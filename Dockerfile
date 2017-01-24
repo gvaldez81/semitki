@@ -1,7 +1,7 @@
 FROM centos
 MAINTAINER developer@celisdelafuente.net
 
-COPY src/ /
+COPY src/ /semitki
 
 WORKDIR /semitki
 
@@ -9,8 +9,9 @@ RUN yum -y update ; \
   yum -y install epel-release ; \
   yum -y install python-pip ; \
   pip install virtualenv ; \
-  virtualenv ENV
+  virtualenv ENV ; \
+  ENV/bin/pip install -r requirements.txt
 
-ENTRYPOINT /semitki/ENV/bin/python
+#ENTRYPOINT /semitki/ENV/bin/python
 
-CMD ["src/main.py"]
+#CMD ["src/main.py"]
