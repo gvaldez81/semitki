@@ -1,7 +1,7 @@
 FROM centos
 MAINTAINER developer@celisdelafuente.net
 
-COPY src/ /semitki
+COPY api/ /semitki
 
 WORKDIR /semitki
 
