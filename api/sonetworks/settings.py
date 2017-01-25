@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'sonetworks',
 ]
 
 MIDDLEWARE = [
@@ -76,7 +77,11 @@ WSGI_APPLICATION = 'sonetworks.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME':  'socialne',
+        'USER': 'lmartinez',
+        'PASSWORD': '123asdzxc',
+        'HOST': 'localhost',
+        'PORT': '3306'
     }
 }
 
