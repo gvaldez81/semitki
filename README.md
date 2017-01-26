@@ -5,8 +5,9 @@
 
     git clone https://github.com/gvaldez81/semitki.git
     cd semitki/api
-    virtualenv ENV
+    virtualenv -p $(which python2.7) ENV
     . ENV/bin/activate
+    pip install -U pip
     pip install -r requirements.txt
 
 

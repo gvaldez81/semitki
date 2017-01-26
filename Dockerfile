@@ -7,7 +7,8 @@ WORKDIR /semitki
 
 RUN yum -y update ; \
   yum -y install epel-release ; \
-  yum -y install python-pip ; \
+  yum -y groupinstall 'Development Tools'
+  yum -y install python-pip mariadb mariadb-devel ; \
   pip install virtualenv ; \
   virtualenv ENV ; \
   ENV/bin/pip install -r requirements.txt
