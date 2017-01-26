@@ -12,7 +12,7 @@ RUN yum -y update ; \
   yum -y install epel-release ; \
   yum -y install https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-7-x86_64/pgdg-centos96-9.6-3.noarch.rpm ; \
   yum -y groupinstall 'Development Tools' ; \
-  yum -y install python-pip postgresql96 postgresql96-contrib postgresql96-devel ; \
+  yum -y install python-pip postgresql96 postgresql96-contrib postgresql96-devel python-devel ; \
   pip install virtualenv ; \
   virtualenv ENV ; \
   ENV/bin/pip install -r requirements.txt
