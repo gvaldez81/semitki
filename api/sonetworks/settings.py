@@ -25,7 +25,7 @@ SECRET_KEY = 'q2-51fh4@riu@7#jm4cbrv5e@_dro$$t#=hu*9(9nxi#&9c7*x'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -76,12 +76,12 @@ WSGI_APPLICATION = 'sonetworks.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME':  'socialne',
         'USER': 'lmartinez',
-        'PASSWORD': '123asdzxc',
+        'PASSWORD': '123asdqwe',
         'HOST': 'localhost',
-        'PORT': '3306'
+        'PORT': '5432'
     }
 }
 
