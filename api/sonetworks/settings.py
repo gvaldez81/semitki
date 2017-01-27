@@ -80,7 +80,7 @@ DATABASES = {
         'NAME':  'socialne',
         'USER': 'lmartinez',
         'PASSWORD': '123asdqwe',
-        'HOST': 'localhost',
+        'HOST': 'tj.patito.ninja',
         'PORT': '5432'
     }
 }

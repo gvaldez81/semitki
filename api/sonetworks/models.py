@@ -2,7 +2,7 @@
 import uuid
 
 from django.db import   models
-from django_mysql.models import JSONField, Model
+from django.contrib.postgres.fields import JSONField
 
 class Posts(models.Model):
     _id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
