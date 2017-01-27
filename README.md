@@ -22,4 +22,4 @@
 ## Run app
 
 
-    docker run -it -v $(pwd):/semitki -p 8000:8000 ecelis/semitki bash
+    docker run -it -v $(pwd)/api:/semitki -v $(pwd)/data:/var/lib/pgsql/data -p 8000:8000 ecelis/semitki bash

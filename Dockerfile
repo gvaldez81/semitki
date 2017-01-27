@@ -4,6 +4,7 @@ MAINTAINER developer@celisdelafuente.net
 EXPOSE 8000
 
 ENV PATH="/usr/pgsql-9.6/bin:$PATH"
+
 COPY api/ /semitki
 
 WORKDIR /semitki
