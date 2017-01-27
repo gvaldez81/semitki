@@ -1,0 +1,22 @@
+{
+  "name": "front",
+  "homepage": "https://github.com/gvaldez81/semitki",
+  "authors": [
+    "Ernesto Celis <developer@celisdelafuente.net>"
+  ],
+  "description": "semitki frontend",
+  "main": "index.html",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "backbone": "^1.3.3",
+    "bootstrap": "^3.3.7"
+  }
+}

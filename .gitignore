@@ -132,3 +132,5 @@ Temporary Items
 
 api/ENV
 data
+node_modules
+bower_components

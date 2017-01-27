@@ -3,12 +3,25 @@
 ## Development setup
 
 
-    git clone https://github.com/gvaldez81/semitki.git
+    git clone git@github.com:gvaldez81/semitki.git
+
+
+### Backend development
+
+
     cd semitki/api
     virtualenv -p $(which python2.7) ENV
     . ENV/bin/activate
     pip install -U pip
     pip install -r requirements.txt
+
+
+### Frontend development
+
+
+    npm install -g bower
+    cd semitki/front
+    bower install
 
 
 ## Build container image
@@ -23,3 +36,4 @@
 
 
     docker run -it -v $(pwd)/api:/semitki -v $(pwd)/data:/var/lib/pgsql/data -p 8000:8000 ecelis/semitki bash
+
