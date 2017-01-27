@@ -22,4 +22,4 @@
 ## Run app
 
 
-    docker run -v $(pwd):/semitki -p 8000:8000 ecelis/semitki bash
+    docker run -it -v $(pwd):/semitki -p 8000:8000 ecelis/semitki bash
