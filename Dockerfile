@@ -5,7 +5,7 @@ EXPOSE 8000
 
 ENV PATH="/usr/pgsql-9.6/bin:$PATH"
 
-COPY api/ /semitki
+COPY api /semitki
 
 WORKDIR /semitki
 
@@ -16,7 +16,7 @@ RUN yum -y update ; \
   yum -y install python-pip postgresql96 postgresql96-server postgresql96-contrib postgresql96-devel python-devel ; \
   pip install virtualenv ; \
   virtualenv ENV ; \
-  ENV/bin/pip install -r requirements.txt
+  ENV/bin/pip install -r api/requirements.txt
 
 #ENTRYPOINT /semitki/api/ENV/bin/python
 
