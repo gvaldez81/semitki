@@ -1,38 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html  lang="en"> 
 
-  <head>
-      <meta charset="utf-8">
-        <title>Semitki</title>
-      <link rel="stylesheet" href="static/css/style.css"/>
-  </head>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  <body>
+<title>Semitki</title>
+ <link rel="stylesheet" href="static/css/style.css"/>
+</head>
 
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/underscore/underscore.js"></script>
-    <script src="bower_components/backbone/backbone.js"></script>
-    <!-- script src="../backbone.localStorage.js"></script -->
+<!-- All the files that are required -->
+<link href="file:///home/luis/semitki/front/css/login.css" rel="stylesheet" type="text/css">
+<script src="/home/luis/semitki/front/login.js"></script>
 
-    <!-- Templates -->
+<body>
 
-    <script type="text/template" id="item-template">
-      <div class="view">
-      <input class="toggle" type="checkbox" <%= done ? 'checked="checked"' : '' %> />
-      <label><%- title %></label>
-      <a class="destroy"></a>
-      </div>
-      <input class="edit" type="text" value="<%- title %>" />
-    </script>
+<!-- LOGIN FORM -->
+<div class="text-center" style="padding:50px 475px">
+	<div class="logo">Login</div>
+	<!-- Main Form -->
+	<div class="login-form-1">
+		<form id="login-form" class="text-left">
+			<div class="login-form-main-message"></div>
+			<div class="main-login-form">
+				<div class="login-group">
+					<div class="form-group">
+	<label for="lg_username" class="sr-only">Username</label>
+	<input type="text" class="form-control" id="lg_username" name="lg_username" placeholder="username">
+				</div>
 
-    <script type="text/template" id="stats-template">
-      <% if (done) { %>
-      <a id="clear-completed">Clear <%= done %> completed <%= done == 1 ? 'item' : 'items' %></a>
-      <% } %>
-      <div class="todo-count"><b><%= remaining %></b> <%= remaining == 1 ? 'item' : 'items' %> left</div>
-    </script>
-
-
-  </body>
+	<div class="form-group">
+	<label for="lg_password" class="sr-only">Password</label>
+	<input type="password" class="form-control" id="lg_password" name="lg_password" placeholder="password">
+	</div>
+		<div class="form-group login-group-checkbox">
+		<input type="checkbox" id="lg_remember" name="lg_remember">
+		<label for="lg_remember">remember</label>
+		</div>
+	</div>
+				<button type="submit" class="login-button"><i class="fa fa-chevron-right"></i></button>
+			</div>
+			<div class="etc-login-form">
+				<p>forgot your password? <a href="#">click here</a></p>
+				<!--<p>new user? <a href="#">create new account</a></p>-->
+			</div>
+	</form>
+	</div>
+	<!-- end:Main Form -->
+</div>
+</body>
 </html>
 
