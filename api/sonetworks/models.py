@@ -11,7 +11,7 @@ class Posts(models.Model):
     bucket = JSONField()
 
 class Topic(models.Model):
-    _id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)    
+    _id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=200)
 
@@ -29,7 +29,7 @@ class Project(models.Model):
 
 
 class Groups(models.Model):
-    _id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)    
+    _id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=200)
 
