@@ -77,10 +77,9 @@ WSGI_APPLICATION = 'sonetworks.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME':  'socialne',
-        'USER': 'lmartinez',
-        'PASSWORD': '123asdqwe',
-        'HOST': 'tj.patito.ninja',
+        'NAME':  'postgres',
+        'USER': 'postgres',
+        'HOST': 'db',
         'PORT': '5432'
     }
 }
