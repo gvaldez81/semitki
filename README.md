@@ -15,6 +15,11 @@
     pip install -U pip
     pip install -r requirements.txt
 
+    ENV/bin/python manage runserver 0.0.0.0:8000
+    ENV/bin/python manage migrate
+    ENV/bin/python manage migrations sonetworks
+
+
 
 ### Frontend development
 
@@ -32,8 +37,27 @@
     docker build -t ecelis/semitki .
 
 
-## Run app
+## Run in Docker with docker-compose
 
 
-    docker run -it -v $(pwd)/api:/semitki -v $(pwd)/data:/var/lib/pgsql/data -p 8000:8000 ecelis/semitki bash
+    cd semitki
+    docker compose up
+
+
+## Django App
+
+
+If running in Docker, execute a bash shell within the container running
+the web app.
+
+
+    docker exec -it semitki_web_1 bash
+
+
+Once in a shell running within the environment of the web application,
+you can run commands of manage.py for the Django app.
+
+
+
+    ENV/bin/python manage.py createsuperuser
 
