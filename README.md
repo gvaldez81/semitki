@@ -3,7 +3,7 @@
 ## Development setup
 
 
-    git clone git@github.com:gvaldez81/semitki.git
+    git clone git@github.com:semitki/semitki.git
 
 
 ### Backend development
