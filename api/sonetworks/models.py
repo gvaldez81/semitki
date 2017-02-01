@@ -4,39 +4,36 @@ import uuid
 from django.db import   models
 from django.contrib.postgres.fields import JSONField
 
-class Posts(models.Model):
-    _id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+class Post(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     date = models.DateTimeField('pusblish date')
-    topic = models.CharField(max_length=100)
+    topic = models.CharField(max_length=140)
     bucket = JSONField()
 
 class Topic(models.Model):
-    _id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name = models.CharField(max_length=100)
-    description = models.CharField(max_length=200)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=140)
+    description = models.CharField(max_length=256)
 
-class Company(models.Model):
-    _id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    topicID = models.ForeignKey(Topic)
-    name= models.CharField(max_length=100)
-    description = models.CharField(max_length=200)
+class Campaign(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    topic_id = models.ForeignKey(Topic)
+    name = models.CharField(max_length=140)
+    description = models.CharField(max_length=256)
 
 class Project(models.Model):
-    _id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name= models.CharField(max_length=100)
-    description = models.CharField(max_length=200)
-    companyID = models.ForeignKey(Company)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name= models.CharField(max_length=140)
+    description = models.CharField(max_length=256)
+    campaing_id = models.ForeignKey(Campaign)
 
+class AccountsGroup(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=140)
+    description = models.CharField(max_length=256)
 
-class Groups(models.Model):
-    _id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name = models.CharField(max_length=100)
-    description = models.CharField(max_length=200)
-
-class Users(models.Model):
-    _id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)     
-    name = models.CharField(max_length=100)
-    description = models.CharField(max_length=200)
-    groupID = models.ForeignKey(Groups)
-
-
+class UserAccount(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=140)
+    description = models.CharField(max_length=256)
+    group_id = models.ForeignKey(AccountsGroup)
