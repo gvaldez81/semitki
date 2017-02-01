@@ -5,10 +5,19 @@ from django.db import   models
 from django.contrib.postgres.fields import JSONField
 
 class Post(models.Model):
+    """
+    txt XOR url
+    data: {
+        txt: "string",
+        url: "string",
+        imgurl: "string",
+        tags: ["fb","tw","<3","r",...],
+    }
+    """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     date = models.DateTimeField('pusblish date')
     topic = models.CharField(max_length=140)
-    bucket = JSONField()
+    data = JSONField()
 
 class Topic(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
