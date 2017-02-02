@@ -18,6 +18,7 @@ class Post(models.Model):
     date = models.DateTimeField('pusblish date')
     topic = models.CharField(max_length=140)
     data = JSONField()
+    owner = models.ForeignKey('auth.user', related_name='posts')
 
 class Topic(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -45,4 +46,7 @@ class UserAccount(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=140)
     description = models.CharField(max_length=256)
-    group_id = models.ForeignKey(AccountsGroup)
+
+class UserAccountsGroup(models.Model):
+    account_group_id = models.ForeignKey(AccountsGroup)
+    user_account_id = models.ForeignKey(UserAccount)
