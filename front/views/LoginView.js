@@ -20,7 +20,7 @@ let LoginView = Backbone.View.extend({
     let compiled = _.template(template, { name: "Template Name" });
     $(this.el).html(compiled);
 //    return this;
-    $(".content-element").html(this.el);
+    $("#container").html(this.el);
   }
 
 });
