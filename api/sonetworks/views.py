@@ -24,4 +24,20 @@ class PostViewSet(viewsets.ModelViewSet):
 
 class TopicViewSet(viewsets.ModelViewSet):
     queryset = Topic.objects.all()
-    serualizer_class = TopicSerializer
+    serializer_class = TopicSerializer
+
+class CampaignViewSet(viewsets.ModelViewSet):
+    queryset = Campaign.objects.all()
+    serializer_class = CampaignSerializer
+
+class ProjectViewSet(viewsets.ModelViewSet):
+    queryset = Project.objects.all()
+    serializer_class = ProjectSerializer
+
+class AccountsGroupViewSet(viewsets.ModelViewSet):
+    queryset = AccountsGroup.objects.all()
+    serializer_class = AccountsGroupSerializer
+
+class UserAccountViewSet(viewsets.ModelViewSet):
+    queryset = UserAccount.objects.all()
+    serializer_class = UserAccountSerializer

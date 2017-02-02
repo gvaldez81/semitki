@@ -5,41 +5,41 @@ from .models import Post, Topic, Campaign, Project, AccountsGroup, UserAccount
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ('url', 'username', 'email', 'groups')
+        fields = ('__all__')
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Group
-        fields = ('url', 'name')
+        fields = ('__all__')
 
 class PostSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Post
-        fields = ('id', 'date', 'topic', 'data')
+        fields = ('__all__')
 
 
 class TopicSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Topic
-        fileds = ('id', 'name', 'description')
+        fields = ('__all__')
 
 class CampaignSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Campaign
-        fields = ('id', 'topic_id', 'name', 'description')
+        fields = ('__all__')
 
 class ProjectSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Project
-        fields = ('id', 'name', 'description', 'campaign_id')
+        fields = ('__all__')
 
 class AccountsGroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = AccountsGroup
-        fields = ('id', 'name', 'description')
+        fields = ('__all__')
 
 class UserAccountSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = UserAccount
-        fileds = ('id', 'name', 'description', 'group_id')
+        fields = ('__all__')

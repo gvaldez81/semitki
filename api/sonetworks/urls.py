@@ -21,8 +21,13 @@ from .views import *
 
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
-router.register(r'users', UserViewSet)
-router.register(r'posts', PostViewSet)
+router.register(r'user', UserViewSet)
+router.register(r'post', PostViewSet)
+router.register(r'topic', TopicViewSet)
+router.register(r'campaign', CampaignViewSet)
+router.register(r'project', ProjectViewSet)
+router.register(r'acount_group', AccountsGroupViewSet)
+router.register(r'user_account', UserAccountViewSet)
 
 urlpatterns = [
     url(r'^', include(router.urls)),
