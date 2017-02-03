@@ -4,6 +4,21 @@ from rest_framework import permissions
 from .serializers import *
 from .models import *
 
+from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
+from allauth.socialaccount.providers.twitter.views import TwitterOAuthAdapter
+from rest_auth.views import LoginView
+from rest_auth.social_serializers import TwitterLoginSerializer
+from rest_auth.registration.views import SocialLoginView
+
+class FacebookLogin(SocialLoginView):
+        adapter_class = FacebookOAuth2Adapter
+
+
+class TwitterLogin(LoginView):
+        serializer_class = TwitterLoginSerializer
+        adapter_class = TwitterOAuthAdapter
+
+
 class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
@@ -43,3 +58,4 @@ class AccountsGroupViewSet(viewsets.ModelViewSet):
 class UserAccountViewSet(viewsets.ModelViewSet):
     queryset = UserAccount.objects.all()
     serializer_class = UserAccountSerializer
+

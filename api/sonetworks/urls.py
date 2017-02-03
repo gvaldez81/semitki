@@ -31,7 +31,9 @@ router.register(r'user_account', UserAccountViewSet)
 
 urlpatterns = [
     url(r'^', include(router.urls)),
+    url(r'^rest-auth/facebook/$', FacebookLogin.as_view(), name='fb_login'),
+    url(r'^rest-auth/twitter/$', TwitterLogin.as_view(), name='twitter_login'),
     url(r'^admin/', admin.site.urls),
-    url(r'^api-token-auth/', views.obtain_auth_token),
+    url(r'^rest-auth/', include('rest_auth.urls')),
     url(r'^api-auth/', include('rest_framework.urls'))
 ]
