@@ -17,6 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
+from rest_framework_jwt.views import obtain_jwt_token
 from .views import *
 
 # Routers provide an easy way of automatically determining the URL conf.
@@ -34,6 +35,5 @@ urlpatterns = [
     url(r'^rest-auth/facebook/$', FacebookLogin.as_view(), name='fb_login'),
     url(r'^rest-auth/twitter/$', TwitterLogin.as_view(), name='twitter_login'),
     url(r'^admin/', admin.site.urls),
-    url(r'^rest-auth/', include('rest_auth.urls')),
-    url(r'^api-auth/', include('rest_framework.urls'))
+    url(r'^api-token-auth/', obtain_jwt_token)
 ]
