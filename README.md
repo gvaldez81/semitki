@@ -2,8 +2,38 @@
 
 ## Development setup
 
+Clone the code from github
+
 
     git clone git@github.com:semitki/semitki.git
+
+
+### Tooling
+
+Besides the code you'll need various tools.
+
+
+  * [docker](https://www.docker.com/products/docker)
+  * [docker-compose](https://docs.docker.com/compose/)
+  * [virtualenv](https://virtualenv.pypa.io/en/stable/)
+  * [NodeJS](https://nodejs.org/en/)
+  * [Bower](https://bower.io/)
+  * [Grunt](http://gruntjs.com/)
+
+
+## Build container image
+
+
+    cd semitki
+    docker build -t semitki/semitki .
+
+
+## Run in Docker with docker-compose
+
+
+    cd semitki
+    docker-compose up
+
 
 
 ### Backend development
@@ -28,21 +58,7 @@
     cd semitki/front
     npm install
     bower install
-
-
-## Build container image
-
-
-    git clone https://github.com/gvaldez81/semitki.git
-    cd semitki/api
-    docker build -t ecelis/semitki .
-
-
-## Run in Docker with docker-compose
-
-
-    cd semitki
-    docker compose up
+    grunt
 
 
 ## Django App
