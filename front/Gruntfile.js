@@ -8,13 +8,21 @@ module.exports = (grunt) => {
           return src.replace(/(^|\n)[ \t]*('use strict'|"use strict");?\s*/g, '$1');
         },
       },
-      templates: {
+      core: {
         src: ['index.html','views/*.hbs'],
         dest: 'dist/index.html'
+      },
+      css: {
+        src: ['static/css/*.css'],
+        dest: 'dist/css/style.css'
       },
       views: {
         src: ['views/*.js'],
         dest: 'dist/js/views.js'
+      },
+      models: {
+        src: ['models/*.js'],
+        dest: 'dist/js/models.js'
       },
     },
   });

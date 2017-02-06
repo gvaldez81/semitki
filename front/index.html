@@ -19,7 +19,7 @@
     <script src="bower_components/handlebars/handlebars.js"></script>
     <script src="bower_components/handlebars/handlebars.runtime.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="views/LoginView.js"></script>
+    <script src="js/views.js"></script>
     <!-- script src="../backbone.localStorage.js"></script -->
 
   </head>
@@ -29,52 +29,6 @@
 
     </div>
   </body>
-
-<script type="text/x-handlebars-template" id="login-template">
-<div class="panel panel-info">
-<div class="panel-heading"><b>SIGN IN</b></div>
-<div class="row">
-  <div class="col-md-6" id="social-buttons">
-    <h2>Use other accounts</h2>
-    <h3>You can also sign in using your Facebook, Twitter or Google accounts.</h3>
-    <div class="row">
-    <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-    <button type="button" class="btn btn-primary btn-lg">Facebook</button>
-    </div>
-
-    <div class="row">
-    <!-- Contextual button for informational alert messages -->
-    <button type="button" class="btn btn-info btn-lg">Twitter</button>
-    </div>
-
-    <div class="row">
-    <!-- Indicates a dangerous or potentially negative action -->
-    <button type="button" class="btn btn-danger btn-lg">Google +</button>
-    </div>
-  </div>
-    <div class="col-md-6" >
-        <form id="login-form" class="form-signin">
-            <div class="login-group">
-                  <label for="lg_username" class="sr-only">Username</label>
-                  <input type="text" class="form-control" id="lg_username" name="lg_username" placeholder="username">
-
-                  <label for="lg_password" class="sr-only">Password</label>
-                  <input type="password" class="form-control" id="lg_password" name="lg_password" placeholder="password">
-
-                <div class="form-group login-group-checkbox">
-                    <input type="checkbox" id="lg_remember" name="lg_remember">
-                    <label for="lg_remember">remember</label>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-md btn-info btn-block">Log In</button>
-            <div>
-                <p>forgot your password? <a href="#">click here</a></p>
-            </div>
-        </form>
-    </div>
-</div>
-</div>
-</script>
 
 <script src="static/js/semitki.js"></script>
 
