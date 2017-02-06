@@ -24,8 +24,9 @@
 ### Frontend development
 
 
-    npm install -g bower
+    npm install -g bower grunt-cli
     cd semitki/front
+    npm install
     bower install
 
 
