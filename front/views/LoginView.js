@@ -14,7 +14,28 @@ let LoginView = Backbone.View.extend({
       let u = $form.find("input[name='username']").val();
       let p = $form.find("input[name='password']").val();
       let url = $form.attr("action");
-      let posting = $.post(url,
+      let csrftoken = Cookies.get("csrftoken");
+      $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+          if (!csrfSafeMethod(settings.type)
+            && sameOrigin(settings.url)) {
+            xhr.setRequestHeader("HTTP_X_CSRFTOKEN", csrftoken);
+            //xhr.setRequestHeader("X-CSRFToken", csrftoken);
+          }
+        },
+        type: "POST",
+        contentType: "application/json"
+      });
+      let posting = $.ajax(url,
+         {
+           beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type)
+              && sameOrigin(settings.url)) {
+              xhr.setRequestHeader("HTTP_X_CSRFTOKEN", csrftoken);
+              //xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+          },
+        },
         {
           username: u,
           password: p
@@ -32,5 +53,4 @@ let LoginView = Backbone.View.extend({
 //    return this;
     $("#container").html(this.el);
   }
-
 });
