@@ -1,45 +1,34 @@
 <script type="text/x-handlebars-template" id="login-template">
-<div class="panel panel-info">
-<div class="panel-heading"><b>SIGN IN</b></div>
-<div class="row">
-  <div class="col-md-6" id="social-buttons">
-    <h2>Use other accounts</h2>
-    <h3>You can also sign in using your Facebook, Twitter or Google accounts.</h3>
-    <div class="row">
-    <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-    <button type="button" class="btn btn-primary btn-lg">Facebook</button>
-    </div>
 
+  <div class="panel panel-info" style="width:50%;">
+    <p class="panel-heading">SIGN IN</p>
     <div class="row">
-    <!-- Contextual button for informational alert messages -->
-    <button type="button" class="btn btn-info btn-lg">Twitter</button>
-    </div>
+      <div class="col-sm-6" id="social-buttons">
+        <h3>Use other accounts</h3>
+        <h4>You can also sign in using your Facebook, Twitter or Google accounts.</h4>
+        <button type="button" class="btn btn-primary btn-lg">Facebook</button>
+        <button type="button" class="btn btn-info btn-lg">Twitter</button>
+        <button type="button" class="btn btn-danger btn-lg">Google +</button>
+      </div>
+      <div class="col-sm-6" >
+        <form id="login-form" class="form-signin" action="//127.0.0.1:8000/api-token-auth/">
+        <div class="login-group">
+          <label for="username" class="sr-only">Username</label>
+          <input type="text" class="form-control" id="username" name="username" placeholder="username">
 
-    <div class="row">
-    <!-- Indicates a dangerous or potentially negative action -->
-    <button type="button" class="btn btn-danger btn-lg">Google +</button>
+          <label for="password" class="sr-only">Password</label>
+          <input type="password" class="form-control" id="password" name="password" placeholder="password">
+
+          <div class="form-group login-group-checkbox">
+            <input type="checkbox" id="remember" name="remember">
+            <label for="remember">Remember me</label>
+          </div>
+        </div>
+        <button type="button" class="btn btn-md btn-info btn-block" id="login-button">Log In</button>
+        <p>Forgot your password? <a href="#">click here</a></p>
+        </form>
+      </div>
     </div>
   </div>
-    <div class="col-md-6" >
-        <form id="login-form" class="form-signin">
-            <div class="login-group">
-                  <label for="lg_username" class="sr-only">Username</label>
-                  <input type="text" class="form-control" id="lg_username" name="lg_username" placeholder="username">
 
-                  <label for="lg_password" class="sr-only">Password</label>
-                  <input type="password" class="form-control" id="lg_password" name="lg_password" placeholder="password">
-
-                <div class="form-group login-group-checkbox">
-                    <input type="checkbox" id="lg_remember" name="lg_remember">
-                    <label for="lg_remember">remember</label>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-md btn-info btn-block">Log In</button>
-            <div>
-                <p>forgot your password? <a href="#">click here</a></p>
-            </div>
-        </form>
-    </div>
-</div>
-</div>
 </script>

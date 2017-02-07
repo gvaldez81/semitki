@@ -144,4 +144,5 @@ REST_FRAMEWORK = {
             'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
             ),
         }
+REST_USE_JWT = True
 
