@@ -2,7 +2,7 @@
 
 module.exports = (grunt) => {
   grunt.initConfig({
-    clean: ['dist'],
+    clean: ['dist/*'],
     concat: {
       core: {
         options: { footer: '<script type="text/javascript" src="js/semitki.js"></script></html>' },

@@ -1,4 +1,4 @@
-'use strict'
-
+$(window).on('load', function() {
   loginView = new LoginView();
-  loginView.render({ el: "#content-element" });
+  loginView.render({ el: "#container" });
+});
