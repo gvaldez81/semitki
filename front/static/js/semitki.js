@@ -1,4 +1,4 @@
 $(window).on('load', function() {
-  loginView = new LoginView();
+  loginView = new SchedulerCreate();
   loginView.render({ el: "#container" });
 });
