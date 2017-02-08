@@ -9,15 +9,6 @@ module.exports = (grunt) => {
         src: ['index.html','views/*.hbs'],
         dest: 'dist/index.html'
       },
-      views: {
-        options: {
-          separator: ';\n',
-          banner: "'use strict'",
-          process: (src, filepath) => { return src.replace(/(^|\n)[ \t]*('use strict'|"use strict");?\s*/g, '$1\n'); }
-        },
-        src: ['views/*.js'],
-        dest: 'dist/js/views.js'
-      },
       models: {
         options: {
           separator: ';\n',
@@ -26,6 +17,24 @@ module.exports = (grunt) => {
         },
         src: ['models/*.js'],
         dest: 'dist/js/models.js'
+      },
+      collections: {
+        options: {
+          separator: ';\n',
+          banner: "'use strict'",
+          process: (src, filepath) => { return src.replace(/(^|\n)[ \t]*('use strict'|"use strict");?\s*/g, '$1\n'); }
+        },
+        src: ['collections/*.js'],
+        dest: 'dist/js/collections.js'
+      },
+      views: {
+        options: {
+          separator: ';\n',
+          banner: "'use strict'",
+          process: (src, filepath) => { return src.replace(/(^|\n)[ \t]*('use strict'|"use strict");?\s*/g, '$1\n'); }
+        },
+        src: ['views/*.js'],
+        dest: 'dist/js/views.js'
       },
     },
     copy: {
