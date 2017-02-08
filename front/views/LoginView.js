@@ -15,30 +15,19 @@ let LoginView = Backbone.View.extend({
       let p = $form.find("input[name='password']").val();
       let url = $form.attr("action");
       let csrftoken = Cookies.get("csrftoken");
-      $.ajaxSetup({
-        beforeSend: function(xhr, settings) {
-          if (!csrfSafeMethod(settings.type)
-            && sameOrigin(settings.url)) {
-            xhr.setRequestHeader("HTTP_X_CSRFTOKEN", csrftoken);
-            //xhr.setRequestHeader("X-CSRFToken", csrftoken);
-          }
-        },
-        type: "POST",
-        contentType: "application/json"
-      });
       let posting = $.ajax(url,
          {
            beforeSend: function(xhr, settings) {
             if (!csrfSafeMethod(settings.type)
               && sameOrigin(settings.url)) {
               xhr.setRequestHeader("HTTP_X_CSRFTOKEN", csrftoken);
-              //xhr.setRequestHeader("X-CSRFToken", csrftoken);
             }
           },
-        },
-        {
-          username: u,
-          password: p
+          data: {
+            username: u,
+            password: p
+          },
+          method: "POST"
         });
       posting.done(function(data) {
         console.log(data);
