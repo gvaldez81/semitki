@@ -1,4 +1,3 @@
 $(window).on('load', function() {
-  dashView = new DashView();
-  dashView.render({ el: "#container" });
-});
+  loginView = new SchedulerCreate();
+  loginView.render({ el: "#container" });

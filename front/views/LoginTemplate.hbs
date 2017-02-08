@@ -1,6 +1,5 @@
 <script type="text/x-handlebars-template" id="login-template">
 
-  <div class="panel panel-info" style="width:50%;">
     <p class="panel-heading">SIGN IN</p>
     <div class="row">
       <div class="col-sm-6" id="social-buttons">
@@ -11,7 +10,8 @@
         <button type="button" class="btn btn-danger btn-lg">Google +</button>
       </div>
       <div class="col-sm-6" >
-        <form id="login-form" class="form-signin" action="//127.0.0.1:8000/api-token-auth/">
+        <form id="login-form" class="form-signin" method="POST"
+        action="//127.0.0.1:8000/api-token-auth/">
         <div class="login-group">
           <label for="username" class="sr-only">Username</label>
           <input type="text" class="form-control" id="username" name="username" placeholder="username">
@@ -29,6 +29,5 @@
         </form>
       </div>
     </div>
-  </div>
 
 </script>

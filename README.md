@@ -1,5 +1,10 @@
 # semitki
 
+
+<a href="https://zenhub.com"><img
+src="https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png"></a>
+
+
 ## Development setup
 
 Clone the code from github
@@ -35,6 +40,9 @@ Besides the code you'll need various tools.
     docker-compose up
 
 
+Browse the API at http://127.0.0.1:8000 and the web frontend at
+http://127.0.0.1:8080
+
 
 ### Backend development
 
@@ -59,6 +67,12 @@ Besides the code you'll need various tools.
     npm install
     bower install
     grunt
+
+
+Running grunt will create a `semitki/frontend/dist` directory which
+should be accesable for an HTTP server. When running with
+docker-compose `dist` gets mounted in the path
+`/usr/share/nginx/html` within the web container.
 
 
 ## Django App
