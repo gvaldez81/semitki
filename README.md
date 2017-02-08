@@ -41,7 +41,7 @@ Besides the code you'll need various tools.
 
 
 Browse the API at http://127.0.0.1:8000 and the web frontend at
-http://127.0.0.1:8080
+http://127.0.0.1:9080
 
 
 ### Backend development
@@ -79,10 +79,10 @@ docker-compose `dist` gets mounted in the path
 
 
 If running in Docker, execute a bash shell within the container running
-the web app.
+the django app.
 
 
-    docker exec -it semitki_web_1 bash
+    docker exec -it semitki_app_1 bash
 
 
 Once in a shell running within the environment of the web application,
