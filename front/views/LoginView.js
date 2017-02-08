@@ -1,12 +1,13 @@
 'use strict'
 
 let LoginView = Backbone.View.extend({
-
+  tagName: "div",
+  className: "panel panel-info",
   events: {
     "click #login-button": "tryLogin"
   },
 
-  tryLogin: () => {
+  tryLogin: function() {
 //    $('#login-form').submit(function(event) {
 //      event.preventDefault();
       let $form = $('#login-form');
@@ -31,5 +32,7 @@ let LoginView = Backbone.View.extend({
 //    return this;
     $("#container").html(this.el);
   }
+    
+
 
 });
