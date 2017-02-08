@@ -36,3 +36,27 @@ border-top-right-radius: 0;
 div#social-buttons .btn-lg {
   width: 100%;
 }
+.one {
+    width: 200px;
+    padding: 122px;
+}
+
+
+
+
+.muestra{
+  background-color: black;
+  width: 2px;
+  
+  height: 100px;
+}
+.col-separator:after {
+    content: ' ';
+    display: block;
+    float: left;
+    background: #ADADAD;
+    margin: 0 10px;
+    height: 500px;
+    width: 10px;
+}
+

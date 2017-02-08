@@ -5,4 +5,3 @@ $(window).on('load', function() {
   loginView = new SchedulerCreate({collection: posts});
   posts.fetch();
   loginView.render({ el: "#container" });
-});
