@@ -5,7 +5,7 @@ module.exports = (grunt) => {
     clean: ['dist/*'],
     concat: {
       core: {
-        options: { footer: '<script type="text/javascript" src="js/semitki.js"></script></html>' },
+        options: { footer: '<script type="text/javascript" src="js/routes.js"></script><script type="text/javascript" src="js/semitki.js"></script></html>' },
         src: ['index.html','views/*.hbs'],
         dest: 'dist/index.html'
       },
