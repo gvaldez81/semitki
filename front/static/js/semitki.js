@@ -1,4 +1,10 @@
-$(window).on('load', function() {
-  loginView = new CreateView();
-  loginView.render({ el: "#container" });
+$(window).on('load', () => {
+
+  // Initialize
+  let posts = new Posts; // Collection first
+  loginView = new SchedulerCreate({collection: posts});
+  posts.fetch();
+  let semitkiRouter = new SemtikiRouter();
+  semitkiRouter();
+//  loginView.render({ el: "#container" });
 });

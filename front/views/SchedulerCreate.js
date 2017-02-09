@@ -6,9 +6,10 @@ let SchedulerCreate = Backbone.View.extend({
 
   render: function() {
     let template = $("#scheduler-create-template").html();
-    let compiled = _.template(template, { name: "Template Name" }); // TODO Pass BB model
-    $(this.el).html(compiled);
+    let compiled = _.template(template, {name: "hi"}); // TODO Pass BB model
+    //let compiled = _.template(template, this.model.toJSON()); // TODO Pass BB model
+    this.$el.html(compiled);
 //    return this;
-    $("#container").html(this.el);
+    $("#container").append(this.el);
   }
 });
