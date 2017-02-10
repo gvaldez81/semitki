@@ -18,7 +18,6 @@ let LoginView = Backbone.View.extend({
          beforeSend: (xhr, settings) => {
           if (!csrfSafeMethod(settings.type)
             && sameOrigin(settings.url)) {
-            //xhr.setRequestHeader("HTTP_X_CSRFTOKEN", csrftoken);
             xhr.setRequestHeader("X-CSRFToken", csrftoken);
           }
         },
