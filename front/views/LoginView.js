@@ -25,10 +25,11 @@ let LoginView = Backbone.View.extend({
           username: u,
           password: p
         },
-        method: "POST",
+        method: "GET",
          dataType: "JSON"
       }).done((data) => {
         Semitki.jwtoken = data.token;
+        Semitki.router.navigate("dashboard", {trigger: true});
       });
   },
 
