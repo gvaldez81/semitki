@@ -3,7 +3,8 @@
 let SemitkiRouter = Backbone.Router.extend({
   routes: {
     "": "index",
-    "scheduler": "scheduler"
+    "scheduler": "scheduler",
+    "dashboard": "dashboard"
   },
   index: () => {
     let view = new LoginView();

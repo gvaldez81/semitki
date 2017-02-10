@@ -23,7 +23,7 @@ $(window).on('load', () => {
 
   Semitki.initialize();
   if(Semitki.jwtoken == undefined) {
-   Semitki.router.dashboard();
+   Semitki.router.index();
   } else {
     Semitki.router.scheduler();
   }
