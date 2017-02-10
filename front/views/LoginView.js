@@ -29,7 +29,7 @@ let LoginView = Backbone.View.extend({
         method: "POST",
          dataType: "JSON"
       }).done((data) => {
-        console.log("hello world")
+        Semitki.jwtoken = data.token;
       });
   },
 
