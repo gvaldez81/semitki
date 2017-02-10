@@ -21,7 +21,6 @@ let Semitki = {
 $(window).on('load', () => {
 
   Semitki.initialize();
-  Semitki.router.navigate("scheduler", {trigger: true});
+  Semitki.router.index();
 
-//  loginView.render({ el: "#container" });
 });
