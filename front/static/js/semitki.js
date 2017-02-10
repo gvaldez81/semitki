@@ -7,7 +7,7 @@ let Semitki = {
     console.log("I'm heating up")
     Backbone.history.start();
     this.router = new SemitkiRouter();
-    this.jwtoken = 0;
+    this.jwtoken = undefined;
     // TODO Get CSRF cookie here
 /*    let posts = new Posts; // Collection first
     loginView = new SchedulerCreate({collection: posts});
@@ -23,7 +23,7 @@ $(window).on('load', () => {
 
   Semitki.initialize();
   if(Semitki.jwtoken == undefined) {
-   Semitki.router.index();
+   Semitki.router.dashboard();
   } else {
     Semitki.router.scheduler();
   }
