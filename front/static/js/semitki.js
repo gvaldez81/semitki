@@ -7,7 +7,7 @@ let Semitki = {
     Backbone.history.start();
     this.router = new SemitkiRouter();
     this.jwtoken = undefined;
-/*    let posts = new Posts; // Collection first
+    /* let posts = new Posts; // Collection first
     loginView = new SchedulerCreate({collection: posts});
     posts.fetch();
     */

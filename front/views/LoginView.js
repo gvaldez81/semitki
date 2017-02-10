@@ -25,7 +25,7 @@ let LoginView = Backbone.View.extend({
           username: u,
           password: p
         },
-        method: "GET",
+        method: "POST",
          dataType: "JSON"
       }).done((data) => {
         Semitki.jwtoken = data.token;
