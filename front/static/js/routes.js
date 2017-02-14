@@ -10,8 +10,9 @@ let SemitkiRouter = Backbone.Router.extend({
     let view = new LoginView();
     view.render({el:"#container"});
   },
-  schedulerCreate: () => {
-    let view = new SchedulerCreate();
+
+    scheduler: () => {
+    let view = new SchedulerCreateView();
     view.render({el:"#container"});
   },
   dashboard: () => {
