@@ -6,8 +6,7 @@ let SchedulerCreate = Backbone.View.extend({
 
   render: function() {
     let template = $("#scheduler-create-template").html();
-    let compiled = _.template(template, {name: "scheduler"}); // TODO Pass BB model
-    //let compiled = _.template(template, this.model.toJSON()); // TODO Pass BB model
+    let compiled = Handlebars.compile(template); // TODO Pass BB model
     this.$el.html(compiled);
     $("#container").html(this.$el);
   }
