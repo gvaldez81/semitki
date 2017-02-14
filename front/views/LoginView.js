@@ -35,7 +35,7 @@ let LoginView = Backbone.View.extend({
 
   render: function() {
     let template = $("#login-template").html();
-    let compiled = _.template(template, { name: "Template Name" });
+    let compiled = Handlebars.compile(template);
     this.$el.html(compiled);
     $("#container").html(this.$el);
   }

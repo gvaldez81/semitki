@@ -48,11 +48,11 @@ http://127.0.0.1:9080
 
 We use:
 
-
 * [Django](https://www.djangoproject.com/)
 * [django-rest-framework](http://www.django-rest-framework.org/)
 * [django-rest-auth](https://github.com/Tivix/django-rest-auth/)
 * [django-rest-framework-jwt](http://getblimp.github.io/django-rest-framework-jwt/)
+
 
 
     cd semitki/api
