@@ -74,20 +74,20 @@
 
 
 
-<!-- Create -->
+  <!-- Create -->
   <div class="panel-group">
     <div class="panel panel-primary">
       <div class="panel-heading">
         <h4 class="panel-title"><a data-toggle="collapse"
-        href="#collapse1">Create</a></h4>
+        href="#scheduler-create-panel">Create</a></h4>
       </div>
       <div id="scheduler-create-panel" class="panel-collapse collapse">
         <div class="row">
           <div class="col-md-3">
             <button type="button" class="btn btn-info btn-lg">Projet</button>
             <select class="custom-select">
-            <option selected>Select Project</option>
-            <option value="1">One</option>
+              <option selected>Select Project</option>
+              <option value="1">One</option>
             </select>
           </div>
           <div class="col-md-3">
@@ -97,118 +97,98 @@
             <button type="button" class="btn btn-default btn-lg">Select Date</button>
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-3">
-          <button type="button" class="btn btn-info btn-lg">Topic</button>
-          <select class="custom-select">
-            <option selected>...</option>
-          </select>
-        </div>
-        <div class="col-md-3">
-          <button type="button" class="btn btn-info btn-lg">Time</button>
-        </div>
-        <div class="col-md-3">
-          <button type="button" class="btn btn-default btn-lg">Select Time</button>
+        <div class="row">
+          <div class="col-md-3">
+            <button type="button" class="btn btn-info btn-lg">Topic</button>
+            <select class="custom-select">
+              <option selected>...</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <button type="button" class="btn btn-info btn-lg">Time</button>
+          </div>
+          <div class="col-md-3">
+            <button type="button" class="btn btn-default btn-lg">Select Time</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-    </div>
-
-            <!-- Posts -->
-            <div class="panel-group">
-            <div class="panel panel-primary">
-            <div class="panel-heading">
-            <h4 class="panel-title">
-            <a data-toggle="collapse" href="#collapse2">Posts</a>
-            </h4> 
-            </div>
-            <div id="collapse2" class="panel-collapse collapse">
-            <hr size="20">
-
-            <div class="row">
-            <div class="col-md-3">
-            <label>Source</label>        
+  <!-- Posts -->
+  <div class="panel-group">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h4 class="panel-title"><a data-toggle="collapse"
+        href="#scheduler-post-panel">Posts</a></h4>
+      </div>
+      <div id="scheduler-post-panel" class="panel-collapse collapse">
+        <div class="row">
+          <div class="col-md-3">
+            <label>Source</label>
             <div class="checkbox">
-            <label><input type="checkbox" value="">Original Post</label>
-            </div>
+              <label><input type="checkbox" value="">Original Post</label></div>
             <div class="checkbox">
-            <label><input type="checkbox" value="">Already Post</label>
+              <label><input type="checkbox" value="">Already Post</label>
             </div>
             <label> Post ID </label>
             <input type="text" class="form-control" placeholder="">
-
-            </div>   
-            <div class="col-md-3">
+          </div>
+          <div class="col-md-3">
             <div class="form-group">
-            <label for="exampleSelect2">Network</label>
-            <select multiple class="form-control" id="exampleSelect2">
-            <option>Facebook</option>
-            <option>Twitter</option>
-            <option>Instagram</option>
-            </select>
+              <label for="scheduler-network-select">Network</label>
+              <select multiple class="form-control" id="exampleSelect2">
+                <option>Facebook</option>
+              </select>
             </div>
-            </div>
-            <div class="col-md-3">
+          </div>
+          <div class="col-md-3">
             <div class="form-group">
-            <label for="copy">Copy</label>
-            <textarea class="form-control" id="copy" rows="4"></textarea>
+              <label for="copy">Copy</label>
+              <textarea class="form-control" id="copy" rows="4"></textarea>
             </div>
             <div class="form-group">
-            <label for="exampleInputFile">Image</label>
-            <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
-            <small id="fileHelp" class="form-text text-muted">Add Image</small>
-            </div> 
+              <label for="exampleInputFile">Image</label>
+              <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+              <small id="fileHelp" class="form-text text-muted">Add Image</small>
             </div>
-
-            </div>
-            </div>
-            </div>
-            </div>
-
-                    <!-- Trending -->
-                    <div class="panel-group">
-                    <div class="panel panel-primary">
-                    <div class="panel-heading">
-                    <h4 class="panel-title">
-                    <a data-toggle="collapse" href="#collapse3">Trending</a>
-                    </h4> 
-                    </div>
-                            <div id="collapse3" class="panel-collapse collapse">
-                    <hr size="20">
-                    <div class="row">
-                    <label>Actions</label>
-                    <select class="custom-select">
-                    <option selected>Group Name Finder</option>
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
-                    <option value="3">Option 3</option>
-                    </select>
-                    </div>
-                    <hr size="20">         
-                    <table class="table table-lg table-bordered">
-                    <thead>
-
-                    <tr>
-                    <th>Group</th>
-                    <th>Share</th>
-                    <th>Like</th>
-                    <th>Delete</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                    <th scope="row">Option1</th>
-                    <td><input type="checkbox" value=""></td>
-                    <td><input type="checkbox" value=""></td>
-                    <td><button type="button" class="btn btn-info btn-md">Delete</button></td>
-                    </tr>
-                    </tbody>
-                    </table>
-             
-    </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+  <!-- Trending -->
+  <div class="panel-group">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h4 class="panel-title"><a data-toggle="collapse"
+        href="#scheduler-trend-panel">Trends</a></h4>
+      </div>
+      <div id="scheduler-trend-panel" class="panel-collapse collapse">
+        <div class="row">
+          <label>Actions</label>
+          <select class="custom-select">
+            <option selected>Group Name Finder</option>
+          </select>
+        </div>
+        <div class="row table table-lg table-bordered">
+          <div class="col-md-3">Group</div>
+          <div class="col-md-3">Share</div>
+          <div class="col-md-3">Like</div>
+          <div class="col-md-3">Delete</div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">Option1</div>
+          <div class="col-md-3"><input type="checkbox" value=""></div>
+          <div class="col-md-3"><input type="checkbox" value=""></div>
+          <div class="col-md-3">
+            <button type="button" class="btn btn-info btn-md">
+            Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </script>
