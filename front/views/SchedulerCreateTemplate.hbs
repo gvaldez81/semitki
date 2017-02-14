@@ -1,141 +1,214 @@
 <script type="text/x-handlebars-template" id="scheduler-create-template">
+<nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+          <div class="btn-group" role="group" aria-label="menu">
+            <button type="button" class="btn btn-default btn-lg">Semitki</button>
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-default btn-lg dropdown-toggle"
+              data-toggle="dropdown" aria-haspopup="true"
+              aria-expandable="false">Scheduler
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a href="#scheduler">Twitter</a></li>
+                <li><a href="#scheduler">Facebook</a></li>
+                <li><a href="#scheduler">Instagram</a></li>
+              </ul>
+            </div>
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-default btn-lg dropdown-toggle"
+              data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">Analyze
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a href="#">Word Cloud</a></li>
+                <li><a href="#">Mentions</a></li>
+                <li><a href="#">Trendings</a></li>
+                <li><a href="#">Sentiment</a></li>
+              </ul>
+            </div>
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-default btn-lg dropdown-toggle"
+              data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">Scout
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a href="#">Activity</a></li>
+                <li><a href="#">Topics</a></li>
+                <li><a href="#">Tags</a></li>
+                <li><a href="#">Sentiment</a></li>
+                <li><a href="#">QueryInfo</a></li>
+              </ul>
+            </div>
+            <div class="btn-group">
+              <button type="button" class="btn btn-default btn-lg dropdown-toggle"
+              data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">Premium
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a href="#">WhatsApp</a></li>
+                <li><a href="#">Telegram</a></li>
+                <li><a href="#">FB Mesennger</a></li>
+                <li><a href="#">Direct Messages</a></li>
+                <li><a href="#">AllTogether</a></li>
+              </ul>
+            </div>
+            <div class="btn-group">
+              <button type="button" class="btn btn-default btn-lg dropdown-toggle"
+              data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">Settings
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a href="#">Account Info</a></li>
+                <li><a href="#">Securityn</a></li>
+                <li><a href="#">Mobile Settings</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+
+
 <!-- Create -->
-<div class="panel-group">
-<div class="panel panel-primary">
-<div class="panel-heading">
-<h4 class="panel-title">
-<a data-toggle="collapse" href="#collapse1">Create</a>
-</h4>      
-</div>
-<div id="collapse1" class="panel-collapse collapse">
-<hr size="20">
-<div class="row">
-<div class="col-md-3">
-<button type="button" class="btn btn-info btn-lg">Projet</button>
-<select class="custom-select">
-<option selected>Select Project</option>
-<option value="1">One</option>
-<option value="2">Two</option>
-<option value="3">Three</option>
-</select>
-</div>
-<div class="col-md-3"><button type="button" class="btn btn-info btn-lg">Date</button></div>
-<div class="col-md-3"><button type="button" class="btn btn-default btn-lg">Select Date</button></div>
-</div>    
-<hr size="20">       
-
-<div class="row">
-
-<div class="col-md-3">
-<button type="button" class="btn btn-info btn-lg">Topic</button>
-<select class="custom-select">
-<option selected>...</option>
-<option value="1">One</option>
-<option value="2">Two</option>
-<option value="3">Three</option>
-
-</select>
-</div>
-<div class="col-md-3"><button type="button" class="btn btn-info btn-lg">Time</button></div>
-<div class="col-md-3"><button type="button" class="btn btn-default btn-lg">Select Time</button></div>
-</div>     
-<hr size="20">       
-</div>    
-</div>  
-</div> 
-
-        <!-- Posts -->
-        <div class="panel-group">
-        <div class="panel panel-primary">
-        <div class="panel-heading">
-        <h4 class="panel-title">
-        <a data-toggle="collapse" href="#collapse2">Posts</a>
-        </h4> 
-        </div>
-        <div id="collapse2" class="panel-collapse collapse">
-        <hr size="20">
-
+  <div class="panel-group">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h4 class="panel-title"><a data-toggle="collapse"
+        href="#collapse1">Create</a></h4>
+      </div>
+      <div id="scheduler-create-panel" class="panel-collapse collapse">
         <div class="row">
+          <div class="col-md-3">
+            <button type="button" class="btn btn-info btn-lg">Projet</button>
+            <select class="custom-select">
+            <option selected>Select Project</option>
+            <option value="1">One</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <button type="button" class="btn btn-info btn-lg">Date</button>
+          </div>
+          <div class="col-md-3">
+            <button type="button" class="btn btn-default btn-lg">Select Date</button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
         <div class="col-md-3">
-        <label>Source</label>        
-        <div class="checkbox">
-        <label><input type="checkbox" value="">Original Post</label>
-        </div>
-        <div class="checkbox">
-        <label><input type="checkbox" value="">Already Post</label>
-        </div>
-        <label> Post ID </label>
-        <input type="text" class="form-control" placeholder="">
-
-        </div>   
-        <div class="col-md-3">
-        <div class="form-group">
-        <label for="exampleSelect2">Network</label>
-        <select multiple class="form-control" id="exampleSelect2">
-        <option>Facebook</option>
-        <option>Twitter</option>
-        <option>Instagram</option>
-        </select>
-        </div>
+          <button type="button" class="btn btn-info btn-lg">Topic</button>
+          <select class="custom-select">
+            <option selected>...</option>
+          </select>
         </div>
         <div class="col-md-3">
-        <div class="form-group">
-        <label for="copy">Copy</label>
-        <textarea class="form-control" id="copy" rows="4"></textarea>
+          <button type="button" class="btn btn-info btn-lg">Time</button>
         </div>
-        <div class="form-group">
-        <label for="exampleInputFile">Image</label>
-        <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
-        <small id="fileHelp" class="form-text text-muted">Add Image</small>
-        </div> 
+        <div class="col-md-3">
+          <button type="button" class="btn btn-default btn-lg">Select Time</button>
         </div>
+      </div>
+    </div>
+  </div>
 
-        </div>
-        </div>
-        </div>
-        </div>
+    </div>
 
-                <!-- Trending -->
-                <div class="panel-group">
-                <div class="panel panel-primary">
-                <div class="panel-heading">
-                <h4 class="panel-title">
-                <a data-toggle="collapse" href="#collapse3">Trending</a>
-                </h4> 
-                </div>
-                        <div id="collapse3" class="panel-collapse collapse">
-                <hr size="20">
-                <div class="row">
-                <label>Actions</label>
-                <select class="custom-select">
-                <option selected>Group Name Finder</option>
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
-                </select>
-                </div>
-                <hr size="20">         
-                <table class="table table-lg table-bordered">
-                <thead>
+            <!-- Posts -->
+            <div class="panel-group">
+            <div class="panel panel-primary">
+            <div class="panel-heading">
+            <h4 class="panel-title">
+            <a data-toggle="collapse" href="#collapse2">Posts</a>
+            </h4> 
+            </div>
+            <div id="collapse2" class="panel-collapse collapse">
+            <hr size="20">
 
-                <tr>
-                <th>Group</th>
-                <th>Share</th>
-                <th>Like</th>
-                <th>Delete</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                <th scope="row">Option1</th>
-                <td><input type="checkbox" value=""></td>
-                <td><input type="checkbox" value=""></td>
-                <td><button type="button" class="btn btn-info btn-md">Delete</button></td>
-                </tr>
-                </tbody>
-                </table>
-         
-</div>
-</div>
-</div>
+            <div class="row">
+            <div class="col-md-3">
+            <label>Source</label>        
+            <div class="checkbox">
+            <label><input type="checkbox" value="">Original Post</label>
+            </div>
+            <div class="checkbox">
+            <label><input type="checkbox" value="">Already Post</label>
+            </div>
+            <label> Post ID </label>
+            <input type="text" class="form-control" placeholder="">
+
+            </div>   
+            <div class="col-md-3">
+            <div class="form-group">
+            <label for="exampleSelect2">Network</label>
+            <select multiple class="form-control" id="exampleSelect2">
+            <option>Facebook</option>
+            <option>Twitter</option>
+            <option>Instagram</option>
+            </select>
+            </div>
+            </div>
+            <div class="col-md-3">
+            <div class="form-group">
+            <label for="copy">Copy</label>
+            <textarea class="form-control" id="copy" rows="4"></textarea>
+            </div>
+            <div class="form-group">
+            <label for="exampleInputFile">Image</label>
+            <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+            <small id="fileHelp" class="form-text text-muted">Add Image</small>
+            </div> 
+            </div>
+
+            </div>
+            </div>
+            </div>
+            </div>
+
+                    <!-- Trending -->
+                    <div class="panel-group">
+                    <div class="panel panel-primary">
+                    <div class="panel-heading">
+                    <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapse3">Trending</a>
+                    </h4> 
+                    </div>
+                            <div id="collapse3" class="panel-collapse collapse">
+                    <hr size="20">
+                    <div class="row">
+                    <label>Actions</label>
+                    <select class="custom-select">
+                    <option selected>Group Name Finder</option>
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                    </select>
+                    </div>
+                    <hr size="20">         
+                    <table class="table table-lg table-bordered">
+                    <thead>
+
+                    <tr>
+                    <th>Group</th>
+                    <th>Share</th>
+                    <th>Like</th>
+                    <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                    <th scope="row">Option1</th>
+                    <td><input type="checkbox" value=""></td>
+                    <td><input type="checkbox" value=""></td>
+                    <td><button type="button" class="btn btn-info btn-md">Delete</button></td>
+                    </tr>
+                    </tbody>
+                    </table>
+             
+    </div>
+    </div>
+  </div>
 </script>
