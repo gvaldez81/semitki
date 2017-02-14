@@ -2,7 +2,7 @@
 
 let DashboardView = Backbone.View.extend({
     tagName:"div",
-    className:"panel-body",
+    className:"row",
 
   render: function() {
     let template = $("#dashboard").html();
