@@ -6,6 +6,7 @@ let Semitki = {
     // Initialize
     Backbone.history.start();
     this.router = new SemitkiRouter();
+    this.jwtheader = "Authorization: JWT ";
     this.jwtoken = undefined;
     /* let posts = new Posts; // Collection first
     loginView = new SchedulerCreate({collection: posts});

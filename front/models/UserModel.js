@@ -1,15 +1,21 @@
 'use strict'
 
 let User = Backbone.Model.extend({
+  initialize: () => {
+    this.bind("change", this.attributesChanged);
+  },
   defaults: () => {
     return {
-      id: 1,
-      username: "root",
-      first_name: "Admin",
-      last_name: "Admin",
-      is_superuser: true,
-      is_staff: true,
-      is_active: true
+      id: undefined,
+      username: undefined,
+      first_name: undefined,
+      last_name: undefined,
+      is_superuser: undefined,
+      is_staff: undefined,
+      is_active: undefined
     }
+  },
+  attributesChanged: () => {
+    console.log("hello world");
   }
 });
