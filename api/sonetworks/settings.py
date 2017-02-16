@@ -157,4 +157,5 @@ JWT_AUTH = {
 CORS_ORIGIN_WHITELIST = (
         '127.0.0.1:9080'
         )
+
 SITE_ID = 1
