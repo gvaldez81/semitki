@@ -1,6 +1,6 @@
 'use strict'
 
-let SchedulerCreate = Backbone.View.extend({
+let SchedulerCreateView = Backbone.View.extend({
   tagName: "div",
   className: "panel",
 
