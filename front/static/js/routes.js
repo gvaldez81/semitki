@@ -4,7 +4,8 @@ let SemitkiRouter = Backbone.Router.extend({
   routes: {
     "": "index",
     "scheduler": "schedulerCreate",
-    "dashboard": "dashboard"
+    "dashboard": "dashboard",
+    "groups": "groupsViews"
   },
   index: () => {
     let view = new LoginView();
@@ -18,5 +19,10 @@ let SemitkiRouter = Backbone.Router.extend({
   dashboard: () => {
     let view = new DashboardView();
     view.render({el:"#container"});
-  }
+  },
+    
+  groups: () => {
+    let view = new GroupsView();
+    view.render({el:"#container"});
+}
 });
