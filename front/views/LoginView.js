@@ -1,19 +1,5 @@
 'use strict'
 
-let getUser = (jwtoken) => {
-  console.log(Semitki.jwtheader + jwtoken);
-    $.ajax('http://127.0.0.1:8000/user/' + this.username,
-      {
-        beforeSend: (xhr, settings) => {
-          xhr.setRequestHeader(Semitki.jwtheader + jwtoken);
-        },
-      }).fail((error) => {
-        console.log(error.statusText);
-      }).done((data) => {
-        console.log(data);
-      });
-    //Semitki.router.navigate("dashboard", {trigger: true});
-  };
 let LoginView = Backbone.View.extend({
   tagName: "div",
   className: "panel panel-info",
@@ -42,8 +28,8 @@ let LoginView = Backbone.View.extend({
         method: "POST",
         dataType: "JSON"
       }).done((data) => {
-        Semitki.jwtoken = data.token;
-      //  getUser(Semitki.jwtoken);
+        console.log(data);
+     //   Semitki.jwtoken = data.token;
      });
   },
 
