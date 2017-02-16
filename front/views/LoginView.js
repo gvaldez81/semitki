@@ -6,6 +6,7 @@ let LoginView = Backbone.View.extend({
   events: {
     "click #login-button": "tryLogin"
   },
+
   tryLogin: () => {
     let $form = $('#login-form');
     this.username = $form.find("input[name='username']").val();
@@ -28,8 +29,11 @@ let LoginView = Backbone.View.extend({
         method: "POST",
         dataType: "JSON"
       }).done((data) => {
-        console.log(data);
-     //   Semitki.jwtoken = data.token;
+        Semitki.jwtoken = data.token;
+        Semitki.user = new UserModel(data.user);
+        if(Semitki.jwtoken != undefined && Semitki.user != undefined) {
+            Semitki.router.navigate("#dashboard", {trigger: true});
+        }
      });
   },
 
@@ -38,6 +42,8 @@ let LoginView = Backbone.View.extend({
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled);
     $("#container").html(this.$el);
-  }
+    //return this;
+  },
+
 });
 

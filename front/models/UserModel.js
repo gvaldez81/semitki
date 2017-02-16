@@ -1,9 +1,6 @@
 'use strict'
 
-let User = Backbone.Model.extend({
-  initialize: () => {
-    this.bind("change", this.attributesChanged);
-  },
+let UserModel = Backbone.Model.extend({
   defaults: () => {
     return {
       id: undefined,
