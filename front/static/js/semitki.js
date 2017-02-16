@@ -13,6 +13,12 @@ let Semitki = {
     posts.fetch();
     */
   },
+
+  sessionDestroy: () => {
+    Semitki.jwtoken = undefined;
+    Semitki.user.clear();
+    Semitki.router.index();
+  }
 };
 
 

@@ -1,8 +1,9 @@
-## semitki models
+# semitki models
 import uuid
 
 from django.db import models
 from django.contrib.postgres.fields import JSONField
+
 
 class Post(models.Model):
     """
@@ -20,10 +21,12 @@ class Post(models.Model):
     data = JSONField()
     owner = models.ForeignKey('auth.user', related_name='posts')
 
+
 class Topic(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=140)
     description = models.CharField(max_length=256)
+
 
 class Campaign(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -31,22 +34,26 @@ class Campaign(models.Model):
     name = models.CharField(max_length=140)
     description = models.CharField(max_length=256)
 
+
 class Project(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name= models.CharField(max_length=140)
+    name = models.CharField(max_length=140)
     description = models.CharField(max_length=256)
     campaing_id = models.ForeignKey(Campaign)
 
-class AccountsGroup(models.Model):
+
+class SocialAccountsGroup(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=140)
     description = models.CharField(max_length=256)
 
-class UserAccount(models.Model):
+
+class SocialAccount(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=140)
     description = models.CharField(max_length=256)
 
-class UserAccountsGroup(models.Model):
-    account_group_id = models.ForeignKey(AccountsGroup)
-    user_account_id = models.ForeignKey(UserAccount)
+
+class GroupedSocialAccounts(models.Model):
+    social_account_group_id = models.ForeignKey(SocialAccountsGroup)
+    social_account_id = models.ForeignKey(SocialAccount)
