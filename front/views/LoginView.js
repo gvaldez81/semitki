@@ -33,7 +33,7 @@ let LoginView = Backbone.View.extend({
         Semitki.user = new UserModel(data.user);
         if(Semitki.jwtoken != undefined && Semitki.user != undefined) {
           Semitki.router.navigate("#dashboard", {trigger: true});
-          Semitki.projects.fetch(Semitki.addAuthorizationHeader());
+          Semitki.collection.projects.fetch(Semitki.addAuthorizationHeader());
         }
      });
   },

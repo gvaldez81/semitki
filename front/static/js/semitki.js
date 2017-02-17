@@ -8,7 +8,10 @@ let Semitki = {
     this.router = new SemitkiRouter();
     this.jwtheader = "JWT ";
     this.jwtoken = undefined;
-    this.projects = new Projects();
+    this.collection = {
+      "projects": new Projects(),
+      "topics": new Topics()
+    }
   },
 
   sessionDestroy: () => {
