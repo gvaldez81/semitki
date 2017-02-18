@@ -6,19 +6,27 @@ let Semitki = {
     // Initialize
     Backbone.history.start();
     this.router = new SemitkiRouter();
-    this.jwtheader = "Authorization: JWT ";
+    this.jwtheader = "JWT ";
     this.jwtoken = undefined;
-    /* let posts = new Posts; // Collection first
-    loginView = new SchedulerCreate({collection: posts});
-    posts.fetch();
-    */
+    this.collection = {
+      "projects": new Projects(),
+      "topics": new Topics()
+    }
   },
 
   sessionDestroy: () => {
     Semitki.jwtoken = undefined;
     Semitki.user.clear();
     Semitki.router.index();
-  }
+  },
+
+  addAuthorizationHeader: () => {
+    return {
+      headers: {'Authorization': Semitki.jwtheader.concat(Semitki.jwtoken)}
+    }
+  },
+
+
 };
 
 
