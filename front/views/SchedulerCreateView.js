@@ -6,9 +6,12 @@ let SchedulerCreateView = Backbone.View.extend({
 
   render: function() {
     let template = $("#scheduler-create-template").html();
-    let compiled = Handlebars.compile(template); // TODO Pass BB model
-    let html = compiled(Semitki.user);
-    this.$el.html(html);
+    let compiled = Handlebars.compile(template);
+    let data = {
+      projects: Semitki.collection.projects.toJSON(),
+      algo:"hola"
+    };
+    this.$el.html(compiled(data));
     $("#container").html(this.$el);
   }
 });
