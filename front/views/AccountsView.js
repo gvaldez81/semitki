@@ -9,5 +9,5 @@ let AccountsView = Backbone.View.extend({
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled);
     $("#container").html(this.$el);
-}
+  }
 });

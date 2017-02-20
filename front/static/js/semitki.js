@@ -5,6 +5,8 @@ let Semitki = {
   initialize: function() {
     // Initialize
     Backbone.history.start();
+    let navTemplate = Handlebars.compile($("#navigation").html())
+    Handlebars.registerPartial('navigation', navTemplate);
     this.router = new SemitkiRouter();
     this.jwtheader = "JWT ";
     this.jwtoken = undefined;
