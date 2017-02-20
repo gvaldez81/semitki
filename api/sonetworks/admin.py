@@ -10,3 +10,5 @@ admin.site.register(SocialAccountsGroup)
 admin.site.register(SocialAccount)
 admin.site.register(GroupedSocialAccounts)
 admin.site.register(Bucket)
+admin.site.register(StaticPages)
+

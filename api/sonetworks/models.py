@@ -62,3 +62,12 @@ class SocialAccount(models.Model):
 class GroupedSocialAccounts(models.Model):
     social_account_group_id = models.ForeignKey(SocialAccountsGroup)
     social_account_id = models.ForeignKey(SocialAccount)
+
+    
+class StaticPages(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4,
+    editable=False)
+    title = models.CharField(max_length=140)
+    content = models.TextField()
+    template = models.CharField(max_length=140)
+    page = models.CharField(max_length=100)
