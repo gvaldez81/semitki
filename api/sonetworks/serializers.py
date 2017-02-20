@@ -51,7 +51,7 @@ class CampaignSerializer(serializers.HyperlinkedModelSerializer):
 class ProjectSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Project
-        fields = ('__all__')
+        fields = ('id', 'name', 'description', 'campaing_id')
 
 
 class SocialAccountsGroupSerializer(serializers.HyperlinkedModelSerializer):
