@@ -65,3 +65,8 @@ class SocialAccountsGroupViewSet(viewsets.ModelViewSet):
 class SocialAccountViewSet(viewsets.ModelViewSet):
     queryset = SocialAccount.objects.all()
     serializer_class = SocialAccountSerializer
+
+
+class BucketViewSet(viewsets.ModelViewSet):
+    queryset = Bucket.objects.all()
+    serializer_class = BucketSerializer

@@ -64,3 +64,9 @@ class SocialAccountSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = SocialAccount
         fields = ('__all__')
+
+
+class BucketSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Bucket
+        fields = ('__all__')
