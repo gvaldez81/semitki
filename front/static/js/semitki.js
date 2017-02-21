@@ -11,10 +11,10 @@ let Semitki = {
     this.jwtheader = "JWT ";
     this.jwtoken = undefined;
     // BackBone collection instances
-    this.collection = {
-      "projects": new Projects(),
-      "topics": new Topics()
-    }
+    // Heil ES6 Map!
+    this.collection = new Map ();
+    this.collection.set("projects", new Projects());
+    this.collection.set("topics", new Topics());
   },
 
   sessionDestroy: () => {

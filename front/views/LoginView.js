@@ -11,7 +11,6 @@ let LoginView = Backbone.View.extend({
     let $form = $('#login-form');
     this.username = $form.find("input[name='username']").val();
     this.password = $form.find("input[name='password']").val();
-    //this.model.bind("validated", this.validated) TODO code validated
     let url = $form.attr("action");
     let csrftoken = Cookies.get("csrftoken");
     $.ajax(url,
@@ -33,7 +32,9 @@ let LoginView = Backbone.View.extend({
         Semitki.user = new UserModel(data.user);
         if(Semitki.jwtoken != undefined && Semitki.user != undefined) {
           Semitki.router.navigate("#dashboard", {trigger: true});
-          Semitki.collection.projects.fetch(Semitki.addAuthorizationHeader());
+          for (let [key, value] of Semitki.collection) {
+            value.fetch(Semitki.addAuthorizationHeader());
+          }
         }
      });
   },
@@ -43,7 +44,6 @@ let LoginView = Backbone.View.extend({
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled);
     $("#container").html(this.$el);
-    //return this;
   },
 
 });

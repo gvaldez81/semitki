@@ -39,7 +39,7 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
 class TopicSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Topic
-        fields = ('__all__')
+        fields = ('id', 'name', 'description')
 
 
 class CampaignSerializer(serializers.HyperlinkedModelSerializer):
