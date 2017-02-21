@@ -79,7 +79,7 @@
                 <input type="text" class="form-control" id="postUrl" placeholder="url://">
               </div>
               <div class="input-group input-group-sm">
-                <label for="postText">Copy</label>
+                <label for="postText">Post</label>
                 <textarea class="form-control" id="postText" rows="4"></textarea>
               </div>
               <div class="input-group input-group-sm">
@@ -105,10 +105,16 @@
       role="tabpanel" aria-lableledby="scheduler-post-head">
         <div class="panel-body">
           <div class="row">
-            <label>Actions</label>
-            <select class="custom-select">
-              <option selected>Group Name Finder</option>
-            </select>
+            <div class="col-md-12">
+              <div class="input-group">
+                <input type="text" class="form-control"
+                placeholder="Group Name Finder"/>
+                <span class="input-group-addon" id="groupFinder">
+                  <!-- glyph -->
+                  <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                </span>
+              </div>
+            </div>
           </div>
           <div class="row table table-lg table-bordered">
             <div class="col-md-3">Group</div>

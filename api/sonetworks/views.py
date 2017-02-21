@@ -32,8 +32,15 @@ class GroupViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows groups to be viewed or edited.
     """
-    queryset = Group.objects.all()
-    serializer_class = GroupSerializer
+    def get_all(request):
+        permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+        queryset = Group.objects.all()
+        serializer_class = GroupSerializer
+
+    def get_detail(request, pk):
+        permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+        queryset = Group.filter(name=pk)
+        serializer_class = GroupSerializer
 
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -58,8 +65,19 @@ class ProjectViewSet(viewsets.ModelViewSet):
 
 
 class SocialAccountsGroupViewSet(viewsets.ModelViewSet):
-    queryset = SocialAccountsGroup.objects.all()
-    serializer_class = SocialAccountsGroupSerializer
+    def get_all(request):
+        permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+        queryset = Group.objects.all()
+        serializer_class = GroupSerializer
+
+    def get_detail(request, pk):
+        permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+        queryset = Group.filter(name=pk)
+        serializer_class = GroupSerializer
+
+
+#     queryset = SocialAccountsGroup.objects.all()
+    # serializer_class = SocialAccountsGroupSerializer
 
 
 class SocialAccountViewSet(viewsets.ModelViewSet):
