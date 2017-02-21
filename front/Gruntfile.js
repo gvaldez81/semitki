@@ -64,6 +64,11 @@ module.exports = (grunt) => {
         expand: true,
         cwd: 'bower_components/bootstrap/dist/css',
         src: '*', dest: 'dist/css/', filter: 'isFile'
+      },
+      bootstrapdatepicker: {
+        expand: true,
+        cwd: 'bower_components/bootstrap-datepicker/dist/css',
+        src: '*', dest: 'dist/css/', filter: 'isFile'
       }
     },
     bower: {
@@ -75,6 +80,9 @@ module.exports = (grunt) => {
           packageSpecific: {
             'bootstrap': {
               files: { src:'dist/**', dest:'dist/css' }
+            },
+            'bootstrap-datepicker': {
+              files: { src:'dist/css/**', dest:'dist/css', expand: true }
             },
             'handlebars': {
               files: ['./*.js']
