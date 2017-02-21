@@ -65,6 +65,11 @@ module.exports = (grunt) => {
         cwd: 'bower_components/bootstrap/dist/css',
         src: '*', dest: 'dist/css/', filter: 'isFile'
       },
+      bootstrapfonts: {
+        expand: true,
+        cwd: 'bower_components/bootstrap/dist/fonts',
+        src: '*', dest: 'dist/fonts', filter: 'isFile'
+      },
       bootstrapdatepicker: {
         expand: true,
         cwd: 'bower_components/bootstrap-datepicker/dist/css',
