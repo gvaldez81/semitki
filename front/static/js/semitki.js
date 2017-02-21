@@ -15,6 +15,11 @@ let Semitki = {
     this.collection = new Map ();
     this.collection.set("projects", new Projects());
     this.collection.set("topics", new Topics());
+    this.collection.set("buckets", new Buckets());
+    this.collection.set("campaigns", new Campaigns());
+    this.collection.set("accounts", new Accounts());
+    this.collection.set("groups", new Groups());
+
   },
 
   sessionDestroy: () => {
