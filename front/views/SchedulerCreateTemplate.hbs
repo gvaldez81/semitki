@@ -10,7 +10,7 @@
       </div>
       <div id="scheduler-create-panel" class="panel-collapse collapse">
         <div class="row">
-          <div class="col-md-3">
+          <div class="col-md-4">
             <label for="projects">Project</label>
             <select id="projects">
             {{#each projects}}
@@ -18,17 +18,7 @@
             {{/each}}
             </select>
           </div>
-          <div class="col-md-3">
-            <div class="input-group date">
-              <input id="scheduledFor" class="form-control" value="" />
-              <div class="input-group-addon">
-                <span class="glyphicon glyphicon-th"></span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-3">
+          <div class="col-md-4">
             <label for="topics">Topic</label>
             <select id="topics">
             {{#each topics}}
@@ -36,8 +26,14 @@
             {{/each}}
             </select>
           </div>
-          <div class="col-md-3">
-            <button type="button" class="btn btn-default btn-lg">Select Time</button>
+          <div class="col-md-4">
+            <label for="scheduledForPicker">Date and Time</label>
+            <div class="input-group date" id="scheduledForPicker">
+              <input type="text" id="scheduledFor" class="form-control" />
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+              </span>
+            </div>
           </div>
         </div>
       </div>

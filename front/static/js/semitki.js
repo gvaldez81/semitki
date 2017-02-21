@@ -20,6 +20,9 @@ let Semitki = {
     this.collection.set("accounts", new Accounts());
     this.collection.set("groups", new Groups());
 
+    // Datepicker
+    $('#scheduledForPicker').datetimepicker();
+
   },
 
   sessionDestroy: () => {
