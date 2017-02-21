@@ -9,7 +9,8 @@ let SchedulerCreateView = Backbone.View.extend({
     let compiled = Handlebars.compile(template);
     let data = {
       projects: Semitki.collection.get("projects").toJSON(),
-      topics: Semitki.collection.get("topics").toJSON()
+      topics: Semitki.collection.get("topics").toJSON(),
+      buckets: Semitki.collection.get("buckets").toJSON()
     };
     this.$el.html(compiled(data));
     $("#container").html(this.$el);

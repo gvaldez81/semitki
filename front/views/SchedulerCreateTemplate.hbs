@@ -60,18 +60,20 @@
             <div class="col-md-3">
               <label>Source</label>
               <div class="checkbox">
-                <label><input type="checkbox" value="">Original Post</label></div>
+                <label><input type="checkbox" value="">New Post</label></div>
               <div class="checkbox">
-                <label><input type="checkbox" value="">Already Post</label>
+                <label><input type="checkbox" value="">Existing Post</label>
               </div>
-              <label> Post ID </label>
+              <label>Post ID</label>
               <input type="text" class="form-control" placeholder="">
             </div>
             <div class="col-md-3">
               <div class="form-group">
                 <label for="scheduler-network-select">Network</label>
-                <select multiple class="form-control" id="exampleSelect2">
-                  <option>Facebook</option>
+                <select multiple class="form-control" id="networks">
+                {{#each buckets}}
+                  <option value="{{id}}">{{name}}</option>
+                {{/each}}
                 </select>
               </div>
             </div>

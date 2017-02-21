@@ -69,4 +69,4 @@ class SocialAccountSerializer(serializers.HyperlinkedModelSerializer):
 class BucketSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Bucket
-        fields = ('__all__')
+        fields = ('id', 'name')
