@@ -57,18 +57,8 @@
       role="tabpanel" aria-lableledby="scheduler-post-head">
         <div class="panel-body">
           <div class="row">
-            <div class="col-md-3">
-              <label>Source</label>
-              <div class="checkbox">
-                <label><input type="checkbox" value="">New Post</label></div>
-              <div class="checkbox">
-                <label><input type="checkbox" value="">Existing Post</label>
-              </div>
-              <label>Post ID</label>
-              <input type="text" class="form-control" placeholder="">
-            </div>
-            <div class="col-md-3">
-              <div class="form-group">
+            <div class="col-md-6">
+              <div class="input-group">
                 <label for="scheduler-network-select">Network</label>
                 <select multiple class="form-control" id="networks">
                 {{#each buckets}}
@@ -77,14 +67,24 @@
                 </select>
               </div>
             </div>
-            <div class="col-md-3">
-              <div class="form-group">
-                <label for="copy">Copy</label>
-                <textarea class="form-control" id="copy" rows="4"></textarea>
+            <div class="col-md-6">
+              <div class="input-group">
+                <input type="radio" name="isNewPost" id="isNewPost"
+                value="1" aria-label="New post">New Post</input>
+                <input type="radio" name="isNewPost" id="isNewPost"
+                value="0" aria-label="Existing post">Existing Post</input>
               </div>
-              <div class="form-group">
-                <label for="exampleInputFile">Image</label>
-                <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+              <div class="input-group input-group-sm">
+                <label for="postUrl">Post ID</label>
+                <input type="text" class="form-control" id="postUrl" placeholder="url://">
+              </div>
+              <div class="input-group input-group-sm">
+                <label for="postText">Copy</label>
+                <textarea class="form-control" id="postText" rows="4"></textarea>
+              </div>
+              <div class="input-group input-group-sm">
+                <label for="postImageUrl">Image</label>
+                <input type="file" class="form-control-file" id="postImageUrl" aria-describedby="fileHelp">
                 <small id="fileHelp" class="form-text text-muted">Add Image</small>
               </div>
             </div>
