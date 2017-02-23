@@ -15,12 +15,34 @@
     </div>
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-          <li><a href="#scheduler">Scheduler</a></li>
-          <li><a href="#anzlize">Analize</a></li>
-          <li><a href="#scheduler">Scout</a></li>
-          <li><a href="#scheduler">Premium</a></li>
-          <li><a href="#scheduler">Settings</a></li>
+        <li><a href="#scheduler">Scheduler</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+          role="button" aria-haspopup="true" aria-expanded="false">Analyze
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Word cloud</a></li>
+            <li><a href="#">Mentions</a></li>
+            <li><a href="#">Trends</a></li>
+            <li><a href="#">Sentiment</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+          role="button" aria-haspopup="true" aria-expanded="false">Scout
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Activity</a></li>
+            <li><a href="#">Topics</a></li>
+            <li><a href="#">Tags</a></li>
+            <li><a href="#">Sentiment</a></li>
+            <li><a href="#">Query Info</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Premium</a></li>
+        <li><a href="#">Settings</a></li>
       </ul>
+      <div class="nav navbar-right"><a href="#logout">{{email}}</a></div>
     </div>
   </div>
 </nav>
