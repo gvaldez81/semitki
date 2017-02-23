@@ -5,6 +5,9 @@
 src="https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png"></a>
 
 
+https://codeship.com/projects/199702/status?branch=master
+
+
 ## Development setup
 
 Clone the code from github
@@ -53,6 +56,8 @@ We use:
 * [django-rest-auth](https://github.com/Tivix/django-rest-auth/)
 * [django-rest-framework-jwt](http://getblimp.github.io/django-rest-framework-jwt/)
 
+
+Run the API
 
 
     cd semitki/api
