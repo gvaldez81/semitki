@@ -14,5 +14,6 @@ let SchedulerCreateView = Backbone.View.extend({
     };
     this.$el.html(compiled(data));
     $("#container").html(this.$el);
+    $('#scheduledForPicker').datetimepicker();
   }
 });

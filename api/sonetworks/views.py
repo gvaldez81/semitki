@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User, Group
+from rest_framework.decorators import detail_route
 from rest_framework import viewsets
 from rest_framework import permissions
 from .serializers import *
@@ -12,12 +13,12 @@ from rest_auth.registration.views import SocialLoginView
 
 
 class FacebookLogin(SocialLoginView):
-        adapter_class = FacebookOAuth2Adapter
+    adapter_class = FacebookOAuth2Adapter
 
 
 class TwitterLogin(LoginView):
-        serializer_class = TwitterLoginSerializer
-        adapter_class = TwitterOAuthAdapter
+    serializer_class = TwitterLoginSerializer
+    adapter_class = TwitterOAuthAdapter
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -26,21 +27,7 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
-
-
-class GroupViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
-    def get_all(request):
-        permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-        queryset = Group.objects.all()
-        serializer_class = GroupSerializer
-
-    def get_detail(request, pk):
-        permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-        queryset = Group.filter(name=pk)
-        serializer_class = GroupSerializer
+    parmission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -52,39 +39,37 @@ class PostViewSet(viewsets.ModelViewSet):
 class TopicViewSet(viewsets.ModelViewSet):
     queryset = Topic.objects.all()
     serializer_class = TopicSerializer
+    parmission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 
 class CampaignViewSet(viewsets.ModelViewSet):
     queryset = Campaign.objects.all()
     serializer_class = CampaignSerializer
+    parmission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 
 class ProjectViewSet(viewsets.ModelViewSet):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
-
+    parmission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 class SocialAccountsGroupViewSet(viewsets.ModelViewSet):
-    def get_all(request):
-        permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-        queryset = Group.objects.all()
-        serializer_class = GroupSerializer
+    queryset = SocialAccountsGroup.objects.all()
+    serializer_class = SocialAccountsGroupSerializer
+    parmission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
-    def get_detail(request, pk):
-        permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-        queryset = Group.filter(name=pk)
-        serializer_class = GroupSerializer
-
-
-#     queryset = SocialAccountsGroup.objects.all()
-    # serializer_class = SocialAccountsGroupSerializer
+    @detail_route()
+    def search(self, request, *args, **kwargs):
+        ag = self.filter(name="algo")
 
 
 class SocialAccountViewSet(viewsets.ModelViewSet):
     queryset = SocialAccount.objects.all()
     serializer_class = SocialAccountSerializer
+    parmission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 
 class BucketViewSet(viewsets.ModelViewSet):
     queryset = Bucket.objects.all()
     serializer_class = BucketSerializer
+    parmission_classes = (permissions.IsAuthenticatedOrReadOnly,)

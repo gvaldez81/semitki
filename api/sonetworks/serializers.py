@@ -21,7 +21,7 @@ class TwitterLoginSerializer(serializers.Serializer):
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'first_name', 'last_name', 'posts')
+        fields = ('url', 'id', 'username', 'email', 'first_name', 'last_name', 'posts')
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
@@ -39,7 +39,7 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
 class TopicSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Topic
-        fields = ('id', 'name', 'description')
+        fields = ('url', 'id', 'name', 'description')
 
 
 class CampaignSerializer(serializers.HyperlinkedModelSerializer):

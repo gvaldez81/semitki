@@ -1,77 +1,28 @@
 <script type="text/x-handlebars-template" id="navigation">
 
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container">
-    <div class="btn-group" role="group" aria-label="menu">
-      <button type="button" class="btn btn-default btn-lg">Semitki</button>
-      <div class="btn-group" role="group">
-        <button type="button" class="btn btn-default btn-lg dropdown-toggle"
-        data-toggle="dropdown" aria-haspopup="true"
-        aria-expandable="false">Scheduler
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-          <li><a href="#scheduler">Twitter</a></li>
-          <li><a href="#scheduler">Facebook</a></li>
-          <li><a href="#scheduler">Instagram</a></li>
-        </ul>
-      </div>
-      <div class="btn-group" role="group">
-        <button type="button" class="btn btn-default btn-lg dropdown-toggle"
-        data-toggle="dropdown" aria-haspopup="true"
-        aria-expanded="false">Analyze
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-          <li><a href="#">Word Cloud</a></li>
-          <li><a href="#">Mentions</a></li>
-          <li><a href="#">Trendings</a></li>
-          <li><a href="#">Sentiment</a></li>
-        </ul>
-      </div>
-      <div class="btn-group" role="group">
-        <button type="button" class="btn btn-default btn-lg dropdown-toggle"
-        data-toggle="dropdown" aria-haspopup="true"
-        aria-expanded="false">Scout
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-          <li><a href="#">Activity</a></li>
-          <li><a href="#">Topics</a></li>
-          <li><a href="#">Tags</a></li>
-          <li><a href="#">Sentiment</a></li>
-          <li><a href="#">QueryInfo</a></li>
-        </ul>
-      </div>
-      <div class="btn-group">
-        <button type="button" class="btn btn-default btn-lg dropdown-toggle"
-        data-toggle="dropdown" aria-haspopup="true"
-        aria-expanded="false">Premium
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-          <li><a href="#">WhatsApp</a></li>
-          <li><a href="#">Telegram</a></li>
-          <li><a href="#">FB Mesennger</a></li>
-          <li><a href="#">Direct Messages</a></li>
-          <li><a href="#">AllTogether</a></li>
-        </ul>
-      </div>
-      <div class="btn-group">
-        <button type="button" class="btn btn-default btn-lg dropdown-toggle"
-        data-toggle="dropdown" aria-haspopup="true"
-        aria-expanded="false">Settings
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-          <li><a href="#">Account Info</a></li>
-          <li><a href="#">Securityn</a></li>
-          <li><a href="#">Mobile Settings</a></li>
-        </ul>
-      </div>
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed"
+      data-toggle="collapse" data-target="#navbar"
+      aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#dashboard">Semitki</a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+          <li><a href="#scheduler">Scheduler</a></li>
+          <li><a href="#anzlize">Analize</a></li>
+          <li><a href="#scheduler">Scout</a></li>
+          <li><a href="#scheduler">Premium</a></li>
+          <li><a href="#scheduler">Settings</a></li>
+      </ul>
     </div>
   </div>
-  <a href="#logout">{{email}}</a>
 </nav>
 
 </script>

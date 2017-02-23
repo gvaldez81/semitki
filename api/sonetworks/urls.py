@@ -28,13 +28,11 @@ router.register(r'topic', TopicViewSet)
 router.register(r'campaign', CampaignViewSet)
 router.register(r'project', ProjectViewSet)
 router.register(r'account', SocialAccountViewSet)
-#router.register(r'account_group', SocialAccountsGroupViewSet.get_all)
+router.register(r'account_group', SocialAccountsGroupViewSet)
 router.register(r'bucket', BucketViewSet)
 
 urlpatterns = [
     url(r'^', include(router.urls)),
-    url(r'^account_group/$', SocialAccountsGroupViewSet.get_all),
-    url(r'^account_group/pk/$', SocialAccountsGroupViewSet.get_detail),
     url(r'^rest-auth/facebook/$', FacebookLogin.as_view(), name='fb_login'),
     url(r'^rest-auth/twitter/$', TwitterLogin.as_view(), name='twitter_login'),
     url(r'^admin/', admin.site.urls),
