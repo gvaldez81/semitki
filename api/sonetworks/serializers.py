@@ -51,22 +51,24 @@ class CampaignSerializer(serializers.HyperlinkedModelSerializer):
 class ProjectSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Project
-        fields = ('id', 'name', 'description', 'campaing_id')
+        campaings = serializers.PrimaryKeyRelatedField(many=True,
+                queryset=Campaign.objects.all())
+        fields = ('url', 'id', 'name', 'description', 'campaign')
 
 
 class SocialAccountsGroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = SocialAccountsGroup
-        fields = ('__all__')
+        fields = ('url', 'id', 'name', 'description')
 
 
 class SocialAccountSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = SocialAccount
-        fields = ('__all__')
+        fields = ('url', 'id', 'name', 'description')
 
 
 class BucketSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Bucket
-        fields = ('id', 'name')
+        fields = ('url', 'id', 'name')
