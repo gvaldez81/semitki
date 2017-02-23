@@ -19,9 +19,10 @@ let Semitki = {
     this.collection.set("campaigns", new Campaigns());
     this.collection.set("accounts", new Accounts());
     this.collection.set("groups", new Groups());
+    this.collection.set("abouts", new Abouts());
 
     // Datepicker
-    $('#scheduledForPicker').datetimepicker();
+   $('#scheduledForPicker').datetimepicker();
 
   },
 

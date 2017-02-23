@@ -70,3 +70,8 @@ class BucketSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Bucket
         fields = ('id', 'name')
+
+class AboutSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = StaticPages
+        fields = ('__all__')

@@ -1,0 +1,29 @@
+<script type="text/x-handlebars-template" id="about">
+
+{{> navigation }}
+
+<div class="container">  
+ <h3> About Us </h3>
+    <form class="form-horizontal">
+     <div class="form-group">
+    <div class="col-sm-4">
+<label class="control-label col-sm-2" for="name">Title:</label>
+        
+<input type="Title" class="form-control" id="tile" placeholder="Title">
+    <form class="form-horizontal" role="form">
+        <div class="form-group">
+          <label for="theme">Themes</label>
+                <select class="form-control">
+                <option value="0" selected>Theme </option>
+                </select>
+        </div>
+    </form>
+
+<label for="theme">Code HTML</label>
+<textarea class="form-control" id="copy" rows="10"></textarea>
+<button type="button" class="btn btn-primary btn-md"> Save </button>
+    </div>
+     </div>
+    </form>
+</div>
+</script>

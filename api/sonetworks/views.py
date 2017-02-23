@@ -88,3 +88,8 @@ class SocialAccountViewSet(viewsets.ModelViewSet):
 class BucketViewSet(viewsets.ModelViewSet):
     queryset = Bucket.objects.all()
     serializer_class = BucketSerializer
+
+
+class AboutViewSet(viewsets.ModelViewSet):
+    queryset = StaticPages.objects.all()
+    serializer_class = AboutSerializer    
