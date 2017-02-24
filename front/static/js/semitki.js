@@ -1,5 +1,8 @@
 'use strict'
 
+let api_url = "127.0.0.1";
+let api_port = 8000;
+
 let Semitki = {
 
   initialize: function() {
@@ -21,9 +24,14 @@ let Semitki = {
     this.collection.set("groups", new Groups());
     this.collection.set("abouts", new Abouts());
 
-    // Datepicker
-   $('#scheduledForPicker').datetimepicker();
+  },
 
+  api: (resource) => {
+    if(api_port == undefined) {
+      return "//" + api_url + "/" + resource + "/";
+    } else {
+      return "//" + api_url + ":" + api_port + "/" + resource + "/";
+    }
   },
 
   sessionDestroy: () => {
