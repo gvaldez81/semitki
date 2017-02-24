@@ -28,7 +28,7 @@ router.register(r'topic', TopicViewSet)
 router.register(r'campaign', CampaignViewSet)
 router.register(r'project', ProjectViewSet)
 router.register(r'account', SocialAccountViewSet)
-router.register(r'account_group', SocialAccountsGroupViewSet)
+router.register(r'accounts_group', SocialAccountsGroupViewSet)
 router.register(r'bucket', BucketViewSet)
 router.register(r'about', AboutViewSet)
 
