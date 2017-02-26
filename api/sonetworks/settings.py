@@ -155,7 +155,9 @@ JWT_AUTH = {
         }
 
 CORS_ORIGIN_WHITELIST = (
-        '127.0.0.1:9080'
+        '127.0.0.1:9080',
+        '159.203.134.236:9080',
+        'tj.patito.ninja:9080'
         )
 
 SITE_ID = 1

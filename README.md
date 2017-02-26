@@ -5,7 +5,7 @@
 src="https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png"></a>
 
 
-https://codeship.com/projects/199702/status?branch=master
+<img src="https://codeship.com/projects/199702/status?branch=master" />
 
 
 ## Development setup

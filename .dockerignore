@@ -1,4 +1,6 @@
-ENV
+**/ENV
 .git
 data
 **/dist
+**/bower_components
+**/node_modules
