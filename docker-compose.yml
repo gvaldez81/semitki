@@ -4,7 +4,7 @@ services:
     image: postgres
   app:
     build: .
-    command: /semitki/ENV/bin/python /semitki/api/manage.py runserver 0.0.0.0:8000
+    command: /semitki/run_api.sh
     volumes:
       - ./api:/semitki/api
     ports:

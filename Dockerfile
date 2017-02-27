@@ -17,6 +17,6 @@ RUN yum -y update ; \
 RUN  virtualenv ENV ; \
   ENV/bin/pip install -r requirements.txt
 
-#ENTRYPOINT /semitki/api/ENV/bin/python
+#ENTRYPOINT /semitki/ENV/bin/python
 
-#CMD ["manage.py", "runserver", "0.0.0.0:8000"]
+#CMD ["/semitki/api/manage.py", "runserver", "0.0.0.0:8000"]
