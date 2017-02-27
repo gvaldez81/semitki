@@ -1,11 +1,10 @@
 # semitki
 
 
-<a href="https://zenhub.com"><img
-src="https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png"></a>
+[_![Shipping faster with ZenHub](a href="https://zenhub.com")](https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png)
+[ ![Codeship Status for semitki/semitki](https://app.codeship.com/projects/2b89f950-cac9-0134-a140-7e371e5d68a3/status?branch=master)](https://app.codeship.com/projects/199702)
 
 
-<img src="https://codeship.com/projects/199702/status?branch=master" />
 
 
 ## Development setup
