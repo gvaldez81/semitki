@@ -1,6 +1,6 @@
 'use strict'
 
-let api_url = "127.0.0.1";
+let api_url = "159.203.134.236";
 let api_port = 8000;
 
 function sameOrigin(url) {
@@ -25,6 +25,7 @@ function csrfSafeMethod(method) {
 
 function apiBuilder(resource) {
   // Builds the api url of a given resource
+// TODO we need a development flag in the buid
   if(api_port == undefined) {
     return "//" + api_url + "/" + resource + "/";
   } else {

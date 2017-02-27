@@ -6,5 +6,5 @@ npm install
 bower install
 grunt
 cd ..
-docker-compose up
-#docker-compose up --build
+docker-compose up -d
+#docker-compose up -d --build

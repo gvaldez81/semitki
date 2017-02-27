@@ -11,7 +11,7 @@ let LoginView = Backbone.View.extend({
     let $form = $('#login-form');
     this.username = $form.find("input[name='username']").val();
     this.password = $form.find("input[name='password']").val();
-    let url = $form.attr("action");
+    let url = Semitki.api("api-token-auth")
     let csrftoken = Cookies.get("csrftoken");
     $.ajax(url,
        {
