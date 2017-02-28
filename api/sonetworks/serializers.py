@@ -4,20 +4,6 @@ from rest_framework import serializers
 from .models import *
 
 
-if 'allauth.socialaccount' in settings.INSTALLED_APPS:
-    from allauth.socialaccount.helpers import complete_social_login
-    from allauth.socialaccount.models import SocialToken
-    from allauth.socialaccount.providers.oauth.client import OAuthError
-
-
-class TwitterLoginSerializer(serializers.Serializer):
-    access_token = serializers.CharField()
-    token_secret = serializers.CharField()
-
-    def _get_request(self):
-        request = self.context.get('request')
-
-
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User

@@ -34,9 +34,6 @@ router.register(r'about', AboutViewSet)
 
 urlpatterns = [
     url(r'^', include(router.urls)),
-    url(r'^rest-auth/', include('rest_auth.urls')),
-    url(r'^rest-auth/facebook/$', FacebookLogin.as_view(), name='fb_login'),
-    url(r'^rest-auth/twitter/$', TwitterLogin.as_view(), name='twitter_login'),
     url(r'^admin/', admin.site.urls),
     url(r'^api-token-auth/', obtain_jwt_token)
 ]

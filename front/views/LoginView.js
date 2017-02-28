@@ -4,7 +4,28 @@ let LoginView = Backbone.View.extend({
   tagName: "div",
   className: "panel panel-info",
   events: {
-    "click #login-button": "tryLogin"
+    "click #login-button": "tryLogin",
+    "click #fb-login": "tryFbLogin"
+  },
+
+  tryFbLogin: () => {
+    let url = apiBuilder("rest-auth/facebook");
+    let csrftoken = Cookies.get("csrftoken");
+    $.ajax(url,
+      {
+        beforeSend: (xhr, settings) => {
+          if (!csrfSafeMethod(settings.type)
+            && sameOrigin(settings.url)) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+          }
+        },
+        method: "POST",
+        dataType: "JSON"
+      }).done((data) => {
+        console.log(data);
+      }).fail((error) => {
+        console.log(error);
+      });
   },
 
   tryLogin: () => {

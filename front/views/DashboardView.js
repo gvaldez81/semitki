@@ -7,7 +7,8 @@ let DashboardView = Backbone.View.extend({
   render: function() {
     let template = $("#dashboard").html();
     let compiled = Handlebars.compile(template);
-    this.$el.html(compiled(Semitki.user.toJSON()));
+    let data = { user:Semitki.user.toJSON() }; 
+    this.$el.html(compiled(data));
     $("#container").html(this.$el);
   }
 });

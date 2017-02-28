@@ -38,17 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'corsheaders',
     # django-rest-framework
     'rest_framework',
     'rest_framework.authtoken',
-    'rest_auth',
-    # rest-auth
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.facebook',
-    'allauth.socialaccount.providers.twitter',
-    'corsheaders',
     # our app
     'sonetworks',
 ]
