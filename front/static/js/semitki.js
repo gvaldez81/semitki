@@ -46,16 +46,31 @@ let Semitki = {
     }
   },
 
-  initFacebook: () => {
-  $.ajaxSetup({ cache: true });
-  $.getScript('//connect.facebook.net/en_US/sdk.js', function(){
-        FB.init({
-                appId: '{your-app-id}',
-                version: 'v2.7' // or v2.1, v2.2, v2.3, ...
-              });     
-        $('#loginbutton,#feedbutton').removeAttr('disabled');
-        FB.getLoginStatus(updateStatusCallback);
-      });
+  fbStatusChangeCallback: (response) => {
+    console.log('statusChangeCallback');
+    console.log(response);
+    // The response object is returned with a status field that lets the
+    // app know the current login status of the person.
+    // Full docs on the response object can be found in the documentation
+    // for FB.getLoginStatus().
+    if (response.status === 'connected') {
+      // Logged into your app and Facebook.
+      return true;
+    } else if (response.status === 'not_authorized') {
+      // The person is logged into Facebook, but not your app.
+      console.log('loged in fb but not in app');
+    } else {
+      // The person is not logged into Facebook, so we're not sure if
+      // they are logged into this app or not.
+      console.log('loginto fb');
+    }
+  },
+
+  fbGetLoginStatus: () => {
+    FB.getLoginStatus((response) => {
+      Semitki.fbStatusChangeCallback(response);
+    });
+  }
 
 
 };

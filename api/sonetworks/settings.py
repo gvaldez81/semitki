@@ -171,8 +171,8 @@ SITE_ID = 1
 
 
 # Facebook configuration
-SOCIAL_AUTH_FACEBOOK_KEY = '1799265310398279'
-SOCIAL_AUTH_FACEBOOK_SECRET = 'e6a135a00b3521d3acd430087c5437b2'
+SOCIAL_AUTH_FACEBOOK_KEY = ''
+SOCIAL_AUTH_FACEBOOK_SECRET = ''
 
 # Define SOCIAL_AUTH_FACEBOOK_SCOPE to get extra permissions from facebook. Email is not sent by default, to get it, you must request the email permission:
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']

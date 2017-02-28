@@ -6,7 +6,7 @@ let api_port = 8000;
 
 window.fbAsyncInit = function() {
   FB.init({
-          appId      : '1799265310398279',
+          appId      : 'app_id',
           xfbml      : true,
           version    : 'v2.8'
         });
