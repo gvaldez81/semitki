@@ -25,6 +25,16 @@ let Semitki = {
   },
 
   sessionDestroy: () => {
+    let url = apiBuilder("rest-auth/logout")
+  //    let csrftoken = Cookies.get("csrftoken");
+    $.ajax(url,
+     {
+        method: "POST",
+        dataType: "JSON"
+      }).done((data) => {
+        console.log(data);
+     });
+
     Semitki.jwtoken = undefined;
     Semitki.user.clear();
     Semitki.router.index();

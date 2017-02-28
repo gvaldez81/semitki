@@ -37,18 +37,20 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'sonetworks',
+    'django.contrib.sites',
+    # django-rest-framework
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
-    'django.contrib.sites',
+    # rest-auth
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.twitter',
     'corsheaders',
-
+    # our app
+    'sonetworks',
 ]
 
 MIDDLEWARE = [
@@ -135,19 +137,19 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# ## REST API
-# REST_FRAMEWORK = {
-        # 'DEFAULT_PERMISSION_CLASSES': (
-            # 'rest_framework.permissions.IsAuthenticated',
-            # ),
-        # 'DEFAULT_AUTHENTICATION_CLASSES': (
-            # 'rest_framework.authentication.SessionAuthentication',
-            # 'rest_framework.authentication.BasicAuthentication',
-            # 'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-            # ),
-        # }
+## REST API
+REST_FRAMEWORK = {
+        'DEFAULT_PERMISSION_CLASSES': (
+            'rest_framework.permissions.IsAuthenticated',
+            ),
+        'DEFAULT_AUTHENTICATION_CLASSES': (
+            'rest_framework.authentication.SessionAuthentication',
+            'rest_framework.authentication.BasicAuthentication',
+            'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+            ),
+        }
 
-# REST_USE_JWT = True
+REST_USE_JWT = True
 
 JWT_AUTH = {
         'JWT_RESPONSE_PAYLOAD_HANDLER':

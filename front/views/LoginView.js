@@ -35,6 +35,11 @@ let LoginView = Backbone.View.extend({
           for (let [key, value] of Semitki.collection) {
             value.fetch(Semitki.addAuthorizationHeader());
           }
+
+  $('#logout').on('click', function() {
+    $('#logout').preventDefault();
+    Semitki.sessionDestroy();
+  });
         }
      });
   },
