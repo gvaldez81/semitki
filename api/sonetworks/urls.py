@@ -35,5 +35,6 @@ router.register(r'about', AboutViewSet)
 urlpatterns = [
     url(r'^', include(router.urls)),
     url(r'^admin/', admin.site.urls),
+    url(r'^auth/', include('rest_framework_social_oauth2.urls')),
     url(r'^login/', obtain_jwt_token)
 ]
