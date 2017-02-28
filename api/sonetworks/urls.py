@@ -35,5 +35,5 @@ router.register(r'about', AboutViewSet)
 urlpatterns = [
     url(r'^', include(router.urls)),
     url(r'^admin/', admin.site.urls),
-    url(r'^api-token-auth/', obtain_jwt_token)
+    url(r'^login/', obtain_jwt_token)
 ]

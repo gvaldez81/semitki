@@ -32,7 +32,7 @@ let LoginView = Backbone.View.extend({
     let $form = $('#login-form');
     this.username = $form.find("input[name='username']").val();
     this.password = $form.find("input[name='password']").val();
-    let url = apiBuilder("rest-auth/login")
+    let url = apiBuilder("login")
     let csrftoken = Cookies.get("csrftoken");
     $.ajax(url,
        {
