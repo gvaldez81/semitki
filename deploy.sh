@@ -1,10 +1,13 @@
 #!/bin/sh
-cd /opt/semitki
+APP_BASE=/opt/semitki
+APP_API=$APP_BASE/api
+APP_FRONT=$APP_BASE/front
+cd $APP_BASE
 git pull
-cd front
+cd $APP_FRONT
 npm install
 bower install
 grunt
-cd ..
+cd $APP_BASE
 #docker-compose up -d
 docker-compose up -d --build
