@@ -1,7 +1,7 @@
 'use strict'
 
-let api_url = "127.0.0.1";
-//let api_url = "159.203.134.236";
+//let api_url = "127.0.0.1";
+let api_url = "159.203.134.236";
 let api_port = 8000;
 
 function sameOrigin(url) {
