@@ -9,23 +9,13 @@ let LoginView = Backbone.View.extend({
   },
 
   tryFbLogin: () => {
-    let url = apiBuilder("rest-auth/facebook");
-    let csrftoken = Cookies.get("csrftoken");
-    $.ajax(url,
-      {
-        beforeSend: (xhr, settings) => {
-          if (!csrfSafeMethod(settings.type)
-            && sameOrigin(settings.url)) {
-            xhr.setRequestHeader("X-CSRFToken", csrftoken);
-          }
-        },
-        method: "POST",
-        dataType: "JSON"
-      }).done((data) => {
-        console.log(data);
-      }).fail((error) => {
-        console.log(error);
-      });
+    FB.login((response) => {
+      if(Semitki.fbStatusChangeCallback(response)) {
+        Semitki.authReponse = response.authReponse;
+        Semitki.router.navigate('#dashboard', {trigger: true});
+      } else {
+      }
+    });
   },
 
   tryLogin: () => {

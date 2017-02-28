@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'oauth2_provider',
+    'social_django',
     'rest_framework_social_oauth2',
     # our app
     'sonetworks',
@@ -72,6 +73,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect'
             ],
         },
     },
@@ -138,11 +141,18 @@ REST_FRAMEWORK = {
             'rest_framework.permissions.IsAuthenticated',
             ),
         'DEFAULT_AUTHENTICATION_CLASSES': (
-            'rest_framework.authentication.SessionAuthentication',
-            'rest_framework.authentication.BasicAuthentication',
             'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+            'oauth2_provider.ext.rest_framework.OAuth2Authentication',
+            'rest_framework_social_oauth2.authentication.SocialAuthentication'
             ),
         }
+
+AUTHENTICATION_BACKENDS = (
+        'rest_framework_social_oauth2.backends.DjangoOAuth2',
+        'django.contrib.auth.backends.ModelBackend',
+        'social_core.backends.facebook.FacebookAppOAuth2',
+        'social_core.backends.facebook.FacebookOAuth2'
+        )
 
 REST_USE_JWT = True
 
@@ -158,3 +168,14 @@ CORS_ORIGIN_WHITELIST = (
         )
 
 SITE_ID = 1
+
+
+# Facebook configuration
+SOCIAL_AUTH_FACEBOOK_KEY = ''
+SOCIAL_AUTH_FACEBOOK_SECRET = ''
+
+# Define SOCIAL_AUTH_FACEBOOK_SCOPE to get extra permissions from facebook. Email is not sent by default, to get it, you must request the email permission:
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+            'fields': 'id, name, email'
+            }
