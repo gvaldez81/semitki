@@ -136,3 +136,4 @@ node_modules
 bower_components
 **/dist
 seecrets.txt
+front/static/js/config.js

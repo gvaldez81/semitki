@@ -1,15 +1,11 @@
 'use strict'
 
-let api_url = "127.0.0.1";
-//let api_url = "159.203.134.236";
-let api_port = 8000;
-
 /**
  * Initializie Facebook JavaScript SDK 
  */
 window.fbAsyncInit = function() {
   FB.init({
-          appId      : 'app_id',
+          appId      : SEMITKI_CONFIG.fb_app_id,
           xfbml      : true,
           version    : 'v2.8'
         });
@@ -48,9 +44,9 @@ function csrfSafeMethod(method) {
 function apiBuilder(resource) {
   // Builds the api url of a given resource
 // TODO we need a development flag in the buid
-  if(api_port == undefined) {
-    return "//" + api_url + "/" + resource + "/";
+  if(SEMITKI_CONFIG.api_port == undefined) {
+    return "//" + SEMITKI_CONFIG.api_url + "/" + resource + "/";
   } else {
-    return "//" + api_url + ":" + api_port + "/" + resource + "/";
+    return "//" + SEMITKI_CONFIG.api_url + ":" + SEMITKI_CONFIG.api_port + "/" + resource + "/";
   }
 };
