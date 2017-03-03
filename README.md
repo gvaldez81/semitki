@@ -15,6 +15,15 @@ Clone the code from github
     git clone git@github.com:semitki/semitki.git
 
 
+### Settings
+
+Copy the sample configuration files and edit accordingly.
+
+
+    cp semitki/variables.env.sample semitki/variables.env
+    cp semitki/front/static/js/config.js.sample semitki/front/static/js/config.js
+
+
 ### Tooling
 
 Besides the code you'll need various tools.
