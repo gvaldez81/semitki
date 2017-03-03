@@ -101,5 +101,6 @@ module.exports = (grunt) => {
   grunt.loadNpmTasks('grunt-contrib-clean');
 
   grunt.registerTask('default', ['clean', 'concat', 'copy', 'bower']);
+  grunt.registerTask('prod', ['clean', 'concat', 'copy', 'bower']);
 
 };
