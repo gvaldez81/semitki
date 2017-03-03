@@ -11,6 +11,8 @@ services:
       - "8000:8000"
     depends_on:
       - db
+    env_file:
+      - variables.env
   web:
     image: nginx:stable
     ports:

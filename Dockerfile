@@ -4,6 +4,8 @@ MAINTAINER developer@celisdelafuente.net
 EXPOSE 8000
 
 ENV PATH="/usr/pgsql-9.6/bin:$PATH"
+ENV SOCIAL_AUTH_FACEBOOK_KEY
+ENV SOCIAL_AUTH_FACEBOOK_SECRET
 
 COPY ./ /semitki
 
