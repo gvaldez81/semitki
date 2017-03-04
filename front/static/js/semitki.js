@@ -45,6 +45,12 @@ let Semitki = {
     }
   },
 
+  fetchCollections: () => {
+    for (let [key, value] of Semitki.collection) {
+      value.fetch(Semitki.addAuthorizationHeader());
+    }
+  },
+
   fbStatusChangeCallback: (response) => {
     // The response object is returned with a status field that lets the
     // app know the current login status of the person.
@@ -69,11 +75,7 @@ let Semitki = {
     });
   },
 
-  user: {
-    toJSON: () => {
-      return Semitki.user;
-    }
-  }
+  user: new UserModel
 
 };
 

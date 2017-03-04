@@ -11,7 +11,7 @@ let UserModel = Backbone.Model.extend({
       is_staff: undefined,
       is_active: undefined
     }
-  },    
+  },
   attributesChanged: () => {
     console.log("hello world");
   }

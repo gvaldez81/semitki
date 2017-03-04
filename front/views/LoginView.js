@@ -11,16 +11,22 @@ let LoginView = Backbone.View.extend({
   tryFbLogin: () => {
     FB.login((response) => {
       if(Semitki.fbStatusChangeCallback(response)) {
-        FB.api('/me', { fields: 'email'}, (response) => {
-          Semitki.user.fb_userID = response.id;
-          Semitki.user.name = response.name;
+        FB.api('/me', { "fields": "id,name,email"}, (response) => {
+          console.log(response);
+          let user = {
+            fb_userID: response.id,
+            name: response.name,
+            email: response.email
+          };
+          Semitki.user.set(user);
           Semitki.router.navigate('#dashboard', {trigger: true});
+          Semitki.fetchCollections();
         });
       } else {
         // TODO when user not logged in FB do something perhaps
         console.log("no in Fb");
       }
-    });
+    }, {scope: 'email'});
   },
 
   tryLogin: () => {
@@ -45,17 +51,10 @@ let LoginView = Backbone.View.extend({
         dataType: "JSON"
       }).done((data) => {
         Semitki.jwtoken = data.token;
-        Semitki.user = new UserModel(data.user);
+        Semitki.user.set(data.user);
         if(Semitki.jwtoken != undefined && Semitki.user != undefined) {
           Semitki.router.navigate("#dashboard", {trigger: true});
-          for (let [key, value] of Semitki.collection) {
-            value.fetch(Semitki.addAuthorizationHeader());
-          }
-
-  $('#logout').on('click', function() {
-    $('#logout').preventDefault();
-    Semitki.sessionDestroy();
-  });
+          Semitki.fetchCollections();
         }
      });
   },
