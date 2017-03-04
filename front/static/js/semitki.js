@@ -20,8 +20,7 @@ let Semitki = {
     this.collection.set("campaigns", new Campaigns());
     this.collection.set("accounts", new Accounts());
     this.collection.set("groups", new Groups());
-    this.collection.set("abouts", new Abouts());
-
+    this.collection.set("abouts", new Abouts()); // TODO refactor to Pages
   },
 
   sessionDestroy: () => {
@@ -47,8 +46,6 @@ let Semitki = {
   },
 
   fbStatusChangeCallback: (response) => {
-    console.log('statusChangeCallback');
-    console.log(response);
     // The response object is returned with a status field that lets the
     // app know the current login status of the person.
     // Full docs on the response object can be found in the documentation
@@ -70,8 +67,13 @@ let Semitki = {
     FB.getLoginStatus((response) => {
       Semitki.fbStatusChangeCallback(response);
     });
-  }
+  },
 
+  user: {
+    toJSON: () => {
+      return Semitki.user;
+    }
+  }
 
 };
 

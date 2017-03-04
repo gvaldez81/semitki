@@ -11,9 +11,14 @@ let LoginView = Backbone.View.extend({
   tryFbLogin: () => {
     FB.login((response) => {
       if(Semitki.fbStatusChangeCallback(response)) {
-        Semitki.authReponse = response.authReponse;
-        Semitki.router.navigate('#dashboard', {trigger: true});
+        FB.api('/me', { fields: 'email'}, (response) => {
+          Semitki.user.fb_userID = response.id;
+          Semitki.user.name = response.name;
+          Semitki.router.navigate('#dashboard', {trigger: true});
+        });
       } else {
+        // TODO when user not logged in FB do something perhaps
+        console.log("no in Fb");
       }
     });
   },
