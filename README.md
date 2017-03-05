@@ -61,7 +61,7 @@ We use:
 
 * [Django](https://www.djangoproject.com/)
 * [django-rest-framework](http://www.django-rest-framework.org/)
-* [django-rest-auth](https://github.com/Tivix/django-rest-auth/)
+* [django-rest-framework-scoial-oauth2](https://github.com/PhilipGarnero/django-rest-framework-social-oauth2)
 * [django-rest-framework-jwt](http://getblimp.github.io/django-rest-framework-jwt/)
 
 

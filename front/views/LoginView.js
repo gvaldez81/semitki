@@ -12,15 +12,28 @@ let LoginView = Backbone.View.extend({
     FB.login((response) => {
       if(Semitki.fbStatusChangeCallback(response)) {
         FB.api('/me', { "fields": "id,name,email"}, (response) => {
-          console.log(response);
           let user = {
             fb_userID: response.id,
             name: response.name,
             email: response.email
           };
+          $.ajax(Semitki.api("auth/convert-token"),
+            {
+              data: {
+                 grant_type: "convert_token",
+                 client_id: SEMITKI_CONFIG.app_id,
+                 client_secret: SEMITKI_CONFIG.app_secret,
+                 backend: "facebook",
+                 token: Semitki.fb_token
+              },
+              method: "POST",
+              dataType: "json"
+            }).done((response) => {
+              Semitki.jwtoken = response.access_token;
           Semitki.user.set(user);
           Semitki.router.navigate('#dashboard', {trigger: true});
           Semitki.fetchCollections();
+            });
         });
       } else {
         // TODO when user not logged in FB do something perhaps

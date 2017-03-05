@@ -43,7 +43,6 @@ function csrfSafeMethod(method) {
 
 function apiBuilder(resource) {
   // Builds the api url of a given resource
-// TODO we need a development flag in the buid
   if(SEMITKI_CONFIG.api_port == undefined) {
     return "//" + SEMITKI_CONFIG.api_url + "/" + resource + "/";
   } else {

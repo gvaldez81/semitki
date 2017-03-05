@@ -9,6 +9,7 @@ let Semitki = {
     let navTemplate = Handlebars.compile($("#navigation").html())
     Handlebars.registerPartial('navigation', navTemplate);
     this.router = new SemitkiRouter();
+    //this.jwtheader = "Token ";
     this.jwtheader = "JWT ";
     this.jwtoken = undefined;
     // BackBone collection instances
@@ -21,6 +22,15 @@ let Semitki = {
     this.collection.set("accounts", new Accounts());
     this.collection.set("groups", new Groups());
     this.collection.set("abouts", new Abouts()); // TODO refactor to Pages
+  },
+
+  api: (resource) => {
+    // Builds the api url of a given resource
+    if(SEMITKI_CONFIG.api_port == undefined) {
+      return "//" + SEMITKI_CONFIG.api_url + "/" + resource + "/";
+    } else {
+      return "//" + SEMITKI_CONFIG.api_url + ":" + SEMITKI_CONFIG.api_port + "/" + resource + "/";
+    }
   },
 
   sessionDestroy: () => {
@@ -58,6 +68,7 @@ let Semitki = {
     // for FB.getLoginStatus().
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
+      Semitki.fb_token = response.authResponse.accessToken;
       return true;
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.

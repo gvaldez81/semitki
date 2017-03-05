@@ -154,7 +154,7 @@ AUTHENTICATION_BACKENDS = (
         'social_core.backends.facebook.FacebookOAuth2'
         )
 
-REST_USE_JWT = True
+REST_USE_JWT = False
 
 JWT_AUTH = {
         'JWT_RESPONSE_PAYLOAD_HANDLER':
