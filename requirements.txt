@@ -17,6 +17,7 @@ python-openid==2.2.5
 python-social-auth==0.3.6
 requests==2.13.0
 requests-oauthlib==0.7.0
+rest-social-auth==1.1.0
 six==1.10.0
-social-auth-app-django==1.1.0
-social-auth-core==1.2.0
+social-auth-app-django==0.1.0
+social-auth-core==0.2.1

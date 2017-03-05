@@ -17,7 +17,7 @@ let LoginView = Backbone.View.extend({
             name: response.name,
             email: response.email
           };
-          $.ajax(Semitki.api("auth/convert-token"),
+          $.ajax(Semitki.api("login/facebook"),
             {
               data: {
                  grant_type: "convert_token",
