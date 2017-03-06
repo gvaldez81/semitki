@@ -6,14 +6,14 @@ let SchedulerCreateView = Backbone.View.extend({
 
   className: "panel",
 
-  model: Semitki.collection.get("posts"),
-
   events: {
     "keyup #groupFinder": "searchGroup"
   },
 
   searchGroup: () => {
-    Semitki.collection.get("groups").search($("#groupFinder").val());
+    let group = Semitki.collection.get("groups").search($("#groupFinder").val());
+    let results = new GroupFinderView({model: group});
+    results.render();
   },
 
   render: function() {

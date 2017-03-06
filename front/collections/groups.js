@@ -16,9 +16,12 @@ let Groups = Backbone.Collection.extend({
         break;
       default:
         let localResult = Semitki.collection.get("groups").where({name: group});
-        Semitki.collection.get("groups")
-          .fetch(Semitki.addAuthorizationHeader());
-        console.log(localResult);
+        if(localResult.length < 1) {
+          Semitki.collection.get("groups")
+            .fetch(Semitki.addAuthorizationHeader());
+        } else {
+          return localResult;
+        }
     }
   }
 });
