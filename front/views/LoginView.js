@@ -1,8 +1,11 @@
 'use strict'
 
 let LoginView = Backbone.View.extend({
+
   tagName: "div",
+
   className: "panel panel-info",
+
   events: {
     "click #login-button": "tryLogin",
     "click #fb-login": "tryFbLogin"
@@ -73,6 +76,7 @@ let LoginView = Backbone.View.extend({
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled);
     $("#container").html(this.$el);
+    return this;
   },
 
 });

@@ -1,8 +1,12 @@
 'use strict'
 
 let SchedulerCreateView = Backbone.View.extend({
+
   tagName: "div",
+
   className: "panel",
+
+  model: Semitki.collection.get("posts"),
 
   events: {
     "keyup #groupFinder": "searchGroup"
@@ -29,5 +33,6 @@ let SchedulerCreateView = Backbone.View.extend({
     $("#container").html(this.$el);
     // Initialize datimepicker here after rendering, otherwise it won't work
     $('#scheduledForPicker').datetimepicker();
+    return this;
   }
 });
