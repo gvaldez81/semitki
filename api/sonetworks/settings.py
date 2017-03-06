@@ -153,16 +153,16 @@ REST_FRAMEWORK = {
 AUTHENTICATION_BACKENDS = (
         #'rest_framework_social_oauth2.backends.DjangoOAuth2',
         'django.contrib.auth.backends.ModelBackend',
-        #'social_core.backends.facebook.FacebookAppOAuth2',
+        'social_core.backends.facebook.FacebookAppOAuth2',
         'social_core.backends.facebook.FacebookOAuth2'
         )
 
 REST_USE_JWT = True
 
 JWT_AUTH = {
-        'JWT_RESPONSE_PAYLOAD_HANDLER':
-        'sonetworks.utils.jwt_response_payload_handler'
-        }
+         'JWT_RESPONSE_PAYLOAD_HANDLER':
+         'sonetworks.utils.jwt_response_payload_handler'
+         }
 
 CORS_ORIGIN_WHITELIST = (
         '127.0.0.1:9080',

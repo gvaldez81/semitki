@@ -24,34 +24,18 @@ let Semitki = {
     this.collection.set("abouts", new Abouts()); // TODO refactor to Pages
   },
 
+  addAuthorizationHeader: () => {
+    return {
+      headers: {'Authorization': Semitki.jwtheader.concat(Semitki.jwtoken)}
+    }
+  },
+
   api: (resource) => {
     // Builds the api url of a given resource
     if(SEMITKI_CONFIG.api_port == undefined) {
       return "//" + SEMITKI_CONFIG.api_url + "/" + resource + "/";
     } else {
       return "//" + SEMITKI_CONFIG.api_url + ":" + SEMITKI_CONFIG.api_port + "/" + resource + "/";
-    }
-  },
-
-  sessionDestroy: () => {
-    let url = apiBuilder("rest-auth/logout")
-  //    let csrftoken = Cookies.get("csrftoken");
-    $.ajax(url,
-     {
-        method: "POST",
-        dataType: "JSON"
-      }).done((data) => {
-        console.log(data);
-     });
-
-    Semitki.jwtoken = undefined;
-    Semitki.user.clear();
-    Semitki.router.index();
-  },
-
-  addAuthorizationHeader: () => {
-    return {
-      headers: {'Authorization': Semitki.jwtheader.concat(Semitki.jwtoken)}
     }
   },
 
@@ -84,6 +68,23 @@ let Semitki = {
     FB.getLoginStatus((response) => {
       Semitki.fbStatusChangeCallback(response);
     });
+  },
+
+  sessionDestroy: () => {
+    // TODO Broken, it needs to be fixed for whatever we do the login work
+    let url = apiBuilder("rest-auth/logout")
+  //    let csrftoken = Cookies.get("csrftoken");
+    $.ajax(url,
+     {
+        method: "POST",
+        dataType: "JSON"
+      }).done((data) => {
+        console.log(data);
+     });
+
+    Semitki.jwtoken = undefined;
+    Semitki.user.clear();
+    Semitki.router.index();
   },
 
   user: new UserModel
