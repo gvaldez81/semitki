@@ -4,12 +4,20 @@ let SchedulerCreateView = Backbone.View.extend({
   tagName: "div",
   className: "panel",
 
+  events: {
+    "keyup #groupFinder": "searchGroup"
+  },
+
+  searchGroup: () => {
+    Semitki.collection.get("groups").search($("#groupFinder").val());
+  },
+
   render: function() {
     let template = $("#scheduler-create-template").html();
     let compiled = Handlebars.compile(template);
-    Semitki.fetchCollections();
     let posts = new Posts();
     posts.fetch(Semitki.addAuthorizationHeader());
+    Semitki.fetchCollections();
     let data = {
       user: Semitki.user.toJSON(),
       posts: posts.toJSON(),
@@ -19,6 +27,7 @@ let SchedulerCreateView = Backbone.View.extend({
     };
     this.$el.html(compiled(data));
     $("#container").html(this.$el);
+    // Initialize datimepicker here after rendering, otherwise it won't work
     $('#scheduledForPicker').datetimepicker();
   }
 });
