@@ -10,8 +10,10 @@ let Groups = Backbone.Collection.extend({
   search: (group) => {
     switch(group.length) {
       case 0:
+        $("#groupFinderItems").hide();
         break;
       case 1:
+        $("#groupFinderItems").hide();
         console.log("do something");
         break;
       default:

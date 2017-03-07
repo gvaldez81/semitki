@@ -12,8 +12,11 @@ let SchedulerCreateView = Backbone.View.extend({
 
   searchGroup: () => {
     let matches = Semitki.collection.get("groups").search($("#groupFinder").val());
-    let results = new GroupFinderView({collection: matches});
-    results.render();
+    if(typeof matches !== 'undefined') {
+      let results = new GroupFinderView({collection: matches});
+      results.render();
+      $("#groupFinderItems").show();
+    }
   },
 
   render: function() {
