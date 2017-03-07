@@ -15,6 +15,7 @@ RUN yum -y update ; \
   yum -y install gcc make python-pip postgresql96 postgresql96-server postgresql96-contrib postgresql96-devel python-devel ; \
   pip install virtualenv
 RUN  virtualenv ENV ; \
+  ENV/bin/pip install --upgrade pip ; \
   ENV/bin/pip install -r requirements.txt
 
 #ENTRYPOINT /semitki/ENV/bin/python
