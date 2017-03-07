@@ -36,6 +36,7 @@ let SchedulerCreateView = Backbone.View.extend({
     $("#container").html(this.$el);
     // Initialize datimepicker here after rendering, otherwise it won't work
     $('#scheduledForPicker').datetimepicker();
+    $("#accordion").find("select").select2();
     return this;
   }
 });
