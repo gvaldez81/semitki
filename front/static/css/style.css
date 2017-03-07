@@ -5,3 +5,7 @@ body {
 div#container {
    padding: 40px 15px;
 }
+
+div.finder {
+  z-index: 300 !important;
+}
