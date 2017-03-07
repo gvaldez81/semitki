@@ -18,56 +18,56 @@ let SemitkiRouter = Backbone.Router.extend({
 
   index: () => {
     let view = new LoginView();
-    view.render({el:"#container"});
+    view.render();
   },
 
   schedulerCreate: () => {
     let view = new SchedulerCreateView();
-    view.render({el:"#container"});
+    view.render();
   },
 
   dashboard: () => {
     let view = new DashboardView();
-    view.render({el:"#container"});
+    view.render();
   },
 
   groups: () => {
     let view = new GroupsView();
-    view.render({el:"#container"});
+    view.render();
   },
 
   accounts: () => {
     let view = new AccountsView();
-    view.render({el:"#container"});
+    view.render();
   },
- 
+
   about: () =>  {
     let view = new AboutView();
-    view.render({el:"#container"});
+    view.render();
   },
- 
+
   user:  () =>  {
     let view = new UserView();
-    view.render({el:"#container"});
+    view.render();
   },
-    
+
   campaigns: () => {
      let view = new CampaignsView();
-     view.render({el:"#container"});
+     view.render();
  },
-    
+
   project: () => {
     let view = new ProjectView();
-    view.render({el:"#container"});
-},
- 
-  permissions: () => {
-    let view = new PermissionsView();
-    view.render({el:"#container"});
-},
-  contact: () => {
-    let view = new ContactView();
-    view.render({el:"#container"});
-}
+    view.render();
+  },
+
+    permissions: () => {
+      let view = new PermissionsView();
+      view.render();
+  },
+    contact: () => {
+      let view = new ContactView();
+      view.render();
+  }
 
 });
