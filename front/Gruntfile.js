@@ -75,11 +75,17 @@ module.exports = (grunt) => {
         cwd: 'bower_components/eonasdan-bootstrap-datepicker/build/css',
         src: '*', dest: 'dist/css', filter: 'isFile'
       },
-      select2: {
+      select2css: {
         expand: true,
-        cwd: 'bower_components/select2/dist',
+        cwd: 'bower_components/select2/dist/css',
         src: '*', dest: 'dist/css', filter: 'isFile'
       },
+      select2js: {
+        expand: true,
+        cwd: 'bower_components/select2/dist/js',
+        src: '*', dest: 'dist/js', filter: 'isFile'
+      },
+
       select2boostrap: {
         expand: true,
         cwd: 'bower_components/select2-bootstrap-theme/dist',
