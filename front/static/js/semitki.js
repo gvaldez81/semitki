@@ -6,6 +6,8 @@ let Semitki = {
   initialize: function() {
     // Initialize
     $.fn.select2.defaults.set("theme", "bootstrap");
+    $.fn.select2.defaults.set("allowClear", true);
+    $.fn.select2.defaults.set("placeholder", "search...");
     Backbone.history.start();
     let navTemplate = Handlebars.compile($("#navigation").html())
     Handlebars.registerPartial('navigation', navTemplate);
