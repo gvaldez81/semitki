@@ -22,24 +22,17 @@ class Post(models.Model):
     owner = models.ForeignKey('auth.user', related_name='posts')
 
 
-class Topic(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name = models.CharField(max_length=140)
-    description = models.CharField(max_length=256)
-
-
-class Campaign(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    topic_id = models.ForeignKey(Topic)
-    name = models.CharField(max_length=140)
-    description = models.CharField(max_length=256)
-
-
 class Project(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=140)
     description = models.CharField(max_length=256)
-    campaing_id = models.ForeignKey(Campaign)
+
+
+class Topic(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=140)
+    description = models.CharField(max_length=256)
+    project = models.ForeignKey(Project)
 
 
 class Bucket(models.Model):

@@ -5,6 +5,20 @@ from rest_framework import permissions
 from .serializers import *
 from .models import *
 
+from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
+from allauth.socialaccount.providers.oauth2.client import OAuth2Client
+from rest_auth.registration.views import SocialLoginView
+
+
+class FacebookLogin(SocialLoginView):
+        adapter_class = FacebookOAuth2Adapter
+        client_class = OAuth2Client
+        callback_url = "localhost:9080"
+        serializer_class = SocialLoginSerializer
+
+        def process_login(self):
+            get_adapter(self.request).login(self.request, self.user)
+
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -24,12 +38,6 @@ class PostViewSet(viewsets.ModelViewSet):
 class TopicViewSet(viewsets.ModelViewSet):
     queryset = Topic.objects.all()
     serializer_class = TopicSerializer
-    parmission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-
-
-class CampaignViewSet(viewsets.ModelViewSet):
-    queryset = Campaign.objects.all()
-    serializer_class = CampaignSerializer
     parmission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 

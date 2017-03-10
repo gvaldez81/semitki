@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
+from rest_auth.registration.serializers import SocialLoginSerializer
 from .models import *
 
 
@@ -26,12 +27,6 @@ class TopicSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Topic
         fields = ('url', 'id', 'name', 'description')
-
-
-class CampaignSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Campaign
-        fields = ('__all__')
 
 
 class ProjectSerializer(serializers.HyperlinkedModelSerializer):

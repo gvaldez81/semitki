@@ -25,7 +25,6 @@ router = routers.DefaultRouter()
 router.register(r'user', UserViewSet)
 router.register(r'post', PostViewSet)
 router.register(r'topic', TopicViewSet)
-router.register(r'campaign', CampaignViewSet)
 router.register(r'project', ProjectViewSet)
 router.register(r'account', SocialAccountViewSet)
 router.register(r'accounts_group', SocialAccountsGroupViewSet)
@@ -34,9 +33,8 @@ router.register(r'about', AboutViewSet)
 
 urlpatterns = [
     url(r'^', include(router.urls)),
+    url(r'^auth/', include('rest_auth.urls')),
+    url(r'^auth/facebook/$', FacebookLogin.as_view(), name="fb_login"),
     url(r'^admin/', admin.site.urls),
-    #url(r'^auth/', include('rest_framework_social_oauth2.urls')),
-    url(r'^auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^api/login/', include('rest_social_auth.urls_jwt')),
     url(r'^api-token-auth/', obtain_jwt_token)
 ]
