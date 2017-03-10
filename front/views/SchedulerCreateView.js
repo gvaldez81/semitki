@@ -10,6 +10,21 @@ let SchedulerCreateView = Backbone.View.extend({
     "keyup #groupFinder": "searchGroup"
   },
 
+  createPost: () => {
+    if(nuevo) {
+      /*
+       * txt, url, imgurl, tags
+       */
+    }
+
+    data = {
+     date: $().val(),
+     topic: $("#topics").val(),
+     data: {}
+    };
+
+  },
+
   searchGroup: () => {
     let matches = Semitki.collection.get("groups").search($("#groupFinder").val());
     if(typeof matches !== 'undefined') {

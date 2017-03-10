@@ -8,7 +8,27 @@ let LoginView = Backbone.View.extend({
 
   events: {
     "click #login-button": "tryLogin",
-    "click #fb-login": "tryFbLogin"
+    "click #fb-login": "tryFbLogin",
+    "click #recover-pass": "recoverPassword",
+  },
+
+  recoverPassword: () => {
+    let url = apiBuilder("auth/password/reset")
+    let csrftoken = Cookies.get("csrftoken");
+    $.ajax(url,
+    {
+       beforeSend: (xhr, settings) => {
+        if (!csrfSafeMethod(settings.type)
+          && sameOrigin(settings.url)) {
+          xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+      },
+      data: {
+        email: $("#email").val()
+      },
+      method: "POST",
+      dataType: "JSON"
+    });
   },
 
   tryFbLogin: () => {
@@ -20,7 +40,7 @@ let LoginView = Backbone.View.extend({
             name: response.name,
             email: response.email
           };
-          $.ajax(Semitki.api("api/login/social/jwt_user"),
+          $.ajax(Semitki.api("auth/login/facebook"),
             {
               data: {
                 "provider": "facebook",

@@ -1,17 +1,39 @@
 <script type="text/x-handlebars-template" id="login-template">
 
+    <div class="modal fade" tabindex="-1" role="dialog" id="remember-password">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email"
+                placeholder="Email address">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="recover-pass">
+            Recover password
+            </button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
     <p class="panel-heading">SIGN IN</p>
+    <div class="panel-body">
     <div class="row">
       <div class="col-sm-6" id="social-buttons">
-        <h3>Use other accounts</h3>
-        <h4>You can also sign in using your Facebook, Twitter or Google accounts.</h4>
+        <h4>Use other accounts</h4>
+        <p>You can also sign in using your Facebook, Twitter or Google accounts.</p>
         <button type="button" class="btn btn-primary btn-lg" id="fb-login">Facebook</button>
         <button type="button" class="btn btn-info btn-lg" id="twitter-login">Twitter</button>
         <!-- button type="button" class="btn btn-danger btn-lg">Google +</button-->
       </div>
       <div class="col-sm-6" >
-        <form id="login-form" class="form-signin" method="POST"
-        action="//127.0.0.1:8000/api-token-auth/">
+        <form id="login-form" class="form-signin">
         <div class="login-group">
           <label for="username" class="sr-only">Username</label>
           <input type="text" class="form-control" id="username" name="username" placeholder="username">
@@ -25,9 +47,10 @@
           </div>
         </div>
         <button type="button" class="btn btn-md btn-info btn-block" id="login-button">Log In</button>
-        <p>Forgot your password? <a href="#">click here</a></p>
+        <p>Forgot your password? <button type="button" class="btn btn-link"
+        data-toggle="modal" data-target="#remember-password">click here</button></p>
         </form>
       </div>
-    </div>
+    </div></div>
 
 </script>

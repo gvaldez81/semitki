@@ -1,10 +1,23 @@
 # semitki
 
 
-[_![Shipping faster with ZenHub](https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png)](https://www.zenhub.com)
-[ ![Codeship Status for semitki/semitki](https://app.codeship.com/projects/2b89f950-cac9-0134-a140-7e371e5d68a3/status?branch=master)](https://app.codeship.com/projects/199702)
+[![Shipping faster with ZenHub](https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png)](https://www.zenhub.com)
+[![Codeship Status for semitki/semitki](https://app.codeship.com/projects/2b89f950-cac9-0134-a140-7e371e5d68a3/status?branch=master)](https://app.codeship.com/projects/199702)
 
 
+## Requirements
+
+Front end relies heavily in JavaScript 1.6 (ECMAScript 6), web browser
+requiremenst follow, any version below stated here or not listed, please
+checck the compatibility table link.
+
+* Firefox => 52
+* Chrome => 56
+* Edge => 13
+* Safari => 10
+* iOS => 10
+
+[Compatibility table](http://kangax.github.io/compat-table/es6/)
 
 
 ## Development setup
@@ -91,7 +104,7 @@ Run the API
 
 
 Running grunt will create a `semitki/frontend/dist` directory which
-should be accesable for an HTTP server. When running with
+should be accesable by an HTTP server. When running with
 docker-compose `dist` gets mounted in the path
 `/usr/share/nginx/html` within the web container.
 

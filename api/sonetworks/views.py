@@ -5,6 +5,13 @@ from rest_framework import permissions
 from .serializers import *
 from .models import *
 
+from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
+from rest_auth.registration.views import SocialLoginView
+
+
+class FacebookLogin(SocialLoginView):
+        adapter_class = FacebookOAuth2Adapter
+
 
 class UserViewSet(viewsets.ModelViewSet):
     """
