@@ -41,12 +41,6 @@ class TopicViewSet(viewsets.ModelViewSet):
     parmission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 
-class CampaignViewSet(viewsets.ModelViewSet):
-    queryset = Campaign.objects.all()
-    serializer_class = CampaignSerializer
-    parmission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-
-
 class ProjectViewSet(viewsets.ModelViewSet):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer

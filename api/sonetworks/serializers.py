@@ -29,12 +29,6 @@ class TopicSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('url', 'id', 'name', 'description')
 
 
-class CampaignSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Campaign
-        fields = ('__all__')
-
-
 class ProjectSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Project
