@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
+from rest_auth.registration.serializers import SocialLoginSerializer
 from .models import *
 
 

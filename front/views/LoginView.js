@@ -40,17 +40,16 @@ let LoginView = Backbone.View.extend({
             name: response.name,
             email: response.email
           };
-          $.ajax(Semitki.api("auth/login/facebook"),
+          $.ajax(Semitki.api("auth/facebook"),
             {
               data: {
-                "provider": "facebook",
-                "code": SEMITKI_CONFIG.fb_app_id
+                "access_token": Semitki.fb_token
               },
               method: "POST",
             }).done((response) => {
               Semitki.jwtoken = response.access_token;
-          Semitki.user.set(user);
-          Semitki.router.navigate('#dashboard', {trigger: true});
+/*          Semitki.user.set(user);*/
+          /*Semitki.router.navigate('#dashboard', {trigger: true});*/
           Semitki.fetchCollections();
             });
         });

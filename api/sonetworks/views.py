@@ -6,11 +6,18 @@ from .serializers import *
 from .models import *
 
 from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
+from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from rest_auth.registration.views import SocialLoginView
 
 
 class FacebookLogin(SocialLoginView):
         adapter_class = FacebookOAuth2Adapter
+        client_class = OAuth2Client
+        callback_url = "localhost:9080"
+        serializer_class = SocialLoginSerializer
+
+        def process_login(self):
+            get_adapter(self.request).login(self.request, self.user)
 
 
 class UserViewSet(viewsets.ModelViewSet):

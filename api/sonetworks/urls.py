@@ -34,8 +34,8 @@ router.register(r'about', AboutViewSet)
 
 urlpatterns = [
     url(r'^', include(router.urls)),
-    url(r'^admin/', admin.site.urls),
     url(r'^auth/', include('rest_auth.urls')),
     url(r'^auth/facebook/$', FacebookLogin.as_view(), name="fb_login"),
+    url(r'^admin/', admin.site.urls),
     url(r'^api-token-auth/', obtain_jwt_token)
 ]
