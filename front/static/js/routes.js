@@ -13,7 +13,9 @@ let SemitkiRouter = Backbone.Router.extend({
     "campaigns": "campaigns",
     "project":  "project",
     "permissions":  "permissions",
-    "contact": "contact"
+    "contact": "contact",
+    "billing": "billing",
+    "accountinfo": "accountinfo"
   },
 
   index: () => {
@@ -68,6 +70,16 @@ let SemitkiRouter = Backbone.Router.extend({
     contact: () => {
       let view = new ContactView();
       view.render();
-  }
+  },
+    
+    billing: () => {
+        let view = new BillingView();
+        view.render();
+    },
+    
+    accountinfo: () => {
+        let view = new AccountInfoView();
+        view.render();
+    }
 
 });
