@@ -15,7 +15,7 @@ let SchedulerCreateView = Backbone.View.extend({
   createPost: () => {
     let d = {};
     if($("#isNewPost").val()) {
-      d.txt = $("postText");
+      d.txt = $("postText").val();
     } else {
       d.url = $("#postUrl").val();
     }
@@ -31,11 +31,12 @@ let SchedulerCreateView = Backbone.View.extend({
       owner: Semitki.user.id
     };
     let url = apiBuilder("post")
+    console.log(content);
     //let csrftoken = Cookies.get("csrftoken");
     $.ajax(url,
     {
       beforeSend: (xhr, settings) => {
-        xhr.setRequestHeader(Semitki.addAuthorizationHeader())
+        xhr.setRequestHeader(Semitki.addAuthorizationHeader());
       },
       data: content,
       method: "POST",
