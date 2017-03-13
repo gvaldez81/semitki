@@ -70,7 +70,7 @@
             <div class="col-md-6">
               <div class="input-group">
                 <input type="radio" name="isNewPost" id="isNewPost"
-                value="1" aria-label="New post">New Post</input>
+                value="1" aria-label="New post" checked="true">New Post</input>
                 <input type="radio" name="isNewPost" id="isNewPost"
                 value="0" aria-label="Existing post">Existing Post</input>
               </div>
@@ -129,13 +129,21 @@
             <div class="col-md-3"><input type="checkbox" value=""></div>
             <div class="col-md-3"><input type="checkbox" value=""></div>
             <div class="col-md-3">
-              <button type="button" class="btn btn-info btn-md">
+              <button type="button" class="btn btn-danger btn-sm" id="delete">
               Delete
               </button>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <button type="button" class="btn btn-primary btn-sm" id="save">
+      Save
+      </button>
     </div>
   </div>
 </script>

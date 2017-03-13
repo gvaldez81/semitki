@@ -7,22 +7,45 @@ let SchedulerCreateView = Backbone.View.extend({
   className: "panel",
 
   events: {
-    "keyup #groupFinder": "searchGroup"
+    "keyup #groupFinder": "searchGroup",
+    "click #save": "createPost",
+    "click #delete": "delete"
   },
 
   createPost: () => {
-    if(nuevo) {
-      /*
-       * txt, url, imgurl, tags
-       */
+    let d = {};
+    if($("#isNewPost").val()) {
+      d.txt = $("postText");
+    } else {
+      d.url = $("#postUrl").val();
     }
-
-    data = {
-     date: $().val(),
-     topic: $("#topics").val(),
-     data: {}
+    let img = $("#postImageUrl").val();
+    if(img !== "") {
+      d.imgurl = img;
+    }
+    d.tags = $("#networks").val();
+    let content = {
+      date: new Date($("#scheduledFor").val()),
+      topic: $("#topics").val(),
+      data: d,
+      owner: Semitki.user.id
     };
+    let url = apiBuilder("post")
+    //let csrftoken = Cookies.get("csrftoken");
+    $.ajax(url,
+    {
+      beforeSend: (xhr, settings) => {
+        xhr.setRequestHeader(Semitki.addAuthorizationHeader())
+      },
+      data: content,
+      method: "POST",
+      dataType: "JSON"
+    });
+  },
 
+  deletePost: () => {
+    // TODO
+    console.log("Delete post");
   },
 
   searchGroup: () => {
