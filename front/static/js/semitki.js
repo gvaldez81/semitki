@@ -5,6 +5,7 @@ let Semitki = {
 
   initialize: function() {
     // Initialize
+    // Select boxes default settings
     $.fn.select2.defaults.set("theme", "bootstrap");
     $.fn.select2.defaults.set("allowClear", true);
     $.fn.select2.defaults.set("placeholder", "search...");
@@ -18,13 +19,12 @@ let Semitki = {
     // BackBone collection instances
     // Heil ES6 Map!
     this.collection = new Map ();
+    // Collections == Catalogs
     this.collection.set("projects", new Projects());
     this.collection.set("topics", new Topics());
     this.collection.set("buckets", new Buckets());
-    this.collection.set("campaigns", new Campaigns());
     this.collection.set("accounts", new Accounts());
     this.collection.set("groups", new Groups());
-    this.collection.set("abouts", new Abouts()); // TODO refactor to Pages
   },
 
   addAuthorizationHeader: () => {
@@ -99,6 +99,7 @@ $(() => {
 
   Semitki.initialize();
   // Check for a valid JWToken and route the user accordingly
+  // TODO this is very weak, we need a solid authorization mechanism
   if(Semitki.jwtoken == undefined) {
     Semitki.router.index();
   } else {
