@@ -9,29 +9,43 @@ let SchedulerCreateView = Backbone.View.extend({
   events: {
     "keyup #groupFinder": "searchGroup",
     "click #save": "createPost",
-    "click #delete": "delete"
+    "click #delete": "delete",
+    "click #isNewPost": "isNew"
+  },
+
+  isNew: () => {
+    //TODO Meh! Fix it later, very low priority
+     if($("#isNewPost").val() === "1") {
+      $("#postUrl").attr("disabled", "true");
+      $("#postTxt").removeAttr("disabled");
+    } else {
+      $("#postTxt").attr("disabled", "true");
+      $("#postUrl").removeAttr("disabled");
+    }
+
   },
 
   createPost: () => {
-    let d = {};
+
+    let content = {};
     if($("#isNewPost").val()) {
-      d.txt = $("postText").val();
+      content.txt = $("postText").val();
     } else {
-      d.url = $("#postUrl").val();
+      content.url = $("#postUrl").val();
     }
+
     let img = $("#postImageUrl").val();
     if(img !== "") {
-      d.imgurl = img;
+      content.imgurl = img;
     }
-    d.tags = $("#networks").val();
-    let content = {
+    content.tags = $("#networks").val();
+    let post = {
       date: new Date($("#scheduledFor").val()),
       topic: $("#topics").val(),
-      data: d,
+      data: content,
       owner: Semitki.user.id
     };
     let url = apiBuilder("post")
-    console.log(content);
     //let csrftoken = Cookies.get("csrftoken");
     $.ajax(url,
     {
