@@ -1,6 +1,6 @@
 'use strict'
 
 let Posts = Backbone.Collection.extend({
-  model: "Post",
+  model: Post,
   url: apiBuilder("post")
 });

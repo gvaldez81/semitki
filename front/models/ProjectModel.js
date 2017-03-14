@@ -14,7 +14,7 @@ let Project = Backbone.Model.extend({
 
 
   url: () => {
-    return "/project/" + this.id;
+    return apiBuilder("project");
   }
 
 

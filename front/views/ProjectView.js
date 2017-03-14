@@ -3,11 +3,32 @@
 let ProjectView = Backbone.View.extend({
     tagName: "div",
     className: "row",
-    
-render: function(){
-    let template = $("#project").html();
+
+  events: {
+    "click #save": "create",
+    "click #delete": "delete"
+  },
+
+  create: () => {
+
+    let data = {
+      name: $("#name").val(),
+      description: $("#description").val()
+    };
+
+    let resource = new Project();
+    resource.save(data, Semitki.addAuthorizationHeader());
+  },
+
+  delete: () => {
+    //TODO imlpemnt it
+    console.log("delete");
+  }
+
+  render: function(){
+    let template = $("#name-description-template").html();
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled);
-    $("#container").html(this.$el);        
+    $("#container").html(this.$el);
   }
 });

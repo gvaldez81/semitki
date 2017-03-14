@@ -42,10 +42,6 @@ let Semitki = {
     }
   },
 
-  setOwnerUrl: (owner) => {
-    return "http:" + Semitki.api(owner) + Semitki[owner].id + "/";
-  },
-
   fetchCollections: () => {
     for (let [key, value] of Semitki.collection) {
       value.fetch(Semitki.addAuthorizationHeader());
