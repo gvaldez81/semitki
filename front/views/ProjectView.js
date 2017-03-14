@@ -23,7 +23,7 @@ let ProjectView = Backbone.View.extend({
   delete: () => {
     //TODO imlpemnt it
     console.log("delete");
-  }
+  },
 
   render: function(){
     let template = $("#name-description-template").html();
