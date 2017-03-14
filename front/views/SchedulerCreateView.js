@@ -6,43 +6,43 @@ let SchedulerCreateView = Backbone.View.extend({
 
   className: "panel",
 
-/*  events: {*/
-    //"keyup #groupFinder": "searchGroup",
-    //"click #save": "createPost",
-    //"click #delete": "delete"
-  //},
+  events: {
+    "keyup #groupFinder": "searchGroup",
+    "click #save": "createPost",
+    "click #delete": "delete"
+  },
 
-  //createPost: () => {
-    //let d = {};
-    //if($("#isNewPost").val()) {
-      //d.txt = $("postText").val();
-    //} else {
-      //d.url = $("#postUrl").val();
-    //}
-    //let img = $("#postImageUrl").val();
-    //if(img !== "") {
-      //d.imgurl = img;
-    //}
-    //d.tags = $("#networks").val();
-    //let content = {
-      //date: new Date($("#scheduledFor").val()),
-      //topic: $("#topics").val(),
-      //data: d,
-      //owner: Semitki.user.id
-    //};
-    //let url = apiBuilder("post")
-    //console.log(content);
-    ////let csrftoken = Cookies.get("csrftoken");
-    //$.ajax(url,
-    //{
-      //beforeSend: (xhr, settings) => {
-        //xhr.setRequestHeader(Semitki.addAuthorizationHeader());
-      //},
-      //data: {},
-      //method: "POST",
-      //dataType: "JSON"
-    //});
-  //},
+  createPost: () => {
+    let d = {};
+    if($("#isNewPost").val()) {
+      d.txt = $("postText").val();
+    } else {
+      d.url = $("#postUrl").val();
+    }
+    let img = $("#postImageUrl").val();
+    if(img !== "") {
+      d.imgurl = img;
+    }
+    d.tags = $("#networks").val();
+    let content = {
+      date: new Date($("#scheduledFor").val()),
+      topic: $("#topics").val(),
+      data: d,
+      owner: Semitki.user.id
+    };
+    let url = apiBuilder("post")
+    console.log(content);
+    //let csrftoken = Cookies.get("csrftoken");
+    $.ajax(url,
+    {
+      beforeSend: (xhr, settings) => {
+        xhr.setRequestHeader(Semitki.addAuthorizationHeader());
+      },
+      data: content,
+      method: "POST",
+      dataType: "JSON"
+    });
+  },
 
   deletePost: () => {
     // TODO
@@ -61,12 +61,11 @@ let SchedulerCreateView = Backbone.View.extend({
   render: function() {
     let template = $("#scheduler-create-template").html();
     let compiled = Handlebars.compile(template);
-    let posts = new Posts();
+    let posts = new Post();
     posts.fetch(Semitki.addAuthorizationHeader());
     Semitki.fetchCollections();
     let data = {
       user: Semitki.user.toJSON(),
-      posts: posts.toJSON(),
       projects: Semitki.collection.get("projects").toJSON(),
       topics: Semitki.collection.get("topics").toJSON(),
       buckets: Semitki.collection.get("buckets").toJSON(),
