@@ -64,3 +64,12 @@ class StaticPages(models.Model):
     content = models.TextField()
     template = models.CharField(max_length=140)
     page = models.CharField(max_length=100)
+    
+    
+class UserInfo(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4,
+    editable=False)
+    name = models.CharField(max_length=100)
+    fname = models.CharField(max_length=100)
+    lname = models.CharField(max_length=100)
+    mail = models.CharField(max_length=100)

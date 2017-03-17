@@ -30,6 +30,7 @@ router.register(r'account', SocialAccountViewSet)
 router.register(r'accounts_group', SocialAccountsGroupViewSet)
 router.register(r'bucket', BucketViewSet)
 router.register(r'about', AboutViewSet)
+router.register(r'userinfo', UserInfoViewSet)
 
 urlpatterns = [
     url(r'^', include(router.urls)),

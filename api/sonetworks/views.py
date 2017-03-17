@@ -70,4 +70,9 @@ class BucketViewSet(viewsets.ModelViewSet):
 
 class AboutViewSet(viewsets.ModelViewSet):
     queryset = StaticPages.objects.all()
-    serializer_class = AboutSerializer
+    serializer_class = AboutSerializer    (permissions.IsAuthenticatedOrReadOnly,)
+
+
+class UserInfoViewSet(viewsets.ModelViewSet):
+    queryset = UserInfo.objects.all()
+    serializer_class = UserInfoSerializer    (permissions.IsAuthenticatedOrReadOnly,)
