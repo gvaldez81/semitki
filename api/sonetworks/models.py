@@ -18,7 +18,7 @@ class Post(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     date = models.DateTimeField('pusblish date')
     topic = models.CharField(max_length=140)
-    data = JSONField()
+    content = JSONField()
     owner = models.ForeignKey('auth.user', related_name='posts')
 
 
@@ -36,8 +36,8 @@ class Topic(models.Model):
 
 
 class Bucket(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name = models.CharField(max_length=140)
+    name = models.CharField(primary_key=True, max_length=140, editable=True)
+    enabled = models.BooleanField
 
 
 class SocialAccountsGroup(models.Model):
@@ -48,8 +48,12 @@ class SocialAccountsGroup(models.Model):
 
 class SocialAccount(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name = models.CharField(max_length=140)
-    description = models.CharField(max_length=256)
+    username = models.CharField(max_length=140)
+    email = models.CharField(max_length=256)
+    password = models.CharField(max_length=2048, null=True)
+    access_token = models.CharField(max_length=2048, null=True)
+    token_expiration = models.DateTimeField
+    bucket = models.CharField(max_length=256)
 
 
 class GroupedSocialAccounts(models.Model):
@@ -64,8 +68,8 @@ class StaticPages(models.Model):
     content = models.TextField()
     template = models.CharField(max_length=140)
     page = models.CharField(max_length=100)
-    
-    
+
+
 class UserInfo(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4,
     editable=False)
