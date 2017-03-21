@@ -80,6 +80,11 @@ let SchedulerCreateView = Backbone.View.extend({
     // Initialize datimepicker here after rendering, otherwise it won't work
     $('#scheduledForPicker').datetimepicker();
     $("#accordion").find("select").select2();
+    // Initialize calendar view
+    let calendar = $("#calendar-panel").calendar({
+      tmpl_path: "/tmpls/",
+      events_source: () => { return []; }
+    });
     return this;
   }
 });

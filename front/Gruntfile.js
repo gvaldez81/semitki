@@ -90,6 +90,12 @@ module.exports = (grunt) => {
         expand: true,
         cwd: 'bower_components/select2-bootstrap-theme/dist',
         src: '*', dest: 'dist/css', filter: 'isFile'
+      },
+
+      calendartmpls: {
+        expand: true,
+        cwd: 'bower_components/bootstrap-calendar',
+        src: 'tmpls/**', dest: 'dist/'
       }
 
     },

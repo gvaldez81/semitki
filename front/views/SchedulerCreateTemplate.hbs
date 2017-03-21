@@ -2,100 +2,148 @@
 {{> navigation}}
 
 
-  <!-- Nav tabs -->
-    <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active"><a href="#scheduler" aria-controls="scheduler" role="tab" data-toggle="tab">Home</a></li>
-            <li role="presentation"><a href="#calendar" aria-controls="calendar" role="tab" data-toggle="tab">Profile</a></li>
-                      </ul>
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist">
+  <li role="presentation" class="active"><a href="#scheduler"
+  aria-controls="scheduler" role="tab" data-toggle="tab">Scheduler</a></li>
+  <li role="presentation"><a href="#calendar" aria-controls="calendar"
+  role="tab" data-toggle="tab">Calendar</a></li>
+</ul>
 
 
-                          <div class="tab-content">
-<div role="tabpanel" class="tab-pane active" id="scheduler">
-  <!-- Create -->
-  <div class="panel-group" id="accordion" role="tablist"
-  aria-multiselectable="true">
-    <div class="panel panel-primary">
-      <div class="panel-heading" role="tab" id="scheduler-create-head">
-        <h4 class="panel-title"><a role="button" data-toggle="collapse"
-          data-parent="#scheduler-create-head"
-          href="#scheduler-create-panel">Create</a>
-        </h4>
-      </div>
-      <div class="panel-collapse collapse in" id="scheduler-create-panel"
-      role="tabpanel" aria-labelledby="scheduler-create-head">
-        <div class="panel-body">
-          <div class="row">
-            <div class="col-md-4">
-              <label for="projects">Project</label>
-              <select class="form-control" id="projects">
-              {{#each projects}}
-                <option value="{{id}}">{{name}}</option>
-              {{/each}}
-              </select>
-            </div>
-            <div class="col-md-4">
-              <label for="topics">Topic</label>
-              <select class="form-control" id="topics">
-              {{#each topics}}
-                <option value="{{id}}">{{name}}</option>
-              {{/each}}
-              </select>
-            </div>
-            <div class="col-md-4">
-              <label for="scheduledForPicker">Date and Time</label>
-              <div class="input-group date" id="scheduledForPicker">
-                <input type="text" id="scheduledFor" class="form-control" />
-                <span class="input-group-addon">
-                  <span class="glyphicon glyphicon-calendar"></span>
-                </span>
-              </div>
-            </div>
-          </div>
+<div class="tab-content">
+  <div role="tabpanel" class="tab-pane active" id="scheduler">
+    <!-- Create -->
+    <div class="panel-group" id="accordion" role="tablist"
+    aria-multiselectable="true">
+      <div class="panel panel-primary">
+        <div class="panel-heading" role="tab" id="scheduler-create-head">
+          <h4 class="panel-title"><a role="button" data-toggle="collapse"
+            data-parent="#scheduler-create-head"
+            href="#scheduler-create-panel">Create</a>
+          </h4>
         </div>
-      </div>
-    </div>
-
-  <!-- Posts -->
-    <div class="panel panel-primary">
-      <div class="panel-heading" role="tab" id="scheduler-post-head">
-        <h4 class="panel-title"><a role="button" data-toggle="collapse"
-          data-parent="#scheduler-post-head" class="collapsed"
-          href="#scheduler-post-panel">Posts</a>
-        </h4>
-      </div>
-      <div id="scheduler-post-panel" class="panel-collapse collapse"
-      role="tabpanel" aria-lableledby="scheduler-post-head">
-        <div class="panel-body">
-          <div class="row">
-            <div class="col-md-6">
-              <div class="input-group">
-                <label for="scheduler-network-select">Network</label>
-                <select multiple="multiple" class="form-control" id="networks">
-                {{#each buckets}}
-                  <option value="{{name}}">{{name}}</option>
+        <div class="panel-collapse collapse in" id="scheduler-create-panel"
+        role="tabpanel" aria-labelledby="scheduler-create-head">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-4">
+                <label for="projects">Project</label>
+                <select class="form-control" id="projects">
+                {{#each projects}}
+                  <option value="{{id}}">{{name}}</option>
                 {{/each}}
                 </select>
               </div>
+              <div class="col-md-4">
+                <label for="topics">Topic</label>
+                <select class="form-control" id="topics">
+                {{#each topics}}
+                  <option value="{{id}}">{{name}}</option>
+                {{/each}}
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label for="scheduledForPicker">Date and Time</label>
+                <div class="input-group date" id="scheduledForPicker">
+                  <input type="text" id="scheduledFor" class="form-control" />
+                  <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
+                </div>
+              </div>
             </div>
-            <div class="col-md-6">
-              <div class="input-group">
-                <input type="radio" name="isNewPost" id="isNewPost"
-                value="1" aria-label="New post">New Post</input>
-                <input type="radio" name="isNewPost" id="isNewPost"
-                value="0" aria-label="Existing post">Existing Post</input>
+          </div>
+        </div>
+      </div>
+
+    <!-- Posts -->
+      <div class="panel panel-primary">
+        <div class="panel-heading" role="tab" id="scheduler-post-head">
+          <h4 class="panel-title"><a role="button" data-toggle="collapse"
+            data-parent="#scheduler-post-head" class="collapsed"
+            href="#scheduler-post-panel">Posts</a>
+          </h4>
+        </div>
+        <div id="scheduler-post-panel" class="panel-collapse collapse"
+        role="tabpanel" aria-lableledby="scheduler-post-head">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="input-group">
+                  <label for="scheduler-network-select">Network</label>
+                  <select multiple="multiple" class="form-control" id="networks">
+                  {{#each buckets}}
+                    <option value="{{name}}">{{name}}</option>
+                  {{/each}}
+                  </select>
+                </div>
               </div>
-              <div class="input-group input-group-sm">
-                <label for="postUrl">Post ID</label>
-                <input type="text" class="form-control" id="postUrl" placeholder="url://">
+              <div class="col-md-6">
+                <div class="input-group">
+                  <input type="radio" name="isNewPost" id="isNewPost"
+                  value="1" aria-label="New post">New Post</input>
+                  <input type="radio" name="isNewPost" id="isNewPost"
+                  value="0" aria-label="Existing post">Existing Post</input>
+                </div>
+                <div class="input-group input-group-sm">
+                  <label for="postUrl">Post ID</label>
+                  <input type="text" class="form-control" id="postUrl" placeholder="url://">
+                </div>
+                <div class="input-group input-group-sm">
+                  <label for="postText">Post</label>
+                  <textarea class="form-control" id="postText" rows="4"></textarea>
+                </div>
+                <div class="input-group input-group-sm">
+                  <label for="postImageUrl">Image</label>
+                  <input type="text" class="form-control-file" id="postImageUrl" aria-describedby="fileHelp">
+                  <small id="fileHelp" class="form-text text-muted">Add Image</small>
+                </div>
               </div>
-              <div class="input-group input-group-sm">
-                <label for="postText">Post</label>
-                <textarea class="form-control" id="postText" rows="4"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- Trending -->
+      <div class="panel panel-primary">
+        <div  class="panel-heading" role="tab" id="scheduler-trends-head">
+          <h4 class="panel-title"><a role="button" data-toggle="collapse"
+            data-parent="#scheduler-trends-head" class="collapsed"
+            href="#scheduler-trends-panel">Trends</a>
+          </h4>
+        </div>
+        <div id="scheduler-trends-panel" class="panel-collapse collapse"
+        role="tabpanel" aria-lableledby="scheduler-post-head">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="input-group">
+                  <input type="text" class="form-control"
+                  placeholder="Group Name Finder" id="groupFinder"/>
+                  <span class="input-group-addon">
+                    <!-- glyph -->
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                  </span>
+                </div>
               </div>
-              <div class="input-group input-group-sm">
-                <label for="postImageUrl">Image</label>
-                <input type="text" class="form-control-file" id="postImageUrl" aria-describedby="fileHelp">
-                <small id="fileHelp" class="form-text text-muted">Add Image</small>
+            </div>
+            <div class="row finder" id="groupFinderItems">
+            </div>
+            <div class="row table table-lg table-bordered">
+              <div class="col-md-3">Group</div>
+              <div class="col-md-3">Share</div>
+              <div class="col-md-3">Like</div>
+              <div class="col-md-3">Delete</div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">Option1</div>
+              <div class="col-md-3"><input type="checkbox" value=""></div>
+              <div class="col-md-3"><input type="checkbox" value=""></div>
+              <div class="col-md-3">
+                <button type="button" class="btn btn-danger btn-sm" id="delete">
+                Delete
+                </button>
               </div>
             </div>
           </div>
@@ -103,61 +151,19 @@
       </div>
     </div>
 
-  <!-- Trending -->
-    <div class="panel panel-primary">
-      <div  class="panel-heading" role="tab" id="scheduler-trends-head">
-        <h4 class="panel-title"><a role="button" data-toggle="collapse"
-          data-parent="#scheduler-trends-head" class="collapsed"
-          href="#scheduler-trends-panel">Trends</a>
-        </h4>
-      </div>
-      <div id="scheduler-trends-panel" class="panel-collapse collapse"
-      role="tabpanel" aria-lableledby="scheduler-post-head">
-        <div class="panel-body">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="input-group">
-                <input type="text" class="form-control"
-                placeholder="Group Name Finder" id="groupFinder"/>
-                <span class="input-group-addon">
-                  <!-- glyph -->
-                  <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div class="row finder" id="groupFinderItems">
-          </div>
-          <div class="row table table-lg table-bordered">
-            <div class="col-md-3">Group</div>
-            <div class="col-md-3">Share</div>
-            <div class="col-md-3">Like</div>
-            <div class="col-md-3">Delete</div>
-          </div>
-          <div class="row">
-            <div class="col-md-3">Option1</div>
-            <div class="col-md-3"><input type="checkbox" value=""></div>
-            <div class="col-md-3"><input type="checkbox" value=""></div>
-            <div class="col-md-3">
-              <button type="button" class="btn btn-danger btn-sm" id="delete">
-              Delete
-              </button>
-            </div>
-          </div>
-        </div>
+    <div class="row">
+      <div class="col-md-12">
+        <button type="button" class="btn btn-primary btn-sm" id="save">
+        Save
+        </button>
       </div>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-12">
-      <button type="button" class="btn btn-primary btn-sm" id="save">
-      Save
-      </button>
-    </div>
+  <div role="tabpanel" class="tab-pane" id="calendar">
+    <div id="calendar-panel"></div>
   </div>
-</div>
-<div role="tabpanel" class="tab-pane" id="calendar"></div>
+
 </div>
 
 </script>
