@@ -1,6 +1,16 @@
 <script type="text/x-handlebars-template" id="scheduler-create-template">
 {{> navigation}}
 
+
+  <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#scheduler" aria-controls="scheduler" role="tab" data-toggle="tab">Home</a></li>
+            <li role="presentation"><a href="#calendar" aria-controls="calendar" role="tab" data-toggle="tab">Profile</a></li>
+                      </ul>
+
+
+                          <div class="tab-content">
+<div role="tabpanel" class="tab-pane active" id="scheduler">
   <!-- Create -->
   <div class="panel-group" id="accordion" role="tablist"
   aria-multiselectable="true">
@@ -146,4 +156,8 @@
       </button>
     </div>
   </div>
+</div>
+<div role="tabpanel" class="tab-pane" id="calendar"></div>
+</div>
+
 </script>
