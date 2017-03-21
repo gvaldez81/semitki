@@ -44,13 +44,13 @@ class SocialAccountsGroupSerializer(serializers.HyperlinkedModelSerializer):
 class SocialAccountSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = SocialAccount
-        fields = ('url', 'id', 'name', 'description')
+        fields = ('__all__')
 
 
 class BucketSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Bucket
-        fields = ('url', 'id', 'name')
+        fields = ('url', 'name')
 
 
 class AboutSerializer(serializers.HyperlinkedModelSerializer):

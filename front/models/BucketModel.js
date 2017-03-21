@@ -5,14 +5,13 @@ let Bucket = Backbone.Model.extend({
 
   defaults: () => {
     return {
-      "name": undefined,
-      "description": undefined,
+      "name": undefined
     }
   },
 
 
   url: () => {
-    return "/bucket/" + this.id;
+    return "/bucket/" + this.name;
   }
 
 
