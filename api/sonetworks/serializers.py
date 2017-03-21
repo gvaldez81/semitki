@@ -58,7 +58,7 @@ class AboutSerializer(serializers.HyperlinkedModelSerializer):
         model = StaticPages
         fields = ('__all__')
 
-        
+
 class UserInfoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = UserInfo

@@ -56,7 +56,7 @@ class SocialAccount(models.Model):
     bucket = models.CharField(max_length=256)
 
 
-class GroupedSocialAccounts(models.Model):
+class GroupedSocialAccount(models.Model):
     social_account_group_id = models.ForeignKey(SocialAccountsGroup)
     social_account_id = models.ForeignKey(SocialAccount)
 
