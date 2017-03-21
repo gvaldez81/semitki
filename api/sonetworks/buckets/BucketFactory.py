@@ -1,19 +1,15 @@
-import sys
-import logging
 from django.db import migrations, models
-from BucketFactory import Bucket
+#from facebook import FacebookBucket
 
-class Facebook(Bucket):
+class Bucket:
 
-    def __init__(self):
-        self.logger = logging.getLogger(__name__)
-        self.logger.info("Facebook bucket instance")
+    def initialize(self):
+        pass
 
 
     def get_token(self, social_account):
         """Get a facebook OAuth2 token"""
-        self.logger.info(social_account)
-        sys.exit(0)
+        pass
 
 
     def post(self, social_account):
@@ -29,3 +25,6 @@ class Facebook(Bucket):
     def fav(self, social_account):
         """Like an existing post"""
         pass
+
+
+

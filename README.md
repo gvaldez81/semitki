@@ -92,6 +92,20 @@ Run the API
     ENV/bin/python manage migrations sonetworks
 
 
+### Importing models from non-Django code
+
+
+    import os
+    import django
+    import django.settings
+
+    os.environ.setdefault("DJANGO_SETTINGS_DEFAULT",
+      "sonetworks.settings")
+    settings.configure()
+    django.setup()
+
+
+
 
 ### Frontend development
 
