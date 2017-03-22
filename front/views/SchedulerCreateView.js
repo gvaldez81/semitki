@@ -75,6 +75,22 @@ let SchedulerCreateView = Backbone.View.extend({
       topics: Semitki.collection.get("topics").toJSON(),
       buckets: Semitki.collection.get("buckets").toJSON(),
     };
+    let calendarFeed = () => {
+      let postArray = Semitki.collection.get("posts").toArray();
+      let feed = postArray.map((post) => {
+        let item = {
+          "id": post.attributes.url,
+          "url": post.attributes.url,
+          "title": post.attributes.topic,
+          "class": "event-info",
+          "start": Date.parse(post.attributes.date),
+          "end": Date.parse(post.attributes.date),
+        };
+        return item;
+      });
+      return feed;
+    }
+    console.log(calendarFeed());
     this.$el.html(compiled(data));
     $("#container").html(this.$el);
     // Initialize datimepicker here after rendering, otherwise it won't work
@@ -83,7 +99,7 @@ let SchedulerCreateView = Backbone.View.extend({
     // Initialize calendar view
     let calendar = $("#calendar-panel").calendar({
       tmpl_path: "/tmpls/",
-      events_source: () => { return []; }
+      events_source: calendarFeed()
     });
     return this;
   }

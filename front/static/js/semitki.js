@@ -25,6 +25,7 @@ let Semitki = {
     this.collection.set("buckets", new Buckets());
     this.collection.set("accounts", new Accounts());
     this.collection.set("groups", new Groups());
+    this.collection.set("posts", new Posts());
   },
 
   addAuthorizationHeader: () => {
