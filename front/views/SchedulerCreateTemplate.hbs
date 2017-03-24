@@ -29,19 +29,23 @@
             <div class="row">
               <div class="col-md-4">
                 <label for="projects">Project</label>
-                <select class="form-control" id="projects">
-                {{#each projects}}
-                  <option value="{{id}}">{{name}}</option>
-                {{/each}}
-                </select>
+                <div class="input-group">
+                  <select class="form-control" id="projects">
+                  {{#each projects}}
+                    <option value="{{id}}">{{name}}</option>
+                  {{/each}}
+                  </select>
+                </div>
               </div>
               <div class="col-md-4">
                 <label for="topics">Topic</label>
-                <select class="form-control" id="topics">
-                {{#each topics}}
-                  <option value="{{id}}">{{name}}</option>
-                {{/each}}
-                </select>
+                <div class="input-group">
+                  <select class="form-control" id="topics">
+                  {{#each topics}}
+                    <option value="{{id}}">{{name}}</option>
+                  {{/each}}
+                  </select>
+                </div>
               </div>
               <div class="col-md-4">
                 <label for="scheduledForPicker">Date and Time</label>
@@ -70,8 +74,8 @@
           <div class="panel-body">
             <div class="row">
               <div class="col-md-6">
-                <div class="input-group" style="height: 100%;">
-                  <label for="scheduler-network-select">Network</label>
+                <label for="scheduler-network-select">Network</label>
+                <div class="input-group">
                   <select multiple="multiple" class="form-control" id="networks">
                   {{#each buckets}}
                     <option value="{{name}}">{{name}}</option>
@@ -86,18 +90,17 @@
                   <input type="radio" name="isNewPost" id="isNewPost"
                   value="0" aria-label="Existing post">Existing Post</input>
                 </div>
-                <div class="input-group input-group-sm">
+                <div class="input-group">
                   <label for="postUrl">Post ID</label>
                   <input type="text" class="form-control" id="postUrl" placeholder="url://">
                 </div>
-                <div class="input-group input-group-sm">
+                <div class="input-group">
                   <label for="postText">Post</label>
                   <textarea class="form-control" id="postText" rows="4"></textarea>
                 </div>
-                <div class="input-group input-group-sm">
+                <div class="input-group">
                   <label for="postImageUrl">Image</label>
-                  <input type="text" class="form-control-file" id="postImageUrl" aria-describedby="fileHelp">
-                  <small id="fileHelp" class="form-text text-muted">Add Image</small>
+                  <input type="text" class="form-control" id="postImageUrl">
                 </div>
               </div>
             </div>
