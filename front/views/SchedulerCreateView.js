@@ -6,11 +6,18 @@ let SchedulerCreateView = Backbone.View.extend({
 
   className: "panel",
 
+
   events: {
     "keyup #groupFinder": "searchGroup",
     "click #save": "createPost",
     "click #delete": "delete",
-    "click #isNewPost": "isNew"
+    "click #isNewPost": "isNew",
+    "click .selection": "selectGroup"
+  },
+
+
+  selectGroup: () => {
+    console.log("Selected group");
   },
 
   isNew: () => {
@@ -25,6 +32,7 @@ let SchedulerCreateView = Backbone.View.extend({
 
   },
 
+
   createPost: () => {
 
     let content = {};
@@ -38,21 +46,26 @@ let SchedulerCreateView = Backbone.View.extend({
     if(img !== "") {
       content.imgurl = img;
     }
+
     content.tags = $("#networks").val();
+
+
     let post = {
       date: new Date($("#scheduledFor").val()),
       topic: $("#topics").val(),
-      data: content,
+      content: content,
       owner: Semitki.user.get("url")
     };
     let newPost = new Post();
     newPost.save(post, Semitki.addAuthorizationHeader());
   },
 
+
   deletePost: () => {
     // TODO
     console.log("Delete post");
   },
+
 
   searchGroup: () => {
     let matches = Semitki.collection.get("groups").search($("#groupFinder").val());
@@ -62,6 +75,7 @@ let SchedulerCreateView = Backbone.View.extend({
       $("#groupFinderItems").show();
     }
   },
+
 
   render: function() {
     let template = $("#scheduler-create-template").html();
@@ -75,7 +89,9 @@ let SchedulerCreateView = Backbone.View.extend({
       topics: Semitki.collection.get("topics").toJSON(),
       buckets: Semitki.collection.get("buckets").toJSON(),
     };
+
     let calendarFeed = () => {
+      /* Build the calendar feed */
       let postArray = Semitki.collection.get("posts").toArray();
       let feed = postArray.map((post) => {
         let item = {
@@ -90,7 +106,7 @@ let SchedulerCreateView = Backbone.View.extend({
       });
       return feed;
     }
-    console.log(calendarFeed());
+
     this.$el.html(compiled(data));
     $("#container").html(this.$el);
     // Initialize datimepicker here after rendering, otherwise it won't work
@@ -102,6 +118,7 @@ let SchedulerCreateView = Backbone.View.extend({
       tmpl_path: "/tmpls/",
       events_source: calendarFeed()
     });
+
     return this;
   }
 });

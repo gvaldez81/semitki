@@ -5,6 +5,8 @@ let GroupFinderView = Backbone.View.extend({
 
   className: "col-md-12 table-responsive",
 
+
+
   render: function() {
     let template = $("#group-finder-template").html();
     let compiled = Handlebars.compile(template);
