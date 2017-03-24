@@ -95,6 +95,7 @@ let SchedulerCreateView = Backbone.View.extend({
     $("#container").html(this.$el);
     // Initialize datimepicker here after rendering, otherwise it won't work
     $('#scheduledForPicker').datetimepicker();
+    // Initialize all select controls as select2
     $("#accordion").find("select").select2();
     // Initialize calendar view
     let calendar = $("#calendar-panel").calendar({
