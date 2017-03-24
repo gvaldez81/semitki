@@ -84,11 +84,13 @@
                 </div>
               </div>
               <div class="col-md-6">
-                <div class="input-group">
-                  <input type="radio" name="isNewPost" id="isNewPost"
-                  value="1" aria-label="New post">New Post</input>
-                  <input type="radio" name="isNewPost" id="isNewPost"
-                  value="0" aria-label="Existing post">Existing Post</input>
+                <div class="radio">
+                  <label><input type="radio" name="isNewPost" id="isNewPost"
+                  value="1" checked>New Post</label>
+                </div>
+                <div class="radio">
+                  <label><input type="radio" name="isNewPost" id="notNewPost"
+                  value="0">Existing Post</label>
                 </div>
                 <div class="input-group">
                   <label for="postUrl">Post ID</label>
