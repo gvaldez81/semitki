@@ -28,5 +28,6 @@ Install `pep8` with `pip` and check your source code with it.
 
 ### Views
 
-File names are camel cased in the form ModuleActionView.js and
-corresponding template ModuleActionTemplate.hbs
+* File names are camel cased in the form ModuleActionView.js and
+  corresponding template ModuleActionTemplate.hbs
+* Template names are in the form _module-template_
