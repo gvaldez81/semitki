@@ -10,7 +10,7 @@ let Semitki = {
     $.fn.select2.defaults.set("allowClear", true);
     $.fn.select2.defaults.set("placeholder", "search...");
     Backbone.history.start();
-    let navTemplate = Handlebars.compile($("#navigation").html())
+    let navTemplate = Handlebars.compile($("#navigation").html());
     Handlebars.registerPartial('navigation', navTemplate);
     this.router = new SemitkiRouter();
     //this.jwtheader = "Token ";
@@ -26,6 +26,8 @@ let Semitki = {
     this.collection.set("accounts", new Accounts());
     this.collection.set("groups", new Groups());
     this.collection.set("posts", new Posts());
+    this.user = new UserModel();
+    this.users = new Users();
   },
 
   addAuthorizationHeader: () => {
@@ -91,7 +93,6 @@ let Semitki = {
     Semitki.router.index();
   },
 
-  user: new UserModel
 
 };
 

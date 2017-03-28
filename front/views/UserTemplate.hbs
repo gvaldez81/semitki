@@ -1,80 +1,79 @@
-<script type="text/x-handlebars-template" id="user">
+<script type="text/x-handlebars-template" id="user-template">
 
 {{> navigation }}
 
 <div class="container">
-<form class="form-horizontal">
- <fieldset>
+  <form class="form-horizontal">
+    <fieldset>
 
-<!-- Name -->
-<legend>User</legend>
+  <legend>User {{user}}</legend>
 
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="fullname">User Name</label> 
-<div class="col-md-6">
-  <input id="fullname" name="fullname" type="text" placeholder="User Name" 
-  class="form-control input-md">
-</div>    
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="email">E-Mail</label>  
-  <div class="col-md-6">
-  <input id="email" name="email" type="text" placeholder="E-mail" class="form-control input-md">
-    
-  </div>
-</div>
-
-<!-- FirstName input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="firstname">First Name</label>
-  <div class="col-md-6">
-    <input id="firstname" name="firstname" type="text" placeholder="First Name" 
-    class="form-control input-md" required="">
-  </div>
-</div>
-
-<!-- LastName input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="lastname">Last Name</label>
-  <div class="col-md-6">
-    <input id="lastname" name="lastname" type="text" placeholder="Last Name" 
-    class="form-control input-md" required="">
-<!--    <span class="help-block"></span>-->
-  </div>
-</div>
-
-<!-- Multiple Radios -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="rad">Tipo de Usuario</label>
-  <div class="col-md-4">
-  <div class="radio">
-    <label for="rad-0">
-      <input type="radio" name="rad" id="rad-0" value="1" checked="checked">
-      Operator
-    </label>
+  <div class="form-group">
+    <span class="col-md-4"></span> <!-- Damn ugly hack, why in the hell there is not a master layout? -->
+    <div class="col-md-6">
+      <select class="form-control" id="userFinder">
+        {{#each users}}
+        <option value="{{id}}">{{first_name}}</option>
+        {{/each}}
+        </option>
+      </select>
     </div>
-  <div class="radio">
-    <label for="rad-1">
-      <input type="radio" name="rad" id="rad-1" value="2">
-      Administrator
-    </label>
-	</div>
   </div>
-</div>
 
-<!-- Button (Double) -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="Save"></label>
-  <div class="col-md-8">
-    <button id="Save" name="Save" class="btn btn-primary">Save</button>
-    <button id="delete" name="delete" class="btn btn-danger">Delete</button>
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="username">User name</label>
+    <div class="col-md-6">
+      <input type="text" class="form-control" id="username">
+    </div>
   </div>
-</div>
 
- </fieldset>
-</form>
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="email">E-mail</label>
+    <div class="col-md-6">
+      <input id="email" type="text" placeholder="mail@example.com"
+      class="form-control">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="fname">First name</label>
+    <div class="col-md-6">
+      <input id="fname" type="text" placeholder="Name"
+      class="form-control">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="lname">Last name</label>
+    <div class="col-md-6">
+      <input id="lname" type="text" placeholder="Last Name"
+      class="form-control">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="rad">Tipo de usuario</label>
+    <div class="col-md-4">
+      <div class="radio">
+        <label class="radio-inline"><input type="radio" id="oper"
+        value="False">Operator</label>
+        <label class="radio-inline"><input type="radio" id="staff"
+        value="true">Administrator</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="Save"></label>
+    <div class="col-md-8">
+      <button type="button" id="save"
+      class="btn btn-primary">Save</button>
+      <button type="button" id="delete"
+      class="btn btn-danger">Delete</button>
+    </div>
+  </div>
+
+   </fieldset>
+  </form>
 </div>
 </script>

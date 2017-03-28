@@ -55,7 +55,6 @@ module.exports = (grunt) => {
       },
       js: {
         expand: true,
-        cwd: 'static/js',
         src: '*.js',
         dest: 'dist/js',
         filter: 'isFile'

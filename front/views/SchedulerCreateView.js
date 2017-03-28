@@ -12,13 +12,8 @@ let SchedulerCreateView = Backbone.View.extend({
     "click #save": "createPost",
     "click #delete": "delete",
     "click #isNewPost": "isNew",
-    "click .selection": "selectGroup"
   },
 
-
-  selectGroup: () => {
-    console.log("Selected group");
-  },
 
   isNew: () => {
     //TODO Meh! Fix it later, very low priority
@@ -48,7 +43,6 @@ let SchedulerCreateView = Backbone.View.extend({
     }
 
     content.tags = $("#networks").val();
-
 
     let post = {
       date: new Date($("#scheduledFor").val()),
@@ -88,6 +82,7 @@ let SchedulerCreateView = Backbone.View.extend({
       projects: Semitki.collection.get("projects").toJSON(),
       topics: Semitki.collection.get("topics").toJSON(),
       buckets: Semitki.collection.get("buckets").toJSON(),
+      groups: Semitki.collection.get("groups").toJSON()
     };
 
     let calendarFeed = () => {
@@ -109,6 +104,7 @@ let SchedulerCreateView = Backbone.View.extend({
 
     this.$el.html(compiled(data));
     $("#container").html(this.$el);
+
     // Initialize datimepicker here after rendering, otherwise it won't work
     $('#scheduledForPicker').datetimepicker();
     // Initialize all select controls as select2

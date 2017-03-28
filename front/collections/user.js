@@ -1,6 +1,6 @@
 'use strict'
 
-let UserCollection = Backbone.Collection.extend({
+let Users = Backbone.Collection.extend({
   model: UserModel,
-  url: "user"
+  url: apiBuilder("user")
 });
