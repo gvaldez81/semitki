@@ -26,7 +26,7 @@ let ProjectView = Backbone.View.extend({
   },
 
   render: function(){
-    let template = $("#name-description-template").html();
+    let template = $("#project-template").html();
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled);
     $("#container").html(this.$el);

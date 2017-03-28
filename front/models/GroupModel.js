@@ -7,13 +7,12 @@ let Group = Backbone.Model.extend({
     return {
       "name": undefined,
       "description": undefined,
+      "url": undefined
     }
   },
 
-
   url: () => {
-    return "/account_group/" + this.id;
+    return apiBuilder("accounts_group/" + this.get("id"));
   }
-
 
 });

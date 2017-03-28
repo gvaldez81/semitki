@@ -1,53 +1,39 @@
-<script type="text/x-handlebars-template" id="groups">
-
+<script type="text/x-handlebars-template" id="group-template">
 
 {{> navigation }}
 
- <div class="container">
-     <h2> Groups </h2>     
-<form class="form-horizontal">
+<div class="col-md-10">
+  <h2>Groups</h2>
+
+  <form class="form-horizontal">
     <div class="form-group">
-        <label class="control-label col-sm-2" for="name">Name:</label>
-            <div class="col-sm-4">
-            <input type="Nombre" class="form-control" id="namegroup" placeholder="Name">
-            </div>
+      <div class="col-md-4"></div>
+      <div class="col-md-6">
+        <select id="groupFinder">
+        {{#each groups}}
+          <option value="{{id}}">{{name}}<option>
+        {{/each}}
+        </select>
+      </div>
     </div>
-        <div class="form-group">
-<label class="control-label col-sm-2" for="desc">Description:</label>
-<div class="col-sm-4"> 
-    <input type="description" class="form-control" id="descgroup" placeholder="Descripton">
-</div>
-    <button type="button" class="btn btn-primary btn-md"> Add </button>
-        </div> 
-</form>
-     
-<div class="row">
-<div class="col-md-5">
-<div class="panel panel-primary">
-<div class="panel-heading"> Groups </div>
-        <div class="row table table-lg table-bordered">
-        <div class="col-md-3">Group Name</div>
-        <div class="col-md-3"></div>
-        </div>
-        <div class="row">
-        <div class="col-md-3">Presidencia</div>
-        <div class="col-md-3">
-        <button type="button" class="btn btn-info btn-xs">
-        Delete
-        </button>
-        </div>
-
-        </div>
+    <div class="form-group">
+      <label class="control-label col-md-4" for="name">Name</label>
+      <div class="col-md-6">
+        <input type="text" class="form-control" id="name" placeholder="Name">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-md-4" for="description">Description</label>
+      <div class="col-md-6">
+        <input type="text" class="form-control" id="description"
+        placeholder="Descripton">
+      </div>
+    </div>
+    <div class="col-md-10">
+      <button type="button" id="save" class="btn btn-primary btn-md">Add</button>
+      <button type="button" id="delete" class="btn btn-danger btn-md">Delete</button>
+    </div>
+  </form>
 
 </div>
-        <button type="button" class="btn btn-info btn-md">
-        Save
-        </button>
-</div>
-</div>
-
- </div>
-
-
-
 </script>
