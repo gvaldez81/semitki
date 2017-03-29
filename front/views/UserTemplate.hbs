@@ -6,14 +6,14 @@
   <form class="form-horizontal">
     <fieldset>
 
-  <legend>User {{user}}</legend>
+  <legend>User</legend>
 
   <div class="form-group">
     <span class="col-md-4"></span> <!-- Damn ugly hack, why in the hell there is not a master layout? -->
     <div class="col-md-6">
       <select class="form-control" id="userFinder">
         {{#each users}}
-        <option value="{{id}}">{{first_name}}</option>
+        <option value="{{id}}">{{username}}</option>
         {{/each}}
         </option>
       </select>
