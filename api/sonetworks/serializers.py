@@ -36,7 +36,7 @@ class SocialAccountSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class SocialAccountsGroupSerializer(serializers.HyperlinkedModelSerializer):
-    socialaccounts = SocialAccountSerializer(many=True)
+    socialaccounts = SocialAccountSerializer(many=True, read_only=True)
     class Meta:
         model = SocialAccountsGroup
         fields = ('url', 'id', 'name', 'description', 'socialaccounts')

@@ -54,7 +54,7 @@ class SocialAccountsGroup(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=140)
     description = models.CharField(max_length=256)
-    socialaccounts = models.ManyToManyField(SocialAccount, null=True)
+    socialaccounts = models.ManyToManyField(SocialAccount, blank=True)
 
 
 class StaticPages(models.Model):

@@ -2,7 +2,6 @@
 
 let GroupsView = Backbone.View.extend({
   tagName:"div",
-  className:"row",
 
   events: {
     "click #save": "save",
