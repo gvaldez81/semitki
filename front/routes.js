@@ -7,6 +7,7 @@ let SemitkiRouter = Backbone.Router.extend({
     "scheduler": "schedulerCreate",
     "dashboard": "dashboard",
     "groups": "groups",
+    "groupedaccounts": "groupedAccounts",
     "accounts": "accounts",
     "about": "about",
     "user": "user" ,
@@ -35,6 +36,11 @@ let SemitkiRouter = Backbone.Router.extend({
 
   groups: () => {
     let view = new GroupsView();
+    view.render();
+  },
+
+  groupedAccounts: () => {
+    let view = new GroupedAccountsView();
     view.render();
   },
 

@@ -40,12 +40,6 @@ class Bucket(models.Model):
     enabled = models.BooleanField
 
 
-class SocialAccountsGroup(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name = models.CharField(max_length=140)
-    description = models.CharField(max_length=256)
-
-
 class SocialAccount(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     username = models.CharField(max_length=140)
@@ -56,9 +50,11 @@ class SocialAccount(models.Model):
     bucket = models.CharField(max_length=256)
 
 
-class GroupedSocialAccount(models.Model):
-    social_account_group_id = models.ForeignKey(SocialAccountsGroup)
-    social_account_id = models.ForeignKey(SocialAccount)
+class SocialAccountsGroup(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=140)
+    description = models.CharField(max_length=256)
+    socialaccounts = models.ManyToManyField(SocialAccount, null=True)
 
 
 class StaticPages(models.Model):

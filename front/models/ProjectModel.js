@@ -2,7 +2,6 @@
 
 let Project = Backbone.Model.extend({
 
-
   defaults: () => {
     return {
       "url": undefined,
@@ -11,11 +10,5 @@ let Project = Backbone.Model.extend({
       "campaing_id": undefined
     }
   },
-
-
-  url: () => {
-    return apiBuilder("project");
-  }
-
 
 });

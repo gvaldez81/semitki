@@ -12,7 +12,8 @@ let GroupsView = Backbone.View.extend({
   save: () => {
     let data = {
       name: $("#name").val(),
-      description: $("#description").val()
+      description: $("#description").val(),
+      socialaccounts: []
     };
     let group = new Group(data);
     Semitki.collection.get("groups")

@@ -11,12 +11,6 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('url', 'id', 'username', 'email', 'first_name', 'last_name', 'posts')
 
 
-class GroupSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Group
-        fields = ('__all__')
-
-
 class PostSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Post
@@ -35,16 +29,17 @@ class ProjectSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('url', 'id', 'name', 'description')
 
 
-class SocialAccountsGroupSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = SocialAccountsGroup
-        fields = ('url', 'id', 'name', 'description')
-
-
 class SocialAccountSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = SocialAccount
         fields = ('__all__')
+
+
+class SocialAccountsGroupSerializer(serializers.HyperlinkedModelSerializer):
+    socialaccounts = SocialAccountSerializer(many=True)
+    class Meta:
+        model = SocialAccountsGroup
+        fields = ('url', 'id', 'name', 'description', 'socialaccounts')
 
 
 class BucketSerializer(serializers.HyperlinkedModelSerializer):
