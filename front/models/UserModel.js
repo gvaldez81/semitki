@@ -14,8 +14,4 @@ let UserModel = Backbone.Model.extend({
     }
   },
 
-  url: () => {
-    return apiBuilder("user");
-  }
-
 });
