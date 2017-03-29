@@ -140,4 +140,3 @@ you can run commands of manage.py for the Django app.
 
     ENV/bin/python manage.py createsuperuser
 
-.
