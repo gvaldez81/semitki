@@ -11,8 +11,4 @@ let Group = Backbone.Model.extend({
     }
   },
 
-  url: () => {
-    return apiBuilder("accounts_group/" + this.get("id"));
-  }
-
 });

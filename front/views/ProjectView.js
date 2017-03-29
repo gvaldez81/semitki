@@ -18,6 +18,7 @@ let ProjectView = Backbone.View.extend({
 
     let resource = new Project();
     resource.save(data, Semitki.addAuthorizationHeader());
+    this.render();
   },
 
   delete: () => {
