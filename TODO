@@ -1,0 +1,23 @@
+1. Registrar los permisos de las cuentas que donan su acceso como estaba en twhandler.gerri.club.
+
+2. Crear grupos.
+
+3. Agrupar las cuentas en grupos , como estaba en el Google Spreadsheet pestana grupos.
+
+4. Agregar publicaciones al calendario para hasta maximo 3 grupos/cuentas.
+
+5. Visualizar el calendario con las publicaciones pasadas y futuras
+
+6. Permitir eliminar publicaciones futuras, que obviamente no se han ejecutado.
+
+7. Editar integrantes de grupos, almacenando la configuracion previa.
+
+8. Guardar una bitacora por cada publicacion realizada. Que cuentas publicaron, que cuentas dieron rt, que cuentas dieron like.
+
+Eso es lo que ocupo desde el Lunes pasado. Exactamente la funcionalidad que tenia en el SpreadSheet de Google.
+
+Como puntos finales:
+
+9. Panel de administracion del usuario, modificar password, datos personales, correo electronico.
+
+10. Panel de Login con funcion de password recovery.

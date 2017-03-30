@@ -31,7 +31,7 @@ router.register(r'project', ProjectViewSet)
 router.register(r'account', SocialAccountViewSet)
 router.register(r'accounts_group', SocialAccountsGroupViewSet)
 router.register(r'bucket', BucketViewSet)
-router.register(r'about', StaticPageViewSet)
+router.register(r'static_page', StaticPageViewSet)
 
 schema_view = get_swagger_view(title='Semitki API')
 

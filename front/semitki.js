@@ -10,8 +10,10 @@ let Semitki = {
     $.fn.select2.defaults.set("allowClear", true);
     $.fn.select2.defaults.set("placeholder", "search...");
     Backbone.history.start();
-    let navTemplate = Handlebars.compile($("#navigation").html());
+    let navTemplate = Handlebars.compile($("#navigation-template").html());
+    let footerTemplate = Handlebars.compile($("#footer-template").html());
     Handlebars.registerPartial('navigation', navTemplate);
+    Handlebars.registerPartial('footer', footerTemplate);
     this.router = new SemitkiRouter();
     //this.jwtheader = "Token ";
     this.jwtheader = "JWT ";
@@ -28,6 +30,12 @@ let Semitki = {
     this.collection.set("posts", new Posts());
     this.user = new UserModel();
     this.users = new Users();
+    this.static_pages = new StaticPages();
+    this.static_pages.fetch(() => {
+      return {
+        headers: {'X-CSRFToken': Cookies.get("CSRFToken")}
+      }
+    });
   },
 
   addAuthorizationHeader: () => {

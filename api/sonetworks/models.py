@@ -81,4 +81,3 @@ class StaticPage(models.Model):
     title = models.CharField(max_length=140)
     content = models.TextField()
     template = models.CharField(max_length=140)
-    page = models.CharField(max_length=100)
