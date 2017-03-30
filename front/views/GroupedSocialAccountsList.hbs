@@ -1,0 +1,9 @@
+<script id="accounts-list-template" type="text/x-handlebars-template">
+
+<select  class="form-control" id="accounts-list" multiple="multiple">
+{{#each accounts}}
+  <option id="{{id}}">{{username}}</option>
+{{/each}}
+</select>
+
+</script>
