@@ -23,12 +23,18 @@ class Post(models.Model):
 
 
 class Project(models.Model):
+    """
+    A project can hold many topics
+    """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=140)
     description = models.CharField(max_length=256)
 
 
 class Topic(models.Model):
+    """
+    A topic belongs to one or many projects
+    """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=140)
     description = models.CharField(max_length=256)
@@ -36,11 +42,17 @@ class Topic(models.Model):
 
 
 class Bucket(models.Model):
+    """
+    Represents marketing targets
+    """
     name = models.CharField(primary_key=True, max_length=140, editable=True)
     enabled = models.BooleanField
 
 
 class SocialAccount(models.Model):
+    """
+    Managed social accounts
+    """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     username = models.CharField(max_length=140)
     email = models.CharField(max_length=256)
@@ -51,25 +63,22 @@ class SocialAccount(models.Model):
 
 
 class SocialAccountsGroup(models.Model):
+    """
+    Grouped social accounts
+    """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=140)
     description = models.CharField(max_length=256)
     socialaccounts = models.ManyToManyField(SocialAccount, blank=True)
 
 
-class StaticPages(models.Model):
+class StaticPage(models.Model):
+    """
+    Customizable static pages such as About Us, Contact, etc...
+    """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4,
     editable=False)
     title = models.CharField(max_length=140)
     content = models.TextField()
     template = models.CharField(max_length=140)
     page = models.CharField(max_length=100)
-
-
-class UserInfo(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4,
-    editable=False)
-    name = models.CharField(max_length=100)
-    fname = models.CharField(max_length=100)
-    lname = models.CharField(max_length=100)
-    mail = models.CharField(max_length=100)

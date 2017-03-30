@@ -48,13 +48,7 @@ class BucketSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('url', 'name')
 
 
-class AboutSerializer(serializers.HyperlinkedModelSerializer):
+class StaticPageSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = StaticPages
-        fields = ('__all__')
-
-
-class UserInfoSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = UserInfo
+        model = StaticPage
         fields = ('__all__')

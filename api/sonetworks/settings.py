@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'corsheaders',
     # django-rest-framework
     'rest_framework',
+    'rest_framework_swagger',
     'rest_framework.authtoken',
     'rest_auth',
     'allauth',
@@ -181,3 +182,14 @@ SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
             'fields': 'id, name, email'
             }
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'basic': {
+        'type': 'basic'
+        }
+    },
+    'DOC_EXPANSION': 'list',
+    'JSON_EDITOR': True
+}
+

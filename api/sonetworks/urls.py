@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
 from rest_framework_jwt.views import obtain_jwt_token
+from django.conf.urls import url
+from rest_framework_swagger.views import get_swagger_view
 from .views import *
 
 # Routers provide an easy way of automatically determining the URL conf.
@@ -29,13 +31,15 @@ router.register(r'project', ProjectViewSet)
 router.register(r'account', SocialAccountViewSet)
 router.register(r'accounts_group', SocialAccountsGroupViewSet)
 router.register(r'bucket', BucketViewSet)
-router.register(r'about', AboutViewSet)
-router.register(r'userinfo', UserInfoViewSet)
+router.register(r'about', StaticPageViewSet)
+
+schema_view = get_swagger_view(title='Semitki API')
 
 urlpatterns = [
+    url(r'^$', schema_view),
     url(r'^', include(router.urls)),
     url(r'^auth/', include('rest_auth.urls')),
     url(r'^auth/facebook/$', FacebookLogin.as_view(), name="fb_login"),
     url(r'^admin/', admin.site.urls),
-    url(r'^api-token-auth/', obtain_jwt_token)
+    url(r'^api-token-auth/', obtain_jwt_token),
 ]
