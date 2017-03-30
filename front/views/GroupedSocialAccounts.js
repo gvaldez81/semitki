@@ -16,9 +16,12 @@ let GroupedAccountsView = Backbone.View.extend({
     this.$el.html(compiled(data));
     $("#container").html(this.$el);
 
-    // Render accounts list
+    // Render ungruped accounts list
     let account_list = new SocialAccountsList();
     account_list.render();
+    // Render grouped accounts
+    let grouped_accounts = new GroupedSocialAccountsList();
+    grouped_accounts.render();
 
     $("#groupFinder").select2();
 

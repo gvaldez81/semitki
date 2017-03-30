@@ -5,21 +5,23 @@
 <div class="row"><div class="col-md-10">
   <h2>Grouped accounts</h2>
 
-  <form class="form-horizontal">
+  <!-- form class="form-horizontal" -->
     <div class="col-md-4">
-      <div class="form-group">
+      <label for="groupFinder">Groups</label>
+        <div class="form-group">
           <select class="form-control" id="groupFinder">
           {{#each groups}}
             <option value="{{id}}">{{name}}<option>
           {{/each}}
           </select>
-      </div>
+        </div>
+      </label>
     </div>
 
-    <div class="col-md-4" id="account-list-container"></div>
+    <div class="col-md-4" id="accounts-list-container"></div>
 
-    <div class="col-md-4" id="grouped-account-container"></div>
-  </form>
+    <div class="col-md-4" id="grouped-accounts-container"></div>
+  <!-- /form -->
 
 </div></div>
 

@@ -1,6 +1,7 @@
-<script id="accounts-list-template" type="text/x-handlebars-template">
+<script id="groupedaccounts-list-template" type="text/x-handlebars-template">
 
-<select  class="form-control" id="accounts-list" multiple="multiple">
+<label for="grouped-select">Grouped accounts</label>
+<select  class="form-control" id="grouped-select" multiple="multiple">
 {{#each accounts}}
   <option id="{{id}}">{{username}}</option>
 {{/each}}
