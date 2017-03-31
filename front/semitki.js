@@ -1,10 +1,12 @@
 'use strict'
 
 
-let Semitki = {
+let S = {
 
   initialize: function() {
     // Initialize
+    // Internationalization
+    this.polyglot = new Polyglot();
     // Select boxes default settings
     $.fn.select2.defaults.set("theme", "bootstrap");
     $.fn.select2.defaults.set("allowClear", true);
@@ -40,7 +42,7 @@ let Semitki = {
 
   addAuthorizationHeader: () => {
     return {
-      headers: {'Authorization': Semitki.jwtheader.concat(Semitki.jwtoken)}
+      headers: {'Authorization': S.jwtheader.concat(S.jwtoken)}
     }
   },
 
@@ -54,8 +56,8 @@ let Semitki = {
   },
 
   fetchCollections: () => {
-    for (let [key, value] of Semitki.collection) {
-      value.fetch(Semitki.addAuthorizationHeader());
+    for (let [key, value] of S.collection) {
+      value.fetch(S.addAuthorizationHeader());
     }
   },
 
@@ -66,7 +68,7 @@ let Semitki = {
     // for FB.getLoginStatus().
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
-      Semitki.fb_token = response.authResponse.accessToken;
+      S.fb_token = response.authResponse.accessToken;
       return true;
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
@@ -80,7 +82,7 @@ let Semitki = {
 
   fbGetLoginStatus: () => {
     FB.getLoginStatus((response) => {
-      Semitki.fbStatusChangeCallback(response);
+      S.fbStatusChangeCallback(response);
     });
   },
 
@@ -96,9 +98,9 @@ let Semitki = {
         console.log(data);
      });
 
-    Semitki.jwtoken = undefined;
-    Semitki.user.clear();
-    Semitki.router.index();
+    S.jwtoken = undefined;
+    S.user.clear();
+    S.router.index();
   },
 
 
@@ -107,13 +109,13 @@ let Semitki = {
 // Launch the JavaScript client side app
 $(() => {
 
-  Semitki.initialize();
+  S.initialize();
   // Check for a valid JWToken and route the user accordingly
   // TODO this is very weak, we need a solid authorization mechanism
-  if(Semitki.jwtoken == undefined) {
-    Semitki.router.index();
+  if(S.jwtoken == undefined) {
+    S.router.index();
   } else {
-    Semitki.router.dashboard();
+    S.router.dashboard();
   }
 
 });
