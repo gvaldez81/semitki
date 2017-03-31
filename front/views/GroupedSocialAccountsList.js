@@ -10,7 +10,7 @@ let GroupedSocialAccountsList = Backbone.View.extend({
     let template = $("#groupedaccounts-list-template").html();
     let compiled = Handlebars.compile(template);
     let data = {
-      accounts: Semitki.collection.get("accounts").toJSON()
+      accounts: S.collection.get("accounts").toJSON()
     };
 
     this.$el.html(compiled(data));

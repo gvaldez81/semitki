@@ -17,19 +17,19 @@ let ProjectView = Backbone.View.extend({
     };
 
     let resource = new Project();
-    resource.save(data, Semitki.addAuthorizationHeader());
+    resource.save(data, S.addAuthorizationHeader());
     this.render();
   },
 
   delete: () => {
-    let projects = Semitki.collection.get("projects");
+    let projects = S.collection.get("projects");
     let project = projects.get($("#projectFinder").val());
-    projects.sync("delete", project, Semitki.addAuthorizationHeader());
+    projects.sync("delete", project, S.addAuthorizationHeader());
   },
 
   render: function(){
     let data = {
-      projects: Semitki.collection.get("projects").toJSON()
+      projects: S.collection.get("projects").toJSON()
     };
     let template = $("#project-template").html();
     let compiled = Handlebars.compile(template);

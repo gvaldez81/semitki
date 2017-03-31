@@ -33,24 +33,24 @@ let LoginView = Backbone.View.extend({
 
   tryFbLogin: () => {
     FB.login((response) => {
-      if(Semitki.fbStatusChangeCallback(response)) {
+      if(S.fbStatusChangeCallback(response)) {
         FB.api('/me', { "fields": "id,name,email"}, (response) => {
           let user = {
             fb_userID: response.id,
             name: response.name,
             email: response.email
           };
-          $.ajax(Semitki.api("auth/facebook"),
+          $.ajax(S.api("auth/facebook"),
             {
               data: {
-                "access_token": Semitki.fb_token
+                "access_token": S.fb_token
               },
               method: "POST",
             }).done((response) => {
-              Semitki.jwtoken = response.access_token;
-/*          Semitki.user.set(user);*/
-          /*Semitki.router.navigate('#dashboard', {trigger: true});*/
-          Semitki.fetchCollections();
+              S.jwtoken = response.access_token;
+/*          S.user.set(user);*/
+          /*S.router.navigate('#dashboard', {trigger: true});*/
+          S.fetchCollections();
             });
         });
       } else {
@@ -81,11 +81,11 @@ let LoginView = Backbone.View.extend({
         method: "POST",
         dataType: "JSON"
       }).done((data) => {
-        Semitki.jwtoken = data.token;
-        Semitki.user.set(data.user);
-        if(Semitki.jwtoken != undefined && Semitki.user != undefined) {
-          Semitki.router.navigate("#dashboard", {trigger: true});
-          Semitki.fetchCollections();
+        S.jwtoken = data.token;
+        S.user.set(data.user);
+        if(S.jwtoken != undefined && S.user != undefined) {
+          S.router.navigate("#dashboard", {trigger: true});
+          S.fetchCollections();
         }
      });
   },

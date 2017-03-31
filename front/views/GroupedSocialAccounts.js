@@ -9,7 +9,7 @@ let GroupedAccountsView = Backbone.View.extend({
   render: function() {
 
     let data = {
-      "groups": Semitki.collection.get("groups").toJSON()
+      "groups": S.collection.get("groups").toJSON()
     }
     let template = $("#grouped-accounts-template").html();
     let compiled = Handlebars.compile(template);

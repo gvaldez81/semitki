@@ -8,7 +8,7 @@ let SemitkiFooter = Backbone.View.extend({
 
   render: function() {
     let data = {
-      pages: Semitki.static_pages.toJSON()
+      pages: S.static_pages.toJSON()
     };
     let template = $("#footer-template").html();
     let compiled = Handlebars.compile(template);

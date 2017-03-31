@@ -15,22 +15,22 @@ let GroupsView = Backbone.View.extend({
       socialaccounts: []
     };
     let group = new Group(data);
-    Semitki.collection.get("groups")
+    S.collection.get("groups")
       .add(group)
-      .sync("create", group, Semitki.addAuthorizationHeader());
+      .sync("create", group, S.addAuthorizationHeader());
   },
 
 
   delete: () => {
-    let groups = Semitki.collection.get("groups");
+    let groups = S.collection.get("groups");
     let group = groups.get($("#groupFinder").val());
-    groups.sync("delete", group, Semitki.addAuthorizationHeader());
+    groups.sync("delete", group, S.addAuthorizationHeader());
   },
 
 
   render: function() {
     let data = {
-      "groups": Semitki.collection.get("groups").toJSON()
+      "groups": S.collection.get("groups").toJSON()
     }
     let template = $("#group-template").html();
     let compiled = Handlebars.compile(template);

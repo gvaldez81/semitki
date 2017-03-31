@@ -48,10 +48,10 @@ let SchedulerCreateView = Backbone.View.extend({
       date: new Date($("#scheduledFor").val()),
       topic: $("#topics").val(),
       content: content,
-      owner: Semitki.user.get("url")
+      owner: S.user.get("url")
     };
     let newPost = new Post();
-    newPost.save(post, Semitki.addAuthorizationHeader());
+    newPost.save(post, S.addAuthorizationHeader());
   },
 
 
@@ -62,7 +62,7 @@ let SchedulerCreateView = Backbone.View.extend({
 
 
   searchGroup: () => {
-    let matches = Semitki.collection.get("groups").search($("#groupFinder").val());
+    let matches = S.collection.get("groups").search($("#groupFinder").val());
     if(typeof matches !== 'undefined') {
       let results = new GroupFinderView({collection: matches});
       results.render();
@@ -75,19 +75,19 @@ let SchedulerCreateView = Backbone.View.extend({
     let template = $("#scheduler-create-template").html();
     let compiled = Handlebars.compile(template);
     let posts = new Post();
-    posts.fetch(Semitki.addAuthorizationHeader());
-    Semitki.fetchCollections();
+    posts.fetch(S.addAuthorizationHeader());
+    S.fetchCollections();
     let data = {
-      user: Semitki.user.toJSON(),
-      projects: Semitki.collection.get("projects").toJSON(),
-      topics: Semitki.collection.get("topics").toJSON(),
-      buckets: Semitki.collection.get("buckets").toJSON(),
-      groups: Semitki.collection.get("groups").toJSON()
+      user: S.user.toJSON(),
+      projects: S.collection.get("projects").toJSON(),
+      topics: S.collection.get("topics").toJSON(),
+      buckets: S.collection.get("buckets").toJSON(),
+      groups: S.collection.get("groups").toJSON()
     };
 
     let calendarFeed = () => {
       /* Build the calendar feed */
-      let postArray = Semitki.collection.get("posts").toArray();
+      let postArray = S.collection.get("posts").toArray();
       let feed = postArray.map((post) => {
         let item = {
           "id": post.attributes.url,

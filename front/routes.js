@@ -72,17 +72,17 @@ let SemitkiRouter = Backbone.Router.extend({
       let view = new ContactView();
       view.render();
   },
-    
+
     billing: () => {
         let view = new BillingView();
         view.render();
     },
-    
+
     accountinfo: () => {
         let view = new AccountInfoView();
         view.render();
     },
-    
+
     pricing: () =>{
     let view = new PricingView();
     view.render();

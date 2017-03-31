@@ -5,7 +5,7 @@ let UserView = Backbone.View.extend({
   className:"row",
 
   initialize: () => {
-    Semitki.users.fetch(Semitki.addAuthorizationHeader());
+    S.users.fetch(S.addAuthorizationHeader());
   },
 
 
@@ -23,22 +23,22 @@ let UserView = Backbone.View.extend({
       last_name: $("#lname").val()
     };
     let user = new UserModel();
-    user.save(data, Semitki.addAuthorizationHeader());
+    user.save(data, S.addAuthorizationHeader());
   },
 
 
   delete: () => {
-    let user = Semitki.users.get($("#userFinder").val());
-    Semitki.users.sync("delete", user, Semitki.addAuthorizationHeader());
+    let user = S.users.get($("#userFinder").val());
+    S.users.sync("delete", user, S.addAuthorizationHeader());
   },
 
 
   render: function() {
-    //Semitki.users = new Users();
+    //S.users = new Users();
     // TODO probably better fetching on user demand rather than on the render
-    console.log(Semitki.users.toJSON());
+    console.log(S.users.toJSON());
     let data = {
-      users: Semitki.users.toJSON(),
+      users: S.users.toJSON(),
     };
     console.log(data);
     let template = $("#user-template").html();
