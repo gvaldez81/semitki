@@ -59,6 +59,10 @@ module.exports = (grunt) => {
         dest: 'dist/js',
         filter: 'isFile'
       },
+      i18n: {
+        expand: true,
+        src: 'i18n/**', dest: 'dist', filter: 'isFile'
+      },
       bootstrap: {
         expand: true,
         cwd: 'bower_components/bootstrap/dist/css',

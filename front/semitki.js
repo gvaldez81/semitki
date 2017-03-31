@@ -6,7 +6,7 @@ let S = {
   initialize: function() {
     // Initialize
     // Internationalization
-    this.polyglot = new Polyglot();
+    S.initPolyglot(this);
     // Select boxes default settings
     $.fn.select2.defaults.set("theme", "bootstrap");
     $.fn.select2.defaults.set("allowClear", true);
@@ -40,11 +40,13 @@ let S = {
     });
   },
 
+
   addAuthorizationHeader: () => {
     return {
       headers: {'Authorization': S.jwtheader.concat(S.jwtoken)}
     }
   },
+
 
   api: (resource) => {
     // Builds the api url of a given resource
@@ -55,11 +57,13 @@ let S = {
     }
   },
 
+
   fetchCollections: () => {
     for (let [key, value] of S.collection) {
       value.fetch(S.addAuthorizationHeader());
     }
   },
+
 
   fbStatusChangeCallback: (response) => {
     // The response object is returned with a status field that lets the
@@ -80,11 +84,25 @@ let S = {
     }
   },
 
+
   fbGetLoginStatus: () => {
     FB.getLoginStatus((response) => {
       S.fbStatusChangeCallback(response);
     });
   },
+
+
+  initPolyglot: (semitki) => {
+    let phrases = $.get("i18n/en.json", {
+      dataType: "json"
+    });
+    phrases.done((xhr) => {
+      semitki.polyglot = new Polyglot({phrases: xhr});
+      console.log(semitki.polyglot);
+      //return polyglot;
+    });
+  },
+
 
   sessionDestroy: () => {
     // TODO Broken, it needs to be fixed for whatever we do the login work
@@ -102,7 +120,6 @@ let S = {
     S.user.clear();
     S.router.index();
   },
-
 
 };
 
