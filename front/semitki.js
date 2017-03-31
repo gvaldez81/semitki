@@ -124,8 +124,8 @@ let S = {
 };
 
 // Launch the JavaScript client side app
-$(() => {
-
+//$(() => {
+requirejs(["i18n/en"], () => {
   S.initialize();
   // Check for a valid JWToken and route the user accordingly
   // TODO this is very weak, we need a solid authorization mechanism
