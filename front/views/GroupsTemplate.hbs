@@ -2,10 +2,10 @@
 
 {{> navigation }}
 
-<div class="col-md-10">
-  <h2>Groups</h2>
-
+<div class="container">
   <form class="form-horizontal">
+      <fieldset>
+      <legend>Groups</legend>
     <div class="form-group">
       <div class="col-md-4"></div>
       <div class="col-md-6">
@@ -29,11 +29,16 @@
         placeholder="Descripton">
       </div>
     </div>
-    <div class="col-md-10">
-      <button type="button" id="save" class="btn btn-primary btn-md">Add</button>
-      <button type="button" id="delete" class="btn btn-danger btn-md">Delete</button>
+    <div class="form-group">
+    <label class="col-md-4 control-label" for="Save"></label>
+    <div class="col-md-8">
+      <button type="button" id="save"
+      class="btn btn-primary">Save</button>
+      <button type="button" id="delete"
+      class="btn btn-danger">Delete</button>
     </div>
+    </div>
+    </fieldset>
   </form>
-
 </div>
 </script>
