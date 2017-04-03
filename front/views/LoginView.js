@@ -95,7 +95,7 @@ let LoginView = Backbone.View.extend({
       //t: {
         //"use_other_account": S.polyglot.t("login.use_other_account")
       //}
-    /*};*/
+/*    }*/;
     let template = $("#login-template").html();
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled);

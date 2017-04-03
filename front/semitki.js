@@ -38,6 +38,8 @@ let S = {
         headers: {'X-CSRFToken': Cookies.get("CSRFToken")}
       }
     });
+
+    return this;
   },
 
 
@@ -98,11 +100,19 @@ let S = {
     });
     phrases.done((xhr) => {
       semitki.polyglot = new Polyglot({phrases: xhr});
-      console.log(semitki.polyglot);
-      //return polyglot;
     });
   },
 
+
+  run: (semitki) => {
+    // Check for a valid JWToken and route the user accordingly
+    // TODO this is very weak, we need a solid authorization mechanism
+    if(semitki.jwtoken == undefined) {
+      semitki.router.index();
+    } else {
+      semitki.router.dashboard();
+    }
+  },
 
   sessionDestroy: () => {
     // TODO Broken, it needs to be fixed for whatever we do the login work
@@ -125,14 +135,5 @@ let S = {
 
 // Launch the JavaScript client side app
 $(() => {
-//requirejs(["i18n/en"], () => {
-  S.initialize();
-  // Check for a valid JWToken and route the user accordingly
-  // TODO this is very weak, we need a solid authorization mechanism
-  if(S.jwtoken == undefined) {
-    S.router.index();
-  } else {
-    S.router.dashboard();
-  }
-
+  S.run(S.initialize());
 });
