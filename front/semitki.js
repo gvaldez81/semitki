@@ -43,6 +43,11 @@ let S = {
   },
 
 
+  setAuthorizationToken: (token) => {
+    S.jwtoken = token;
+  },
+
+
   addAuthorizationHeader: () => {
     return {
       headers: {'Authorization': S.jwtheader.concat(S.jwtoken)}

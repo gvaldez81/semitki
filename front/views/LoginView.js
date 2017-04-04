@@ -47,7 +47,7 @@ let LoginView = Backbone.View.extend({
               },
               method: "POST",
             }).done((response) => {
-              S.jwtoken = response.access_token;
+              S.setAuthorizationToken(response.access_token);
 /*          S.user.set(user);*/
           /*S.router.navigate('#dashboard', {trigger: true});*/
           S.fetchCollections();
