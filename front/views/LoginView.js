@@ -40,18 +40,26 @@ let LoginView = Backbone.View.extend({
             name: response.name,
             email: response.email
           };
-          $.ajax(S.api("auth/facebook"),
+          let fb_token = new Promise((resolve, reject) => {
+            $.ajax(S.api("auth/facebook"),
             {
               data: {
                 "access_token": S.fb_token
               },
               method: "POST",
-            }).done((response) => {
-              S.setAuthorizationToken(response.access_token);
-/*          S.user.set(user);*/
-          /*S.router.navigate('#dashboard', {trigger: true});*/
-          S.fetchCollections();
-            });
+            }).done(resolve).fail(reject);
+          });
+          S.jwtoken = result.token;
+          fb_token.then((result) => {
+            S.fetchCollections();
+          }, (err) => {
+            console.log(err);
+          });
+            /*.done((response) => {
+              S.jwtoken = response.token;*/
+//          S.user.set(user);<]
+ //         [>S.router.navigate('#dashboard', {trigger: true});<]
+ //           });
         });
       } else {
         // TODO when user not logged in FB do something perhaps

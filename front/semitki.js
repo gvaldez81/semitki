@@ -43,11 +43,6 @@ let S = {
   },
 
 
-  setAuthorizationToken: (token) => {
-    S.jwtoken = token;
-  },
-
-
   addAuthorizationHeader: () => {
     return {
       headers: {'Authorization': S.jwtheader.concat(S.jwtoken)}
@@ -109,15 +104,15 @@ let S = {
   },
 
 
-  run: (semitki) => {
-    // Check for a valid JWToken and route the user accordingly
-    // TODO this is very weak, we need a solid authorization mechanism
-    if(semitki.jwtoken == undefined) {
-      semitki.router.index();
-    } else {
-      semitki.router.dashboard();
-    }
-  },
+/*  run: (semitki) => {*/
+    //// Check for a valid JWToken and route the user accordingly
+    //// TODO this is very weak, we need a solid authorization mechanism
+    //if(semitki.jwtoken == undefined) {
+      //semitki.router.index();
+    //} else {
+      //semitki.router.dashboard();
+    //}
+  /*},*/
 
   sessionDestroy: () => {
     // TODO Broken, it needs to be fixed for whatever we do the login work
@@ -140,5 +135,13 @@ let S = {
 
 // Launch the JavaScript client side app
 $(() => {
-  S.run(S.initialize());
+  S.initialize();
+    //// Check for a valid JWToken and route the user accordingly
+    //// TODO this is very weak, we need a solid authorization mechanism
+    if(S.jwtoken == undefined) {
+      S.router.index();
+    } else {
+      S.router.dashboard();
+    }
+
 });
