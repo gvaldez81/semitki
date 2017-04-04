@@ -49,9 +49,11 @@ let LoginView = Backbone.View.extend({
               method: "POST",
             }).done(resolve).fail(reject);
           });
-          S.jwtoken = result.token;
           fb_token.then((result) => {
-            S.fetchCollections();
+            S.jwtoken = result.token;
+            if (S.jwtoken != undefined) {
+              S.fetchCollections();
+            }
           }, (err) => {
             console.log(err);
           });
