@@ -51,14 +51,9 @@ let LoginView = Backbone.View.extend({
           });
           fb_token.then((result) => {
             S.jwtoken = result.token;
-            if (S.jwtoken != undefined) {
-              S.fetchCollections();
-            }
           }, (err) => {
-            console.log(err);
+            console.log("err: " + err);
           });
-            /*.done((response) => {
-              S.jwtoken = response.token;*/
 //          S.user.set(user);<]
  //         [>S.router.navigate('#dashboard', {trigger: true});<]
  //           });
@@ -68,6 +63,12 @@ let LoginView = Backbone.View.extend({
         console.log("no in Fb");
       }
     }, {scope: 'email'});
+            if (S.jwtoken != undefined) {
+              S.user.set(user);
+              S.router.navigate('#dashboard', {trigger: true});
+              S.fetchCollections();
+            }
+
   },
 
   tryLogin: () => {
