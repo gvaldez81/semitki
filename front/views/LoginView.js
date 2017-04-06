@@ -9,6 +9,7 @@ let LoginView = Backbone.View.extend({
   events: {
     "click #login-button": "tryLogin",
     "click #fb-login": "tryFbLogin",
+    "click #tw-login": "tryTwLogin",
     "click #recover-pass": "recoverPassword",
   },
 
@@ -36,40 +37,46 @@ let LoginView = Backbone.View.extend({
       if(S.fbStatusChangeCallback(response)) {
         FB.api('/me', { "fields": "id,name,email"}, (response) => {
           let user = {
-            fb_userID: response.id,
-            name: response.name,
+            username: response.id,
+            last_name: response.name.split(" ")[0],
+            first_name: response.name.split(" ")[1],
             email: response.email
           };
+
           let fb_token = new Promise((resolve, reject) => {
             $.ajax(S.api("auth/facebook"),
             {
               data: {
-                "access_token": S.fb_token
+                "access_token": S.fb_token,
+                "email": user.email
               },
               method: "POST",
             }).done(resolve).fail(reject);
           });
+
           fb_token.then((result) => {
             S.jwtoken = result.token;
+            if (S.jwtoken != undefined && S.user != undefined) {
+              S.user.set(user);
+              S.router.navigate('#dashboard', {trigger: true});
+              S.fetchCollections();
+            }
           }, (err) => {
-            console.log("err: " + err);
+            console.log("err: " + err); // TODO replace this error log
           });
-//          S.user.set(user);<]
- //         [>S.router.navigate('#dashboard', {trigger: true});<]
- //           });
         });
       } else {
         // TODO when user not logged in FB do something perhaps
         console.log("no in Fb");
       }
     }, {scope: 'email'});
-            if (S.jwtoken != undefined) {
-              S.user.set(user);
-              S.router.navigate('#dashboard', {trigger: true});
-              S.fetchCollections();
-            }
-
   },
+
+
+  tryTwLogin: () => {
+    console.log("Login with Twitter TODO");
+  },
+
 
   tryLogin: () => {
     let $form = $('#login-form');

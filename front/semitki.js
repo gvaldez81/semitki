@@ -4,25 +4,21 @@
 let S = {
 
   initialize: function() {
-    // Initialize
-    // Internationalization
-    S.initPolyglot(this);
-    // Select boxes default settings
-    $.fn.select2.defaults.set("theme", "bootstrap");
-    $.fn.select2.defaults.set("allowClear", true);
-    $.fn.select2.defaults.set("placeholder", "search...");
-    Backbone.history.start();
+    Backbone.history.start();                         // Initialize Backbone web browser history support
+    this.router = new SemitkiRouter();                // Initialize Backbone routes
     let navTemplate = Handlebars.compile($("#navigation-template").html());
     let footerTemplate = Handlebars.compile($("#footer-template").html());
     Handlebars.registerPartial('navigation', navTemplate);
     Handlebars.registerPartial('footer', footerTemplate);
-    this.router = new SemitkiRouter();
-    //this.jwtheader = "Token ";
-    this.jwtheader = "JWT ";
-    this.jwtoken = undefined;
+    // Select boxes default settings
+    $.fn.select2.defaults.set("theme", "bootstrap");
+    $.fn.select2.defaults.set("allowClear", true);
+    $.fn.select2.defaults.set("placeholder", "search...");
+    this.jwtheader = "JWT ";                          // Token prefix for authorization custom header
+    this.jwtoken = undefined;                         // JSON Web Token
     // BackBone collection instances
     // Heil ES6 Map!
-    this.collection = new Map ();
+    this.collection = new Map ();                     // System catalogs colection
     // Collections == Catalogs
     this.collection.set("projects", new Projects());
     this.collection.set("topics", new Topics());
@@ -30,14 +26,16 @@ let S = {
     this.collection.set("accounts", new Accounts());
     this.collection.set("groups", new Groups());
     this.collection.set("posts", new Posts());
-    this.user = new UserModel();
-    this.users = new Users();
+    this.user = new UserModel();                      // Signed in user
+    this.users = new Users();                         // User collection
     this.static_pages = new StaticPages();
-    this.static_pages.fetch(() => {
+    this.static_pages.fetch(() => {                   // Get custom static content
       return {
         headers: {'X-CSRFToken': Cookies.get("CSRFToken")}
       }
     });
+    this.lang = "en-EN"                                  // UX language
+    S.initPolyglot(this);                                // Initialize internationalization
 
     return this;
   },
@@ -95,7 +93,7 @@ let S = {
 
 
   initPolyglot: (semitki) => {
-    let phrases = $.get("i18n/en.json", {
+    let phrases = $.get("i18n/"+semitki.lang+".json", {
       dataType: "json"
     });
     phrases.done((xhr) => {
@@ -136,12 +134,11 @@ let S = {
 // Launch the JavaScript client side app
 $(() => {
   S.initialize();
-    //// Check for a valid JWToken and route the user accordingly
-    //// TODO this is very weak, we need a solid authorization mechanism
-    if(S.jwtoken == undefined) {
-      S.router.index();
-    } else {
-      S.router.dashboard();
-    }
-
+  //// Check for a valid JWToken and route the user accordingly
+  //// TODO this is very weak, we need a solid authorization mechanism
+  if(S.jwtoken == undefined) {
+    S.router.index();
+  } else {
+    S.router.dashboard();
+  }
 });

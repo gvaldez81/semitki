@@ -111,6 +111,7 @@ let SchedulerCreateView = Backbone.View.extend({
     $("#accordion").find("select").select2();
     // Initialize calendar view
     let calendar = $("#calendar-panel").calendar({
+      language: S.lang,
       tmpl_path: "/tmpls/",
       events_source: calendarFeed()
     });
