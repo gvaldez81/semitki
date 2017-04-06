@@ -112,6 +112,7 @@ let SchedulerCreateView = Backbone.View.extend({
     // Initialize calendar view
     let calendar = $("#calendar-panel").calendar({
       language: S.lang,
+      modal: "#post-detail",
       tmpl_path: "/tmpls/",
       events_source: calendarFeed()
     });
