@@ -94,7 +94,6 @@ module.exports = (grunt) => {
 
       calendartmpls: {
         expand: true,
-        cwd: 'bower_components/bootstrap-calendar',
         src: 'tmpls/**', dest: 'dist/'
       }
 

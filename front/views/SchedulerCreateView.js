@@ -92,7 +92,8 @@ let SchedulerCreateView = Backbone.View.extend({
         let topic = S.collection.get("topics").get(post.attributes.topic);
         let item = {
           "id": post.attributes.url,
-          "url": post.attributes.url,
+//          "url": post.attributes.url,
+          "url": "http://localhost:8090/#accountinfo",
           "title": topic.attributes.name,
           "class": "event-info",
           "start": Date.parse(post.attributes.date),
@@ -115,6 +116,7 @@ let SchedulerCreateView = Backbone.View.extend({
       language: S.lang,
       modal: "#post-detail",
       tmpl_path: "/tmpls/",
+      modal_type: "ajax",
       events_source: calendarFeed()
     });
 
