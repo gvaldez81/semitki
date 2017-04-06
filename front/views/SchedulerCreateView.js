@@ -89,10 +89,11 @@ let SchedulerCreateView = Backbone.View.extend({
       /* Build the calendar feed */
       let postArray = S.collection.get("posts").toArray();
       let feed = postArray.map((post) => {
+        let topic = S.collection.get("topics").get(post.attributes.topic);
         let item = {
           "id": post.attributes.url,
           "url": post.attributes.url,
-          "title": post.attributes.topic,
+          "title": topic.attributes.name,
           "class": "event-info",
           "start": Date.parse(post.attributes.date),
           "end": Date.parse(post.attributes.date),
