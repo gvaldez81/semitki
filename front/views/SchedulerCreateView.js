@@ -119,6 +119,25 @@ let SchedulerCreateView = Backbone.View.extend({
       modal_type: "ajax",
       events_source: calendarFeed()
     });
+    // Calendar navigation
+    // TODO make this with Array.each() method
+
+
+    $("#btn-prev").on("click", () => {
+      calendar.navigate("prev");
+    });
+    $("#btn-day").on("click", () => {
+      calendar.view("day");
+    });
+    $("#btn-week").on("click", () => {
+      calendar.view("week");
+    });
+    $("#btn-month").on("click", () => {
+      calendar.view("month");
+    });
+    $("#btn-next").on("click", () => {
+      calendar.navigate("next");
+    });
 
     return this;
   }
