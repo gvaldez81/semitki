@@ -34,7 +34,7 @@ Copy the sample configuration files and edit accordingly.
 
 
     cp semitki/variables.env.sample semitki/variables.env
-    cp semitki/front/static/js/config.js.sample semitki/front/static/js/config.js
+    cp semitki/front/config.js.sample semitki/front/config.js
 
 
 ### Tooling
