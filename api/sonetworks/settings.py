@@ -146,9 +146,9 @@ REST_FRAMEWORK = {
             'rest_framework.permissions.IsAuthenticated',
             ),
         'DEFAULT_AUTHENTICATION_CLASSES': (
+            'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
             'rest_framework.authentication.SessionAuthentication',
             'rest_framework.authentication.BasicAuthentication',
-            'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
             ),
         }
 
@@ -160,14 +160,16 @@ REST_USE_JWT = True
 
 JWT_AUTH = {
          'JWT_RESPONSE_PAYLOAD_HANDLER':
-         'sonetworks.utils.jwt_response_payload_handler'
+         'sonetworks.utils.jwt_response_payload_handler',
+         'JWT_VERIFY': False
          }
 
 CORS_ORIGIN_WHITELIST = (
         '127.0.0.1:9080',
         'localhost:9080',
         '159.203.134.236:9080',
-        'tj.patito.ninja:9080'
+        'tj.patito.ninja:9080',
+        '192.168.43.204:9080'
         )
 
 SITE_ID = 1

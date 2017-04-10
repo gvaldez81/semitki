@@ -48,6 +48,7 @@ let LoginView = Backbone.View.extend({
             {
               data: {
                 "access_token": S.fb_token,
+                "code": SEMITKI_CONFIG.fb_app_id,
                 "email": user.email
               },
               method: "POST",
@@ -82,7 +83,8 @@ let LoginView = Backbone.View.extend({
     let $form = $('#login-form');
     this.username = $form.find("input[name='username']").val();
     this.password = $form.find("input[name='password']").val();
-    let url = apiBuilder("api-token-auth")
+    let url = apiBuilder("auth/login")
+    //let url = apiBuilder("api-token-auth")
     let csrftoken = Cookies.get("csrftoken");
     $.ajax(url,
        {

@@ -9,7 +9,7 @@
 
 Front end relies heavily in JavaScript 1.6 (ECMAScript 6), web browser
 requiremenst follow, any version below stated here or not listed, please
-checck the compatibility table link.
+check the compatibility table link.
 
 * Firefox => 52
 * Chrome => 56
@@ -54,7 +54,7 @@ Besides the code you'll need various tools.
 
 
     cd semitki
-    docker build -t semitki/semitki .
+    docker build -t semitki_app .
 
 
 ## Run in Docker with docker-compose
@@ -118,9 +118,9 @@ Run the API
 
 
 Running grunt will create a `semitki/frontend/dist` directory which
-should be accesable by an HTTP server. When running with
-docker-compose `dist` gets mounted in the path
-`/usr/share/nginx/html` within the web container.
+should be accesable by an HTTP server. When running with docker-compose
+`dist` gets mounted in the path `/usr/share/nginx/html` within the web
+container.
 
 
 ## Django App
