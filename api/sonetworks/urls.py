@@ -41,6 +41,7 @@ urlpatterns = [
     url(r'^auth/', include('rest_auth.urls')),
     url(r'^auth/', include('allauth.urls'), name='socialaccount_signup'),
     url(r'^auth/facebook/$', FacebookLogin.as_view(), name="fb_login"),
+    url(r'^auth/twitter/$', TwitterLogin.as_view(), name="twitter_login"),
     url(r'^admin/', admin.site.urls),
     url(r'^api-token-auth/', obtain_jwt_token),
     url(r'^api-token-refresh/', refresh_jwt_token),

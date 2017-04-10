@@ -61,7 +61,7 @@ let LoginView = Backbone.View.extend({
               S.fetchCollections();
             }
           }, (err) => {
-            console.log("err: " + err); // TODO replace this error log
+            console.log("FB token promise error: " + err.responseText); // TODO replace this error log
           });
         });
       } else {
