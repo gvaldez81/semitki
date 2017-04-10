@@ -39,7 +39,7 @@ urlpatterns = [
     url(r'^$', schema_view),
     url(r'^', include(router.urls)),
     url(r'^auth/', include('rest_auth.urls')),
-    url(r'^auth/registration/', include('rest_auth.registration.urls')),
+    url(r'^auth/', include('allauth.urls'), name='socialaccount_signup'),
     url(r'^auth/facebook/$', FacebookLogin.as_view(), name="fb_login"),
     url(r'^admin/', admin.site.urls),
     url(r'^api-token-auth/', obtain_jwt_token),

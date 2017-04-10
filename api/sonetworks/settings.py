@@ -161,7 +161,6 @@ REST_USE_JWT = True
 JWT_AUTH = {
          'JWT_RESPONSE_PAYLOAD_HANDLER':
          'sonetworks.utils.jwt_response_payload_handler',
-         'JWT_VERIFY': False
          }
 
 CORS_ORIGIN_WHITELIST = (

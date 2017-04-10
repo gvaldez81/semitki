@@ -48,8 +48,6 @@ let LoginView = Backbone.View.extend({
             {
               data: {
                 "access_token": S.fb_token,
-                "code": SEMITKI_CONFIG.fb_app_id,
-                "email": user.email
               },
               method: "POST",
             }).done(resolve).fail(reject);
@@ -70,7 +68,7 @@ let LoginView = Backbone.View.extend({
         // TODO when user not logged in FB do something perhaps
         console.log("no in Fb");
       }
-    }, {scope: 'email'});
+    }, {scope: 'public_profile,email'});
   },
 
 
