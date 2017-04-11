@@ -5,6 +5,29 @@ from django.db import models
 from django.contrib.postgres.fields import JSONField
 
 
+
+class Campaign(models.Model):
+    """
+    A project can hold many topics
+    """
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=140)
+    description = models.CharField(max_length=256)
+    isactive = models.BooleanField(default = True)
+    valid_to = models.DateField(null=True, blank=True)
+
+
+class Phase(models.Model):
+    """
+    A topic belongs to one or many projects
+    """
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=140)
+    description = models.CharField(max_length=256)
+    campaign = models.ForeignKey(Campaign)
+    isactive = models.BooleanField(default = True)
+    valid_to = models.DateField(null=True, blank=True)
+
 class Post(models.Model):
     """
     txt XOR url
@@ -16,29 +39,10 @@ class Post(models.Model):
     }
     """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    date = models.DateTimeField('pusblish date')
-    topic = models.CharField(max_length=140)
+    date = models.DateTimeField(blank=False)
+    phase = models.ForeignKey(Phase)
     content = JSONField()
     owner = models.ForeignKey('auth.user', related_name='posts')
-
-
-class Project(models.Model):
-    """
-    A project can hold many topics
-    """
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name = models.CharField(max_length=140)
-    description = models.CharField(max_length=256)
-
-
-class Topic(models.Model):
-    """
-    A topic belongs to one or many projects
-    """
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name = models.CharField(max_length=140)
-    description = models.CharField(max_length=256)
-    project = models.ForeignKey(Project)
 
 
 class Bucket(models.Model):
@@ -58,18 +62,31 @@ class SocialAccount(models.Model):
     email = models.CharField(max_length=256)
     password = models.CharField(max_length=2048, null=True)
     access_token = models.CharField(max_length=2048, null=True)
-    token_expiration = models.DateTimeField
+    token_expiration = models.DateTimeField(blank=False)
     bucket = models.CharField(max_length=256)
+    isactive = models.BooleanField(default = True)
+    valid_to = models.DateField(null=True, blank=True)
 
-
-class SocialAccountsGroup(models.Model):
+class SocialGroup(models.Model):
     """
-    Grouped social accounts
+    Managed social accounts
     """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=140)
     description = models.CharField(max_length=256)
-    socialaccounts = models.ManyToManyField(SocialAccount, blank=True)
+    isactive = models.BooleanField(default = True)
+    valid_to = models.DateField(null=True, blank=True)
+
+
+class SocialAccountGroup(models.Model):
+    """
+    Grouped social accounts
+    """
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    socialaccount = models.ManyToManyField(SocialAccount, blank=True)
+    socialgroup = models.ForeignKey(SocialGroup, blank=True)
+    isactive = models.BooleanField(default = True)
+    valid_to = models.DateField(null=True, blank=True)
 
 
 class StaticPage(models.Model):

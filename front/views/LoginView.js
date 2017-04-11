@@ -61,7 +61,7 @@ let LoginView = Backbone.View.extend({
               S.fetchCollections();
             }
           }, (err) => {
-            console.log("err: " + err); // TODO replace this error log
+            console.log("err: " + err.toString()); // TODO replace this error log
           });
         });
       } else {

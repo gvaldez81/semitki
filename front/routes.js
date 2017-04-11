@@ -11,7 +11,7 @@ let SemitkiRouter = Backbone.Router.extend({
     "accounts": "accounts",
     "about": "about",
     "user": "user" ,
-    "project":  "project",
+    "campaign":  "campaign",
     "permissions":  "permissions",
     "contact": "contact",
     "billing": "billing",
@@ -59,8 +59,8 @@ let SemitkiRouter = Backbone.Router.extend({
     view.render();
   },
 
-  project: () => {
-    let view = new ProjectView();
+  campaign: () => {
+    let view = new CampaignView();
     view.render();
   },
 

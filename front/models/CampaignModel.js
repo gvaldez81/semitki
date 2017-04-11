@@ -1,19 +1,18 @@
 'use strict'
 
-let Topic = Backbone.Model.extend({
-
+let Campaign = Backbone.Model.extend({
 
   defaults: () => {
     return {
       "name": undefined,
       "description": undefined,
+      "isactive": undefined,
+      "valid_to": undefined,
     }
   },
 
-
   url: () => {
-    return "/topic/" + this.id;
+    return "/campaign/" + this.id;
   }
-
 
 });

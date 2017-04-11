@@ -5,7 +5,7 @@ let Post = Backbone.Model.extend({
   defaults: () => {
     return {
     "date": new Date(),
-    "topic": undefined,
+    "phase": undefined,
     "content": {},
     "owner": 1
     }

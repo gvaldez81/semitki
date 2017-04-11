@@ -1,9 +1,9 @@
 'use strict'
 
-let Group = Backbone.Model.extend({
-
-
+let Phase = Backbone.Model.extend({
+  idAttribute: "id",
   defaults: () => {
+
     return {
       "name": undefined,
       "description": undefined,
@@ -12,8 +12,10 @@ let Group = Backbone.Model.extend({
     }
   },
 
-  url: () => {
-    return "/group/" + this.id;
+url: () => {
+    //return "/phase/" + this.id;
+    return apiBuilder("post");
   }
+
 
 });

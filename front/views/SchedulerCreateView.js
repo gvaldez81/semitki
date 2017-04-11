@@ -32,11 +32,12 @@ let SchedulerCreateView = Backbone.View.extend({
 
     let content = {};
     if($("#isNewPost").val()) {
-      content.txt = $("postText").val();
+      content.txt = $("#postText").val();
     } else {
       content.url = $("#postUrl").val();
     }
-
+    //content.txt = $("#postText").val();
+    //content.url = $("#postUrl").val();
     let img = $("#postImageUrl").val();
     if(img !== "") {
       content.imgurl = img;
@@ -46,9 +47,9 @@ let SchedulerCreateView = Backbone.View.extend({
 
     let post = {
       date: new Date($("#scheduledFor").val()),
-      topic: $("#topics").val(),
+      phase: $("#phases").val(),
       content: content,
-      owner: S.user.get("url")
+      owner: S.user.get("pk")
     };
     let newPost = new Post();
     newPost.save(post, S.addAuthorizationHeader());
@@ -79,22 +80,22 @@ let SchedulerCreateView = Backbone.View.extend({
     S.fetchCollections();
     let data = {
       user: S.user.toJSON(),
-      projects: S.collection.get("projects").toJSON(),
-      topics: S.collection.get("topics").toJSON(),
+      campaigns: S.collection.get("campaigns").toJSON(),
+      phases: S.collection.get("phases").toJSON(),
       buckets: S.collection.get("buckets").toJSON(),
-      groups: S.collection.get("groups").toJSON()
+      account_groups: S.collection.get("account_group").toJSON()
     };
 
     let calendarFeed = () => {
       /* Build the calendar feed */
       let postArray = S.collection.get("posts").toArray();
       let feed = postArray.map((post) => {
-        let topic = S.collection.get("topics").get(post.attributes.topic);
+        let phase = S.collection.get("phases").get(post.attributes.phase);
         let item = {
           "id": post.attributes.url,
 //          "url": post.attributes.url,
           "url": "http://localhost:8090/#accountinfo",
-          "title": topic.attributes.name,
+          "title": phase.attributes.name,
           "class": "event-info",
           "start": Date.parse(post.attributes.date),
           "end": Date.parse(post.attributes.date),

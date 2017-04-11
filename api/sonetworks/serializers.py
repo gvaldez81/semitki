@@ -11,35 +11,40 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('url', 'id', 'username', 'email', 'first_name', 'last_name', 'posts')
 
 
-class PostSerializer(serializers.HyperlinkedModelSerializer):
+class PostSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Post
-        fields = ('__all__')
+        fields = ('id', 'url', 'date', 'content', 'owner', 'phase')
 
 
-class TopicSerializer(serializers.HyperlinkedModelSerializer):
+class PhaseSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Topic
-        fields = ('url', 'id', 'name', 'description')
+        model = Phase
+        fields = ('id', 'url', 'name', 'description', 'isactive', 'valid_to')
 
 
-class ProjectSerializer(serializers.HyperlinkedModelSerializer):
+class CampaignSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Project
-        fields = ('url', 'id', 'name', 'description')
+        model = Campaign
+        fields = ('url', 'id', 'name', 'description', 'isactive', 'valid_to')
 
 
 class SocialAccountSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = SocialAccount
-        fields = ('__all__')
+        fields = ('url', 'id', 'username', 'email', 'access_token', 'token_expiration', 'isactive', 'valid_to')
 
-
-class SocialAccountsGroupSerializer(serializers.HyperlinkedModelSerializer):
-    socialaccounts = SocialAccountSerializer(many=True, read_only=True)
+class SocialGroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = SocialAccountsGroup
-        fields = ('url', 'id', 'name', 'description', 'socialaccounts')
+        model = SocialGroup
+        fields = ('url', 'id', 'name', 'description', 'isactive', 'valid_to')
+
+class SocialAccountGroupSerializer(serializers.HyperlinkedModelSerializer):
+    #socialaccounts = SocialAccountSerializer(many=True, read_only=True)
+    class Meta:
+        model = SocialAccountGroup
+        fields = ('url', 'id', 'socialaccount', 'socialgroup', 'isactive', 'valid_to')
 
 
 class BucketSerializer(serializers.HyperlinkedModelSerializer):

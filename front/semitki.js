@@ -20,11 +20,12 @@ let S = {
     // Heil ES6 Map!
     this.collection = new Map ();                     // System catalogs colection
     // Collections == Catalogs
-    this.collection.set("projects", new Projects());
-    this.collection.set("topics", new Topics());
+    this.collection.set("campaigns", new Campaigns());
+    this.collection.set("phases", new Phases());
     this.collection.set("buckets", new Buckets());
     this.collection.set("accounts", new Accounts());
     this.collection.set("groups", new Groups());
+    this.collection.set("account_group", new AccountGroups());
     this.collection.set("posts", new Posts());
     this.user = new UserModel();                      // Signed in user
     this.users = new Users();                         // User collection

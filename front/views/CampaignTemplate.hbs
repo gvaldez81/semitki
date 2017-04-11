@@ -1,4 +1,4 @@
-<script type="text/x-handlebars-template" id="project-template">
+<script type="text/x-handlebars-template" id="campaign-template">
 
 {{> navigation }}
 
@@ -6,13 +6,13 @@
 		<form class="form-horizontal">
       <fieldset>
 
-        <legend>Projects</legend>
+        <legend>Campaigns</legend>
 
         <div class="form-group">
           <div class="col-md-4"></div>
           <div class="col-md-6">
-            <select class="form-control" id="projectFinder">
-            {{#each projects}}
+            <select class="form-control" id="campaignFinder">
+            {{#each campaigns}}
               <option value="{{id}}">{{name}}</option>
             {{/each}}
             </select>
@@ -22,7 +22,7 @@
         <div class="form-group">
           <label class="col-md-4 control-label" for="name">Name</label>
           <div class="col-md-6">
-            <input id="name" name="name" type="text" placeholder="Projects"
+            <input id="name" name="name" type="text" placeholder="Campaigns"
             class="form-control input-md">
           </div>
         </div>

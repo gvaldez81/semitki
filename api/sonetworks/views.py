@@ -30,6 +30,7 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
+    lookup_field = 'username'
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 
@@ -42,21 +43,21 @@ class PostViewSet(viewsets.ModelViewSet):
     serializer_class = PostSerializer
 
 
-class TopicViewSet(viewsets.ModelViewSet):
+class PhaseViewSet(viewsets.ModelViewSet):
     """
     Topics, these belong to one or many projects
     """
-    queryset = Topic.objects.all()
-    serializer_class = TopicSerializer
+    queryset = Phase.objects.all()
+    serializer_class = PhaseSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 
-class ProjectViewSet(viewsets.ModelViewSet):
+class CampaignViewSet(viewsets.ModelViewSet):
     """
     Marketing projects or campaignsi, these hold many topics
     """
-    queryset = Project.objects.all()
-    serializer_class = ProjectSerializer
+    queryset = Campaign.objects.all()
+    serializer_class = CampaignSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 
@@ -68,14 +69,20 @@ class SocialAccountViewSet(viewsets.ModelViewSet):
     serializer_class = SocialAccountSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
+class SocialGroupViewSet(viewsets.ModelViewSet):
+    """
+    Managed social accounts
+    """
+    queryset = SocialGroup.objects.all()
+    serializer_class = SocialGroupSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
-
-class SocialAccountsGroupViewSet(viewsets.ModelViewSet):
+class SocialAccountGroupViewSet(viewsets.ModelViewSet):
     """
     Groups of social accounts
     """
-    queryset = SocialAccountsGroup.objects.all()
-    serializer_class = SocialAccountsGroupSerializer
+    queryset = SocialAccountGroup.objects.all()
+    serializer_class = SocialAccountGroupSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     @detail_route()

@@ -1,6 +1,6 @@
 'use strict'
 
-let ProjectView = Backbone.View.extend({
+let CampaignView = Backbone.View.extend({
     tagName: "div",
     className: "row",
 
@@ -16,27 +16,27 @@ let ProjectView = Backbone.View.extend({
       description: $("#description").val()
     };
 
-    let resource = new Project();
+    let resource = new Campaign();
     resource.save(data, S.addAuthorizationHeader());
     this.render();
   },
 
   delete: () => {
-    let projects = S.collection.get("projects");
-    let project = projects.get($("#projectFinder").val());
-    projects.sync("delete", project, S.addAuthorizationHeader());
+    let campaigns = S.collection.get("campaigns");
+    let campaign = campaigns.get($("#campaignFinder").val());
+    campaigns.sync("delete", campaign, S.addAuthorizationHeader());
   },
 
   render: function(){
     let data = {
-      projects: S.collection.get("projects").toJSON()
+      campaigns: S.collection.get("campaigns").toJSON()
     };
-    let template = $("#project-template").html();
+    let template = $("#campaign-template").html();
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled(data));
     $("#container").html(this.$el);
 
-    $("#projectFinder").select2();
+    $("#campaignFinder").select2();
 
     return this;
   }
