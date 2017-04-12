@@ -32,6 +32,7 @@ let LoginView = Backbone.View.extend({
     });
   },
 
+
   tryFbLogin: () => {
     FB.login((response) => {
       if(S.fbStatusChangeCallback(response)) {
@@ -61,7 +62,7 @@ let LoginView = Backbone.View.extend({
               S.fetchCollections();
             }
           }, (err) => {
-            console.log("err: " + err.toString()); // TODO replace this error log
+            console.log("err: " + err.responseText); // TODO replace this error log
           });
         });
       } else {
@@ -82,7 +83,6 @@ let LoginView = Backbone.View.extend({
     this.username = $form.find("input[name='username']").val();
     this.password = $form.find("input[name='password']").val();
     let url = apiBuilder("auth/login")
-    //let url = apiBuilder("api-token-auth")
     let csrftoken = Cookies.get("csrftoken");
     $.ajax(url,
        {

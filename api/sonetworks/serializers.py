@@ -5,10 +5,10 @@ from rest_auth.registration.serializers import SocialLoginSerializer
 from .models import *
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('url', 'id', 'username', 'email', 'first_name', 'last_name', 'posts')
+        fields = ('id', 'username', 'email', 'first_name', 'last_name', 'posts')
 
 
 class PostSerializer(serializers.ModelSerializer):

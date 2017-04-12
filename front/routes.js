@@ -9,14 +9,15 @@ let SemitkiRouter = Backbone.Router.extend({
     "groups": "groups",
     "groupedaccounts": "groupedAccounts",
     "accounts": "accounts",
-    "about": "about",
+    "about": "about", // TODO Check if still used
     "user": "user" ,
     "campaign":  "campaign",
     "permissions":  "permissions",
     "contact": "contact",
     "billing": "billing",
     "accountinfo": "accountinfo",
-    "pricing":  "pricing"
+    "pricing":  "pricing",
+    "grouppedaccounts":  "grouppedaccounts"
   },
 
   index: () => {
@@ -25,67 +26,101 @@ let SemitkiRouter = Backbone.Router.extend({
   },
 
   schedulerCreate: () => {
-    let view = new SchedulerCreateView();
-    view.render();
+    S.refreshToken(() => {
+      let view = new SchedulerCreateView();
+      view.render();
+    });
   },
 
   dashboard: () => {
-    let view = new DashboardView();
-    view.render();
+    S.refreshToken(() => {
+      let view = new DashboardView();
+      view.render();
+    });
   },
 
   groups: () => {
-    let view = new GroupsView();
-    view.render();
+    S.refreshToken(() => {
+      let view = new GroupsView();
+      view.render();
+    });
   },
 
   groupedAccounts: () => {
-    let view = new GroupedAccountsView();
-    view.render();
+    S.refreshToken(() => {
+      let view = new GroupedAccountsView();
+      view.render();
+    });
   },
 
   accounts: () => {
-    let view = new AccountsView();
-    view.render();
+    S.refreshToken(() => {
+      let view = new AccountsView();
+      view.render();
+    });
   },
 
-  about: () =>  {
-    let view = new AboutView();
-    view.render();
+  about: () =>  { // TODO Check if is still used, I think it is  not
+    S.refreshToken(() => {
+      let view = new AboutView();
+      view.render();
+    });
   },
 
   user:  () =>  {
-    let view = new UserView();
-    view.render();
+    S.refreshToken(() => {
+      let view = new UserView();
+      view.render();
+    });
   },
 
   campaign: () => {
-    let view = new CampaignView();
-    view.render();
+    S.refreshToken(() => {
+      let view = new CampaignView();
+      view.render();
+    });
   },
 
-    permissions: () => {
+  permissions: () => {
+    S.refreshToken(() => {
       let view = new PermissionsView();
       view.render();
+    });
   },
-    contact: () => {
+
+  contact: () => {
+    S.refreshToken(() => {
       let view = new ContactView();
       view.render();
+    });
   },
 
-    billing: () => {
-        let view = new BillingView();
-        view.render();
-    },
+  billing: () => {
+    S.refreshToken(() => {
+      let view = new BillingView();
+      view.render();
+    });
+  },
 
-    accountinfo: () => {
-        let view = new AccountInfoView();
-        view.render();
-    },
+  accountinfo: () => {
+    S.refreshToken(() => {
+      let view = new AccountInfoView();
+      view.render();
+    });
+  },
 
-    pricing: () =>{
-    let view = new PricingView();
-    view.render();
-}
+  pricing: () =>{
+    S.refreshToken(() => {
+      let view = new PricingView();
+      view.render();
+    });
+  },
+  
+    grouppedaccounts: () =>{
+    S.refreshToken(() => {
+      let view = new GrouppedAccountsView();
+      view.render();
+    });
+  },
 
 });
