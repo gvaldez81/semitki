@@ -103,15 +103,25 @@ let S = {
   },
 
 
-/*  run: (semitki) => {*/
-    //// Check for a valid JWToken and route the user accordingly
-    //// TODO this is very weak, we need a solid authorization mechanism
-    //if(semitki.jwtoken == undefined) {
-      //semitki.router.index();
-    //} else {
-      //semitki.router.dashboard();
-    //}
-  /*},*/
+  refreshToken: (secureFunction) => {
+    let is_valid = new Promise((resolve, reject) => {
+      $.ajax(S.api("api-token-refresh"),
+      {
+        data: {
+          "token": S.jwtoken
+        },
+        method: "POST"
+      }).done(resolve).fail(reject);
+    });
+
+    is_valid.then((result) => {
+      S.jwtoken = result.token;
+      secureFunction.call();
+    }, (err) => {
+      console.log(err.responseText);
+    });
+  },
+
 
   sessionDestroy: () => {
     // TODO Broken, it needs to be fixed for whatever we do the login work
