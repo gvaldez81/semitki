@@ -16,7 +16,8 @@ let SemitkiRouter = Backbone.Router.extend({
     "contact": "contact",
     "billing": "billing",
     "accountinfo": "accountinfo",
-    "pricing":  "pricing"
+    "pricing":  "pricing",
+    "grouppedaccounts":  "grouppedaccounts"
   },
 
   index: () => {
@@ -113,6 +114,13 @@ let SemitkiRouter = Backbone.Router.extend({
       let view = new PricingView();
       view.render();
     });
-  }
+  },
+  
+    grouppedaccounts: () =>{
+    S.refreshToken(() => {
+      let view = new GrouppedAccountsView();
+      view.render();
+    });
+  },
 
 });
