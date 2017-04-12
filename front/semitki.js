@@ -41,6 +41,13 @@ let S = {
     return this;
   },
 
+  // VAriables
+  log: {
+    info: "bg-info",
+    success: "bg-succes",
+    error: "bg-danger"
+  },
+
 
   addAuthorizationHeader: () => {
     return {
@@ -56,6 +63,20 @@ let S = {
     } else {
       return "//" + SEMITKI_CONFIG.api_url + ":" + SEMITKI_CONFIG.api_port + "/" + resource + "/";
     }
+  },
+
+
+  logger: (level, text) => {
+    // TODO use level to determine the classes
+    let divmsg = $("#messages");
+    divmsg.empty()
+      .removeClass(() => {
+      return S.log.info + " " + S.log.success + " " + S.log.error
+    })
+      .addClass(level);
+
+    divmsg.html("<h3>"+text+"</h3>")
+      .fadeIn(400, () => { $("#messages").fadeOut(4000); });
   },
 
 
@@ -118,7 +139,7 @@ let S = {
       S.jwtoken = result.token;
       secureFunction.call();
     }, (err) => {
-      console.log(err.responseText);
+      S.logger(err.responseText);
     });
   },
 
