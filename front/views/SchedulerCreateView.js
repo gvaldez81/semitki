@@ -50,7 +50,9 @@ let SchedulerCreateView = Backbone.View.extend({
         owner: S.user.get("pk")
       };
       let newPost = new Post();
-      newPost.save(post, S.addAuthorizationHeader());
+      let r = newPost.save(post, S.addAuthorizationHeader());
+      S.logger(r.responseText);
+      console.log(r);
     });
   },
 

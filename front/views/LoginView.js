@@ -105,7 +105,7 @@ let LoginView = Backbone.View.extend({
           S.router.navigate("#dashboard", {trigger: true});
           S.fetchCollections();
         }
-     });
+     }).fail((xhr) => { S.logger(S.log.info, xhr.responseText); });
   },
 
   render: function() {
