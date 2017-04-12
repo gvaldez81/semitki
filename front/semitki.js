@@ -66,16 +66,18 @@ let S = {
   },
 
 
-  logger: (level, text) => {
+  logger: (level, text, debug = false) => {
+    if (debug)
+      console.log(text);
+
     // TODO use level to determine the classes
     let divmsg = $("#messages");
     divmsg.empty()
       .removeClass(() => {
       return S.log.info + " " + S.log.success + " " + S.log.error
-    })
-      .addClass(level);
+    });
 
-    divmsg.html("<h3>"+text+"</h3>")
+    divmsg.addClass(level).html("<h3>"+text+"</h3>")
       .fadeIn(400, () => { $("#messages").fadeOut(4000); });
   },
 
