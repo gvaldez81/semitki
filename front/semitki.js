@@ -4,7 +4,7 @@
 let S = {
 
   initialize: function() {
-    Backbone.history.start();                         // Initialize Backbone web browser history support
+    Backbone.history.start({pushState: true});        // Initialize Backbone web browser history support
     this.router = new SemitkiRouter();                // Initialize Backbone routes
     let navTemplate = Handlebars.compile($("#navigation-template").html());
     let footerTemplate = Handlebars.compile($("#footer-template").html());
