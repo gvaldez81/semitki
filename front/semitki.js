@@ -67,6 +67,11 @@ let S = {
 
 
   logger: (level, text, debug = false) => {
+
+    let verbose = function() {
+      debug = true;
+    }
+
     if (debug)
       console.log(text);
 
