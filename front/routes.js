@@ -37,7 +37,7 @@ let SemitkiRouter = Backbone.Router.extend({
       S.refreshToken(() => {
   //      args.push(parseQueryString(args.pop())); TODO check what to do with it
         if (callback) callback.apply(this, args);
-        return false;
+        //return false;
       });
     }
   },
