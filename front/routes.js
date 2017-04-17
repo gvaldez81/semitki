@@ -39,6 +39,8 @@ let SemitkiRouter = Backbone.Router.extend({
         if (callback) callback.apply(this, args);
         //return false;
       });
+    } else {
+      S.router.navigate("", {trigger: true});
     }
   },
 
