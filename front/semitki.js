@@ -154,23 +154,14 @@ let S = {
       S.jwtoken(result.token);
       secureFunction.call();
     }, (err) => {
-      S.logger(err.responseText);
+      S.logger("bg-error", "Invalid token", false);
+      S.sessionDestroy();
+      S.router.index();
     });
   },
 
 
   sessionDestroy: () => {
-    // TODO Broken, it needs to be fixed for whatever we do the login work
-    //let url = apiBuilder("rest-auth/logout")
-  //    let csrftoken = Cookies.get("csrftoken");
-/*    $.ajax(url,*/
-     //{
-        //method: "POST",
-        //dataType: "JSON"
-      //}).done((data) => {
-        //console.log(data);
-     //});
-
     sessionStorage.clear();
   },
 };
@@ -178,4 +169,11 @@ let S = {
 // Launch the JavaScript client side app
 $(() => {
   S.initialize();
+  if(!sessionStorage.getItem("token") || !sessionStorage.getItem("user")) {
+    let app = new LoginView();
+    app.render();
+  }
+  S.refreshToken(() => {
+    S.router.navigate("#dashboard", {trigger: true});
+  });
 });

@@ -99,7 +99,6 @@ let LoginView = Backbone.View.extend({
         method: "POST",
         dataType: "JSON"
       }).done((data) => {
-        console.log("ya entre");
         S.jwtoken(data.token);
         S.user.set(data.user);
         sessionStorage.setItem("user", data.user);
