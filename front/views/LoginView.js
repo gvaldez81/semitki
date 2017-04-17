@@ -62,7 +62,7 @@ let LoginView = Backbone.View.extend({
               S.fetchCollections();
             }
           }, (err) => {
-            console.log("err: " + err.responseText); // TODO replace this error log
+            S.logger("bg-error", "Failed login with Facebook account", true);
           });
         });
       } else {
@@ -104,7 +104,9 @@ let LoginView = Backbone.View.extend({
         sessionStorage.setItem("user", data.user);
         S.router.navigate("#dashboard", {trigger: true});
         S.fetchCollections();
-     }).fail((xhr) => { S.logger("bg-error", xhr.responseText, true); });
+     }).fail((xhr) => {
+       S.logger("bg-error", "Failed login, check your connection", true);
+     });
   },
 
   render: function() {
