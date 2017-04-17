@@ -55,14 +55,14 @@ let LoginView = Backbone.View.extend({
           });
 
           fb_token.then((result) => {
-            S.jwtoken = result.token;
-            if (S.jwtoken != undefined && S.user != undefined) {
+            S.jwtoken(result.token);
+            if (S.jwtoken() != undefined && S.user != undefined) {
               S.user.set(user);
               S.router.navigate('#dashboard', {trigger: true});
               S.fetchCollections();
             }
           }, (err) => {
-            console.log("err: " + err.responseText); // TODO replace this error log
+            S.logger("bg-error", "Failed login with Facebook account", true);
           });
         });
       } else {
@@ -99,13 +99,14 @@ let LoginView = Backbone.View.extend({
         method: "POST",
         dataType: "JSON"
       }).done((data) => {
-        S.jwtoken = data.token;
+        S.jwtoken(data.token);
         S.user.set(data.user);
-        if(S.jwtoken != undefined && S.user != undefined) {
-          S.router.navigate("#dashboard", {trigger: true});
-          S.fetchCollections();
-        }
-     }).fail((xhr) => { S.logger(S.log.info, xhr.responseText); });
+        sessionStorage.setItem("user", data.user);
+        S.router.navigate("#dashboard", {trigger: true});
+        S.fetchCollections();
+     }).fail((xhr) => {
+       S.logger("bg-error", "Failed login, check your connection", true);
+     });
   },
 
   render: function() {

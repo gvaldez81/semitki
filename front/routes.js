@@ -2,6 +2,7 @@
 
 let SemitkiRouter = Backbone.Router.extend({
 
+
   routes: {
     "": "index",
     "scheduler": "schedulerCreate",
@@ -19,6 +20,30 @@ let SemitkiRouter = Backbone.Router.extend({
     "pricing":  "pricing",
     "grouppedaccounts":  "grouppedaccounts"
   },
+
+
+  initialize: function(options) {
+    if(!sessionStorage.getItem("token") || !sessionStorage.getItem("user")) {
+      S.sessionDestroy();
+    }
+  },
+
+
+  execute: function(callback, args, name) {
+    // This method is called whenever a route matches and its corresponding
+    // callback is about to be executed. If there is a valid session return
+    // false to cancel the current transition.
+    if(sessionStorage.getItem("token") && sessionStorage.getItem("user")) {
+      S.refreshToken(() => {
+  //      args.push(parseQueryString(args.pop())); TODO check what to do with it
+        if (callback) callback.apply(this, args);
+        //return false;
+      });
+    } else {
+      S.router.navigate("", {trigger: true});
+    }
+  },
+
 
   index: () => {
     let view = new LoginView();

@@ -4,7 +4,7 @@
 let S = {
 
   initialize: function() {
-    Backbone.history.start();                         // Initialize Backbone web browser history support
+    Backbone.history.start({pushState: false});        // Initialize Backbone web browser history support
     this.router = new SemitkiRouter();                // Initialize Backbone routes
     let navTemplate = Handlebars.compile($("#navigation-template").html());
     let footerTemplate = Handlebars.compile($("#footer-template").html());
@@ -15,7 +15,6 @@ let S = {
     $.fn.select2.defaults.set("allowClear", true);
     $.fn.select2.defaults.set("placeholder", "search...");
     this.jwtheader = "JWT ";                          // Token prefix for authorization custom header
-    this.jwtoken = undefined;                         // JSON Web Token
     // BackBone collection instances
     // Heil ES6 Map!
     this.collection = new Map ();                     // System catalogs colection
@@ -49,9 +48,18 @@ let S = {
   },
 
 
+  jwtoken: function(token) {
+    if (token === undefined) {
+      return sessionStorage.getItem("token");
+    } else {
+      sessionStorage.setItem("token", token);
+    }
+  },
+
+
   addAuthorizationHeader: () => {
     return {
-      headers: {'Authorization': S.jwtheader.concat(S.jwtoken)}
+      headers: {'Authorization': S.jwtheader.concat(S.jwtoken())}
     }
   },
 
@@ -67,6 +75,11 @@ let S = {
 
 
   logger: (level, text, debug = false) => {
+
+    let verbose = function() {
+      debug = true;
+    }
+
     if (debug)
       console.log(text);
 
@@ -131,48 +144,36 @@ let S = {
       $.ajax(S.api("api-token-refresh"),
       {
         data: {
-          "token": S.jwtoken
+          "token": S.jwtoken()
         },
         method: "POST"
       }).done(resolve).fail(reject);
     });
 
     is_valid.then((result) => {
-      S.jwtoken = result.token;
+      S.jwtoken(result.token);
       secureFunction.call();
     }, (err) => {
-      S.logger(err.responseText);
+      S.logger("bg-error", "Invalid token", false);
+      S.sessionDestroy();
+      S.router.index();
     });
   },
 
 
   sessionDestroy: () => {
-    // TODO Broken, it needs to be fixed for whatever we do the login work
-    let url = apiBuilder("rest-auth/logout")
-  //    let csrftoken = Cookies.get("csrftoken");
-    $.ajax(url,
-     {
-        method: "POST",
-        dataType: "JSON"
-      }).done((data) => {
-        console.log(data);
-     });
-
-    S.jwtoken = undefined;
-    S.user.clear();
-    S.router.index();
+    sessionStorage.clear();
   },
-
 };
 
 // Launch the JavaScript client side app
 $(() => {
   S.initialize();
-  //// Check for a valid JWToken and route the user accordingly
-  //// TODO this is very weak, we need a solid authorization mechanism
-  if(S.jwtoken == undefined) {
-    S.router.index();
-  } else {
-    S.router.dashboard();
+  if(!sessionStorage.getItem("token") || !sessionStorage.getItem("user")) {
+    let app = new LoginView();
+    app.render();
   }
+  S.refreshToken(() => {
+    S.router.navigate("#dashboard", {trigger: true});
+  });
 });
