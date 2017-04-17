@@ -108,6 +108,8 @@ let SchedulerCreateView = Backbone.View.extend({
 
     this.$el.html(compiled(data));
     $("#container").html(this.$el);
+    this.sideMenu = new SideMenu();
+    this.sideMenu.render();
 
     // Initialize datimepicker here after rendering, otherwise it won't work
     $('#scheduledForPicker').datetimepicker();

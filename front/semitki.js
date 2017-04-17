@@ -7,8 +7,10 @@ let S = {
     Backbone.history.start({pushState: false});        // Initialize Backbone web browser history support
     this.router = new SemitkiRouter();                // Initialize Backbone routes
     let navTemplate = Handlebars.compile($("#navigation-template").html());
+    let settingsTemplate = Handlebars.compile($("#side-menu-template").html());
     let footerTemplate = Handlebars.compile($("#footer-template").html());
     Handlebars.registerPartial('navigation', navTemplate);
+    Handlebars.registerPartial('settings', settingsTemplate);
     Handlebars.registerPartial('footer', footerTemplate);
     // Select boxes default settings
     $.fn.select2.defaults.set("theme", "bootstrap");
@@ -38,13 +40,6 @@ let S = {
     S.initPolyglot(this);                                // Initialize internationalization
 
     return this;
-  },
-
-  // VAriables
-  log: {
-    info: "bg-info",
-    success: "bg-succes",
-    error: "bg-danger"
   },
 
 
@@ -87,7 +82,7 @@ let S = {
     let divmsg = $("#messages");
     divmsg.empty()
       .removeClass(() => {
-      return S.log.info + " " + S.log.success + " " + S.log.error
+      return "bg-info bg-success bg-danger";
     });
 
     divmsg.addClass(level).html("<h3>"+text+"</h3>")

@@ -25,13 +25,75 @@ footer {
 
 .navbar .nav,
 .navbar .nav > li {
-    float:none;
-      display:inline-block;
-        *display:inline; /* ie7 fix */
-          *zoom:1; /* hasLayout ie7 trigger */
-            vertical-align: top;
-          }
+  float:none;
+  display:inline-block;
+  *display:inline; /* ie7 fix */
+  *zoom:1; /* hasLayout ie7 trigger */
+  vertical-align: top;
+}
 
-          .navbar-inner {
-              text-align:center;
-            }
+.navbar-inner {
+  text-align:center;
+}
+
+
+.viewport {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  top: 7px;
+  right: 0;
+  left: 0;
+}
+
+.frame {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  width: 200%;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.menu-slide {
+  -webkit-transform: translateX(-250px);
+  -ms-transform: translateX(-250px);
+  -o-transform: translateX(-250px);
+  transform: translateX(-250);
+  -webkit-transition: 500ms;
+  -o-transition: 500ms;
+  position: relative;
+  margin:0;
+  padding: 0;
+  width: 230px;
+  height: auto;
+  float: left;
+  background-color: #eee;
+}
+
+.menu-slide-show {
+  -webkit-transform: translateX(0);
+  -ms-transform: translateX(0);
+  -o-transform: translateX(0);
+  transform: trasnsl(0);
+}
+
+.corp {
+  position: absolute;
+  -webkit-transition: 500ms;
+  -o-transition: 500ms;
+  transition: 500ms;
+  margin: 0;
+  padding: 0;
+  width: 50%;
+  height: 100%;
+}
+
+.corp_show {
+  -webkit-transform: translateX(250px);
+  -ms-transform: translateX(250px);
+  -o-transform: translateX(250px);
+  transform: translateX(250px);
+}
