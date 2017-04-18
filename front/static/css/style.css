@@ -7,6 +7,23 @@ body {
   margin-bottom: 60px;
 }
 
+/** Navigation **/
+.navbar .nav,
+.navbar .nav > li {
+  float: none;
+  display:inline-block;
+  *display:inline; /* ie7 fix */
+  *zoom:1; /* hasLayout ie7 trigger */
+  vertical-align: top;
+}
+
+div.navbar-inner {
+  float: right;
+  vertical-align: top;
+  text-align: center;
+}
+
+
 /** Login **/
 .form-signin {
   max-width: 330px;
@@ -39,7 +56,9 @@ body {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
-div#container {
+
+/** Main **/
+div#main{
    padding: 40px 15px;
 }
 
@@ -55,18 +74,6 @@ footer {
   background-color: #222;
 }
 
-.navbar .nav,
-.navbar .nav > li {
-  float:none;
-  display:inline-block;
-  *display:inline; /* ie7 fix */
-  *zoom:1; /* hasLayout ie7 trigger */
-  vertical-align: top;
-}
-
-.navbar-inner {
-  text-align:center;
-}
 
 
 .viewport {
