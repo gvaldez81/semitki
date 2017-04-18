@@ -45,6 +45,7 @@ let S = {
 
 
   jwtoken: function(token) {
+    // Set or get the JWT
     if (token === undefined) {
       return sessionStorage.getItem("token");
     } else {
@@ -71,7 +72,8 @@ let S = {
 
 
   logger: (level, text, debug = false) => {
-
+    // Sort of system logger, text will be rendered in any DIV element
+    // with id="messages"
     let verbose = function() {
       debug = true;
     }
@@ -86,7 +88,7 @@ let S = {
       return "bg-info bg-success bg-danger";
     });
 
-    divmsg.addClass(level).html("<h3>"+text+"</h3>")
+    divmsg.addClass(level).html("<h4>"+text+"</h4>")
       .fadeIn(400, () => { $("#messages").fadeOut(4000); });
   },
 
@@ -126,6 +128,7 @@ let S = {
 
 
   initPolyglot: (semitki) => {
+    // Start Internationalization support
     let phrases = $.get("i18n/"+semitki.lang+".json", {
       dataType: "json"
     });
@@ -136,6 +139,7 @@ let S = {
 
 
   refreshToken: (secureFunction) => {
+    // Wrap every function triggered by user interaction within this function
     let is_valid = new Promise((resolve, reject) => {
       $.ajax(S.api("api-token-refresh"),
       {
@@ -159,10 +163,12 @@ let S = {
 
   sessionDestroy: () => {
     sessionStorage.clear();
+    S.router.navigate("", {trigger: true});
   },
 
 
   toggleMenu: () => {
+    // Enable side menu
     $(".menu-slide").show().hover(() => {
       $(".menu-slide").addClass("menu-slide-show");
       $("#main").addClass("corp-show");
@@ -175,6 +181,7 @@ let S = {
 
 
   toggleNavigation: (enable=false) => {
+    // Hide or show navigation elements (top and side menu)
     if(enable) {
       $("#app-nav").show();
       S.toggleMenu();
