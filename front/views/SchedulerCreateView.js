@@ -4,77 +4,15 @@ let SchedulerCreateView = Backbone.View.extend({
 
   tagName: "div",
 
-  className: "panel",
+  className: "container",
 
 
-  events: {
-    "keyup #groupFinder": "searchGroup",
-    "click #save": "createPost",
-    "click #delete": "delete",
-    "click #isNewPost": "isNew",
+  initialize: function() {
+    this.navigation = new NavigationView();
   },
-
-
-  isNew: () => {
-    //TODO Meh! Fix it later, very low priority
-     if($("#isNewPost").val() === "1") {
-      $("#postUrl").attr("disabled", "true");
-      $("#postTxt").removeAttr("disabled");
-    } else {
-      $("#postTxt").attr("disabled", "true");
-      $("#postUrl").removeAttr("disabled");
-    }
-
-  },
-
-
-  createPost: () => {
-    S.refreshToken(() => {
-      let content = {};
-      if($("#isNewPost").val()) {
-        content.txt = $("#postText").val();
-      } else {
-        content.url = $("#postUrl").val();
-      }
-      let img = $("#postImageUrl").val();
-      if(img !== "") {
-        content.imgurl = img;
-      }
-
-      content.tags = $("#networks").val();
-
-      let post = {
-        date: new Date($("#scheduledFor").val()),
-        phase: $("#phases").val(),
-        content: content,
-        owner: S.user.get("pk")
-      };
-      let newPost = new Post();
-      let r = newPost.save(post, S.addAuthorizationHeader());
-      S.logger(r.responseText);
-      console.log(r);
-    });
-  },
-
-
-  deletePost: () => {
-    // TODO
-    console.log("Delete post");
-  },
-
-
-  searchGroup: () => {
-    let matches = S.collection.get("groups").search($("#groupFinder").val());
-    if(typeof matches !== 'undefined') {
-      let results = new GroupFinderView({collection: matches});
-      results.render();
-      $("#groupFinderItems").show();
-    }
-  },
-
 
   render: function() {
-    let template = $("#scheduler-create-template").html();
+    let template = $("#scheduler-template").html();
     let compiled = Handlebars.compile(template);
     let posts = new Post();
     posts.fetch(S.addAuthorizationHeader());
@@ -107,9 +45,9 @@ let SchedulerCreateView = Backbone.View.extend({
     }
 
     this.$el.html(compiled(data));
-    $("#container").html(this.$el);
-    this.sideMenu = new SideMenu();
-    this.sideMenu.render();
+    $("#main").html(this.$el);
+
+    this.navigation.setElement(this.$("#app-nav")).render();
 
     // Initialize datimepicker here after rendering, otherwise it won't work
     $('#scheduledForPicker').datetimepicker();
@@ -142,7 +80,7 @@ let SchedulerCreateView = Backbone.View.extend({
     $("#btn-next").on("click", () => {
       calendar.navigate("next");
     });
-S.toggleMenu();
+
     return this;
   }
 });

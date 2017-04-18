@@ -1,31 +1,8 @@
 <script type="text/x-handlebars-template" id="login-template">
 
-    <div class="modal fade" tabindex="-1" role="dialog" id="remember-password">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-body">
-            <form>
-              <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" id="email"
-                placeholder="Email address">
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id="recover-pass">
-            Recover password
-            </button>
-          </div>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-
-
       <form id="login-form" class="form-signin">
         <h2 class="form-signin-heading">Please sign in</h2>
-        <div id="messagess"></div>
+        <div id="messages"></div>
         <label for="username" class="sr-only">Username</label>
         <input type="email" class="form-control" id="username" name="username"
         placeholder="User name">
@@ -39,7 +16,7 @@
         </div>
         <button type="button" class="btn btn-lg btn-info btn-block"
         id="login-button">Log In</button>
-        <p><button type="button" class="btn btn-lg btn-link" id="recover-pass">
+        <p><button type="button" class="btn btn-sm btn-link" id="recover-pass">
           Forgot your password?</button></p>
         <br /><br />
         <button type="button" class="btn btn-primary btn-lg"
