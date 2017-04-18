@@ -74,14 +74,7 @@ footer {
 }
 
 
-
-
-
-
-div.finder {
-  z-index: 300 !important;
-}
-
+/** Sliding Menu **/
 .viewport {
   position: absolute;
   margin: 0;
@@ -90,26 +83,24 @@ div.finder {
   right: 0;
   left: 0;
 }
-
 .frame {
+/*  position: absolute; */
   margin: 0;
   padding: 0;
-  position: absolute;
   width: 200%;
   height: 100%;
   top: 0;
   bottom: 0;
   left: 0;
 }
-
 .menu-slide {
+  position: absolute;
   -webkit-transform: translateX(-250px);
   -ms-transform: translateX(-250px);
   -o-transform: translateX(-250px);
   transform: translateX(-250);
   -webkit-transition: 500ms;
   -o-transition: 500ms;
-  position: relative;
   margin:0;
   padding: 0;
   width: 230px;
@@ -117,16 +108,14 @@ div.finder {
   float: left;
   background-color: #eee;
 }
-
 .menu-slide-show {
   -webkit-transform: translateX(0);
   -ms-transform: translateX(0);
   -o-transform: translateX(0);
-  transform: trasnsl(0);
+  transform: translateX(0);
 }
-
 .corp {
-  position: absolute;
+/*  position: absolute; */
   -webkit-transition: 500ms;
   -o-transition: 500ms;
   transition: 500ms;
@@ -135,10 +124,18 @@ div.finder {
   width: 50%;
   height: 100%;
 }
-
-.corp_show {
+.corp-show {
   -webkit-transform: translateX(250px);
   -ms-transform: translateX(250px);
   -o-transform: translateX(250px);
   transform: translateX(250px);
 }
+
+
+
+
+div.finder {
+  z-index: 300 !important;
+}
+
+
