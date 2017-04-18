@@ -9,6 +9,7 @@ let LoginView = Backbone.View.extend({
 
   initialize: function() {
     this.footer = new FooterView();
+    S.toggleNavigation();
   },
 
   events: {
@@ -63,6 +64,7 @@ let LoginView = Backbone.View.extend({
             S.jwtoken(result.token);
             if (S.jwtoken() != undefined && S.user != undefined) {
               S.user.set(user);
+              S.toggleNavigation(true);
               S.router.navigate('#scheduler', {trigger: true});
               S.fetchCollections();
             }
@@ -106,6 +108,7 @@ let LoginView = Backbone.View.extend({
         S.jwtoken(data.token);
         S.user.set(data.user);
         sessionStorage.setItem("user", data.user);
+        S.toggleNavigation(true);
         S.router.navigate("#scheduler", {trigger: true});
         S.fetchCollections();
      }).fail((xhr) => {
@@ -126,6 +129,8 @@ let LoginView = Backbone.View.extend({
 
     this.$el.html(compiled);
     $("#main").html(this.$el);
+
+    // Hide the side menu container in the login view
     return this;
   },
 

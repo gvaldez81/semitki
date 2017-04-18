@@ -38,6 +38,7 @@ let S = {
     });
     this.lang = "en-EN"                                  // UX language
     S.initPolyglot(this);                                // Initialize internationalization
+    this.hideSideMenu = true;                           // Keep the side menu hidden fro start
 
     return this;
   },
@@ -162,17 +163,26 @@ let S = {
 
 
   toggleMenu: () => {
-    let hide = true;
-    $("#toggle-button").on("click", () => {
-      if(hide) {
-        $("#settings-menu").addClass("menu-slide-show");
-        $("#corp").addClass("corp-show");
-      } else {
-        $("#settings-menu").removeClass("menu-slide-show");
-        $("#corp").removeClass("corp-show");
-      }
-    })
-  }
+    $(".menu-slide").show().hover(() => {
+      $(".menu-slide").addClass("menu-slide-show");
+      $("#main").addClass("corp-show");
+    },
+    () => {
+      $(".menu-slide").removeClass("menu-slide-show");
+      $("#main").removeClass("corp-show");
+    });
+  },
+
+
+  toggleNavigation: (enable=false) => {
+    if(enable) {
+      $("#app-nav").show();
+      S.toggleMenu();
+    } else {
+      $("#app-nav").hide();
+      $(".menu-slide").hide();
+    }
+  },
 };
 
 // Launch the JavaScript client side app

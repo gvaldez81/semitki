@@ -95,10 +95,10 @@ footer {
 }
 .menu-slide {
   position: absolute;
-  -webkit-transform: translateX(-250px);
-  -ms-transform: translateX(-250px);
-  -o-transform: translateX(-250px);
-  transform: translateX(-250);
+  -webkit-transform: translateX(-200px);
+  -ms-transform: translateX(-200px);
+  -o-transform: translateX(-200px);
+  transform: translateX(-200);
   -webkit-transition: 500ms;
   -o-transition: 500ms;
   margin:0;
