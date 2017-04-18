@@ -14,6 +14,9 @@ let SchedulerCreateView = Backbone.View.extend({
   render: function() {
     let template = $("#scheduler-template").html();
     let compiled = Handlebars.compile(template);
+
+    this.navigation.render();
+
     let posts = new Post();
     posts.fetch(S.addAuthorizationHeader());
     S.fetchCollections();
@@ -45,9 +48,9 @@ let SchedulerCreateView = Backbone.View.extend({
     }
 
     this.$el.html(compiled(data));
+
     $("#main").html(this.$el);
 
-    this.navigation.setElement(this.$("#app-nav")).render();
 
     // Initialize datimepicker here after rendering, otherwise it won't work
     $('#scheduledForPicker').datetimepicker();
