@@ -64,6 +64,11 @@ let SemitkiRouter = Backbone.Router.extend({
     view.render();
   },
 
+  campaigndetail: () => {
+    let view = new CampaignDetailView();
+    view.render();
+  },
+
     permissions: () => {
       let view = new PermissionsView();
       view.render();

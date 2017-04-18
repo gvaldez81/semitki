@@ -21,13 +21,15 @@ class PostSerializer(serializers.ModelSerializer):
 class PhaseSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Phase
-        fields = ('id', 'url', 'name', 'description', 'isactive', 'valid_to')
+        fields = ('id', 'url', 'name', 'description', 'isactive', 'valid_to', 'campaign')
 
 
 class CampaignSerializer(serializers.HyperlinkedModelSerializer):
+    #phases = PhaseSerializer(many=True, read_only=True)
+    phases = PhaseSerializer(many=True)
     class Meta:
         model = Campaign
-        fields = ('url', 'id', 'name', 'description', 'isactive', 'valid_to')
+        fields = ('url', 'id', 'name', 'description', 'isactive', 'valid_to', 'phases')
 
 
 class SocialAccountSerializer(serializers.HyperlinkedModelSerializer):
