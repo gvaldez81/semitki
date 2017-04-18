@@ -2,9 +2,9 @@
 
 let SemitkiFooter = Backbone.View.extend({
 
-  tagName: "div",
+/*  tagName: "div",*/
 
-  className: "row",
+  //className: "row",
 
   render: function() {
     let data = {
@@ -13,7 +13,7 @@ let SemitkiFooter = Backbone.View.extend({
     let template = $("#footer-template").html();
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled(data));
-    $("footer").html(this.$el);
+    $("#app-footer").html(this.$el);
 
     return this;
   }

@@ -142,7 +142,7 @@ let SchedulerCreateView = Backbone.View.extend({
     $("#btn-next").on("click", () => {
       calendar.navigate("next");
     });
-
+S.toggleMenu();
     return this;
   }
 });

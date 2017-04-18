@@ -4,7 +4,7 @@ let LoginView = Backbone.View.extend({
 
   tagName: "div",
 
-  className: "panel panel-info",
+  className: "container",
 
   events: {
     "click #login-button": "tryLogin",
@@ -118,7 +118,7 @@ let LoginView = Backbone.View.extend({
     let template = $("#login-template").html();
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled);
-    $("#container").html(this.$el);
+    $("body").html(this.$el);
     return this;
   },
 

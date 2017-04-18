@@ -9,6 +9,8 @@ let SideMenu = Backbone.View.extend({
     this.$el.html(compiled());
     $("#side-menu").html(this.$el);
 
+    S.toggleMenu();
+
     return this;
   }
 });

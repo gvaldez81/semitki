@@ -22,36 +22,30 @@
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-    <p class="panel-heading">SIGN IN</p>
-    <div class="panel-body">
-    <div class="row">
-      <div class="col-sm-6" id="social-buttons">
-        <h4>{{t.use_other_acccount}}</h4>
-        <p>You can also sign in using your Facebook, Twitter or Google accounts.</p>
-        <button type="button" class="btn btn-primary btn-lg" id="fb-login">Facebook</button>
-        <button type="button" class="btn btn-info btn-lg" id="twitter-login">Twitter</button>
-        <!-- button type="button" class="btn btn-danger btn-lg">Google +</button-->
-      </div>
-      <div class="col-sm-6" >
-        <form id="login-form" class="form-signin">
-        <div class="login-group">
-          <label for="username" class="sr-only">Username</label>
-          <input type="text" class="form-control" id="username" name="username" placeholder="username">
 
-          <label for="password" class="sr-only">Password</label>
-          <input type="password" class="form-control" id="password" name="password" placeholder="password">
-
-          <div class="form-group login-group-checkbox">
-            <input type="checkbox" id="remember" name="remember">
-            <label for="remember">Remember me</label>
-          </div>
+      <form id="login-form" class="form-signin">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <div id="messagess"></div>
+        <label for="username" class="sr-only">Username</label>
+        <input type="email" class="form-control" id="username" name="username"
+        placeholder="User name">
+        <label for="password" class="sr-only">Password</label>
+        <input type="password" class="form-control" id="password"
+        name="password" placeholder="Password">
+        <div class="checkbox">
+          <label for="remember">
+            <input type="checkbox" id="remember" name="remember"> Remember me
+          </label>
         </div>
-        <button type="button" class="btn btn-md btn-info btn-block" id="login-button">Log In</button>
-        <p>Forgot your password? <button type="button" class="btn btn-link"
-        data-toggle="modal" data-target="#remember-password">click here</button></p>
-        </form>
-      </div>
-    </div></div>
+        <button type="button" class="btn btn-lg btn-info btn-block"
+        id="login-button">Log In</button>
+        <p><button type="button" class="btn btn-lg btn-link" id="recover-pass">
+          Forgot your password?</button></p>
+        <br /><br />
+        <button type="button" class="btn btn-primary btn-lg"
+        id="fb-login">Facebook</button>
+        <button type="button" class="btn btn-info btn-lg"
+        id="twitter-login">Twitter</button>
+      </form>
 
-{{> footer}}
 </script>

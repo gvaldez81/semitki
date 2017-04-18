@@ -159,6 +159,20 @@ let S = {
   sessionDestroy: () => {
     sessionStorage.clear();
   },
+
+
+  toggleMenu: () => {
+    let hide = true;
+    $("#toggle-button").on("click", () => {
+      if(hide) {
+        $("#settings-menu").addClass("menu-slide-show");
+        $("#corp").addClass("corp-show");
+      } else {
+        $("#settings-menu").removeClass("menu-slide-show");
+        $("#corp").removeClass("corp-show");
+      }
+    })
+  }
 };
 
 // Launch the JavaScript client side app
