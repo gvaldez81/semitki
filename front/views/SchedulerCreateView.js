@@ -29,30 +29,31 @@ let SchedulerCreateView = Backbone.View.extend({
 
 
   createPost: () => {
+    S.refreshToken(() => {
+      let content = {};
+      if($("#isNewPost").val()) {
+        content.txt = $("#postText").val();
+      } else {
+        content.url = $("#postUrl").val();
+      }
+      let img = $("#postImageUrl").val();
+      if(img !== "") {
+        content.imgurl = img;
+      }
 
-    let content = {};
-    if($("#isNewPost").val()) {
-      content.txt = $("#postText").val();
-    } else {
-      content.url = $("#postUrl").val();
-    }
-    //content.txt = $("#postText").val();
-    //content.url = $("#postUrl").val();
-    let img = $("#postImageUrl").val();
-    if(img !== "") {
-      content.imgurl = img;
-    }
+      content.tags = $("#networks").val();
 
-    content.tags = $("#networks").val();
-
-    let post = {
-      date: new Date($("#scheduledFor").val()),
-      phase: $("#phases").val(),
-      content: content,
-      owner: S.user.get("pk")
-    };
-    let newPost = new Post();
-    newPost.save(post, S.addAuthorizationHeader());
+      let post = {
+        date: new Date($("#scheduledFor").val()),
+        phase: $("#phases").val(),
+        content: content,
+        owner: S.user.get("pk")
+      };
+      let newPost = new Post();
+      let r = newPost.save(post, S.addAuthorizationHeader());
+      S.logger(r.responseText);
+      console.log(r);
+    });
   },
 
 

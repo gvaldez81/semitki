@@ -32,6 +32,7 @@ let LoginView = Backbone.View.extend({
     });
   },
 
+
   tryFbLogin: () => {
     FB.login((response) => {
       if(S.fbStatusChangeCallback(response)) {
@@ -54,14 +55,14 @@ let LoginView = Backbone.View.extend({
           });
 
           fb_token.then((result) => {
-            S.jwtoken = result.token;
-            if (S.jwtoken != undefined && S.user != undefined) {
+            S.jwtoken(result.token);
+            if (S.jwtoken() != undefined && S.user != undefined) {
               S.user.set(user);
               S.router.navigate('#dashboard', {trigger: true});
               S.fetchCollections();
             }
           }, (err) => {
-            console.log("err: " + err.toString()); // TODO replace this error log
+            S.logger("bg-error", "Failed login with Facebook account", true);
           });
         });
       } else {
@@ -82,7 +83,6 @@ let LoginView = Backbone.View.extend({
     this.username = $form.find("input[name='username']").val();
     this.password = $form.find("input[name='password']").val();
     let url = apiBuilder("auth/login")
-    //let url = apiBuilder("api-token-auth")
     let csrftoken = Cookies.get("csrftoken");
     $.ajax(url,
        {
@@ -99,12 +99,13 @@ let LoginView = Backbone.View.extend({
         method: "POST",
         dataType: "JSON"
       }).done((data) => {
-        S.jwtoken = data.token;
+        S.jwtoken(data.token);
         S.user.set(data.user);
-        if(S.jwtoken != undefined && S.user != undefined) {
-          S.router.navigate("#dashboard", {trigger: true});
-          S.fetchCollections();
-        }
+        sessionStorage.setItem("user", data.user);
+        S.router.navigate("#dashboard", {trigger: true});
+        S.fetchCollections();
+     }).fail((xhr) => {
+       S.logger("bg-error", "Failed login, check your connection", true);
      });
   },
 
