@@ -169,6 +169,8 @@ let S = {
 
   toggleMenu: () => {
     // Enable side menu
+    let menu = new SideMenuView();
+    menu.render();
     $(".menu-slide").show().hover(() => {
       $(".menu-slide").addClass("menu-slide-show");
       $("#main").addClass("corp-show");
