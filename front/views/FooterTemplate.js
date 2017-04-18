@@ -1,10 +1,10 @@
 'use strict'
 
-let SemitkiFooter = Backbone.View.extend({
+let FooterView = Backbone.View.extend({
 
-/*  tagName: "div",*/
+  tagName: "div",
 
-  //className: "row",
+  className: "container",
 
   render: function() {
     let data = {

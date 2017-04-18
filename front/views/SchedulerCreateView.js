@@ -9,6 +9,7 @@ let SchedulerCreateView = Backbone.View.extend({
 
   initialize: function() {
     this.navigation = new NavigationView();
+    this.footer = new FooterView();
   },
 
   render: function() {
@@ -16,6 +17,7 @@ let SchedulerCreateView = Backbone.View.extend({
     let compiled = Handlebars.compile(template);
 
     this.navigation.render();
+    this.footer.render();
 
     let posts = new Post();
     posts.fetch(S.addAuthorizationHeader());

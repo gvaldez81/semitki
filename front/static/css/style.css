@@ -7,6 +7,7 @@ body {
   margin-bottom: 60px;
 }
 
+
 /** Navigation **/
 .navbar .nav,
 .navbar .nav > li {
@@ -16,7 +17,6 @@ body {
   *zoom:1; /* hasLayout ie7 trigger */
   vertical-align: top;
 }
-
 div.navbar-inner {
   float: right;
   vertical-align: top;
@@ -57,24 +57,30 @@ div.navbar-inner {
   border-bottom-left-radius: 0;
 }
 
+
 /** Main **/
 div#main{
    padding: 40px 15px;
 }
 
-div.finder {
-  z-index: 300 !important;
-}
 
+/** Footer **/
 footer {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 60px;
+  height: 40px;
   background-color: #222;
 }
 
 
+
+
+
+
+div.finder {
+  z-index: 300 !important;
+}
 
 .viewport {
   position: absolute;

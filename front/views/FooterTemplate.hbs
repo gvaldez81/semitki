@@ -1,13 +1,20 @@
 <script type="text/x-handlebars-template" id="footer-template">
 
-  <div>Copyright &copy; 2017 Semitki</div>
-  <div>
-  oaoaoaoa
-    {{#each pages}}
+<div class="row">
+  <div class="col-sm-2"><p>Copyright &copy; 2017 Semitki</p></div>
+  <div class="col-sm-8">
+     {{#each pages}}
     <a href="{{title}}" class="btn btn-link" role="button"
       id="{{title}}-link">{{title}}</a>
     {{/each}}
-  <div>
-  <div></div>
+    <a href="" class="btn btn-link" role="button"
+      id="link">A sample link</a>
+    <a href="" class="btn btn-link" role="button"
+      id="link">Another place</a>
+    <a href="" class="btn btn-link" role="button"
+      id="link">Yay!</a>
+  </div>
+  <div class="col-sm-2"><p>Copyright &copy; 2017 Semitki</p></div>
+</div>
 
 </script>
