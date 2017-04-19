@@ -38,8 +38,7 @@ class CampaignSerializer(serializers.HyperlinkedModelSerializer):
 class SocialAccountSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = SocialAccount
-        fields = ('url', 'id', 'username', 'email', 'access_token',
-                'token_expiration', 'isactive', 'valid_to')
+        fields = ('url', 'id', 'username', 'email', 'access_token', 'token_expiration', 'isactive', 'valid_to', 'bucket')
 
 class SocialGroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -48,6 +47,11 @@ class SocialGroupSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class SocialAccountGroupSerializer(serializers.HyperlinkedModelSerializer):
+    #friends = models.ManyToManyField(SocialAccount)
+    #tickets = serializers.SerializerMethodField()
+    #def get_tickets(self, obj):
+    #    return  friends.all()
+    #friends = models.ManyToManyField(SocialAccount)
     socialaccount = SocialAccountSerializer(
             many=True,
             read_only=True,)
@@ -56,7 +60,6 @@ class SocialAccountGroupSerializer(serializers.HyperlinkedModelSerializer):
         model = SocialAccountGroup
         fields = ('url', 'id', 'socialaccount', 'socialgroup', 'isactive',
                 'valid_to')
-
 
 class BucketSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

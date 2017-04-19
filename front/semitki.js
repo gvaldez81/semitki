@@ -26,7 +26,7 @@ let S = {
     this.collection.set("buckets", new Buckets());
     this.collection.set("accounts", new Accounts());
     this.collection.set("groups", new Groups());
-    this.collection.set("account_group", new AccountGroups());
+    this.collection.set("account_groups", new AccountGroups());
     this.collection.set("posts", new Posts());
     this.user = new UserModel();                      // Signed in user
     this.users = new Users();                         // User collection
