@@ -8,7 +8,8 @@ from .models import *
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'first_name', 'last_name', 'posts')
+        fields = ('id', 'username', 'email', 'first_name', 'last_name',
+                'posts')
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -21,7 +22,8 @@ class PostSerializer(serializers.ModelSerializer):
 class PhaseSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Phase
-        fields = ('id', 'url', 'name', 'description', 'isactive', 'valid_to', 'campaign')
+        fields = ('id', 'url', 'name', 'description', 'isactive', 'valid_to',
+                'campaign')
 
 
 class CampaignSerializer(serializers.HyperlinkedModelSerializer):
@@ -29,24 +31,31 @@ class CampaignSerializer(serializers.HyperlinkedModelSerializer):
     phases = PhaseSerializer(many=True)
     class Meta:
         model = Campaign
-        fields = ('url', 'id', 'name', 'description', 'isactive', 'valid_to', 'phases')
+        fields = ('url', 'id', 'name', 'description', 'isactive', 'valid_to',
+                'phases')
 
 
 class SocialAccountSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = SocialAccount
-        fields = ('url', 'id', 'username', 'email', 'access_token', 'token_expiration', 'isactive', 'valid_to')
+        fields = ('url', 'id', 'username', 'email', 'access_token',
+                'token_expiration', 'isactive', 'valid_to')
 
 class SocialGroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = SocialGroup
         fields = ('url', 'id', 'name', 'description', 'isactive', 'valid_to')
 
+
 class SocialAccountGroupSerializer(serializers.HyperlinkedModelSerializer):
-    #socialaccounts = SocialAccountSerializer(many=True, read_only=True)
+    socialaccount = SocialAccountSerializer(
+            many=True,
+            read_only=True,)
+
     class Meta:
         model = SocialAccountGroup
-        fields = ('url', 'id', 'socialaccount', 'socialgroup', 'isactive', 'valid_to')
+        fields = ('url', 'id', 'socialaccount', 'socialgroup', 'isactive',
+                'valid_to')
 
 
 class BucketSerializer(serializers.HyperlinkedModelSerializer):
@@ -56,6 +65,7 @@ class BucketSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class StaticPageSerializer(serializers.HyperlinkedModelSerializer):
+
     class Meta:
         model = StaticPage
         fields = ('__all__')
