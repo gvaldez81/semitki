@@ -7,9 +7,11 @@ let S = {
     Backbone.history.start({pushState: false});        // Initialize Backbone web browser history support
     this.router = new SemitkiRouter();                // Initialize Backbone routes
     let navTemplate = Handlebars.compile($("#navigation-template").html());
-    let footerTemplate = Handlebars.compile($("#footer-template").html());
+    //let settingsTemplate = Handlebars.compile($("#side-menu-template").html());
+    //let footerTemplate = Handlebars.compile($("#footer-template").html());
     Handlebars.registerPartial('navigation', navTemplate);
-    Handlebars.registerPartial('footer', footerTemplate);
+    //Handlebars.registerPartial('settings', settingsTemplate);
+    //Handlebars.registerPartial('footer', footerTemplate);
     // Select boxes default settings
     $.fn.select2.defaults.set("theme", "bootstrap");
     $.fn.select2.defaults.set("allowClear", true);
@@ -36,15 +38,9 @@ let S = {
     });
     this.lang = "en-EN"                                  // UX language
     S.initPolyglot(this);                                // Initialize internationalization
+    this.hideSideMenu = true;                           // Keep the side menu hidden fro start
 
     return this;
-  },
-
-  // VAriables
-  log: {
-    info: "bg-info",
-    success: "bg-succes",
-    error: "bg-danger"
   },
 
 
@@ -87,7 +83,7 @@ let S = {
     let divmsg = $("#messages");
     divmsg.empty()
       .removeClass(() => {
-      return S.log.info + " " + S.log.success + " " + S.log.error
+      return "bg-info bg-success bg-danger";
     });
 
     divmsg.addClass(level).html("<h3>"+text+"</h3>")
@@ -164,6 +160,29 @@ let S = {
   sessionDestroy: () => {
     sessionStorage.clear();
   },
+
+
+  toggleMenu: () => {
+    $(".menu-slide").show().hover(() => {
+      $(".menu-slide").addClass("menu-slide-show");
+      $("#main").addClass("corp-show");
+    },
+    () => {
+      $(".menu-slide").removeClass("menu-slide-show");
+      $("#main").removeClass("corp-show");
+    });
+  },
+
+
+  toggleNavigation: (enable=false) => {
+    if(enable) {
+      $("#app-nav").show();
+      S.toggleMenu();
+    } else {
+      $("#app-nav").hide();
+      $(".menu-slide").hide();
+    }
+  },
 };
 
 // Launch the JavaScript client side app
@@ -174,6 +193,6 @@ $(() => {
     app.render();
   }
   S.refreshToken(() => {
-    S.router.navigate("#dashboard", {trigger: true});
+    S.router.navigate("#scheduler", {trigger: true});
   });
 });

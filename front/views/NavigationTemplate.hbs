@@ -1,8 +1,6 @@
 <script type="text/x-handlebars-template" id="navigation-template">
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container">
-    <div class="navbar-header">
+    <div class="navbar-header nav">
       <button type="button" class="navbar-toggle collapsed"
       data-toggle="collapse" data-target="#navbar"
       aria-expanded="false" aria-controls="navbar">
@@ -11,26 +9,24 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#calendar">Semitki</a>
+      <a class="navbar-brand" href="">Semitki</a>
     </div>
-    <div id="navbar" class="collapse navbar-collapse">
-        <ul class="nav navbar-nav navbar-inner">
-          <li><a href="#scheduler">
+    <div id="navbar" class="collapse navbar-collapse navbar-inner">
+        <ul class="nav navbar-nav">
+          <li><a href="#post">
             <button type="button" class="btn btn-link navbar-btn">POST</button>
           </a></li>
-          <li><a href="#calendar">
+          <li><a href="#scheduler">
             <button type="button" class="btn btn-link navbar-btn">CALENDAR</button>
           </a></li>
           <li><a href="#stats">
             <button type="button" class="btn btn-link navbar-btn">STATISTICS</button>
           </a></li>
         </ul>
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav">
           <li><button type="button" class="btn btn-default navbar-btn"
               id="add-post-button">+ ADD POST</button></li>
         </ul>
     </div>
-  </div>
-</nav>
 
 </script>

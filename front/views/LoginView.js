@@ -2,9 +2,15 @@
 
 let LoginView = Backbone.View.extend({
 
-  tagName: "div",
+  tagName: "form",
 
-  className: "panel panel-info",
+  className: "form-signin",
+
+
+  initialize: function() {
+    this.footer = new FooterView();
+    S.toggleNavigation();
+  },
 
   events: {
     "click #login-button": "tryLogin",
@@ -58,11 +64,12 @@ let LoginView = Backbone.View.extend({
             S.jwtoken(result.token);
             if (S.jwtoken() != undefined && S.user != undefined) {
               S.user.set(user);
-              S.router.navigate('#dashboard', {trigger: true});
+              S.toggleNavigation(true);
+              S.router.navigate('#scheduler', {trigger: true});
               S.fetchCollections();
             }
           }, (err) => {
-            S.logger("bg-error", "Failed login with Facebook account", true);
+            S.logger("bg-danger", "Failed login with Facebook account", true);
           });
         });
       } else {
@@ -74,14 +81,13 @@ let LoginView = Backbone.View.extend({
 
 
   tryTwLogin: () => {
-    console.log("Login with Twitter TODO");
+    S.logger("bg-danger", "Login with Twitter TODO", true);
   },
 
 
   tryLogin: () => {
-    let $form = $('#login-form');
-    this.username = $form.find("input[name='username']").val();
-    this.password = $form.find("input[name='password']").val();
+    this.username = $("input[name='username']").val();
+    this.password = $("input[name='password']").val();
     let url = apiBuilder("auth/login")
     let csrftoken = Cookies.get("csrftoken");
     $.ajax(url,
@@ -102,10 +108,11 @@ let LoginView = Backbone.View.extend({
         S.jwtoken(data.token);
         S.user.set(data.user);
         sessionStorage.setItem("user", data.user);
-        S.router.navigate("#dashboard", {trigger: true});
+        S.toggleNavigation(true);
+        S.router.navigate("#scheduler", {trigger: true});
         S.fetchCollections();
      }).fail((xhr) => {
-       S.logger("bg-error", "Failed login, check your connection", true);
+       S.logger("bg-danger", "Failed login, check your credentials", true);
      });
   },
 
@@ -117,8 +124,13 @@ let LoginView = Backbone.View.extend({
 /*    }*/;
     let template = $("#login-template").html();
     let compiled = Handlebars.compile(template);
+
+    this.footer.render();
+
     this.$el.html(compiled);
-    $("#container").html(this.$el);
+    $("#main").html(this.$el);
+
+    // Hide the side menu container in the login view
     return this;
   },
 
