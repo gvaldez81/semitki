@@ -39,6 +39,8 @@ let SemitkiRouter = Backbone.Router.extend({
         if (callback) callback.apply(this, args);
         //return false;
       });
+    } else {
+      S.router.navigate("", {trigger: true});
     }
   },
 
@@ -100,6 +102,13 @@ let SemitkiRouter = Backbone.Router.extend({
   campaign: () => {
     S.refreshToken(() => {
       let view = new CampaignView();
+      view.render();
+    });
+  },
+
+  campaigndetail: () => {
+    S.refreshToken(() => {
+      let view = new CampaignDetailView();
       view.render();
     });
   },

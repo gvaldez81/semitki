@@ -38,12 +38,14 @@
     <script src="js/collections.js"></script>
     <script src="js/views.js"></script>
     <script type="text/javascript" src="js/routes.js"></script>
-    <script data-main="js/semitki" src="js/vendor/require.js"></script>
   </head>
 
   <body>
-      <div class="container" id="container"></div>
+    <nav class="navbar navbar-inverse navbar-fixed-top nav" id="app-nav"></nav>
+    <div class="menu-slide affix"></div>
+    <div class="container" id="main"></div>
+    <footer id="app-footer"></footer>
+  </body>
 
-      <div class="container" id="messages"></div>
-
-      <footer></footer>
+  <script data-main="js/semitki" src="js/vendor/require.js"></script>
+</html>

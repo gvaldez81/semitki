@@ -24,7 +24,7 @@ class Phase(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=140)
     description = models.CharField(max_length=256)
-    campaign = models.ForeignKey(Campaign)
+    campaign = models.ForeignKey(Campaign, related_name='phases')
     isactive = models.BooleanField(default = True)
     valid_to = models.DateField(null=True, blank=True)
 
