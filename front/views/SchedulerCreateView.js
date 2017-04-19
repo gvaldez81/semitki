@@ -27,7 +27,7 @@ let SchedulerCreateView = Backbone.View.extend({
       campaigns: S.collection.get("campaigns").toJSON(),
       phases: S.collection.get("phases").toJSON(),
       buckets: S.collection.get("buckets").toJSON(),
-      account_groups: S.collection.get("account_group").toJSON()
+      account_groups: S.collection.get("account_groups").toJSON()
     };
 
     let calendarFeed = () => {
