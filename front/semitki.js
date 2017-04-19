@@ -6,10 +6,10 @@ let S = {
   initialize: function() {
     Backbone.history.start({pushState: false});        // Initialize Backbone web browser history support
     this.router = new SemitkiRouter();                // Initialize Backbone routes
-    let navTemplate = Handlebars.compile($("#navigation-template").html());
+    //let navTemplate = Handlebars.compile($("#navigation-template").html());
     //let settingsTemplate = Handlebars.compile($("#side-menu-template").html());
     //let footerTemplate = Handlebars.compile($("#footer-template").html());
-    Handlebars.registerPartial('navigation', navTemplate);
+    //Handlebars.registerPartial('navigation', navTemplate);
     //Handlebars.registerPartial('settings', settingsTemplate);
     //Handlebars.registerPartial('footer', footerTemplate);
     // Select boxes default settings
@@ -161,9 +161,8 @@ let S = {
   },
 
 
-  sessionDestroy: () => {
+  sessionDestroy: function() {
     sessionStorage.clear();
-    S.router.navigate("", {trigger: true});
   },
 
 
