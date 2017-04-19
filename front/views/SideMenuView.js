@@ -1,15 +1,18 @@
 'use strict'
 
-let SideMenu = Backbone.View.extend({
+let SideMenuView = Backbone.View.extend({
+
+  tagName: "ul",
+
+
+  className: "nav nav-pills nav-stacked",
 
 
   render: function() {
     let template = $("#side-menu-template").html();
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled());
-    $("#side-menu").html(this.$el);
-
-    S.toggleMenu();
+    $(".menu-slide").html(this.$el);
 
     return this;
   }
