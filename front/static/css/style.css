@@ -7,31 +7,135 @@ body {
   margin-bottom: 60px;
 }
 
-div#container {
+
+/** Navigation **/
+.navbar .nav,
+.navbar .nav > li {
+  float: none;
+  display:inline-block;
+  *display:inline; /* ie7 fix */
+  *zoom:1; /* hasLayout ie7 trigger */
+  vertical-align: top;
+}
+div.navbar-inner {
+  float: right;
+  vertical-align: top;
+  text-align: center;
+}
+
+
+/** Login **/
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.from-signin .from-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.from-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.from-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+
+/** Main **/
+div#main{
    padding: 40px 15px;
 }
+
+
+/** Footer **/
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+  background-color: #222;
+}
+
+
+/** Sliding Menu **/
+.viewport {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  top: 7px;
+  right: 0;
+  left: 0;
+}
+.frame {
+/*  position: absolute; */
+  margin: 0;
+  padding: 0;
+  width: 200%;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
+.menu-slide {
+  position: absolute;
+  -webkit-transform: translateX(-200px);
+  -ms-transform: translateX(-200px);
+  -o-transform: translateX(-200px);
+  transform: translateX(-200);
+  -webkit-transition: 500ms;
+  -o-transition: 500ms;
+  margin:0;
+  padding: 0;
+  width: 230px;
+  height: auto;
+  float: left;
+  background-color: #eee;
+}
+.menu-slide-show {
+  -webkit-transform: translateX(0);
+  -ms-transform: translateX(0);
+  -o-transform: translateX(0);
+  transform: translateX(0);
+}
+.corp {
+/*  position: absolute; */
+  -webkit-transition: 500ms;
+  -o-transition: 500ms;
+  transition: 500ms;
+  margin: 0;
+  padding: 0;
+  width: 50%;
+  height: 100%;
+}
+.corp-show {
+  -webkit-transform: translateX(250px);
+  -ms-transform: translateX(250px);
+  -o-transform: translateX(250px);
+  transform: translateX(250px);
+}
+
+
+
 
 div.finder {
   z-index: 300 !important;
 }
 
-footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 60px;
-  background-color: #222;
-}
 
-.navbar .nav,
-.navbar .nav > li {
-    float:none;
-      display:inline-block;
-        *display:inline; /* ie7 fix */
-          *zoom:1; /* hasLayout ie7 trigger */
-            vertical-align: top;
-          }
-
-          .navbar-inner {
-              text-align:center;
-            }

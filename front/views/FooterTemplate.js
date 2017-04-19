@@ -1,10 +1,10 @@
 'use strict'
 
-let SemitkiFooter = Backbone.View.extend({
+let FooterView = Backbone.View.extend({
 
   tagName: "div",
 
-  className: "row",
+  className: "container",
 
   render: function() {
     let data = {
@@ -13,7 +13,7 @@ let SemitkiFooter = Backbone.View.extend({
     let template = $("#footer-template").html();
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled(data));
-    $("footer").html(this.$el);
+    $("#app-footer").html(this.$el);
 
     return this;
   }

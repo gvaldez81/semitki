@@ -1,13 +1,24 @@
 'use strict'
 
 let CampaignDetailView = Backbone.View.extend({
-    tagName: "div",
-    className: "row",
+
+  tagName: "div",
+
+
+  className: "row",
+
+
+  initialize: function() {
+    this.navigation = new NavigationView();
+    this.footer = new FooterView();
+  },
+
 
   events: {
     "click #save": "create",
     "click #delete": "delete"
   },
+
 
   create: () => {
 
@@ -21,11 +32,13 @@ let CampaignDetailView = Backbone.View.extend({
     this.render();
   },
 
+
   delete: () => {
     let campaigns = S.collection.get("campaigns");
     let campaign = campaigns.get($("#campaignFinder").val());
     campaigns.sync("delete", campaign, S.addAuthorizationHeader());
   },
+
 
   render: function(){
     let data = {
@@ -33,8 +46,12 @@ let CampaignDetailView = Backbone.View.extend({
     };
     let template = $("#campaign-template").html();
     let compiled = Handlebars.compile(template);
+
+    this.navigation.render();
+    this.footer.render();
+
     this.$el.html(compiled(data));
-    $("#container").html(this.$el);
+    $("#main").html(this.$el);
 
     $("#campaignFinder").select2();
 

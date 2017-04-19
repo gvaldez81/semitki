@@ -1,8 +1,18 @@
 'use strict'
 
 let CampaignView = Backbone.View.extend({
-    tagName: "div",
-    className: "row",
+
+  tagName: "div",
+
+
+  className: "row",
+
+
+  initialize: function() {
+    this.navigation = new NavigationView();
+    this.footer = new FooterView();
+  },
+
 
   events: {
     "click #save": "create",
@@ -13,7 +23,6 @@ let CampaignView = Backbone.View.extend({
   create: () => {
 
     //Ir a la vista detalle
-    
   },
 
   edit: () => {
@@ -37,6 +46,10 @@ let CampaignView = Backbone.View.extend({
       campaigns: S.collection.get("campaigns").toJSON()
       //phases: S.collection.get("phases").toJSON();
     };
+
+    this.navigation.render();
+    this.footer.render();
+
     let template = $("#campaign-template").html();
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled(data));

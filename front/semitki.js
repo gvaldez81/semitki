@@ -6,10 +6,12 @@ let S = {
   initialize: function() {
     Backbone.history.start({pushState: false});        // Initialize Backbone web browser history support
     this.router = new SemitkiRouter();                // Initialize Backbone routes
-    let navTemplate = Handlebars.compile($("#navigation-template").html());
-    let footerTemplate = Handlebars.compile($("#footer-template").html());
-    Handlebars.registerPartial('navigation', navTemplate);
-    Handlebars.registerPartial('footer', footerTemplate);
+    //let navTemplate = Handlebars.compile($("#navigation-template").html());
+    //let settingsTemplate = Handlebars.compile($("#side-menu-template").html());
+    //let footerTemplate = Handlebars.compile($("#footer-template").html());
+    //Handlebars.registerPartial('navigation', navTemplate);
+    //Handlebars.registerPartial('settings', settingsTemplate);
+    //Handlebars.registerPartial('footer', footerTemplate);
     // Select boxes default settings
     $.fn.select2.defaults.set("theme", "bootstrap");
     $.fn.select2.defaults.set("allowClear", true);
@@ -36,19 +38,14 @@ let S = {
     });
     this.lang = "en-EN"                                  // UX language
     S.initPolyglot(this);                                // Initialize internationalization
+    this.hideSideMenu = true;                           // Keep the side menu hidden fro start
 
     return this;
   },
 
-  // VAriables
-  log: {
-    info: "bg-info",
-    success: "bg-succes",
-    error: "bg-danger"
-  },
-
 
   jwtoken: function(token) {
+    // Set or get the JWT
     if (token === undefined) {
       return sessionStorage.getItem("token");
     } else {
@@ -75,7 +72,8 @@ let S = {
 
 
   logger: (level, text, debug = false) => {
-
+    // Sort of system logger, text will be rendered in any DIV element
+    // with id="messages"
     let verbose = function() {
       debug = true;
     }
@@ -87,10 +85,10 @@ let S = {
     let divmsg = $("#messages");
     divmsg.empty()
       .removeClass(() => {
-      return S.log.info + " " + S.log.success + " " + S.log.error
+      return "bg-info bg-success bg-danger";
     });
 
-    divmsg.addClass(level).html("<h3>"+text+"</h3>")
+    divmsg.addClass(level).html("<h4>"+text+"</h4>")
       .fadeIn(400, () => { $("#messages").fadeOut(4000); });
   },
 
@@ -130,6 +128,7 @@ let S = {
 
 
   initPolyglot: (semitki) => {
+    // Start Internationalization support
     let phrases = $.get("i18n/"+semitki.lang+".json", {
       dataType: "json"
     });
@@ -140,6 +139,7 @@ let S = {
 
 
   refreshToken: (secureFunction) => {
+    // Wrap every function triggered by user interaction within this function
     let is_valid = new Promise((resolve, reject) => {
       $.ajax(S.api("api-token-refresh"),
       {
@@ -161,8 +161,35 @@ let S = {
   },
 
 
-  sessionDestroy: () => {
+  sessionDestroy: function() {
     sessionStorage.clear();
+  },
+
+
+  toggleMenu: () => {
+    // Enable side menu
+    let menu = new SideMenuView();
+    menu.render();
+    $(".menu-slide").show().hover(() => {
+      $(".menu-slide").addClass("menu-slide-show");
+      $("#main").addClass("corp-show");
+    },
+    () => {
+      $(".menu-slide").removeClass("menu-slide-show");
+      $("#main").removeClass("corp-show");
+    });
+  },
+
+
+  toggleNavigation: (enable=false) => {
+    // Hide or show navigation elements (top and side menu)
+    if(enable) {
+      $("#app-nav").show();
+      S.toggleMenu();
+    } else {
+      $("#app-nav").hide();
+      $(".menu-slide").hide();
+    }
   },
 };
 
@@ -174,6 +201,6 @@ $(() => {
     app.render();
   }
   S.refreshToken(() => {
-    S.router.navigate("#dashboard", {trigger: true});
+    S.router.navigate("#scheduler", {trigger: true});
   });
 });

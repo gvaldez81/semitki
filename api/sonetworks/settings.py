@@ -192,7 +192,7 @@ SWAGGER_SETTINGS = {
         'type': 'basic'
         }
     },
-    'DOC_EXPANSION': 'list',
+    'DOC_EXPANSION': 'None',
     'JSON_EDITOR': True
 }
 
