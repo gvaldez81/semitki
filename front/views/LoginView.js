@@ -130,7 +130,6 @@ let LoginView = Backbone.View.extend({
     this.$el.html(compiled);
     $("#main").html(this.$el);
 
-    // Hide the side menu container in the login view
     return this;
   },
 
