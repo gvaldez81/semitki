@@ -83,8 +83,8 @@ class SocialAccountGroup(models.Model):
     Grouped social accounts
     """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    socialaccount = models.ManyToManyField(SocialAccount, blank=True)
-    socialgroup = models.ForeignKey(SocialGroup, blank=True)
+    social_account = models.ForeignKey(SocialAccount, blank=True , related_name='accounts')
+    social_group = models.ForeignKey(SocialGroup, blank=True)
     isactive = models.BooleanField(default = True)
     valid_to = models.DateField(null=True, blank=True)
 
