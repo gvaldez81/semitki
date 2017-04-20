@@ -34,7 +34,7 @@ div.navbar-inner {
 .form-signin .checkbox {
   margin-bottom: 10px;
 }
-.from-signin .from-control {
+.form-signin .form-control {
   position: relative;
   height: auto;
   -webkit-box-sizing: border-box;
@@ -43,7 +43,7 @@ div.navbar-inner {
   padding: 10px;
   font-size: 16px;
 }
-.from-signin .form-control:focus {
+.form-signin .form-control:focus {
   z-index: 2;
 }
 .form-signin input[type="email"] {
@@ -51,11 +51,47 @@ div.navbar-inner {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
-.from-signin input[type="password"] {
+.form-signin input[type="password"] {
   margin-bottom: 10px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
+
+
+/** Form Add Post **/
+.addpost-form {
+  max-width: 800px;
+  padding: 15px;
+  margin: 0 auto;
+  border: thin solid #eee;
+  border-radius: 25px;
+}
+.addpost-form .form-signin-heading,
+.addpost-form .checkbox {
+  margin-bottom: 10px;
+}
+.addpost-form .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.addpost-form .form-control:focus {
+  z-index: 2;
+}
+/*.addpost-form input[type="email"] {*/
+  /*margin-bottom: -1px;*/
+  /*border-bottom-right-radius: 0;*/
+  /*border-bottom-left-radius: 0;*/
+/*}*/
+/*.addpost-form input[type="password"] {*/
+  /*margin-bottom: 10px;*/
+  /*border-bottom-right-radius: 0;*/
+  /*border-bottom-left-radius: 0;*/
+/*}*/
 
 
 /** Main **/
@@ -75,26 +111,9 @@ footer {
 
 
 /** Sliding Menu **/
-.viewport {
-  position: absolute;
-  margin: 0;
-  padding: 0;
-  top: 7px;
-  right: 0;
-  left: 0;
-}
-.frame {
-/*  position: absolute; */
-  margin: 0;
-  padding: 0;
-  width: 200%;
-  height: 100%;
-  top: 0;
-  bottom: 0;
-  left: 0;
-}
 .menu-slide {
   position: absolute;
+  float: left;
   -webkit-transform: translateX(-200px);
   -ms-transform: translateX(-200px);
   -o-transform: translateX(-200px);
@@ -102,11 +121,14 @@ footer {
   -webkit-transition: 500ms;
   -o-transition: 500ms;
   margin:0;
-  padding: 0;
+  padding-top: 40px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
   width: 230px;
   height: auto;
-  float: left;
-  background-color: #eee;
+  background: rgba(235, 238, 238, 0.0);
+  border: 1px solid #eee;
 }
 .menu-slide-show {
   -webkit-transform: translateX(0);

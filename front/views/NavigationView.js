@@ -6,6 +6,18 @@ let NavigationView = Backbone.View.extend({
 
   className: "container",
 
+
+  events: {
+    "click #addpost-btn": "addNewPost"
+  },
+
+
+  addNewPost: () => {
+    let postView = new AddPostView();
+    postView.render();
+  },
+
+
   render: function() {
     let template = $("#navigation-template").html();
     let compiled = Handlebars.compile(template);

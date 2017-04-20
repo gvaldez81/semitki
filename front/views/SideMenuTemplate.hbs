@@ -1,10 +1,27 @@
 <script type="x-handlebars-template" id="side-menu-template">
 
   <ul class="nav nav-pills nav-stacked">
-    <li><a href="#" class="toggle-button">l 1</a></li>
-    <li><a href="#" class="toggle-button">l 1</a></li>
-    <li><a href="#" class="toggle-button">l 1</a></li>
-    <li><a href="#" class="toggle-button">l 1</a></li>
+    <li>
+      <button class="btn btn-default">Add your SoNet here +</button>
+      <button class="btn btn-default">Add your SoNet here +</button>
+      <button class="btn btn-default">Add your SoNet here +</button>
+      <button class="btn btn-default">Add your SoNet here +</button>
+    </li>
+    <li role="separator" class="divider"></li>
+    <li>
+      <div class="dropup">
+        <button class="btn btn-default dropdown-toggle" type="button"
+        id="user-menu-button" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">{{user.email}}<span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="user-menu-button">
+          <li><button id="settings" type="button"
+          class="btn btn-link">Settings</a></li>
+          <li><button id="logout" type="button"
+          class="btn btn-link">Log out</button></li>
+        </ul>
+      </div>
+    </li>
   </ul>
 
 </script>

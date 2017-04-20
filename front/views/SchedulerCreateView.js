@@ -23,7 +23,6 @@ let SchedulerCreateView = Backbone.View.extend({
     posts.fetch(S.addAuthorizationHeader());
     S.fetchCollections();
     let data = {
-      user: S.user.toJSON(),
       campaigns: S.collection.get("campaigns").toJSON(),
       phases: S.collection.get("phases").toJSON(),
       buckets: S.collection.get("buckets").toJSON(),
