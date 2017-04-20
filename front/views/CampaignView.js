@@ -53,7 +53,7 @@ let CampaignView = Backbone.View.extend({
     let template = $("#campaign-template").html();
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled(data));
-    $("#container").html(this.$el);
+    $("#main").html(this.$el);
 
     return this;
   }
