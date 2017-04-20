@@ -20,7 +20,7 @@ let AccountInfoView = Backbone.View.extend({
             username: $("#name").val()
             
         };
-        alert("fuck");
+        alert("");
     },
     
   render: function() {

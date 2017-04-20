@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='socialaccountgroup',
             name='social_account',
-            field=models.ForeignKey(blank=True, default='f2358c96-c2bc-477f-94cc-1441d3930600', on_delete=django.db.models.deletion.CASCADE, to='sonetworks.SocialAccount'),
+            field=models.ForeignKey(blank=True,  on_delete=django.db.models.deletion.CASCADE, to='sonetworks.SocialAccount'),
             preserve_default=False,
         ),
     ]

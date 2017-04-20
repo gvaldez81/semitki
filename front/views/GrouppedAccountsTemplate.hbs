@@ -1,7 +1,5 @@
 <script type="text/x-handlebars-template" id="groupped-account">
 
-{{> navigation }}
-
 <div class="container">
   <form class="form-horizontal">
    <div class="form-group">
@@ -34,12 +32,21 @@
                 <th>Accounts</th>
             </tr> 
           </thead>
-            <tbody>
-            <tr>
-
-
-            </tr>
-            </tbody>
+<tbody>
+{{#each account_groups}}
+  <tr>
+    <td>  
+       <option value="{{id}}">{{social_group_url.name}}</option> 
+    </td>
+    <td>
+       <option id="{{id}}">{{social_account_url.bucket}}</option>
+    </td>
+    <td> 
+       <option id="{{id}}">{{social_account_url.username}}</option>
+    </td>  
+  </tr>
+{{/each}}
+</tbody>
         </table>
       </div>
 <!--          <div class="col-md-6 ">
