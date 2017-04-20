@@ -75,26 +75,9 @@ footer {
 
 
 /** Sliding Menu **/
-.viewport {
-  position: absolute;
-  margin: 0;
-  padding: 0;
-  top: 7px;
-  right: 0;
-  left: 0;
-}
-.frame {
-/*  position: absolute; */
-  margin: 0;
-  padding: 0;
-  width: 200%;
-  height: 100%;
-  top: 0;
-  bottom: 0;
-  left: 0;
-}
 .menu-slide {
   position: absolute;
+  float: left;
   -webkit-transform: translateX(-200px);
   -ms-transform: translateX(-200px);
   -o-transform: translateX(-200px);
@@ -102,11 +85,14 @@ footer {
   -webkit-transition: 500ms;
   -o-transition: 500ms;
   margin:0;
-  padding: 0;
+  padding-top: 40px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
   width: 230px;
   height: auto;
-  float: left;
-  background-color: #eee;
+  background: rgba(235, 238, 238, 0.0);
+  border: 1px solid #eee;
 }
 .menu-slide-show {
   -webkit-transform: translateX(0);

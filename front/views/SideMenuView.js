@@ -17,7 +17,7 @@ let SideMenuView = Backbone.View.extend({
 
   events: {
     "click #logout": "logout",
-    "click #settngs-btn": "goSettings"
+    "click #settings-btn": "goSettings"
   },
 
 
