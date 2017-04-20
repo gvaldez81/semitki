@@ -154,15 +154,16 @@ let S = {
       S.jwtoken(result.token);
       secureFunction.call();
     }, (err) => {
-      S.logger("bg-error", "Invalid token", false);
+      S.logger("bg-danger", "Invalid token", false);
       S.sessionDestroy();
       S.router.index();
     });
   },
 
 
-  sessionDestroy: function() {
+  sessionDestroy: () => {
     sessionStorage.clear();
+    console.log(sessionStorage);
   },
 
 
