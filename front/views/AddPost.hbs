@@ -1,15 +1,26 @@
 <script type="text/x-handlebars-template" id="addpost-template">
 
 <div id="messages"></div>
+<div><button id="closeadd" type="button" class="close" aria-label="Close">
+<span aria-hidden="true">&times;</span></button></div>
 <form id="addpost-form" class="addpost-form">
   <p class="form-signin-heading">Post from:<p>
   <img src="..." alt="..." class="img-rounded" style="width: 70px;">
   <hr />
-  <textarea class="form-control" rows="4"></textarea>
-  <div class="checkbox">
-    <label for="remember">
-      <input type="checkbox" id="remember" name="remember"> Remember me
-    </label>
+  <div class="form-group">
+    <textarea class="form-control" rows="4" placeholder="Post text"></textarea>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-default" type="button"
+    id="addImg">Add image</button>
+    <div class="dropup">
+      <button class="btn btn-info dropdown-toggle" type="button"
+      id="publish-btn" data-toggle="dropdown" aria-haspopup="true"
+      aria-expanded="false">Publish now<span class="caret"></button>
+      <ul class="dropdown-menu" aria-labeledby="publish-btn">
+        <li><a href="#">Schedule</li>
+      </ul>
+    </div>
   </div>
 </form>
 

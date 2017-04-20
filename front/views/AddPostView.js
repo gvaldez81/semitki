@@ -9,8 +9,21 @@ let AddPostView = Backbone.View.extend({
   className: "container addpost-form",
 
 
+  events: {
+    "click #closeadd": "closeadd"
+  },
+
+
   initialize: function() {
     S.toggleNavigation();
+    this.scheduler = new SchedulerCreateView();
+  },
+
+
+  closeadd: function() {
+    S.toggleNavigation(true);
+    this.remove();
+    this.scheduler.render();
   },
 
 
