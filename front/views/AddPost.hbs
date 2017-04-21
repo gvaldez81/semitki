@@ -10,17 +10,21 @@
   <div class="form-group">
     <textarea class="form-control" rows="4" placeholder="Post text"></textarea>
   </div>
-  <div class="form-group">
+  <div class="btn-group">
     <button class="btn btn-default" type="button"
     id="addImg">Add image</button>
-    <div class="dropup">
-      <button class="btn btn-info dropdown-toggle" type="button"
-      id="publish-btn" data-toggle="dropdown" aria-haspopup="true"
-      aria-expanded="false">Publish now<span class="caret"></button>
-      <ul class="dropdown-menu" aria-labeledby="publish-btn">
-        <li><a href="#">Schedule</li>
-      </ul>
-    </div>
+  </div>
+  <div class="btn-group dropup pull-right">
+    <button type="button" class="btn btn-info"
+    id="publish-btn">Publish now</button>
+    <button class="btn btn-info dropdown-toggle" type="button"
+    data-toggle="dropdown" aria-haspopup="true"
+    aria-expanded="false"><span class="caret"></span>
+    <span class="sr-only">Toggle dropdown</span></button>
+    <ul class="dropdown-menu" aria-labeledby="publish-btn">
+      <li><a href="#">Schedule</li>
+      <li><a href="#">Publish now</li>
+    </ul>
   </div>
 </form>
 
