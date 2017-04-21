@@ -26,9 +26,12 @@ let SideMenuView = Backbone.View.extend({
   },
 
 
-  logout: () => {
+  logout: function() {
     S.sessionDestroy();
     S.router.navigate("", { trigger: true });
+    $("#main").removeClass("corp-show"); // Ugly hack :P
+    S.router.index();
+    this.remove();
   },
 
 
