@@ -1,74 +1,28 @@
 <script type="text/x-handlebars-template" id="groupped-account">
 
-<div class="container">
-  <form class="form-horizontal">
-   <div class="form-group">
-     <div class="col-md-4 col-md-offset-9">
-      <button type="button" id="save" class="btn btn-primary">New</button>
-       <button type="button" id="edit" class="btn btn-primary">Edit</button>
-        <button type="button" id="delete" class="btn btn-danger">Delete</button>
-     </div>
+  <div class="container">
+    <form class="form-horizontal">
+      <div class="form-group">
+        <div class="col-md-4 col-md-offset-9">
+          <button type="button" id="save" class="btn btn-primary">New</button>
+          <button type="button" id="edit" class="btn btn-primary">Edit</button>
+          <button type="button" id="delete" class="btn btn-danger">Delete</button>
+        </div>
+      </div>
+      <div class="form-group">  
+        <div class="col-md-6 col-md-offset-3"> 
+          <label for="groups">Groups</label>
+          <select class="form-control" id="groups">
+            {{#each groups}}
+            <option value="{{id}}">{{name}}</option>
+             {{/each}}
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group" id="relateaccount">
+        
+      </div>
+    </form>
   </div>
-    <div class="form-group">  
-      <div class="col-md-6 col-md-offset-3"> 
-        <label for="grouppedAccount">Groups</label>
-        <select class="form-control" id="grouppedAccount">
-          {{#each groups}}
-          <option value="id">{{name}}</option>
-           {{/each}}
-      </select>
-      </div>
-    </div>
-
-  <div class="form-group" id="relateaccount">
-    <div class="col-md-6 col-md-offset-3">
-     <label for="related-account">Related Accounts</label>
-      <div class="panel-body" id="related-account">
-        <table class="table table-striped table-bordered table-list">
-          <thead>
-            <tr>
-                <th>Group</th>
-                <th>Network</th>
-                <th>Accounts</th>
-            </tr> 
-          </thead>
-<tbody>
-{{#each account_groups}}
-  <tr>
-    <td>  
-       <option value="{{id}}">{{social_group_url.name}}</option> 
-    </td>
-    <td>
-       <option id="{{id}}">{{social_account_url.bucket}}</option>
-    </td>
-    <td> 
-       <option id="{{id}}">{{social_account_url.username}}</option>
-    </td>  
-  </tr>
-{{/each}}
-</tbody>
-        </table>
-      </div>
-<!--          <div class="col-md-6 ">
-      <div class="panel-body">
-        <table class="table table-striped table-bordered table-list">
-          <thead>
-            <tr>
-                <th>Network</th>
-                <th>Accounts</th>
-            </tr> 
-          </thead>
-            <tbody>
-            <tr>
-
-
-            </tr>
-            </tbody>
-        </table>
-      </div>
-      </div>-->
-    
-    </div>
-</div>
- </form>
 </script>
