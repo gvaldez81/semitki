@@ -23,6 +23,9 @@ let S = {
     this.collection.set("account_groups", new AccountGroups());
     this.collection.set("posts", new Posts());
     this.user = new UserModel();                      // Signed in user
+    if(sessionStorage.getItem("user")) {
+      this.user.set(JSON.parse(sessionStorage.user));
+    }
     this.users = new Users();                         // User collection
     this.static_pages = new StaticPages();
     this.static_pages.fetch(() => {                   // Get custom static content
@@ -193,8 +196,10 @@ $(() => {
   if(!sessionStorage.getItem("token") || !sessionStorage.getItem("user")) {
     let app = new LoginView();
     app.render();
+  } else {
+    S.refreshToken(() => {
+      S.router.schedulerCreate();
+      S.router.navigate("#scheduler", {trigger: true});
+    });
   }
-  S.refreshToken(() => {
-    S.router.navigate("#scheduler", {trigger: true});
-  });
 });
