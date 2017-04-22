@@ -11,14 +11,21 @@ let GrouppedAccountsView = Backbone.View.extend({
   },
   
   events: {
-    "change #groups": "filterGroup",
+    "change #groups": "filterACGroup",
   },
 
-  filterGroup: () =>{
+  filterACGroup: () =>{
     S.collection.get("account_groups").filtering($('#groups').val())
     let view = new GrouppedAccountsRelatedView();
     view.render();
   },
+
+  filterGroup: () =>{
+    S.collection.get("groups").filtering($('#groups').val())
+    let view = new GrouppedAccountsRelatedView();
+    view.render();
+  },
+
 
   render: function() {
     
