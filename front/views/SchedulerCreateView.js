@@ -10,14 +10,15 @@ let SchedulerCreateView = Backbone.View.extend({
   initialize: function() {
     this.navigation = new NavigationView();
     this.footer = new FooterView();
+    this.navigation.render();
+    this.footer.render();
   },
 
   render: function() {
     let template = $("#scheduler-template").html();
     let compiled = Handlebars.compile(template);
 
-    this.navigation.render();
-    this.footer.render();
+    S.toggleNavigation(true);
 
     let posts = new Post();
     posts.fetch(S.addAuthorizationHeader());

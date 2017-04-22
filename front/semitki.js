@@ -6,12 +6,6 @@ let S = {
   initialize: function() {
     Backbone.history.start({pushState: false});        // Initialize Backbone web browser history support
     this.router = new SemitkiRouter();                // Initialize Backbone routes
-    //let navTemplate = Handlebars.compile($("#navigation-template").html());
-    //let settingsTemplate = Handlebars.compile($("#side-menu-template").html());
-    //let footerTemplate = Handlebars.compile($("#footer-template").html());
-    //Handlebars.registerPartial('navigation', navTemplate);
-    //Handlebars.registerPartial('settings', settingsTemplate);
-    //Handlebars.registerPartial('footer', footerTemplate);
     // Select boxes default settings
     $.fn.select2.defaults.set("theme", "bootstrap");
     $.fn.select2.defaults.set("allowClear", true);
@@ -29,6 +23,9 @@ let S = {
     this.collection.set("account_groups", new AccountGroups());
     this.collection.set("posts", new Posts());
     this.user = new UserModel();                      // Signed in user
+    if(sessionStorage.getItem("user")) {
+      this.user.set(JSON.parse(sessionStorage.user));
+    }
     this.users = new Users();                         // User collection
     this.static_pages = new StaticPages();
     this.static_pages.fetch(() => {                   // Get custom static content
@@ -163,7 +160,6 @@ let S = {
 
   sessionDestroy: () => {
     sessionStorage.clear();
-    console.log(sessionStorage);
   },
 
 
@@ -200,8 +196,10 @@ $(() => {
   if(!sessionStorage.getItem("token") || !sessionStorage.getItem("user")) {
     let app = new LoginView();
     app.render();
+  } else {
+    S.refreshToken(() => {
+      S.router.schedulerCreate();
+      S.router.navigate("#scheduler", {trigger: true});
+    });
   }
-  S.refreshToken(() => {
-    S.router.navigate("#scheduler", {trigger: true});
-  });
 });

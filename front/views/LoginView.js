@@ -107,8 +107,7 @@ let LoginView = Backbone.View.extend({
       }).done((data) => {
         S.jwtoken(data.token);
         S.user.set(data.user);
-        sessionStorage.setItem("user", data.user);
-        S.toggleNavigation(true);
+        sessionStorage.setItem("user", JSON.stringify(data.user));
         S.router.navigate("#scheduler", {trigger: true});
         S.fetchCollections();
      }).fail((xhr) => {
