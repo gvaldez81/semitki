@@ -13,7 +13,9 @@
         {{#each related}}
           <tr>
             <td>  
-               {{social_group_url.name}}
+              {{#with (lookup2 ../groups social_group)}}
+                {{name}}
+              {{/with}}
             </td>
             <td>
                {{social_account_url.bucket}}

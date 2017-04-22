@@ -84,7 +84,7 @@ class SocialAccountGroup(models.Model):
     """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     social_account = models.ForeignKey(SocialAccount, blank=True , related_name='accounts')
-    social_group = models.ForeignKey(SocialGroup, blank=True)
+    social_group = models.ForeignKey(SocialGroup, blank=True, related_name='related')
     isactive = models.BooleanField(default = True)
     valid_to = models.DateField(null=True, blank=True)
 

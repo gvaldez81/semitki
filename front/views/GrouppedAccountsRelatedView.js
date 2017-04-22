@@ -14,9 +14,21 @@ let GrouppedAccountsRelatedView = Backbone.View.extend({
   render: function() {
     if (S.collection.get("related")!== undefined){
       let data = {
-        related: S.collection.get("related").toJSON() 
+        related: S.collection.get("related").toJSON(),
+        groups: S.collection.get("groups").toJSON()
       };
-              
+      Handlebars.registerHelper('lookup2', function(collection, id) {
+        var collectionLength = collection.length;
+
+        for (var i = 0; i < collectionLength; i++) {
+            if (collection[i].id === id) {
+                return collection[i];
+            }
+
+        }
+
+        return null;
+      });      
       let template = $("#grouppedaccount-related").html();
       let compiled = Handlebars.compile(template);
       this.$el.html(compiled(data));
