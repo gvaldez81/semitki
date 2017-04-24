@@ -92,6 +92,12 @@ module.exports = (grunt) => {
         src: '*', dest: 'dist/css', filter: 'isFile'
       },
 
+      bootstrapmenu: {
+        expand: true,
+        cwd: 'bower_components/bootstrap-submenu/dist/css',
+        src: '*', dest: 'dist/css', filter: 'isFile'
+      },
+
       calendartmpls: {
         expand: true,
         src: 'tmpls/**', dest: 'dist/'
