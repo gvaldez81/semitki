@@ -29,15 +29,17 @@ let SideMenuView = Backbone.View.extend({
 
 
   render: function() {
-    this.data = {
+    let data = {
       user: S.user.toJSON(),
-      groups: S.collection.get("account_group").toJSON()
+      groups: S.collection.get("groups").toJSON()
     };
 
     let template = $("#side-menu-template").html();
     let compiled = Handlebars.compile(template);
-    this.$el.html(compiled(this.data));
+    this.$el.html(compiled(data));
     $(".menu-slide").html(this.$el);
+
+    $('[data-submenu]').submenupicker();
 
     return this;
   }
