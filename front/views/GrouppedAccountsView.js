@@ -41,7 +41,11 @@ let GrouppedAccountsView = Backbone.View.extend({
   this.$el.html(compiled(data));
   $("#main").html(this.$el);  
   this.relatedaccount.render();
-
+  // Initialization
+  $("#groups").select2({
+      placeholder: 'Select a Group',
+      minimumResultsForSearch: 20  //Infinity
+  });
   return this;    
   }
 });
