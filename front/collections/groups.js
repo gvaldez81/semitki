@@ -9,7 +9,7 @@ let Groups = Backbone.Collection.extend({
 	//Filter down the list to only todo items that are still not finished.
 	filtering: function(group) {
 		//S.collection.set("related", this.where({social_group: group}))
-		S.collection.set("related", new Accounts())
+		S.collection.set("related", new Groups())
 		S.collection.get("related").add(this.where({id: group}))
 	}
 
