@@ -2,25 +2,34 @@
 
   <ul class="nav nav-pills nav-stacked">
     <li>
-      <button class="btn btn-default">Add your SoNet here +</button>
-      <button class="btn btn-default">Add your SoNet here +</button>
-      <button class="btn btn-default">Add your SoNet here +</button>
-      <button class="btn btn-default">Add your SoNet here +</button>
+      <button class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+      data-submenu aria-haspopup="true" aria-expanded="false">Social accounts
+      <span class="caret"></span></button>
+      <ul class="dropdown-menu">
+      {{#each groups}}
+       <li class="dropdown-submenu"><a tabindex="0">{{name}}</a>
+         <ul class="dropdown-menu">
+          {{#each related}}
+          <li><a tabindex="0">{{social_account_url.username}}</a></li>
+          {{/each}}
+         </ul>
+       </li>
+      {{/each}}
+      </ul>
     </li>
+
     <li role="separator" class="divider"></li>
     <li>
-      <div class="dropup">
-        <button class="btn btn-default dropdown-toggle" type="button"
-        id="user-menu-button" data-toggle="dropdown" aria-haspopup="true"
-        aria-expanded="false">{{user.email}}<span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="user-menu-button">
-          <li><button id="settings" type="button"
-          class="btn btn-link">Settings</a></li>
-          <li><button id="logout" type="button"
-          class="btn btn-link">Log out</button></li>
-        </ul>
-      </div>
+      <button class="btn btn-default dropdown-toggle" type="button"
+      id="user-menu-button" data-toggle="dropdown" aria-haspopup="true"
+      aria-expanded="false">{{user.email}}<span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="user-menu-button">
+        <li><button id="settings" type="button"
+        class="btn btn-link">Settings</a></li>
+        <li><button id="logout" type="button"
+        class="btn btn-link">Log out</button></li>
+      </ul>
     </li>
   </ul>
 

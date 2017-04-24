@@ -8,13 +8,6 @@ let SideMenuView = Backbone.View.extend({
   className: "nav nav-pills nav-stacked",
 
 
-  initialize: function() {
-    this.data = {
-      user: S.user.toJSON()
-    };
-  },
-
-
   events: {
     "click #logout": "logout",
     "click #settings-btn": "goSettings"
@@ -36,10 +29,17 @@ let SideMenuView = Backbone.View.extend({
 
 
   render: function() {
+    let data = {
+      user: S.user.toJSON(),
+      groups: S.collection.get("groups").toJSON()
+    };
+
     let template = $("#side-menu-template").html();
     let compiled = Handlebars.compile(template);
-    this.$el.html(compiled(this.data));
+    this.$el.html(compiled(data));
     $(".menu-slide").html(this.$el);
+
+    $('[data-submenu]').submenupicker();
 
     return this;
   }
