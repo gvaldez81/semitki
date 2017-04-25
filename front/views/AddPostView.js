@@ -9,13 +9,16 @@ let AddPostView = Backbone.View.extend({
   className: "container addpost-form",
 
 
+
+
   events: {
     "click #closeadd": "closeadd",
     "click #publish-btn": "publish"
   },
 
 
-  initialize: function() {
+  initialize: function(data) {
+    this.data = data || {};
     S.toggleNavigation();
     this.scheduler = new SchedulerCreateView();
   },
@@ -29,9 +32,8 @@ let AddPostView = Backbone.View.extend({
 
 
   publish: () => {
-    console.log("publish click");
     let content = {
-      txt: "Contenido del post",
+      txt: $("#postxt").val(),
       img: "http://images2.fanpop.com/image/photos/13700000/Beautiful-Pug-pugs-13728067-1600-1200.jpg",
       tags: ["facebook", "rs"],
     };
@@ -53,7 +55,7 @@ let AddPostView = Backbone.View.extend({
   render: function() {
     let template = $("#addpost-template").html();
     let compiled = Handlebars.compile(template);
-    this.$el.html(compiled);
+    this.$el.html(compiled(this.data));
 
     $("#main").html(this.$el);
 

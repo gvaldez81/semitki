@@ -10,7 +10,17 @@ let SideMenuView = Backbone.View.extend({
 
   events: {
     "click #logout": "logout",
-    "click #settings-btn": "goSettings"
+    "click #settings-btn": "goSettings",
+    "click .account": "addNewPost"
+  },
+
+
+  addNewPost: (e) => {
+    let postView = new AddPostView({
+      account_id: e.currentTarget.id,
+      username: e.currentTarget.innerText
+    });
+    postView.render();
   },
 
 
