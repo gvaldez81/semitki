@@ -69,6 +69,7 @@ let S = {
 
 
   collection2select: (jsonMap) => {
+    // Get a { id, text } closure and return another closure for select2
     return {
       "id": jsonMap.id,
       "text": jsonMap.text
