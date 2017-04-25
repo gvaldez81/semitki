@@ -8,16 +8,19 @@ let SideMenuView = Backbone.View.extend({
   className: "nav nav-pills nav-stacked",
 
 
-  initialize: function() {
-    this.data = {
-      user: S.user.toJSON()
-    };
+  events: {
+    "click #logout": "logout",
+    "click #settings-btn": "goSettings",
+    "click .account": "addNewPost"
   },
 
 
-  events: {
-    "click #logout": "logout",
-    "click #settings-btn": "goSettings"
+  addNewPost: (e) => {
+    let postView = new AddPostView({
+      account_id: e.currentTarget.id,
+      username: e.currentTarget.innerText
+    });
+    postView.render();
   },
 
 
@@ -36,10 +39,17 @@ let SideMenuView = Backbone.View.extend({
 
 
   render: function() {
+    let data = {
+      user: S.user.toJSON(),
+      groups: S.collection.get("groups").toJSON()
+    };
+
     let template = $("#side-menu-template").html();
     let compiled = Handlebars.compile(template);
-    this.$el.html(compiled(this.data));
+    this.$el.html(compiled(data));
     $(".menu-slide").html(this.$el);
+
+    $('[data-submenu]').submenupicker();
 
     return this;
   }

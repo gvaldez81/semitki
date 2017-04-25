@@ -4,11 +4,12 @@
 <div><button id="closeadd" type="button" class="close" aria-label="Close">
 <span aria-hidden="true">&times;</span></button></div>
 <form id="addpost-form" class="addpost-form">
-  <p class="form-signin-heading">Post from:<p>
-  <img src="..." alt="..." class="img-rounded" style="width: 70px;">
+  <p class="form-signin-heading">Post from:&nbsp;{{username}}<p>
+  <!-- img src="..." alt="..." class="img-rounded" style="width: 70px;" -->
   <hr />
   <div class="form-group">
-    <textarea class="form-control" rows="4" placeholder="Post text"></textarea>
+    <textarea class="form-control" rows="4" id="postxt"
+    placeholder="Post text"></textarea>
   </div>
   <div class="btn-group">
     <button class="btn btn-default" type="button"
