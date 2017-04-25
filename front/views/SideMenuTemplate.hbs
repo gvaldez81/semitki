@@ -10,7 +10,8 @@
        <li class="dropdown-submenu"><a tabindex="0">{{name}}</a>
          <ul class="dropdown-menu">
           {{#each related}}
-          <li><a tabindex="0">{{social_account_url.username}}</a></li>
+             <li><a tabindex="0" id="{{social_account_url.id}}"
+             class="account">{{social_account_url.username}}</a></li>
           {{/each}}
          </ul>
        </li>
