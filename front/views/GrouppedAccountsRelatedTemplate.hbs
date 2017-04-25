@@ -1,4 +1,5 @@
 <script type="text/x-handlebars-template" id="grouppedaccount-related">
+
     <label for="related-account">Related Accounts</label>
     <div class="panel-body" id="panel_relatedaccount">
       <table class="table table-striped table-bordered table-list">
@@ -10,11 +11,12 @@
           </tr> 
         </thead>
         <tbody>
+        {{#each groupped}}
         {{#each related}}
           <tr>
             <td>  
-              {{#with (lookup2 ../groups social_group)}}
-                {{name}}
+              {{#with (lookup2 ../../groups social_group) }}
+              {{ name }}
               {{/with}}
             </td>
             <td>
@@ -25,8 +27,11 @@
             </td>  
           </tr>
         {{/each}}
+        {{/each}}
         </tbody>
       </table>
+      <p>{{id}}
+      <p>{{social_account_url}}
     </div>
 </script>
 
