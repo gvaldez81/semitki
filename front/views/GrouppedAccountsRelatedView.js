@@ -16,7 +16,7 @@ let GrouppedAccountsRelatedView = Backbone.View.extend({
       groups: S.collection.get("groups").toJSON()
     };
     if (S.collection.get("related")!== undefined){
-      data.related= S.collection.get("related").toJSON()
+      data.groupped= S.collection.get("related").toJSON()
       
     }
     Handlebars.registerHelper('lookup2', function(collection, id) {

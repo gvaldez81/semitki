@@ -11,10 +11,11 @@
           </tr> 
         </thead>
         <tbody>
+        {{#each groupped}}
         {{#each related}}
           <tr>
             <td>  
-              {{#with (lookup2 ../groups social_group) }}
+              {{#with (lookup2 ../../groups social_group) }}
               {{ name }}
               {{/with}}
             </td>
@@ -26,8 +27,11 @@
             </td>  
           </tr>
         {{/each}}
+        {{/each}}
         </tbody>
       </table>
+      <p>{{id}}
+      <p>{{social_account_url}}
     </div>
 </script>
 
