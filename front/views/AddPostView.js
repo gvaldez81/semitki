@@ -13,12 +13,16 @@ let AddPostView = Backbone.View.extend({
 
   events: {
     "click #closeadd": "closeadd",
-    "click #publish-btn": "publish"
+    "click #publish-btn": "publish",
+    "select #campaignSelectorBox": "showPhases"
   },
 
 
   initialize: function(data) {
     this.data = data || {};
+    this.data.campaigns = S.collection.get("campaigns").toJSON().map((i) => {
+      return S.collection2select({id: i.id, text: i.name});
+    });
     S.toggleNavigation();
     this.scheduler = new SchedulerCreateView();
   },
@@ -28,6 +32,11 @@ let AddPostView = Backbone.View.extend({
     S.toggleNavigation(true);
     this.remove();
     this.scheduler.render();
+  },
+
+
+  showPhases: (e) => {
+   console.log(e);
   },
 
 
@@ -58,6 +67,8 @@ let AddPostView = Backbone.View.extend({
     this.$el.html(compiled(this.data));
 
     $("#main").html(this.$el);
+
+    $("#campaignSelectorBox").select2({data: this.data.campaigns});
 
     return this;
   }
