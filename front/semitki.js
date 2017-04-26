@@ -68,6 +68,15 @@ let S = {
   },
 
 
+  collection2select: (jsonMap) => {
+    // Get a { id, text } closure and return another closure for select2
+    return {
+      "id": jsonMap.id,
+      "text": jsonMap.text
+    };
+  },
+
+
   logger: (level, text, debug = false) => {
     // Sort of system logger, text will be rendered in any DIV element
     // with id="messages"
@@ -177,6 +186,21 @@ let S = {
     });
   },
 
+  showButtons: () => {
+    $(".list-group-item").hover(function() {
+      //$($(this)[0].childNodes[3]).addClass('showme')
+      //$($(this)[0]).css("background-color","transparent")
+      $(this).find('div.item_buttons.hideme.crud_buttons').addClass('showme')
+      $(this).css("background-color","transparent")
+    },
+    function() {
+      //$($(this)[0].childNodes[3]).removeClass('showme')
+      //$($(this)[0]).css("background-color","#eee")
+      $(this).find('div.item_buttons.hideme.crud_buttons').removeClass('showme')
+      $(this).css("background-color","#eee")
+    });
+  },
+
 
   toggleNavigation: (enable=false) => {
     // Hide or show navigation elements (top and side menu)
@@ -188,6 +212,8 @@ let S = {
       $(".menu-slide").hide();
     }
   },
+
+
 };
 
 // Launch the JavaScript client side app
