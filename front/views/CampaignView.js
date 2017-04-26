@@ -11,8 +11,7 @@ let CampaignView = Backbone.View.extend({
   initialize: function() {
     this.navigation = new NavigationView();
     this.footer = new FooterView();
-    let modal = new editCampaign();
-    modal.render();
+    this.modal = new editCampaign();
   },
 
 
@@ -36,11 +35,14 @@ let CampaignView = Backbone.View.extend({
     //Ir a la vista detalle cargando la campana seleccionada
 
   },
+
+
   editItem: function(ev) {
-    let id = $(ev.currentTarget).parents('.item')[0].id;
-    let dialog = new editCampaign({item: S.collection.get("campaigns").get(id)});
-    dialog.render();
-    return false;
+/*    let id = $(ev.currentTarget).parents('.item')[0].id;*/
+    //let dialog = new editCampaign({item: S.collection.get("campaigns").get(id)});
+    //dialog.render();
+    /*return false;*/
+    //$("#dialog").modal({show: true});
   },
 
   delete: () => {
@@ -49,8 +51,9 @@ let CampaignView = Backbone.View.extend({
     campaigns.sync("delete", campaign, S.addAuthorizationHeader());
     //recargar el listado.
   },
- 
+
   render: function(){
+    this.modal.render();
     let data = {
       campaigns: S.collection.get("campaigns").toJSON()
       //phases: S.collection.get("phases").toJSON();

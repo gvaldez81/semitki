@@ -15,10 +15,11 @@
 				<a  class="list-group-item item" id="{{id}}" style="background: #eee"  >
 				    <div class="pull-right"><strong>0</strong></div>
 
-					<div class="item_buttons hideme crud_buttons">
-					
+            <div class="item_buttons hideme crud_buttons">
+
 						<button class="btn btn-default btn-xs item_button_remove"><span class="glyphicon glyphicon-trash"></span> Remove</button>
-						<button class="btn btn-default btn-xs item_button_edit"><span class="glyphicon glyphicon-pencil"></span> Edit</button>
+            <button class="btn btn-default btn-xs item_button_edit"
+            data-toggle="modal" data-target="#dialog"><span class="glyphicon glyphicon-pencil"></span> Edit</button>
 					</div>
 					<h4 class="list-group-item-heading">
 						{{name}}
