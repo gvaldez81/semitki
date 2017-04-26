@@ -9,8 +9,6 @@ let AddPostView = Backbone.View.extend({
   className: "container addpost-form",
 
 
-
-
   events: {
     "click #closeadd": "closeadd",
     "click #publish-btn": "publish",
@@ -37,8 +35,8 @@ let AddPostView = Backbone.View.extend({
   publish: function() {
     let tags = [];
     tags.push(this.data.bucket);
-    tags.push($("#like").val());
-    tags.push($("#rs").val());
+    tags.push({"like": $("#lkgroups").val()});
+    tags.push({"rs": $("#rsgroups").val()});
     let content = {
       txt: $("#postxt").val(),
       img: "http://images2.fanpop.com/image/photos/13700000/Beautiful-Pug-pugs-13728067-1600-1200.jpg",
@@ -65,6 +63,7 @@ let AddPostView = Backbone.View.extend({
 
     $("#main").html(this.$el);
 
+    // Campaigns and phases select
     let c = $("#campaignSelectorBox").select2({data: this.data.campaigns,
       placeholder: "Select a campaign"});
     let p = $("#phaseSelectorBox").select2({placeholder: "Select a phase"});
@@ -73,6 +72,18 @@ let AddPostView = Backbone.View.extend({
         toJSON().phases.map((i) => {
           return S.collection2select({id: i.id, text: i.name});
         })}).prop("disabled", false);
+    });
+
+    // RS and Like group selects
+    let lk = $("#lkgroups").select2({data: S.collection.get("groups")
+      .toJSON().map((i) => {
+        return  S.collection2select({id: i.id, text: i.name });
+      })
+    });
+    let rs = $("#rsgroups").select2({data: S.collection.get("groups")
+      .toJSON().map((i) => {
+        return  S.collection2select({id: i.id, text: i.name });
+      })
     });
 
     return this;
