@@ -16,10 +16,8 @@ let SideMenuView = Backbone.View.extend({
 
 
   addNewPost: (e) => {
-    let postView = new AddPostView({
-      account_id: e.currentTarget.id,
-      username: e.currentTarget.innerText
-    });
+    let postView = new AddPostView(S.collection.get("accounts")
+      .get(e.currentTarget.id).toJSON());
     postView.render();
   },
 

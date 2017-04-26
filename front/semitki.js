@@ -68,6 +68,15 @@ let S = {
   },
 
 
+  collection2select: (jsonMap) => {
+    // Get a { id, text } closure and return another closure for select2
+    return {
+      "id": jsonMap.id,
+      "text": jsonMap.text
+    };
+  },
+
+
   logger: (level, text, debug = false) => {
     // Sort of system logger, text will be rendered in any DIV element
     // with id="messages"
@@ -203,6 +212,8 @@ let S = {
       $(".menu-slide").hide();
     }
   },
+
+
 };
 
 // Launch the JavaScript client side app

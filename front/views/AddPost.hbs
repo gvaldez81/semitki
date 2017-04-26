@@ -6,26 +6,44 @@
 <form id="addpost-form" class="addpost-form">
   <p class="form-signin-heading">Post from:&nbsp;{{username}}<p>
   <!-- img src="..." alt="..." class="img-rounded" style="width: 70px;" -->
-  <hr />
+
+  <div class="form-group" id="campaignSelector">
+    <select id="campaignSelectorBox"></select>
+  </div>
+  <div class="form-group" id="phaseSelector">
+    <select id="phaseSelectorBox" disabled></select>
+  </div>
+
   <div class="form-group">
     <textarea class="form-control" rows="4" id="postxt"
     placeholder="Post text"></textarea>
   </div>
-  <div class="btn-group">
-    <button class="btn btn-default" type="button"
-    id="addImg">Add image</button>
-  </div>
-  <div class="btn-group dropup pull-right">
-    <button type="button" class="btn btn-info"
-    id="publish-btn">Publish now</button>
-    <button class="btn btn-info dropdown-toggle" type="button"
-    data-toggle="dropdown" aria-haspopup="true"
-    aria-expanded="false"><span class="caret"></span>
-    <span class="sr-only">Toggle dropdown</span></button>
-    <ul class="dropdown-menu" aria-labeledby="publish-btn">
-      <li><a href="#">Schedule</li>
-      <li><a href="#">Publish now</li>
-    </ul>
+  <div class="form-inline">
+    <div class="btn-group">
+      <button class="btn btn-default" type="button"
+      id="addImg">Add image</button>
+    </div>
+    <div class="center-block">
+      <div class="checkbox">
+        <label><input type="checkbox" id="like" value="like">&lt;3</label>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" id="rs" value="rs">RS</label>
+          vi
+      </div>
+    </div>
+    <div class="btn-group dropup pull-right">
+      <button type="button" class="btn btn-info"
+      id="publish-btn">Publish now</button>
+      <button class="btn btn-info dropdown-toggle" type="button"
+      data-toggle="dropdown" aria-haspopup="true"
+      aria-expanded="false"><span class="caret"></span>
+      <span class="sr-only">Toggle dropdown</span></button>
+      <ul class="dropdown-menu" aria-labeledby="publish-btn">
+        <li><a href="#">Schedule</li>
+        <li><a href="#">Publish now</li>
+      </ul>
+    </div>
   </div>
 </form>
 
