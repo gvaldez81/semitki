@@ -154,7 +154,32 @@ footer {
 }
 
 
+.crud_item {
 
+}
+
+.crud_item .crud_buttons {
+  float: right;
+  margin-right: 10px;
+}
+
+.hideme {
+    display: none;
+}
+
+.showme {
+    display: block;
+}
+
+a.action {
+  border-bottom: 1px dashed #2a6496;
+  text-decoration: none;
+}
+
+a.action:hover {
+  border-bottom: 1px dashed #2a6496;
+  text-decoration: none;
+}
 
 div.finder {
   z-index: 300 !important;

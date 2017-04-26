@@ -1,47 +1,61 @@
 <script type="text/x-handlebars-template" id="campaign-template">
 
-  <div class="col-md-12">
-		<h3>
-			CAMPAIGNS
-		</h3>
-			<nav class="navbar navbar-default" style="background-color: #337ab7;" role="navigation">
-				<div class="navbar-header">
-					 
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-						 <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-					</button>
-				</div>
-				
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<form class="navbar-form navbar-left" role="search">
-						<div class="form-group">
-							<input type="text" class="form-control">
-						</div> 
-						<button type="button" class="btn btn-default">
-							Buscar
-						</button>
-					</form>
-				</div>
-			</nav>
-			<div class="panel-group" id="panel-campaign">
-				{{#each campaigns}}
-              		<div class="panel panel-default">
-					<div class="panel-heading">
-						 <a class="panel-title" data-toggle="collapse" data-parent="#panel-campaign" href="#panel-element-{{id}}">{{name}}</a>
+
+<div class="container">
+	<ul class="breadcrumb">
+	  <li><a href="{$settings->site_path}">Dash board</a></li>
+	  <li class="active">Campaigns</li>
+	</ul>
+
+
+	<div class="row">
+		<div class="col-xs-12 col-md-9">
+			<div class="list-group crud_item" id="phases_items">
+			{{#each campaigns}}
+				<a  class="list-group-item item" id="{{id}}" style="background: #eee"  >
+				    <div class="pull-right"><strong>0</strong></div>
+
+					<div class="item_buttons hideme crud_buttons">
+					
+						<button class="btn btn-default btn-xs item_button_remove"><span class="glyphicon glyphicon-trash"></span> Remove</button>
+						<button class="btn btn-default btn-xs item_button_edit"><span class="glyphicon glyphicon-pencil"></span> Edit</button>
 					</div>
-					<div id="panel-element-{{id}}" class="panel-collapse collapse ">
-						<div class="panel-body">
-							{{#each phases}}
-							<div>
-								{{this.name}}
-							</div>
-							{{/each}}
-						</div> 
-					</div>
-				</div>	
-            	{{/each}}
-				
+					<h4 class="list-group-item-heading">
+						{{name}}
+					</h4>
+				</a>
+			{{else}}
+				<div class="alert alert-warning" role="alert">Vacio
+					<a href="{$settings->site_path}/wallets/add" class="btn btn-primary btn-xs" id="add_wallet_button">
+					Add</a>
+				</div>
+			{{/each}}
 			</div>
 		</div>
 
+		<div class="col-xs-12 col-md-3">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Actions</h3>
+				</div>
+				<div class="panel-body">
+					<ul class="nav nav-pills nav-stacked">
+						<li><a href="#" class="filter_menu" data-status="active"><span class="glyphicon glyphicon-ok"></span> Active</a></li>
+						<li><a href="#" class="filter_menu" data-status="hidden"><span class="glyphicon glyphicon-trash"></span> Trash</a></li>
+					</ul>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+{{!-- 	<div class="hidden">
+		<span id="tour_step_0">{t}Here is quick introdution to DimeShift.<br><br>Our demo robot has created few sample wallets for you to check out.{/t}</span>
+		<span id="tour_step_1">{t}But you can add as many as you want.<br><br>Different name, different currencies{/t}</span>
+		<span id="tour_step_2">{t}There're few options availiable when you move your mouse over your wallet.<br><br>
+		But lets jump directly to wallet page.<br><br>Click any row to jump to it.
+		{/t}</span>
+	</div> --}}
+
+</div>
 </script>

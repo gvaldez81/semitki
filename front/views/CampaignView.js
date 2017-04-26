@@ -11,13 +11,16 @@ let CampaignView = Backbone.View.extend({
   initialize: function() {
     this.navigation = new NavigationView();
     this.footer = new FooterView();
+    let modal = new editCampaign();
+    modal.render();
   },
 
 
   events: {
     "click #save": "create",
     "click #edit": "edit",
-    "click #delete": "delete"
+    "click #delete": "delete",
+    "click .item_button_edit": "editItem"
   },
 
   create: () => {
@@ -33,6 +36,12 @@ let CampaignView = Backbone.View.extend({
     //Ir a la vista detalle cargando la campana seleccionada
 
   },
+  editItem: function(ev) {
+    let id = $(ev.currentTarget).parents('.item')[0].id;
+    let dialog = new editCampaign({item: S.collection.get("campaigns").get(id)});
+    dialog.render();
+    return false;
+  },
 
   delete: () => {
     let campaigns = S.collection.get("campaigns");
@@ -40,21 +49,18 @@ let CampaignView = Backbone.View.extend({
     campaigns.sync("delete", campaign, S.addAuthorizationHeader());
     //recargar el listado.
   },
-
+ 
   render: function(){
     let data = {
       campaigns: S.collection.get("campaigns").toJSON()
       //phases: S.collection.get("phases").toJSON();
     };
 
-    this.navigation.render();
-    this.footer.render();
-
     let template = $("#campaign-template").html();
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled(data));
     $("#main").html(this.$el);
-
+    S.showButtons();
     return this;
   }
 });
