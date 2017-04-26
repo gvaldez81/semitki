@@ -1,0 +1,68 @@
+<script type="text/x-handlebars-template" id="groupped-art">
+
+  <ul class="breadcrumb">
+    <li><a href="">Home</a></li>
+    <li class="active">Related Accounts</li>
+  </ul>
+
+
+
+  <div class="row">
+    <!--{if $step != 1}style="display: none;"{/if}-->
+    <div class="col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Groupped Accounts</h3>
+        </div>
+        <div class="panel-body">
+
+
+          <div class="row">
+            <div class="col-sm-6">
+              <p>Group</p>
+              <div class="form-group">
+                <label class="sr-only" for="groupName">Groups</label>
+                  <select class="form-control" id="groupName">
+                    {{#each groups}}
+                    <option value="{{id}}">{{name}}<option>
+                    {{/each}}
+                  </select>
+                <!--       {if $preparedData->name|default:'Undefined' != 'Undefined'}value="{$preparedData->name|escape:'html'}"{/if} placeholder="{t}Plan name{/t}">-->
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <p>Accounts Free</p>
+              <span></span>
+              <!--	{if $wallets|count == 0}
+				{else}-->
+              <div class="list-group">
+                <a href="#" class="list-group-item step1_wallet_checkbox ">
+                  <span class="glyphicon glyphicon-unchecked"></span>
+                </a>
+
+
+                <!--					{foreach from=$wallets item=w}
+						{assign var="checked" value=0}
+						{if $preparedData->wallets|default:''}
+						{foreach from=$preparedData->wallets item=pwid}
+							{if $pwid == $w->id}
+								{assign var="checked" value=1}
+							{/if}
+						{/foreach}
+						{/if}-->
+                <!--	<a href="#" class="list-group-item </a>
+                      <span class="glyphicon glyphicon-search"</span> 
+					<-->
+              </div>
+            </div>
+          </div>
+
+          <button class="btn btn-default" type="submit" id="button_step1_back">Back</button>
+          <button class="btn btn-primary" type="submit" id="button_step1_next">Next</button>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</script>
