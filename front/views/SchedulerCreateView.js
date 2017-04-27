@@ -10,8 +10,10 @@ let SchedulerCreateView = Backbone.View.extend({
   initialize: function() {
     this.navigation = new NavigationView();
     this.footer = new FooterView();
+    this.modal = new CalendarModal();
     this.navigation.render();
     this.footer.render();
+    this.modal.render();
   },
 
   render: function() {
@@ -61,7 +63,7 @@ let SchedulerCreateView = Backbone.View.extend({
     // Initialize calendar view
     let calendar = $("#calendar-panel").calendar({
       language: S.lang,
-      modal: "#post-detail",
+      modal: "#dialog",
       tmpl_path: "/tmpls/",
       modal_type: "ajax",
       events_source: calendarFeed()

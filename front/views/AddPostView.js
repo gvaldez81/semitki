@@ -52,7 +52,12 @@ let AddPostView = Backbone.View.extend({
     };
 
     let newPost = new Post();
-    newPost.save(post, S.addAuthorizationHeader())
+    let options = S.addAuthorizationHeader();
+    options.error = () => {
+      S.logger("bg-danger", "Couldn't schedule new post", true);
+    };
+    if(newPost.save(post, options))
+      this.closeadd();
   },
 
 
