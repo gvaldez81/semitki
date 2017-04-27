@@ -41,7 +41,7 @@ let SchedulerCreateView = Backbone.View.extend({
           "id": post.attributes.url,
 //          "url": post.attributes.url,
           "url": "http://localhost:8090/#accountinfo",
-          "title": phase.attributes.name,
+          "title": post.attributes.content.txt,
           "class": "event-info",
           "start": Date.parse(post.attributes.date),
           "end": Date.parse(post.attributes.date),
