@@ -39,7 +39,7 @@ let LoginView = Backbone.View.extend({
   },
 
 
-  tryFbLogin: () => {
+  tryFbLogin: function() {
     FB.login((response) => {
       if(S.fbStatusChangeCallback(response)) {
         FB.api('/me', { "fields": "id,name,email"}, (response) => {
@@ -54,7 +54,7 @@ let LoginView = Backbone.View.extend({
             $.ajax(S.api("auth/facebook"),
             {
               data: {
-                "access_token": S.fb_token,
+                "access_token": S.fbtoken(),
               },
               method: "POST",
             }).done(resolve).fail(reject);
@@ -64,7 +64,6 @@ let LoginView = Backbone.View.extend({
             S.jwtoken(result.token);
             if (S.jwtoken() != undefined && S.user != undefined) {
               S.user.set(user);
-              S.toggleNavigation(true);
               S.router.navigate('#scheduler', {trigger: true});
               S.fetchCollections();
             }
@@ -72,8 +71,6 @@ let LoginView = Backbone.View.extend({
             S.logger("bg-danger", "Failed login with Facebook account", true);
           });
         });
-      } else {
-        // TODO when user not logged in FB do something perhaps
         console.log("no in Fb");
       }
     }, {scope: 'public_profile,email'});
