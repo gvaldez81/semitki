@@ -1,29 +1,84 @@
-<script type="text/x-handlebars-template" id="groupped-account">
+<script type="text/x-handlebars-template" id="groupped-art">
 
-  <div class="container">
-    <form class="form-horizontal">
+      <ul class="breadcrumb">
+        <li><a href="">Home</a></li>
+          <li class="active">Accounts Related</li>
+      </ul>
+
+
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+          <h3 class="panel-title">Groupped Accounts</h3>
+      </div>
+<div class="panel-body">
+   <div class="row">
+   
       <div class="form-group">
-        <div class="col-md-4 col-md-offset-9">
-          <button type="button" id="save" class="btn btn-primary">New</button>
-          <button type="button" id="edit" class="btn btn-primary">Edit</button>
-          <button type="button" id="delete" class="btn btn-danger">Delete</button>
-        </div>
-      </div>
-      <div class="form-group">  
-        <div class="col-md-6 col-md-offset-3"> 
-          <label for="groups">Groups</label>
-          <select class="form-control" id="groups">
-            <option></option>
-            {{#each groups}}
-            <option value="{{id}}">{{name}}</option>
-             {{/each}}
-          </select>
+        <div class="col-sm-6">
+          <label for="groupName">Groups</label>
+            <select class="form-control" id="group">
+              <option></option>
+                {{#each groups}}
+                  <option value="{{id}}">{{name}}<option>
+                {{/each}}
+            </select>
         </div>
       </div>
 
-     <div class="form-group" id="relateaccount">
-        
-      </div>
-    </form>
+          <div class="col-sm-6">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Accounts Free</h3>
+              </div>
+                <div class="panel-body">
+                  <table class="table table-striped table-bordered table-list">
+                    <thead>
+                      <tr>
+                          <th>Network</th>
+                          <th>Accounts</th>
+                      </tr> 
+                    </thead>
+                     <!-- <tbody>
+                        {{#each groupped}}
+                        {{#each related}}
+                          <tr>
+                          <td>  
+                              {{#with (lookup2 ../../groups social_group) }}
+                              {{ name }}
+                              {{/with}}
+                              
+                              <td>
+                              {{social_account_url.bucket}}
+                              </td>
+                              <td> 
+                              {{social_account_url.username}}
+                              </td>  
+                          </tr>
+                        {{/each}}
+                        {{/each}}
+                      </tbody></td>-->
+                  </table>
+                </div>
+            </div>
+          </div>                            
+    </div>
+            <button class="btn btn-default" type="submit" id="button_step1_back">Back</button>
+          <button class="btn btn-primary" type="submit" id="button_step1_next">Next</button>
   </div>
+</div>
+
+
+
+    </div>
+  </div>
+           <div class="row">
+               <div class="col-xs-6">      
+              <div class="form-group" id="relateda">
+                 </div>
+            </div>
+              
+            </div>
 </script>
