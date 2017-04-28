@@ -4,9 +4,14 @@ let UserView = Backbone.View.extend({
   tagName:"div",
   className:"row",
 
-  initialize: () => {
+  initialize: function () {
+
+    this.navigation = new NavigationView();
+    this.footer = new FooterView();
     S.users.fetch(S.addAuthorizationHeader());
+
   },
+  
 
 
   events: {
@@ -46,7 +51,7 @@ let UserView = Backbone.View.extend({
 
     this.$el.html(compiled(data));
     $("#container").html(this.$el);
-
+     $("#main").html(this.$el);
     // Initialization
     $("#userFinder").select2();
 
