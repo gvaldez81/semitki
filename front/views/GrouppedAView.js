@@ -1,8 +1,8 @@
 'use strict'
 
-let GrouppedAccountsRelatedView = Backbone.View.extend({
+let GrouppedAView = Backbone.View.extend({
   tagName: "div",
-  className: "col-md-6 col-md-offset-3",
+  className: "row",
 
   initialize: function () {
     this.navigation = new NavigationView();
@@ -15,8 +15,8 @@ let GrouppedAccountsRelatedView = Backbone.View.extend({
     let data = {
       groups: S.collection.get("groups").toJSON()
     };
-    if (S.collection.get("related") !== undefined) {
-      data.groupped = S.collection.get("related").toJSON()
+    if (S.collection.get("filter")!== undefined) {
+      data.groupped = S.collection.get("filter").toJSON()
 
     }
     Handlebars.registerHelper('lookup2', function (collection, id) {
@@ -31,10 +31,10 @@ let GrouppedAccountsRelatedView = Backbone.View.extend({
 
       return null;
     });
-    let template = $("#grouppedaccount-related").html();
+    let template = $("#grouppedaccount-a").html();
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled(data));
-    $("#relateaccount").html(this.$el);
+    $("#relateda").html(this.$el);
     return this;
 
   }

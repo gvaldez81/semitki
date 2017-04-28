@@ -51,6 +51,16 @@ let S = {
   },
 
 
+  fbtoken: function(token) {
+    // This code seems redundant, refactor to reuse in some way ASAP
+    if (token === undefined) {
+      return sessionStorage.getItem("token");
+    } else {
+      sessionStorage.setItem("token", token);
+    }
+  },
+
+
   addAuthorizationHeader: () => {
     return {
       headers: {'Authorization': S.jwtheader.concat(S.jwtoken())}
@@ -113,7 +123,7 @@ let S = {
     // for FB.getLoginStatus().
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
-      S.fb_token = response.authResponse.accessToken;
+      S.fbtoken(response.authResponse.accessToken);
       return true;
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
