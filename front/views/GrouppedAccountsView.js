@@ -5,42 +5,42 @@ let GrouppedAccountsView = Backbone.View.extend({
   className: "row",
 
   initialize: function () {
-    this.navigation = new NavigationView();
-    this.relatedaccount = new GrouppedAccountsRelatedView();
+    this.navigation = new NavigationView();   
     this.footer = new FooterView();
+     this.relateda = new GrouppedAccountsRelatedView();
+    this.navigation.render();
+    this.footer.render();
+ 
   },
+
 
   events: {
-    "change #groups": "filterGroup",
+    "change #group": "filteraccount"
   },
 
-  filterACGroup: () => {
-    S.collection.get("account_groups").filtering($('#groups').val())
+
+  filteraccount:() =>{
+
+    S.collection.get("groups").filtering($('#group').val())
     let view = new GrouppedAccountsRelatedView();
     view.render();
   },
-
-  filterGroup: () => {
-    S.collection.get("groups").filtering($('#groups').val())
-    let view = new GrouppedAccountsRelatedView();
-    view.render();
-  },
-
 
   render: function () {
+
 
     let data = {
       groups: S.collection.get("groups").toJSON(),
       account_groups: S.collection.get("account_groups").toJSON(),
       accounts: S.collection.get("accounts").toJSON()
-
     };
 
-    let template = $("#groupped-account").html();
+
+    let template = $("#groupped-art").html();
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled(data));
     $("#main").html(this.$el);
-    this.relatedaccount.render();
+    this.relateda.render();
 
     return this;
   }
