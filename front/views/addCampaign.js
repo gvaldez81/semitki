@@ -21,7 +21,7 @@ let addCampaign = Backbone.View.extend({
     let template = $("#campaign-modal-add").html();
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled(this.data));
-    $("#dialog-add").html(this.$el);
+    $("#dialog-crud").html(this.$el);
   },
 
 
