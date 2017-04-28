@@ -6,27 +6,38 @@ let GrouppedARView = Backbone.View.extend({
 
   initialize: function () {
     this.navigation = new NavigationView();
+    this.relateda = new GrouppedAView();
     this.footer = new FooterView();
+  },
+
+
+  events: {
+    "change #groupName": "filteraccount"
+  },
+
+
+  filteraccount:() =>{
+
+    S.collection.get("groups").filtera($('#groups').val())
+    let view = new GrouppedAView();
+    view.render();
   },
 
   render: function () {
 
+
     let data = {
-      groups: S.collection.get("groups").toJSON()
+      groups: S.collection.get("groups").toJSON(),
+      account_g: S.collection.get("account_groups").toJSON(),
+      accounts: S.collection.get("accounts").toJSON()
     };
+
 
     let template = $("#groupped-art").html();
     let compiled = Handlebars.compile(template);
-
-    this.navigation.render();
-    this.footer.render();
-
     this.$el.html(compiled(data));
-    $("#container").html(this.$el);
-
     $("#main").html(this.$el);
-
-    $("#groupName").select2();
+    this.relateda.render();
 
     return this;
   }
