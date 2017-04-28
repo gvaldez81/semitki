@@ -2,7 +2,7 @@
 
 let GrouppedAccountsRelatedView = Backbone.View.extend({
   tagName: "div",
-  className: "row",
+  className: "col-xs-6",
 
   initialize: function () {
     this.navigation = new NavigationView();
@@ -31,10 +31,10 @@ let GrouppedAccountsRelatedView = Backbone.View.extend({
 
       return null;
     });
-    let template = $("#grouppedaccount-a").html();
+    let template = $("#grouppedaccounts-related").html();
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled(data));
-     $("#relateda").html(this.$el);
+     $("#related").html(this.$el);
     return this;
 
   }
