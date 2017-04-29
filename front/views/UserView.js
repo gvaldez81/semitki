@@ -43,7 +43,8 @@ let UserView = Backbone.View.extend({
     // TODO probably better fetching on user demand rather than on the render
     console.log(S.users.toJSON());
     let data = {
-      users: S.users.toJSON(),
+      users: S.collection.get("user").toJSON()
+
     };
     console.log(data);
     let template = $("#user-template").html();
@@ -53,7 +54,7 @@ let UserView = Backbone.View.extend({
     $("#container").html(this.$el);
      $("#main").html(this.$el);
     // Initialization
-    $("#userFinder").select2();
+    //$("#userFinder").select2();
 
     return this;
   }

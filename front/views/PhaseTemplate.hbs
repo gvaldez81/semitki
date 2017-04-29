@@ -1,0 +1,53 @@
+<script type="text/x-handlebars-template" id="phase-template">
+
+
+<div class="container">
+	<ul class="breadcrumb">
+	  <li><a href="{$settings->site_path}">Dash board</a></li>
+	  <li class="active">Phases</li>
+	</ul>
+
+
+	<div class="row">
+		<div class="col-xs-12 col-md-9">
+			<div class="list-group crud_item" id="phases_items">
+			{{#each phase}}
+				<a  class="list-group-item item" id="{{id}}" style="background: #eee"  >
+				    <div class="pull-right"><strong>{{@index}}</strong></div>
+
+            <div class="item_buttons hideme crud_buttons">
+
+						<button class="btn btn-default btn-xs item_button_remove" data-toggle="modal" data-target="#dialog-crud"><span class="glyphicon glyphicon-trash"></span> Remove
+						</button>
+            			<button class="btn btn-default btn-xs item_button_edit" data-toggle="modal" data-target="#dialog-crud"><span class="glyphicon glyphicon-pencil"></span> Edit
+            			</button>
+					</div>
+					<h4 class="list-group-item-heading">
+						{{name}}
+					</h4>
+				</a>
+			{{else}}
+				<div class="alert alert-warning" role="alert">Vacio
+					<a href="{$settings->site_path}/wallets/add" class="btn btn-primary btn-xs" id="add_wallet_button">
+					Add</a>
+				</div>
+			{{/each}}
+			</div>
+		</div>
+
+		<div class="col-xs-12 col-md-3">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Actions</h3>
+				</div>
+				<div class="panel-body">
+					<ul class="nav nav-pills nav-stacked">
+						<li><a href="#" class="add_phase" data-status="active" data-toggle="modal" data-target="#dialog-crud"><span class="glyphicon glyphicon-plus"></span> Add </a></li>
+					</ul>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+</script>

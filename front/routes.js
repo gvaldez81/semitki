@@ -19,7 +19,7 @@ let SemitkiRouter = Backbone.Router.extend({
     "accountinfo": "accountinfo",
     "pricing": "pricing",
     "grouppedaccounts": "grouppedaccounts",
-    "grouppeda": "grouppeda"
+    "phases": "phases"
   },
 
 
@@ -157,5 +157,12 @@ let SemitkiRouter = Backbone.Router.extend({
       view.render();
     });
   },
+
+  phases:() => {
+      S.refreshToken(() => {
+      let view = new PhaseView();
+      view.render();
+    });
+  }
 
 });
