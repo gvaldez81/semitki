@@ -2,77 +2,61 @@
 
 
 <div class="container">
-  <form class="form-horizontal">
-    <fieldset>
+  <ul class="breadcrumb">
+    <li><a href="{$settings->site_path}">Dash board</a></li>
+    <li class="active">Users</li>
+  </ul>
 
-  <legend>User</legend>
 
-  <div class="form-group">
-    <span class="col-md-4"></span> <!-- Damn ugly hack, why in the hell there is not a master layout? -->
-    <div class="col-md-6">
-      <select class="form-control" id="userFinder">
-        {{#each users}}
-        <option value="{{id}}">{{username}}</option>
-        {{/each}}
-        </option>
-      </select>
-    </div>
-  </div>
+  <div class="row">
+    <div class="col-xs-12 col-md-9">
+      <div class="list-group crud_item" id="phases_items">
+      {{#each users}}
+        <a  class="list-group-item item" id="{{id}}" style="background: #eee"  >
+            <div class="pull-right"><strong>{{@index}}</strong></div>
 
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="username">User name</label>
-    <div class="col-md-6">
-      <input type="text" class="form-control" id="username">
-    </div>
-  </div>
+            <div class="item_buttons hideme crud_buttons">
 
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="email">E-mail</label>
-    <div class="col-md-6">
-      <input id="email" type="text" placeholder="mail@example.com"
-      class="form-control">
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="fname">First name</label>
-    <div class="col-md-6">
-      <input id="fname" type="text" placeholder="Name"
-      class="form-control">
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="lname">Last name</label>
-    <div class="col-md-6">
-      <input id="lname" type="text" placeholder="Last Name"
-      class="form-control">
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="rad">Tipo de usuario</label>
-    <div class="col-md-4">
-      <div class="radio">
-        <label class="radio-inline"><input type="radio" id="oper"
-        value="False">Operator</label>
-        <label class="radio-inline"><input type="radio" id="staff"
-        value="true">Administrator</label>
+            <button class="btn btn-default btn-xs item_button_remove" data-toggle="modal" data-target="#dialog-crud"><span class="glyphicon glyphicon-trash"></span> Remove
+            </button>
+                  <button class="btn btn-default btn-xs item_button_edit" data-toggle="modal" data-target="#dialog-crud"><span class="glyphicon glyphicon-pencil"></span> Edit
+                  </button>
+          </div>
+          <h4 class="list-group-item-heading">
+            {{username}}
+          </h4>
+        </a>
+      {{else}}
+        <div class="alert alert-warning" role="alert">Vacio
+          <a href="{$settings->site_path}/wallets/add" class="btn btn-primary btn-xs" id="add_wallet_button">
+          Add</a>
+        </div>
+      {{/each}}
       </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="Save"></label>
-    <div class="col-md-8">
-      <button type="button" id="save"
-      class="btn btn-primary">Save</button>
-      <button type="button" id="delete"
-      class="btn btn-danger">Delete</button>
+    <div class="col-xs-12 col-md-3">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Actions</h3>
+        </div>
+        <div class="panel-body">
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="#" class="add_campaign" data-status="active" data-toggle="modal" data-target="#dialog-crud"><span class="glyphicon glyphicon-plus"></span> Add </a></li>
+          </ul>
+        </div>
+      </div>
+
     </div>
   </div>
 
-   </fieldset>
-  </form>
+{{!--   <div class="hidden">
+    <span id="tour_step_0">{t}Here is quick introdution to DimeShift.<br><br>Our demo robot has created few sample wallets for you to check out.{/t}</span>
+    <span id="tour_step_1">{t}But you can add as many as you want.<br><br>Different name, different currencies{/t}</span>
+    <span id="tour_step_2">{t}There're few options availiable when you move your mouse over your wallet.<br><br>
+    But lets jump directly to wallet page.<br><br>Click any row to jump to it.
+    {/t}</span>
+  </div> --}}
+
 </div>
 </script>

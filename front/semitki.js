@@ -22,6 +22,7 @@ let S = {
     this.collection.set("groups", new Groups());
     this.collection.set("account_groups", new AccountGroups());
     this.collection.set("posts", new Posts());
+    this.collection.set("user", new Users());
     this.user = new UserModel();                      // Signed in user
     if(sessionStorage.getItem("user")) {
       this.user.set(JSON.parse(sessionStorage.user));
