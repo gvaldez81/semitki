@@ -113,6 +113,7 @@ let LoginView = Backbone.View.extend({
   },
 
   render: function() {
+    console.log(location.search);
 /*    let data = {*/
       //t: {
         //"use_other_account": S.polyglot.t("login.use_other_account")
