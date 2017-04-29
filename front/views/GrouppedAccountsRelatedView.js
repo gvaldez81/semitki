@@ -2,7 +2,7 @@
 
 let GrouppedAccountsRelatedView = Backbone.View.extend({
   tagName: "div",
-  className: "col-md-6 col-md-offset-3",
+  className: "col-xs-6",
 
   initialize: function () {
     this.navigation = new NavigationView();
@@ -15,7 +15,7 @@ let GrouppedAccountsRelatedView = Backbone.View.extend({
     let data = {
       groups: S.collection.get("groups").toJSON()
     };
-    if (S.collection.get("related") !== undefined) {
+    if (S.collection.get("related")!== undefined) {
       data.groupped = S.collection.get("related").toJSON()
 
     }
@@ -31,10 +31,10 @@ let GrouppedAccountsRelatedView = Backbone.View.extend({
 
       return null;
     });
-    let template = $("#grouppedaccount-related").html();
+    let template = $("#grouppedaccounts-related").html();
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled(data));
-    $("#relateaccount").html(this.$el);
+     $("#related").html(this.$el);
     return this;
 
   }

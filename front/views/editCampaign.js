@@ -24,10 +24,10 @@ let editCampaign = Backbone.View.extend({
 
 
   render: function(){
-    let template = $("#campaign-modal").html();
+    let template = $("#campaign-modal-edit").html();
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled(this.data));
-    $("#dialog").html(this.$el);
+    $("#dialog-crud").html(this.$el);
   },
 
 

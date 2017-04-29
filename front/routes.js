@@ -169,11 +169,4 @@ let SemitkiRouter = Backbone.Router.extend({
     });
   },
 
-  grouppeda: () => {
-    S.refreshToken(() => {
-      let view = new GrouppedARView();
-      view.render();
-    });
-  }
-
 });
