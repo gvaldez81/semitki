@@ -20,7 +20,7 @@ let hideCampaign = Backbone.View.extend({
     let template = $("#campaign-modal-hide").html();
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled(this.data));
-    $("#dialog-hide").html(this.$el);
+    $("#dialog-crud").html(this.$el);
   },
 
 

@@ -26,7 +26,8 @@ let CampaignView = Backbone.View.extend({
   },
 
   addItem: () => {
-    //Ir a la vista detalle
+    let dialog = new addCampaign();
+    dialog.render();
   },
 
   editItem: function(ev) {

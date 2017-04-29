@@ -9,6 +9,7 @@ let SemitkiRouter = Backbone.Router.extend({
     "dashboard": "dashboard",
     "groups": "groups",
     "groupedaccounts": "groupedAccounts",
+    "landing": "landing",
     "accounts": "accounts",
     "about": "about", // TODO Check if still used
     "user": "user",
@@ -41,9 +42,12 @@ let SemitkiRouter = Backbone.Router.extend({
         //return false;
       });
     } else {
-      S.router.navigate("", {
-        trigger: true
-      });
+      if(callback === this.landing) {
+        S.router.navigate("landing", {trigger: true});
+        this.landing();
+      } else {
+        S.router.navigate("", {trigger: true});
+      }
     }
   },
 
@@ -80,6 +84,13 @@ let SemitkiRouter = Backbone.Router.extend({
       view.render();
     });
   },
+
+
+  landing: () => {
+    let view = new LandingPageView();
+    view.render();
+  },
+
 
   accounts: () => {
     S.refreshToken(() => {
