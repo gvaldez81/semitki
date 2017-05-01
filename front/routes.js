@@ -20,7 +20,7 @@ let SemitkiRouter = Backbone.Router.extend({
     "accountinfo": "accountinfo",
     "pricing": "pricing",
     "grouppedaccounts": "grouppedaccounts",
-    "phases": "phases"
+    "phases": "phases",
   },
 
 
