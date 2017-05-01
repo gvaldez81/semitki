@@ -34,21 +34,20 @@ let PhaseView = Backbone.View.extend({
     let dialog = new editPhaseView({item: new Array(S.collection.get("phases").get(id).toJSON())});
     dialog.render();
   },
-/*
+
   hideItem: function(ev) {
     let id = $(ev.currentTarget).parents('.item')[0].id;
-    let dialog = new hideCampaign({item: new Array(S.collection.get("phase").get(id).toJSON())});
+    let dialog = new hidePhaseView({item: new Array(S.collection.get("phases").get(id).toJSON())});
     dialog.render();
-    //return false;
   },
 
   delete: () => {
-    let phases = S.collection.get("phase");
-    let phase = phases.get($("#campaignFinder").val());
-    campaigns.sync("delete", campaign, S.addAuthorizationHeader());
+    let phases = S.collection.get("phases");
+    //let phase = phases.get($("#campaignFinder").val());
+    campaigns.sync("delete", phases, S.addAuthorizationHeader());
     //recargar el listado.
   },
-*/
+
   render: function(){
     this.modal.render();
     this.modal_add.render();
