@@ -1,13 +1,14 @@
 'use strict'
 
-let addPhaseView = Backbone.View.extend({
+let hideUserView = Backbone.View.extend({
   tagName: "div",
 
 
   className: "modal-dialog",
 
   events: {
-    "submit form": "onSubmit"
+    "submit form": "onSubmit",
+    "click .process_button": "doProcess"
   },
 
 
@@ -15,10 +16,8 @@ let addPhaseView = Backbone.View.extend({
     this.data = data || undefined;
   },
 
-
-
   render: function(){
-    let template = $("#phase-modal-add").html();
+    let template = $("#user-modal-hide").html();
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled(this.data));
     $("#dialog-crud").html(this.$el);

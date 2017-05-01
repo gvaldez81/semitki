@@ -1,6 +1,6 @@
 'use strict'
 
-let addPhaseView = Backbone.View.extend({
+let addUserView = Backbone.View.extend({
   tagName: "div",
 
 
@@ -18,7 +18,7 @@ let addPhaseView = Backbone.View.extend({
 
 
   render: function(){
-    let template = $("#phase-modal-add").html();
+    let template = $("#user-modal-add").html();
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled(this.data));
     $("#dialog-crud").html(this.$el);
