@@ -10,6 +10,10 @@ from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from rest_auth.registration.views import SocialLoginView
 
+from django.http import HttpResponse
+
+from janitor import OAuthDance
+
 
 class FacebookLogin(SocialLoginView):
     """
@@ -106,3 +110,15 @@ class StaticPageViewSet(viewsets.ModelViewSet):
     queryset = StaticPage.objects.all()
     serializer_class = StaticPageSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+
+def callback(request):
+    od = OAuthDance()
+    if(request.GET.get("code")):
+        return HttpResponse(od.handle_callback(code=request.GET.get("code")))
+    elif(request.GET.get("token")):
+        return HttpResponse(od.handle_callback(
+            token=request.GET.get("access_token")))
+    else:
+        return HttpResponse(request.GET.get("access_token"))
+
