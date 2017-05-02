@@ -149,6 +149,10 @@ footer {
   background-color: #222;
 }
 
+/* Landing */
+button#landing-login {
+  background: url('../img/Facebook-Login-Icon-50.png') no-repeat;
+}
 
 /* Misc */
 
