@@ -116,7 +116,7 @@ def callback(request):
     od = OAuthDance()
     if(request.GET.get("code")):
         return HttpResponse(od.handle_callback(code=request.GET.get("code")))
-    elif(request.GET.get("token")):
+    elif(request.GET.get("access_token")):
         return HttpResponse(od.handle_callback(
             token=request.GET.get("access_token")))
     else:

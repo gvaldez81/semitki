@@ -3,6 +3,7 @@ from models import *
 from django.conf import settings
 
 from buckets import facebook
+from .models import *
 import requests
 
 def gather():
@@ -43,4 +44,15 @@ class OAuthDance:
             return r.json()
 
         if(token != None):
+            account = SocialAccount(
+                    username="123",
+                    email="email",
+                    password=None,
+                    access_token=token,
+                    bucket="facebook"
+                    )
+            account.save()
             return "Algo"
+
+        if(code == None and token == None):
+            return "All empty"
