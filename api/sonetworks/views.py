@@ -10,6 +10,13 @@ from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from rest_auth.registration.views import SocialLoginView
 
+from django.http import HttpResponse
+
+from janitor import OAuthDance
+
+from requests_oauthlib import OAuth2Session
+from requests_oauthlib.compliance_fixes import facebook_compliance_fix
+
 
 class FacebookLogin(SocialLoginView):
     """
@@ -67,7 +74,7 @@ class SocialAccountViewSet(viewsets.ModelViewSet):
     """
     queryset = SocialAccount.objects.all()
     serializer_class = SocialAccountSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.AllowAny,)
 
 class SocialGroupViewSet(viewsets.ModelViewSet):
     """
@@ -106,3 +113,21 @@ class StaticPageViewSet(viewsets.ModelViewSet):
     queryset = StaticPage.objects.all()
     serializer_class = StaticPageSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+
+def callback(request):
+    if request.GET.get("code"):
+        return HttpResponse(request.GET.get("code"))
+
+    return HttpResponse(request.GET.get("access_token"))
+#     client_id = settings.SOCIAL_AUTH_FACEBOOK_KEY
+    # client_secret = settings.SOCIAL_AUTH_FACEBOOK_SECRET
+    # authorization_base_url = 'https://www.facebook.com/dialog/oauth'
+    # token_url = 'https://graph.facebook.com/v2.9/oauth/access_token'
+    # redirect_uri = 'http://localhost:8000/callback/'
+
+    # facebook = OAuth2Session(client_id)
+    # token = facebook.fetch_token(token_url, client_secret=client_secret,
+            # code=request.GET.get("code"))
+
+    # return HttpResponse(token)
