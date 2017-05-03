@@ -183,4 +183,7 @@ div.finder {
   z-index: 300 !important;
 }
 
+.connectedSortable { background-color: #fff }
+.connectedSortable td {  background-color: #eee }
+
 

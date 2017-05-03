@@ -41,12 +41,36 @@ let GrouppedAccountsView = Backbone.View.extend({
     });
     data.free = cuentasfree;
 
+
+
+
     let template = $("#grouppedaccounts").html();
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled(data));
     $("#main").html(this.$el);
     this.related.render();
 
+    let $tabs = $('#table-related')
+    $("tbody.connectedSortable")
+        .sortable({
+            connectWith: ".connectedSortable",
+            items: "> tr:not(:first)",
+            appendTo: $tabs,
+            helper: "clone",
+            zIndex: 999990
+        })
+        .disableSelection();
+
+    let $tab_items = $(".nav-tabs > li", $tabs).droppable({
+        accept: ".connectedSortable tr",
+        hoverClass: "ui-state-hover",
+        drop: function (event, ui) {
+            //ACTUALIZCION
+            return false;
+        }
+    });
+    
+    
     return this;
   }
 });
