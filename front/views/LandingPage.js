@@ -2,9 +2,9 @@
 
 let LandingPageView = Backbone.View.extend({
 
-  tagName: "form",
+  tagName: "div",
 
-  className: "form-signin",
+  className: "row",
 
 
   events: {
@@ -13,8 +13,8 @@ let LandingPageView = Backbone.View.extend({
 
 
   initialize: function() {
-    this.footer = new FooterView();
-    S.toggleNavigation();
+    //this.footer = new FooterView();
+    //S.toggleNavigation();
     S.sessionDestroy();
   },
 
@@ -56,7 +56,7 @@ let LandingPageView = Backbone.View.extend({
     let template = $("#landing-template").html();
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled);
-    $("#main").html(this.$el);
+    $("#landing").html(this.$el);
     return this;
   }
 });
