@@ -152,6 +152,14 @@ footer {
 /* Landing */
 button#landing-login {
   background: url('../img/Facebook-Login-Icon-50.png') no-repeat;
+  border: none;
+  padding: 20px 90px;
+}
+/* Landing TW*/
+button#landing-login-tw {
+  background: url('../img/Twitter-Login-Icon-50.png') no-repeat;
+  border: none;
+  padding: 20px 90px;
 }
 
 /* Misc */
