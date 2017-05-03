@@ -56,7 +56,7 @@ let LandingPageView = Backbone.View.extend({
     let template = $("#landing-template").html();
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled);
-    $("#landing").html(this.$el);
+    $("body").html(this.$el);
     return this;
   }
 });
