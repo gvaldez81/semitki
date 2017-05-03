@@ -7,7 +7,7 @@ let addGroupsView = Backbone.View.extend({
   className: "modal-dialog",
 
   events: {
-    "submit form": "onSubmit"
+    "click #save": "saveGroup"
   },
 
 
@@ -15,6 +15,29 @@ let addGroupsView = Backbone.View.extend({
     this.data = data || undefined;
   },
 
+  saveGroup:() =>{
+
+    let data = {
+
+      first_name: $("#input_name").val(),
+      last_name: $("#input_description").val(),
+
+    };
+
+    let group = new Group(data);
+    S.collection.get("groups")
+      .add(group)
+      .sync("create", group, S.addAuthorizationHeader());
+    console.log("savegroup")
+    //Cerramos modal
+    $('#dialog-crud').modal('hide')
+    //Abrimos modal de success
+    bootbox.alert({
+      message: "Group saved",
+      size: 'small',
+      className: 'rubberBand animated'
+    });
+  },
 
 
   render: function(){

@@ -11,7 +11,7 @@ let PhaseView = Backbone.View.extend({
   initialize: function() {
     this.navigation = new NavigationView();
     this.footer = new FooterView();
-    this.modal = new editPhaseView();
+    this.modal_edit = new editPhaseView();
     this.modal_add = new addPhaseView();
   },
 
@@ -45,21 +45,21 @@ let PhaseView = Backbone.View.extend({
     let phases = S.collection.get("phases");
     //let phase = phases.get($("#campaignFinder").val());
     campaigns.sync("delete", phases, S.addAuthorizationHeader());
-    //recargar el listado.
   },
 
   render: function(){
-    this.modal.render();
+    this.modal_edit.render();
     this.modal_add.render();
-    let data = {
-      phase: S.collection.get("phases").toJSON()
-    };
 
-    let template = $("#phase-template").html();
-    let compiled = Handlebars.compile(template);
-    this.$el.html(compiled(data));
-    $("#main").html(this.$el);
-    S.showButtons();
-    return this;
+      let data = {
+        phase: S.collection.get("phases").toJSON()
+      };
+
+      let template = $("#phase-template").html();
+      let compiled = Handlebars.compile(template);
+      this.$el.html(compiled(data));
+      $("#main").html(this.$el);
+      S.showButtons();
+      return this;
   }
 });
