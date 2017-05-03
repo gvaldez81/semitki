@@ -2,42 +2,52 @@
 
 
 <div class="container">
-  <form class="form-horizontal">
-      <fieldset>
-      <legend>Groups</legend>
-    <div class="form-group">
-      <div class="col-md-4"></div>
-      <div class="col-md-6">
-        <select class="form-control" id="groupFinder">
-        {{#each groups}}
-          <option value="{{id}}">{{name}}<option>
-        {{/each}}
-        </select>
+  <ul class="breadcrumb">
+    <li><a href="#scheduler">Dash board</a></li>
+    <li class="active">Users</li>
+  </ul>
+
+
+  <div class="row">
+    <div class="col-xs-12 col-md-9">
+      <div class="list-group crud_item" id="phases_items">
+      {{#each groups}}
+        <a  class="list-group-item item" id="{{id}}" style="background: #eee"  >
+            <div class="pull-right"><strong>{{@index}}</strong></div>
+
+            <div class="item_buttons hideme crud_buttons">
+
+            <button class="btn btn-default btn-xs item_button_remove" data-toggle="modal" data-target="#dialog-crud"><span class="glyphicon glyphicon-trash"></span> Remove
+            </button>
+                  <button class="btn btn-default btn-xs item_button_edit" data-toggle="modal" data-target="#dialog-crud"><span class="glyphicon glyphicon-pencil"></span> Edit
+                  </button>
+          </div>
+          <h4 class="list-group-item-heading">
+            {{name}}
+          </h4>
+        </a>
+      {{else}}
+        <div class="alert alert-warning" role="alert">Vacio
+          <a href="#" class="btn btn-primary btn-xs" id="add_wallet_button">
+          Add</a>
+        </div>
+      {{/each}}
       </div>
     </div>
-    <div class="form-group">
-      <label class="control-label col-md-4" for="name">Name</label>
-      <div class="col-md-6">
-        <input type="text" class="form-control" id="name" placeholder="Name">
+
+    <div class="col-xs-12 col-md-3">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Actions</h3>
+        </div>
+        <div class="panel-body">
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="#" class="add_group" data-status="active" data-toggle="modal" data-target="#dialog-crud"><span class="glyphicon glyphicon-plus"></span> Add </a></li>
+          </ul>
+        </div>
       </div>
+
     </div>
-    <div class="form-group">
-      <label class="control-label col-md-4" for="description">Description</label>
-      <div class="col-md-6">
-        <input type="text" class="form-control" id="description"
-        placeholder="Descripton">
-      </div>
-    </div>
-    <div class="form-group">
-    <label class="col-md-4 control-label" for="Save"></label>
-    <div class="col-md-8">
-      <button type="button" id="save"
-      class="btn btn-primary">Save</button>
-      <button type="button" id="delete"
-      class="btn btn-danger">Delete</button>
-    </div>
-    </div>
-    </fieldset>
-  </form>
+  </div>
 </div>
 </script>

@@ -1,17 +1,17 @@
-<script type="text/x-handlebars-template" id="campaign-template">
+<script type="text/x-handlebars-template" id="phase-template">
 
 
 <div class="container">
 	<ul class="breadcrumb">
 	  <li><a href="#scheduler">Dash board</a></li>
-	  <li class="active">Campaigns</li>
+	  <li class="active">Phases</li>
 	</ul>
 
 
 	<div class="row">
 		<div class="col-xs-12 col-md-9">
 			<div class="list-group crud_item" id="phases_items">
-			{{#each campaigns}}
+			{{#each phase}}
 				<a  class="list-group-item item" id="{{id}}" style="background: #eee"  >
 				    <div class="pull-right"><strong>{{@index}}</strong></div>
 
@@ -42,21 +42,12 @@
 				</div>
 				<div class="panel-body">
 					<ul class="nav nav-pills nav-stacked">
-						<li><a href="#" class="add_campaign" data-status="active" data-toggle="modal" data-target="#dialog-crud"><span class="glyphicon glyphicon-plus"></span> Add</a></li>
+						<li><a href="#" class="add_phase" data-status="active" data-toggle="modal" data-target="#dialog-crud"><span class="glyphicon glyphicon-plus"></span> Add </a></li>
 					</ul>
 				</div>
 			</div>
 
 		</div>
 	</div>
-
-{{!-- 	<div class="hidden">
-		<span id="tour_step_0">{t}Here is quick introdution to DimeShift.<br><br>Our demo robot has created few sample wallets for you to check out.{/t}</span>
-		<span id="tour_step_1">{t}But you can add as many as you want.<br><br>Different name, different currencies{/t}</span>
-		<span id="tour_step_2">{t}There're few options availiable when you move your mouse over your wallet.<br><br>
-		But lets jump directly to wallet page.<br><br>Click any row to jump to it.
-		{/t}</span>
-	</div> --}}
-
 </div>
 </script>

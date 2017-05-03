@@ -13,8 +13,8 @@ let Phase = Backbone.Model.extend({
   },
 
 url: () => {
-    //return "/phase/" + this.id;
-    return apiBuilder("post");
+    return "/phase/" + this.id;
+    //return apiBuilder("post");
   }
 
 
