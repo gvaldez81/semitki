@@ -32,8 +32,10 @@ let UserView = Backbone.View.extend({
       first_name: $("#fname").val(),
       last_name: $("#lname").val()
     };
+
     let user = new UserModel();
     user.save(data, S.addAuthorizationHeader());
+    
   },
 
   delete: () => {
