@@ -11,8 +11,6 @@ let Campaign = Backbone.Model.extend({
     }
   },
 
-  url: () => {
-    return "/campaign/" + this.id;
-  }
+
 
 });

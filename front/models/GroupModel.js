@@ -12,8 +12,4 @@ let Group = Backbone.Model.extend({
     }
   },
 
-  url: () => {
-    return "/group/" + this.id;
-  }
-
 });

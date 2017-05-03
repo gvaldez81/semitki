@@ -7,9 +7,33 @@ let addUserView = Backbone.View.extend({
   className: "modal-dialog",
 
   events: {
-    "submit form": "onSubmit"
+    "click #save": "saveUser"
   },
 
+   saveUser:() =>{
+
+    let data = {
+
+      first_name: $("#input_fname").val(),
+      last_name: $("#input_lname").val(),
+      email: $("#input_email").val(),
+      username: $("#input_username").val()
+    };
+
+    let user = new UserModel(data);
+    S.collection.get("user")
+      .add(user)
+      .sync("create", user, S.addAuthorizationHeader());
+    console.log("saveuser")
+    //Cerramos modal
+    $('#dialog-crud').modal('hide')
+    //Abrimos modal de success
+    bootbox.alert({
+      message: "User saved",
+      size: 'small',
+      className: 'rubberBand animated'
+    });
+  },
 
   initialize: function(data) {
     this.data = data || undefined;

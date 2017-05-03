@@ -6,14 +6,39 @@ let addCampaign = Backbone.View.extend({
 
   className: "modal-dialog",
 
-  events: {
-    "submit form": "onSubmit"
-  },
-
-
-  initialize: function(data) {
+    initialize: function(data) {
     this.data = data || undefined;
   },
+
+
+  events: {
+    "click #save": "saveCampaign"
+  },
+
+
+
+  saveCampaign:() =>{
+    let data = {
+      name: $("#input_name").val(),
+      description: $("#input_description").val()
+    };
+
+    let campaign = new Campaign(data);
+    S.collection.get("campaigns")
+      .add(campaign)
+      .sync("create", campaign, S.addAuthorizationHeader());
+    console.log("saveCampaign")
+    //Cerramos modal
+    $('#dialog-crud').modal('hide')
+    //Abrimos modal de success
+    bootbox.alert({
+      message: "Campaign saved",
+      size: 'small',
+      className: 'rubberBand animated'
+    });
+  },
+
+
 
 
 
