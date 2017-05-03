@@ -17,8 +17,10 @@ let GrouppedAccountsRelatedView = Backbone.View.extend({
     };
     if (S.collection.get("related")!== undefined) {
       data.groupped = S.collection.get("related").toJSON()
-
+      data.groupname=S.collection.get("related").toJSON()[0].name
+    
     }
+
     Handlebars.registerHelper('lookup2', function (collection, id) {
       var collectionLength = collection.length;
 
@@ -31,10 +33,33 @@ let GrouppedAccountsRelatedView = Backbone.View.extend({
 
       return null;
     });
+
     let template = $("#grouppedaccounts-related").html();
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled(data));
      $("#related").html(this.$el);
+
+    let $tabs = $('#table-related')
+    $("tbody.connectedSortable")
+        .sortable({
+            connectWith: ".connectedSortable",
+            items: "> tr:not(:first)",
+            appendTo: $tabs,
+            helper: "clone",
+            zIndex: 999990
+        })
+        .disableSelection();
+
+    let $tab_items = $(".nav-tabs > li", $tabs).droppable({
+        accept: ".connectedSortable tr",
+        hoverClass: "ui-state-hover",
+        drop: function (event, ui) {
+            //ACTUALIZCION
+            return false;
+        }
+    });
+
+    
     return this;
 
   }

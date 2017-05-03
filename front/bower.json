@@ -26,6 +26,8 @@
     "bootstrap-wysiwyg": "*",
     "bootstrap-calendar": "^0.2.5",
     "requirejs": "^2.3.3",
-    "bootstrap-submenu": "^2.0.4"
+    "bootstrap-submenu": "^2.0.4",
+    "jquery-ui": "^1.12.1",
+    "bootbox.js": "bootbox#^4.4.0"
   }
 }
