@@ -30,8 +30,6 @@
     "jquery-ui": "^1.12.1",
     "bootbox.js": "bootbox#^4.4.0",
     "components-font-awesome": "^4.7.0",
-    "bower": "*",
-    "install": "^1.0.4",
     "glyphicons-halflings": "*"
   }
 }
