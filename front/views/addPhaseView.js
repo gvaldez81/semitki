@@ -15,7 +15,10 @@ let addPhaseView = Backbone.View.extend({
 
     let data = {
       name: $("#input_name").val(),
-      description: $("#input_description").val()
+      description: $("#input_description").val(),
+      //TODO 
+      campaign: "http:"+apiBuilder("campaign/"+$("#campaign").val())
+
     };
 
     let phase = new Phase(data);
@@ -40,9 +43,15 @@ let addPhaseView = Backbone.View.extend({
 
 
   render: function(){
+         let data = {
+        
+      campaign: S.collection.get("campaigns").toJSON()
+ 
+      };
+
     let template = $("#phase-modal-add").html();
     let compiled = Handlebars.compile(template);
-    this.$el.html(compiled(this.data));
+    this.$el.html(compiled(data));
     $("#dialog-crud").html(this.$el);
   },
 
