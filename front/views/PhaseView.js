@@ -52,7 +52,9 @@ let PhaseView = Backbone.View.extend({
     this.modal_add.render();
 
       let data = {
-        phase: S.collection.get("phases").toJSON()
+
+      phase: S.collection.get("phases").toJSON(),
+
       };
 
       let template = $("#phase-template").html();
