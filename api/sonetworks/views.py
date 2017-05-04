@@ -1,3 +1,4 @@
+import os
 from django.contrib.auth.models import User, Group
 from rest_framework.decorators import detail_route
 from rest_framework import viewsets
@@ -14,8 +15,10 @@ from django.http import HttpResponse
 
 from janitor import OAuthDance
 
+import requests
 from requests_oauthlib import OAuth2Session
 from requests_oauthlib.compliance_fixes import facebook_compliance_fix
+from oauthlib.oauth2 import BackendApplicationClient
 
 
 class FacebookLogin(SocialLoginView):
@@ -116,18 +119,21 @@ class StaticPageViewSet(viewsets.ModelViewSet):
 
 
 def callback(request):
-    if request.GET.get("code"):
-        return HttpResponse(request.GET.get("code"))
+    # Set to 0 for production, 1 is for development only
+    os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
-    return HttpResponse(request.GET.get("access_token"))
-#     client_id = settings.SOCIAL_AUTH_FACEBOOK_KEY
-    # client_secret = settings.SOCIAL_AUTH_FACEBOOK_SECRET
-    # authorization_base_url = 'https://www.facebook.com/dialog/oauth'
-    # token_url = 'https://graph.facebook.com/v2.9/oauth/access_token'
-    # redirect_uri = 'http://localhost:8000/callback/'
+    client_id = settings.SOCIAL_AUTH_FACEBOOK_KEY
+    client_secret = settings.SOCIAL_AUTH_FACEBOOK_SECRET
+    graph_url = 'https://graph.facebook.com/'
+    token_url = graph_url + 'v2.9/oauth/access_token'
+    client = BackendApplicationClient(client_id = client_id)
+    oauth = OAuth2Session(client = client)
+    token = oauth.fetch_token(token_url = token_url,
+            client_id = client_id, client_secret = client_secret)
 
-    # facebook = OAuth2Session(client_id)
-    # token = facebook.fetch_token(token_url, client_secret=client_secret,
-            # code=request.GET.get("code"))
+    payload = {"access_token": token['access_token']}
+    account = requests.get(graph_url + 'me', params = payload)
 
-    # return HttpResponse(token)
+    #return HttpResponse(account.text)
+    #return HttpResponse(account.url)
+    return HttpResponse(request.GET.get("code"))
