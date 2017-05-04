@@ -121,7 +121,7 @@ def callback(request):
     # Set to 0 for production, 1 is for development only
     os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
     client_id = settings.SOCIAL_AUTH_FACEBOOK_KEY
-    client_secret=settings.SOCIAL_AUTH_FACEBOOK_SECRET
+    client_secret = settings.SOCIAL_AUTH_FACEBOOK_SECRET
     token_url ='https://graph.facebook.com/v2.9/oauth/access_token'
     client = BackendApplicationClient(client_id = client_id)
     oauth = OAuth2Session(client = client)

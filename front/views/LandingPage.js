@@ -8,7 +8,7 @@ let LandingPageView = Backbone.View.extend({
 
 
   events: {
-    "click #landing-login": "fbLogin"
+    "click #landing-login": "fbManualLogin"
   },
 
 
@@ -16,6 +16,15 @@ let LandingPageView = Backbone.View.extend({
     //this.footer = new FooterView();
     //S.toggleNavigation();
     S.sessionDestroy();
+  },
+
+
+  fbManualLogin: () => {
+    location.assign("https://www.facebook.com/v2.9/dialog/oauth?client_id="
+      + SEMITKI_CONFIG.fb_app_id
+      + "&redirect_uri=http://localhost:8000/callback"
+      + "&state=XyZ"
+      );
   },
 
 
