@@ -24,7 +24,7 @@ let LandingPageView = Backbone.View.extend({
       + SEMITKI_CONFIG.fb_app_id
       + "&redirect_uri=http://localhost:8000/callback"
       + "&state=XyZ"
-      );
+      + "&scope=public_profile,email,publish_actions");
   },
 
 

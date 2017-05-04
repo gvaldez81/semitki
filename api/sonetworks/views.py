@@ -15,6 +15,7 @@ from django.http import HttpResponse
 
 from janitor import OAuthDance
 
+import requests
 from requests_oauthlib import OAuth2Session
 from requests_oauthlib.compliance_fixes import facebook_compliance_fix
 from oauthlib.oauth2 import BackendApplicationClient
@@ -120,12 +121,19 @@ class StaticPageViewSet(viewsets.ModelViewSet):
 def callback(request):
     # Set to 0 for production, 1 is for development only
     os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
+
     client_id = settings.SOCIAL_AUTH_FACEBOOK_KEY
     client_secret = settings.SOCIAL_AUTH_FACEBOOK_SECRET
-    token_url ='https://graph.facebook.com/v2.9/oauth/access_token'
+    graph_url = 'https://graph.facebook.com/'
+    token_url = graph_url + 'v2.9/oauth/access_token'
     client = BackendApplicationClient(client_id = client_id)
     oauth = OAuth2Session(client = client)
     token = oauth.fetch_token(token_url = token_url,
             client_id = client_id, client_secret = client_secret)
 
-    return HttpResponse(token['access_token'])
+    payload = {"access_token": token['access_token']}
+    account = requests.get(graph_url + 'me', params = payload)
+
+    #return HttpResponse(account.text)
+    #return HttpResponse(account.url)
+    return HttpResponse(request.GET.get("code"))
