@@ -9,6 +9,7 @@ let Phase = Backbone.Model.extend({
       "description": undefined,
       "isactive": undefined,
       "valid_to": undefined,
+      "campaign": undefined
     }
   },
 

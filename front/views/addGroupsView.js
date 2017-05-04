@@ -19,8 +19,8 @@ let addGroupsView = Backbone.View.extend({
 
     let data = {
 
-      first_name: $("#input_name").val(),
-      last_name: $("#input_description").val(),
+      name: $("#input_name").val(),
+      description: $("#input_description").val(),
 
     };
 
