@@ -16,8 +16,6 @@ let addPhaseView = Backbone.View.extend({
     let data = {
       name: $("#input_name").val(),
       description: $("#input_description").val(),
-      isactive: "false",
-      //TODO 
       campaign: "http:"+apiBuilder("campaign/"+$("#campaign").val())
 
     };
@@ -35,9 +33,9 @@ let addPhaseView = Backbone.View.extend({
       size: 'small',
       className: 'rubberBand animated'
     });
-
-    let fatherV = new PhaseView();
-    fatherV.render();
+    _.debounce(S.collection.get("phases").fetch({reset: true}), 300)
+    let phaseView = new PhaseView();
+    phaseView.render();
   },
 
   initialize: function(data) {
