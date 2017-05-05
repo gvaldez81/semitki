@@ -28,7 +28,8 @@ let LandingPageView = Backbone.View.extend({
   },
 
 
-  fbLogin: () => {
+  fbLogin: (e) => {
+    e.preventDefault(); // Keep default action of button from beign triggered
     FB.login((response) => {
       if(response.status === 'connected') {
 
