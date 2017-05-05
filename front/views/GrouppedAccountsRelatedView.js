@@ -2,7 +2,7 @@
 
 let GrouppedAccountsRelatedView = Backbone.View.extend({
   tagName: "div",
-  className: "col-xs-6",
+  className: "row",
 
   initialize: function () {
     this.navigation = new NavigationView();
