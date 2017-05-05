@@ -186,7 +186,7 @@ SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
             'fields': 'id, name, email'
             }
 
-APPEND_SLASH=False
+#APPEND_SLASH=False
 
 SWAGGER_SETTINGS = {
     'SECURITY_DEFINITIONS': {
