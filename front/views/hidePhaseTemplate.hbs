@@ -7,23 +7,27 @@
         <h4 class="modal-title" id="dialog_label">
         Are you sure that you want to delete phase: {{name}}
         </h4>
+
         {{/each}}
       </div>
       <form method="post" action="hide" role="form">
-      <div class="modal-body modal-body-default" style="padding-bottom: 0;">
-          <p>You will be able to restore it from Trash folder</p>
-        <div class="alert alert-danger errors-container" style="display: none;">
+        <div class="modal-body modal-body-default" style="padding-bottom: 0;">
+            <p>You will be able to restore it from Trash folder</p>
+          <div class="alert alert-danger errors-container" style="display: none;">
+          </div>
+
         </div>
+        <div class="modal-footer">
 
-      </div>
-      <div class="modal-footer">
+          <div class="form-group">
+            {{#each item}}
+              <input type="hidden" id="phase-id" value="{{id}}">
+            {{/each }}  
+            <input id="delete" type="button" class="process_button btn btn-danger pull-left" value="Yes, Hide It" data-loading-text="Removing...">
+            <input id="cancel" type="button" class="btn btn-primary pull-left" value="Cancel" data-loading-text="Canceling...">
+          </div>
 
-        <div class="form-group">
-          <input type="button" class="process_button btn btn-danger pull-left" value="Yes, Hide It" data-loading-text="Removing...">
-          <input type="button" class="btn btn-primary pull-left" value="Cancel" data-loading-text="Canceling...">
         </div>
-
-      </div>
       </form>
   </div>
 

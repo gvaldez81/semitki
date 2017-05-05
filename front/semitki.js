@@ -63,9 +63,15 @@ let S = {
 
 
   addAuthorizationHeader: () => {
+    
     return {
       headers: {'Authorization': S.jwtheader.concat(S.jwtoken())}
     }
+  },
+
+  fixUrl: (modelUrl) => {
+    return modelUrl+(modelUrl.charAt(modelUrl.length - 1) == "/" ? "" : "/");
+    
   },
 
 
