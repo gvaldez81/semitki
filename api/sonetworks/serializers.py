@@ -5,6 +5,12 @@ from rest_auth.registration.serializers import SocialLoginSerializer
 from .models import *
 
 
+class FilteredIsActiveListSerializer(serializers.ListSerializer):
+
+    def to_representation(self, data):
+        data = data.filter(isactive=True)
+        return super(FilteredIsActiveListSerializer, self).to_representation(data)
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -21,6 +27,7 @@ class PostSerializer(serializers.ModelSerializer):
 
 class PhaseSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
+        list_serializer_class = FilteredIsActiveListSerializer
         model = Phase
         fields = ('id', 'url', 'name', 'description', 'isactive', 'valid_to',
                 'campaign')
