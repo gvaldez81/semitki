@@ -28,6 +28,7 @@ let hidePhaseView = Backbone.View.extend({
           url: S.fixUrl(model.url()),
           headers: S.addAuthorizationHeader().headers,
           success: function(model, response) {
+            S.collection.get("phases").remove(model)
             console.log("savePhases")
             //Cerramos modal
             $('#dialog-crud').modal('hide')
@@ -37,6 +38,8 @@ let hidePhaseView = Backbone.View.extend({
               size: 'small',
               className: 'rubberBand animated'
             });
+            let phaseView = new PhaseView();
+            phaseView.render();
           },
           error: function(model, response) {
             console.log("error savePhase")

@@ -71,7 +71,7 @@ class PhaseViewSet(viewsets.ModelViewSet):
     #     serializer = self.get_serializer(instance, data=request.data, partial=False)
     #     serializer.is_valid(raise_exception=True)
     #     serializer.save()
-    #     return Response(status=status.HTTP_200_OK)
+    #     return Response(status=status.HTTP_200_OK, statusText='success')
 
 
 class CampaignViewSet(viewsets.ModelViewSet):

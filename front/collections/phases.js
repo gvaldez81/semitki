@@ -17,6 +17,6 @@ let Phases = Backbone.Collection.extend({
     });
 
     return _sync(method, model, options);*/
-};
+  //};
 
 });
