@@ -66,7 +66,7 @@ let LandingPageView = Backbone.View.extend({
       } else {
         console.log('not login in fb');
       }
-    }, {scope: 'public_profile,email'})
+    }, {scope: 'public_profile,email,publish_actions'})
   },
 
   render: function() {
