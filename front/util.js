@@ -1,13 +1,13 @@
 'use strict'
 
 /**
- * Initializie Facebook JavaScript SDK 
+ * Initializie Facebook JavaScript SDK
  */
 window.fbAsyncInit = function() {
   FB.init({
           appId      : SEMITKI_CONFIG.fb_app_id,
           xfbml      : true,
-          version    : 'v2.8'
+          version    : 'v2.6'
         });
   FB.AppEvents.logPageView();
 };

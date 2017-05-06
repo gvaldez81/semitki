@@ -21,6 +21,7 @@ import requests
 from requests_oauthlib import OAuth2Session
 from requests_oauthlib.compliance_fixes import facebook_compliance_fix
 from oauthlib.oauth2 import BackendApplicationClient
+from oauthlib.oauth2 import WebApplicationClient
 
 
 class FacebookLogin(SocialLoginView):
@@ -136,16 +137,20 @@ def callback(request):
 
     client_id = settings.SOCIAL_AUTH_FACEBOOK_KEY
     client_secret = settings.SOCIAL_AUTH_FACEBOOK_SECRET
+
+    redirect_response = request.get_full_path()
+    redirect_uri = 'http://159.203.134.236:8000/callback/'
     graph_url = 'https://graph.facebook.com/'
-    token_url = graph_url + 'v2.9/oauth/access_token'
-    client = BackendApplicationClient(client_id = client_id)
-    oauth = OAuth2Session(client = client)
-    token = oauth.fetch_token(token_url = token_url,
-            client_id = client_id, client_secret = client_secret)
+    token_url = graph_url + 'oauth/access_token'
+    code = request.GET.get("code")
+    #client = BackendApplicationClient(client_id = client_id)
+    oauth = OAuth2Session(client_id = client_id, 
+		redirect_uri = redirect_uri)
+    oauth = facebook_compliance_fix(oauth)
+    token = oauth.fetch_token(
+             token_url = token_url
+             ,client_secret = client_secret
+             ,authorization_response = redirect_response
+    	    )
 
-    payload = {"access_token": token['access_token']}
-    account = requests.get(graph_url + 'me', params = payload)
-
-    #return HttpResponse(account.text)
-    #return HttpResponse(account.url)
-    return HttpResponse(request.GET.get("code"))
+    return HttpResponse(oauth.get(graph_url + 'me?').content)
