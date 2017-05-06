@@ -8,7 +8,7 @@ let LandingPageView = Backbone.View.extend({
 
 
   events: {
-    "click #landing-login": "fbLogin"
+    "click #landing-login": "fbManualLogin"
   },
 
 
@@ -20,10 +20,10 @@ let LandingPageView = Backbone.View.extend({
 
 
   fbManualLogin: () => {
-    location.assign("https://www.facebook.com/v2.9/dialog/oauth?client_id="
+    location.assign("https://www.facebook.com/v2.8/dialog/oauth?client_id="
       + SEMITKI_CONFIG.fb_app_id
-      + "&redirect_uri=http://localhost:8000/callback"
-      + "&response_type=token"
+      + "&redirect_uri=http://159.203.134.236:8000/callback/"
+      + "&response_type=code"
       + "&scope=public_profile,email,publish_actions");
   },
 
