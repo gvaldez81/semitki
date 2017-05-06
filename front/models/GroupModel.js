@@ -1,7 +1,7 @@
 'use strict'
 
 let Group = Backbone.Model.extend({
-
+  idAttribute: "id",
 
   defaults: () => {
     return {

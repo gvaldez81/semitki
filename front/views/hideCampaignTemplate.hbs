@@ -19,8 +19,11 @@
       <div class="modal-footer">
 
         <div class="form-group">
-          <input type="button" class="process_button btn btn-danger pull-left" value="Yes, Hide It" data-loading-text="Removing...">
-          <input type="submit" class="btn btn-primary pull-left" value="Cancel" data-loading-text="Canceling...">
+            {{#each item}}
+              <input type="hidden" id="campaign-id" value="{{id}}">
+            {{/each }}  
+          <input id="delete" type="button" class="process_button btn btn-danger pull-left" value="Yes, Hide It" data-loading-text="Removing...">
+          <input type="button" class="btn btn-primary pull-left" value="Cancel" data-loading-text="Canceling...">
         </div>
 
       </div>

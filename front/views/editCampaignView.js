@@ -1,6 +1,6 @@
 'use strict'
 
-let editPhaseView = Backbone.View.extend({
+let editCampaignView = Backbone.View.extend({
   tagName: "div",
 
 
@@ -14,35 +14,41 @@ let editPhaseView = Backbone.View.extend({
     "click #edit": "edit"
   },
 
-  edit: () => {
+
+
+
+  edit: () =>{
+
     let id = $("#edit-id").val();
-    let dialog = new editPhaseView({item: new Array(S.collection.get("phases").get(id).toJSON())});
+    let dialog = new editCampaignView({title: new Array(S.collection.get("campaigns").get(id).toJSON())});
 
-    let model = S.collection.get("phases").get(id);
+    let model = S.collection.get("campaigns").get(id);
+
         model.set({ name: $("#input_name").val(),
-                  description: $("#input_description").val(),
-                  campaign: "http:"+apiBuilder("campaign/"+$("#campaign").val())});
+                  description: $("#input_description").val()
 
-      S.collection.get("phases").add(model)
+                });
+
+      S.collection.get("campaigns").add(model)
         .sync("update", model, {
           url: S.fixUrl(model.url()),
           headers: S.addAuthorizationHeader().headers,
           success: function(model, response) {
-            //S.collection.get("phases").remove(model)
-            console.log("EditedPhases")
+            //S.collection.get("campaigns").fetch(model)
+            console.log("editCampaign")
             //Cerramos modal
             $('#dialog-crud').modal('hide')
             //Abrimos modal de success
             bootbox.alert({
-              message: "Phase Edited",
+              message: "Campaign Edited",
               size: 'small',
               className: 'rubberBand animated'
             });
-            let phaseView = new PhaseView();
-            phaseView.render();
+            let campaignView = new CampaignView();
+                campaignView.render();
           },
           error: function(model, response) {
-            console.log("error editedPhase")
+            console.log("error editGroup")
             console.log("status = "+model.status)
             console.log("response = "+model.responseText)
             /*HAY QUE ITERAR responseJSON, 
@@ -65,11 +71,11 @@ let editPhaseView = Backbone.View.extend({
             */
           }
     });
-  },
 
+ },
 
   render: function(){
-    let template = $("#phase-modal-edit").html();
+    let template = $("#campaign-modal-edit").html();
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled(this.data));
     $("#dialog-crud").html(this.$el);

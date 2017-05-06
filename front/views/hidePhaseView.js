@@ -29,12 +29,12 @@ let hidePhaseView = Backbone.View.extend({
           headers: S.addAuthorizationHeader().headers,
           success: function(model, response) {
             S.collection.get("phases").remove(model)
-            console.log("savePhases")
+            console.log("deletedPhases")
             //Cerramos modal
             $('#dialog-crud').modal('hide')
             //Abrimos modal de success
             bootbox.alert({
-              message: "Phase saved",
+              message: "Phase Deleted",
               size: 'small',
               className: 'rubberBand animated'
             });
@@ -42,7 +42,7 @@ let hidePhaseView = Backbone.View.extend({
             phaseView.render();
           },
           error: function(model, response) {
-            console.log("error savePhase")
+            console.log("error deletedPhase")
             console.log("status = "+model.status)
             console.log("response = "+model.responseText)
             /*HAY QUE ITERAR responseJSON, 

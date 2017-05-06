@@ -1,46 +1,51 @@
 'use strict'
 
-let addCampaign = Backbone.View.extend({
+let hideCampaignView = Backbone.View.extend({
   tagName: "div",
 
 
   className: "modal-dialog",
 
-    initialize: function(data) {
+initialize: function(data) {
     this.data = data || undefined;
   },
 
 
   events: {
-    "click #save": "saveCampaign"
+    "click #delete": "delete",
+    "click .process_button": "doProcess"
   },
 
 
+delete: (ev) => {
 
-  saveCampaign:() =>{
-    let data = {
-      name: $("#input_name").val(),
-      description: $("#input_description").val()
-    };
+      let id = $("#campaign-id").val();
+      //$(ev.currentTarget).parents('div.form-group').children('delete').value;
+      let dialog = new hideCampaignView({title: new Array(S.collection.get("campaigns").get(id).toJSON())});
 
-    let campaign = new Campaign(data);
-    S.collection.get("campaigns")
-      .add(campaign)
-      .sync("create", campaign, {
+      let model = S.collection.get("campaigns").get(id);
+      model.set({'isactive': false});
+
+      S.collection.get("campaigns").add(model)
+        .sync("update", model, {
+          url: S.fixUrl(model.url()),
           headers: S.addAuthorizationHeader().headers,
           success: function(model, response) {
-            console.log("saveCampaign")
+            S.collection.get("campaigns").remove(model)
+            console.log("deletedCampaign")
             //Cerramos modal
             $('#dialog-crud').modal('hide')
             //Abrimos modal de success
             bootbox.alert({
-              message: "Campaign saved",
+              message: "Campaign Deleted",
               size: 'small',
               className: 'rubberBand animated'
             });
+            let campaignView = new CampaignView();
+              campaignView.render();
           },
           error: function(model, response) {
-            console.log("error saveCampaing")
+            console.log("error saveGroup")
             console.log("status = "+model.status)
             console.log("response = "+model.responseText)
             /*HAY QUE ITERAR responseJSON, 
@@ -63,15 +68,11 @@ let addCampaign = Backbone.View.extend({
             */
           }
     });
-    
-  },
-
-
-
+ },
 
 
   render: function(){
-    let template = $("#campaign-modal-add").html();
+    let template = $("#campaign-modal-hide").html();
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled(this.data));
     $("#dialog-crud").html(this.$el);

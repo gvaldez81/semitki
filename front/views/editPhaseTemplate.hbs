@@ -20,11 +20,26 @@
           <input type="text" name="description" class="form-control" id="input_description" placeholder="Description" value="{{description}}">
         </div>
         {{/each}}
+
         <div class="alert alert-danger errors-container" style="display: none;">
         </div>
-        <div class="form-group">
-          <input type="button" class="btn btn-primary pull-left" value="Save" data-loading-text="Saving...">
+
+        <div class="form-group">              
+          <label for="campaign">Campaigns</label>
+           <select class="form-control" id="campaign">
+               {{#each campaign}}
+               <option value="{{id}}">{{name}}</option>
+               {{/each}}
+           </select>
         </div>
+
+        <div class="form-group">
+          {{#each item}}
+           <input type="hidden" id="edit-id" value="{{id}}">
+           {{/each}}
+          <input id="edit" type="button" class="btn btn-primary pull-left" value="Save" data-loading-text="Saving...">
+        </div>
+
       </fieldset>
       </form>
 

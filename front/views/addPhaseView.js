@@ -6,6 +6,11 @@ let addPhaseView = Backbone.View.extend({
 
   className: "modal-dialog",
 
+    initialize: function(data) {
+    this.data = data || undefined;
+  },
+
+
   events: {
     "click #save": "savePhases",
   },
@@ -23,26 +28,34 @@ let addPhaseView = Backbone.View.extend({
     let phase = new Phase(data);
     S.collection.get("phases")
       .add(phase)
-      .sync("create", phase, S.addAuthorizationHeader());
-    console.log("savephase")
-    //Cerramos modal
-    $('#dialog-crud').modal('hide')
-    //Abrimos modal de success
-    bootbox.alert({
-      message: "Phase saved",
-      size: 'small',
-      className: 'rubberBand animated'
-    });
-    _.debounce(S.collection.get("phases").fetch({reset: true}), 300)
-    let phaseView = new PhaseView();
-    phaseView.render();
+      .sync("create", phase,{
+          //url: S.fixUrl(model.url()),
+        headers: S.addAuthorizationHeader().headers,
+        success: function(model, response) {
+         console.log("savePhase")
+              //Cerramos modal
+            $('#dialog-crud').modal('hide')
+            //Abrimos modal de success
+            bootbox.alert({
+              message:   "Phase saved",
+              size:      'small',
+              className: 'rubberBand animated'
+            });
+
+         let phaseView = new PhaseView();
+             phaseView.render();
+
+          },
+
+          error: function(model, response) {
+            console.log("error editPhase")
+            console.log("status = "+model.status)
+            console.log("response = "+model.responseText)
+
+          }
+    });       
+      
   },
-
-  initialize: function(data) {
-    this.data = data || undefined;
-  },
-
-
 
   render: function(){
          let data = {
