@@ -139,12 +139,11 @@ def callback(request):
     client_secret = settings.SOCIAL_AUTH_FACEBOOK_SECRET
 
     redirect_response = request.get_full_path()
-    redirect_uri = 'http://159.203.134.236:8000/callback/'
+    redirect_uri = os.environ["OAUTH2_REDIRECT_URI"]
     graph_url = 'https://graph.facebook.com/'
     token_url = graph_url + 'oauth/access_token'
     code = request.GET.get("code")
-    #client = BackendApplicationClient(client_id = client_id)
-    oauth = OAuth2Session(client_id = client_id, 
+    oauth = OAuth2Session(client_id = client_id,
 		redirect_uri = redirect_uri)
     oauth = facebook_compliance_fix(oauth)
     token = oauth.fetch_token(
@@ -153,4 +152,5 @@ def callback(request):
              ,authorization_response = redirect_response
     	    )
 
-    return HttpResponse(oauth.get(graph_url + 'me?').content)
+    #return HttpResponse(oauth.get(graph_url + 'me?').content)
+    return HttpResponse(request.META)

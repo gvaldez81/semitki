@@ -12,11 +12,15 @@ WORKDIR /semitki
 RUN yum -y update ; \
   yum -y install epel-release ; \
   yum -y install https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-7-x86_64/pgdg-centos96-9.6-3.noarch.rpm ; \
-  yum -y install gcc make python-pip postgresql96 postgresql96-server postgresql96-contrib postgresql96-devel python-devel ; \
+  yum -y install gcc make patch python-pip postgresql96 postgresql96-server \
+    postgresql96-contrib postgresql96-devel python-devel ; \
   pip install virtualenv
 RUN  virtualenv ENV ; \
   ENV/bin/pip install --upgrade pip ; \
-  ENV/bin/pip install -r requirements.txt
+  ENV/bin/pip install -r requirements.txt ; \
+  cd ENV/lib/python2.7/site-packages/rest_framework_jwt ; \
+  patch < /semitki/patches/authentication.patch ; \
+  patch < /semitki/patches/serializers.patch
 
 #ENTRYPOINT /semitki/ENV/bin/python
 

@@ -5,6 +5,17 @@
 [![Codeship Status for semitki/semitki](https://app.codeship.com/projects/2b89f950-cac9-0134-a140-7e371e5d68a3/status?branch=master)](https://app.codeship.com/projects/199702)
 
 
+## Notes
+
+Python rest_framework_jwt module throws `Invalid payload` beacause
+missing username in Facebook social authentication, the module is
+patched to get around this validation. But better to check and fix it
+ASAP.
+
+Patches are locates in `semitki/patches` directory and applied at
+container build.
+
+
 ## Requirements
 
 Front end relies heavily in JavaScript 1.6 (ECMAScript 6), web browser
