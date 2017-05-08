@@ -1,5 +1,6 @@
 'use strict'
 
+
 module.exports = (grunt) => {
   grunt.initConfig({
     clean: ['dist/*'],
@@ -11,6 +12,10 @@ module.exports = (grunt) => {
       privacy: {
         src: ['privacypolicy.html'],
         dest: 'dist/privacypolicy.html'
+      },
+      terms: {
+        src: ['terms.html'],
+        dest: 'dist/terms.html'
       },
       models: {
         options: {
