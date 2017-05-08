@@ -18,9 +18,9 @@ RUN yum -y update ; \
 RUN  virtualenv ENV ; \
   ENV/bin/pip install --upgrade pip ; \
   ENV/bin/pip install -r requirements.txt ; \
-  cd ENV/lib/python2.7/site-packages/rest_framework_jwt ; \
-  patch < /semitki/patches/authentication.patch ; \
-  patch < /semitki/patches/serializers.patch
+  cd /semitki/ENV/lib/python2.7/site-packages/rest_framework_jwt ; \
+  patch < /semitki/patches/authentication.py.patch ; \
+  patch < /semitki/patches/serializers.py.patch
 
 #ENTRYPOINT /semitki/ENV/bin/python
 
