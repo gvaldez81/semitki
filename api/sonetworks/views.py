@@ -1,4 +1,6 @@
-import os
+import os, time
+import json
+from datetime import datetime, tzinfo
 from django.contrib.auth.models import User, Group
 from rest_framework.decorators import detail_route
 from rest_framework import viewsets
@@ -135,21 +137,33 @@ def callback(request):
     # Set to 0 for production, 1 is for development only
     os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
-    client_id = settings.SOCIAL_AUTH_FACEBOOK_KEY
-    client_secret = settings.SOCIAL_AUTH_FACEBOOK_SECRET
+    ## Facebook callback handling
+    if (request.GET.get("chan") == "facebook"):
+        client_id = settings.SOCIAL_AUTH_FACEBOOK_KEY
+        client_secret = settings.SOCIAL_AUTH_FACEBOOK_SECRET
+        redirect_response = request.get_full_path()
+        redirect_uri = os.environ["OAUTH2_REDIRECT_URI"] + "?chan=facebook"
+        graph_url = 'https://graph.facebook.com/'
+        token_url = graph_url + 'oauth/access_token'
+        oauth = OAuth2Session(client_id = client_id,
+            redirect_uri = redirect_uri)
+        oauth = facebook_compliance_fix(oauth)
+        token = oauth.fetch_token(
+                 token_url = token_url
+                 ,client_secret = client_secret
+                 ,authorization_response = redirect_response
+                )
+        # Fetch user detail
+        #user = json.JSONDecoder().decode(
+        user = json.loads(
+                oauth.get(graph_url + "me?fields=id,name,email").content)
 
-    redirect_response = request.get_full_path()
-    redirect_uri = os.environ["OAUTH2_REDIRECT_URI"]
-    graph_url = 'https://graph.facebook.com/'
-    token_url = graph_url + 'oauth/access_token'
-    code = request.GET.get("code")
-    oauth = OAuth2Session(client_id = client_id,
-		redirect_uri = redirect_uri)
-    oauth = facebook_compliance_fix(oauth)
-    token = oauth.fetch_token(
-             token_url = token_url
-             ,client_secret = client_secret
-             ,authorization_response = redirect_response
-    	    )
+    social_account = SocialAccount(
+            username = user["id"],
+            email = user["email"],
+            access_token = token["access_token"],
+            token_expiration = datetime.fromtimestamp(token["expires_in"]),
+            bucket = "facebook")
+    social_account.save()
 
-    return HttpResponse(oauth.get(graph_url + 'me?').content)
+    return HttpResponseRedirect("http://localhost:9080/#landing")
