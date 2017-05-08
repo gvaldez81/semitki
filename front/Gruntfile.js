@@ -8,6 +8,10 @@ module.exports = (grunt) => {
         src: ['index.html','views/*.hbs'],
         dest: 'dist/index.html'
       },
+      privacy: {
+        src: ['privacypolicy.html'],
+        dest: 'dist/privacypolicy.html'
+      },
       models: {
         options: {
           separator: ';\n',
