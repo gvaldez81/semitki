@@ -1,8 +1,9 @@
 'use strict'
 
 let UserModel = Backbone.Model.extend({
-
+  
   defaults: () => {
+    
     return {
       username: undefined,
       first_name: undefined,

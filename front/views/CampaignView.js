@@ -11,8 +11,8 @@ let CampaignView = Backbone.View.extend({
   initialize: function() {
     this.navigation = new NavigationView();
     this.footer = new FooterView();
-    this.modal = new editCampaign();
-    this.modal_add = new addCampaign();
+    this.modal = new editCampaignView();
+    this.modal_add = new addCampaignView();
   },
 
 
@@ -26,20 +26,20 @@ let CampaignView = Backbone.View.extend({
   },
 
   addItem: () => {
-    let dialog = new addCampaign();
+    let dialog = new addCampaignView();
     dialog.render();
   },
 
   editItem: function(ev) {
     let id = $(ev.currentTarget).parents('.item')[0].id;
-    let dialog = new editCampaign({item: new Array(S.collection.get("campaigns").get(id).toJSON())});
+    let dialog = new editCampaignView({item: new Array(S.collection.get("campaigns").get(id).toJSON())});
     dialog.render();
     //return false;
   },
 
   hideItem: function(ev) {
     let id = $(ev.currentTarget).parents('.item')[0].id;
-    let dialog = new hideCampaign({item: new Array(S.collection.get("campaigns").get(id).toJSON())});
+    let dialog = new hideCampaignView({item: new Array(S.collection.get("campaigns").get(id).toJSON())});
     dialog.render();
     //return false;
   },
@@ -62,6 +62,7 @@ let CampaignView = Backbone.View.extend({
     let template = $("#campaign-template").html();
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled(data));
+    $("#container").html(this.$el);
     $("#main").html(this.$el);
     S.showButtons();
     return this;

@@ -23,7 +23,10 @@
         <div class="alert alert-danger errors-container" style="display: none;">
         </div>
         <div class="form-group">
-          <input type="submit" class="btn btn-primary pull-left" value="Save" data-loading-text="Saving...">
+          {{#each item}}
+            <input type="hidden" id="edit-id" value="{{id}}">
+          {{/each}}  
+            <input id="edit" type="button" class="btn btn-primary pull-left" value="Save" data-loading-text="Saving...">          
         </div>
       </fieldset>
       </form>
