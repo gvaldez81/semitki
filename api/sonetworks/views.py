@@ -15,7 +15,7 @@ from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from rest_auth.registration.views import SocialLoginView
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 
 from janitor import OAuthDance
 
@@ -137,6 +137,7 @@ def callback(request):
     # Set to 0 for production, 1 is for development only
     os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
+    user = None
     ## Facebook callback handling
     if (request.GET.get("chan") == "facebook"):
         client_id = settings.SOCIAL_AUTH_FACEBOOK_KEY
@@ -158,12 +159,13 @@ def callback(request):
         user = json.loads(
                 oauth.get(graph_url + "me?fields=id,name,email").content)
 
-    social_account = SocialAccount(
-            username = user["id"],
-            email = user["email"],
-            access_token = token["access_token"],
-            token_expiration = datetime.fromtimestamp(token["expires_in"]),
-            bucket = "facebook")
-    social_account.save()
+    if user is not None:
+        social_account = SocialAccount(
+                username = user["id"],
+                email = user["email"],
+                access_token = token["access_token"],
+                token_expiration = datetime.fromtimestamp(token["expires_in"]),
+                bucket = "facebook")
+        social_account.save()
 
-    return HttpResponseRedirect("http://localhost:9080/#landing")
+    return HttpResponseRedirect(os.environ["SEMITKI_LANDING"])
