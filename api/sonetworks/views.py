@@ -152,5 +152,4 @@ def callback(request):
              ,authorization_response = redirect_response
     	    )
 
-    #return HttpResponse(oauth.get(graph_url + 'me?').content)
-    return HttpResponse(request.META)
+    return HttpResponse(oauth.get(graph_url + 'me?').content)

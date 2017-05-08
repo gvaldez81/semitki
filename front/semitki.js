@@ -63,15 +63,9 @@ let S = {
 
 
   addAuthorizationHeader: () => {
-    
     return {
       headers: {'Authorization': S.jwtheader.concat(S.jwtoken())}
     }
-  },
-
-  fixUrl: (modelUrl) => {
-    return modelUrl+(modelUrl.charAt(modelUrl.length - 1) == "/" ? "" : "/");
-    
   },
 
 
@@ -91,6 +85,11 @@ let S = {
       "id": jsonMap.id,
       "text": jsonMap.text
     };
+  },
+
+
+  fixUrl: (modelUrl) => {
+    return modelUrl+(modelUrl.charAt(modelUrl.length - 1) == "/" ? "" : "/");
   },
 
 
@@ -189,19 +188,19 @@ let S = {
   },
 
 
-  toggleMenu: () => {
-    // Enable side menu
-    let menu = new SideMenuView();
-    menu.render();
-    $(".menu-slide").show().hover(() => {
-      $(".menu-slide").addClass("menu-slide-show");
-      $("#main").addClass("corp-show");
-    },
-    () => {
-      $(".menu-slide").removeClass("menu-slide-show");
-      $("#main").removeClass("corp-show");
-    });
+  splitQueryString: (a) => {
+    if (a == "") return {};
+    let b = {};
+    for (let i = 0; i < a.length; ++i) {
+      let p = a[i].split('=', 2);
+      if(p.length == 1)
+        b[p[0]] = "";
+      else
+        b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+    }
+    return b;
   },
+
 
   showButtons: () => {
     $(".list-group-item").hover(function() {
@@ -215,6 +214,21 @@ let S = {
       //$($(this)[0]).css("background-color","#eee")
       $(this).find('div.item_buttons.hideme.crud_buttons').removeClass('showme')
       $(this).css("background-color","#eee")
+    });
+  },
+
+
+  toggleMenu: () => {
+    // Enable side menu
+    let menu = new SideMenuView();
+    menu.render();
+    $(".menu-slide").show().hover(() => {
+      $(".menu-slide").addClass("menu-slide-show");
+      $("#main").addClass("corp-show");
+    },
+    () => {
+      $(".menu-slide").removeClass("menu-slide-show");
+      $("#main").removeClass("corp-show");
     });
   },
 
@@ -235,14 +249,23 @@ let S = {
 
 // Launch the JavaScript client side app
 $(() => {
-  S.initialize();
-  if(!sessionStorage.getItem("token") || !sessionStorage.getItem("user")) {
-    let app = new LoginView();
+  if(window.location.hash === "#landing") {
+    // If landing page render it only
+    let app = new LandingPageView();
     app.render();
   } else {
-    S.refreshToken(() => {
-      S.router.schedulerCreate();
-      S.router.navigate("#scheduler", {trigger: true});
-    });
+    // initialize Semitki
+    S.initialize();
+    if(!sessionStorage.getItem("token") || !sessionStorage.getItem("user")) {
+      // If we can't find a previous session stored render a new LoginView
+      let app = new LoginView();
+      app.render();
+    } else {
+      // if there is a session try to refresh the token and navigate to Scheduler
+      S.refreshToken(() => {
+        S.router.schedulerCreate();
+        S.router.navigate("#scheduler", {trigger: true});
+      });
+    }
   }
 });

@@ -23,7 +23,7 @@ let LandingPageView = Backbone.View.extend({
     e.preventDefault(); // Keep default action of button from beign triggered
     location.assign("https://www.facebook.com/v"+SEMITKI_CONFIG.fb_api
       +"/dialog/oauth?client_id="+SEMITKI_CONFIG.fb_app_id
-      + "&redirect_uri=http://localhost:8000/callback/"
+      + "&redirect_uri=http://localhost:8000/callback/?chan=facebook"
       + "&scope=public_profile,email,publish_actions"
     );
   },
