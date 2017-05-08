@@ -3,6 +3,6 @@
 let SEMITKI_CONFIG = {
   api_url: "127.0.0.1",
   api_port: 8000,
-  fb_app_id: ,
-  fb_app_secret: ""
+  fb_app_id: 1234567890,
+  fb_api: 2.6
 };
