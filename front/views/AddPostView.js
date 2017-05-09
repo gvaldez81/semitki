@@ -62,6 +62,20 @@ let AddPostView = Backbone.View.extend({
 
   schedule: function(e) {
     e.preventDefault();
+    let options = {
+      error: (error) => {
+        S.logger("bg-danger", "Couldn't schedule new post", true);
+      },
+      success: (model, reponse) => {
+        console.log(model);
+        this.closeadd();
+        S.logger("bg-success", "Post published succesfully", true);
+      },
+      wait: true,
+      headers: S.addAuthorizationHeader().headers
+    }
+    let post = S.collection.get("posts")
+      .create(this.prepare_post(new Date($("#scheduleFor").val())), options);
     console.log("scheduling");
   },
 
