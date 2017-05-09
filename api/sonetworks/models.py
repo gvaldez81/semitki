@@ -61,7 +61,7 @@ class SocialAccount(models.Model):
     username = models.CharField(max_length=140)
     email = models.CharField(max_length=256)
     password = models.CharField(max_length=2048, null=True)
-    access_token = models.CharField(max_length=2048, null=True)
+    access_token = JSONField()
     token_expiration = models.DateTimeField(blank=False)
     bucket = models.CharField(max_length=256)
     isactive = models.BooleanField(default = True)

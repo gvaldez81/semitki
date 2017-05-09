@@ -162,7 +162,7 @@ def callback(request):
         social_account = SocialAccount(
                 username = user["id"],
                 email = user["email"],
-                access_token = token["access_token"],
+                access_token = json.JSONEncoder().encode(token),
                 token_expiration = datetime.fromtimestamp(token["expires_in"]),
                 bucket = "facebook")
         social_account.save()
