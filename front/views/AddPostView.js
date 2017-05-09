@@ -33,16 +33,13 @@ let AddPostView = Backbone.View.extend({
   },
 
 
-  schedule: function(e) {
-    e.preventDefault();
-    console.log("scheduling");
-  },
-
-
-  publish: function(e) {
-    e.preventDefault();
+  prepare_post: function(date) {
     let tags = [];
-    tags.push(this.data.bucket);
+    tags.push({ "account":
+      { "bucket": this.data.bucket,
+        "account_id": this.data.username
+      }
+    });
     tags.push({"like": $("#lkgroups").val()});
     tags.push({"rs": $("#rsgroups").val()});
     let content = {
@@ -52,13 +49,24 @@ let AddPostView = Backbone.View.extend({
     };
 
     let post = {
-      date: new Date(),
+      date: date,
       campaign: $("#campaignSelectorBox").val(),
       phase: $("#phaseSelectorBox").val(),
       content: content,
       owner: S.user.attributes.pk
     };
+    return new Post(post);
+  },
 
+
+  schedule: function(e) {
+    e.preventDefault();
+    console.log("scheduling");
+  },
+
+
+  publish: function(e) {
+    e.preventDefault();
     let options = {
       error: (error) => {
         S.logger("bg-danger", "Couldn't schedule new post", true);
@@ -70,7 +78,7 @@ let AddPostView = Backbone.View.extend({
       wait: true,
       headers: S.addAuthorizationHeader().headers
     }
-    S.collection.get("posts").create(new Post(post), options);
+    S.collection.get("posts").create(this.prepare_post(new Date()), options);
   },
 
 
