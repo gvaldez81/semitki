@@ -59,6 +59,7 @@ let AddPostView = Backbone.View.extend({
 
     if(newPost.save(post, options)) {
       console.log(newPost.id);
+      this.closeadd();
     }
   },
 
