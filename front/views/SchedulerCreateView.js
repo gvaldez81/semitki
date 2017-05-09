@@ -15,6 +15,7 @@ let SchedulerCreateView = Backbone.View.extend({
     this.navigation.render();
     this.footer.render();
     this.modal.render();
+    this.render();
   },
 
   render: function() {
