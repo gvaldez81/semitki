@@ -1,3 +1,4 @@
+import json
 from models import *
 
 from django.conf import settings
@@ -35,10 +36,10 @@ def stuff_it(pk):
     client_secret = settings.SOCIAL_AUTH_FACEBOOK_SECRET
     graph_url = 'https://graph.facebook.com/'
     node = graph_url + "me/feed?"
-    token = "EAALSDfc2j6UBAPKzBK7kzjkKfFlRV9VqKTgc0d3KK7D2aJo2lZC19zOZCdteZA1ZBKuhi1KpSxBZBZAw5iDn7WEBfs7h3HFkn5Ii2PIQLmDJLYRSNHdEyv2KtPrmYZACGzshSx2OqCRZBSR1X814E7wT0YyAfjIkRjJ9HDPhfp0QIQZDZD"
-    oauth = OAuth2Session(client_id = client_id)
+    token = json.JSONDecoder().decode("{\"access_token\": \"EAALSDfc2j6UBAFYa0uIGkbePjb7AT8gmoZC1L6au2mvbrCvXFdCaUGUePYLiQCIiXYmgAvrVngohUedZBy93feF7YDoiHE9YBiiS3Qgj9kDJ803ckuCIEp8mKqYKTJINxxoPyOaZBSFiFqBb9nRezHfI7sC9NdlJoTErdS2WwZDZD\", \"token_type\": \"bearer\", \"expires_in\": 5183743, \"expires_at\": 1499480919.301521}")
+    oauth = OAuth2Session(client_id = client_id, token = token)
 ##    oauth.access_token(token)
-    oauth.token(token)
+##    oauth.token(token)
     oauth = facebook_compliance_fix(oauth)
 
     payload = { "message": p.content["txt"],
