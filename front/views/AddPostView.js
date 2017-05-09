@@ -21,15 +21,14 @@ let AddPostView = Backbone.View.extend({
       return S.collection2select({id: i.id, text: i.name});
     });
     S.toggleNavigation();
-    this.scheduler = new SchedulerCreateView();
   },
 
 
   closeadd: function() {
     S.toggleNavigation(true);
     this.scheduler = new SchedulerCreateView();
-    this.scheduler.render();
     this.remove();
+    //this.scheduler.render();
   },
 
 
@@ -52,16 +51,26 @@ let AddPostView = Backbone.View.extend({
       owner: S.user.attributes.pk
     };
 
-    let newPost = new Post();
+    let newPost = new Post(post);
     let options = S.addAuthorizationHeader();
     options.error = () => {
       S.logger("bg-danger", "Couldn't schedule new post", true);
     };
+    S.collection.get("posts").add(newPost).sync("create", newPost, {
+      headers: S.addAuthorizationHeader().headers,
+      success: (model, response) => {
+        S.logger("bg-success", "Post published succesfully", true);
+        this.closeadd();
+      },
+      error: (model, response) => {
+        console.log(response);
+      }
+    });
 
-    if(newPost.save(post, options)) {
-      console.log(newPost.id);
-      this.closeadd();
-    }
+/*    if(newPost.save(post, options)) {*/
+      //console.log(newPost.id);
+      //this.closeadd();
+    /*}*/
   },
 
 
