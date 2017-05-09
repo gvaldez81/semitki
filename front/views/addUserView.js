@@ -6,6 +6,10 @@ let addUserView = Backbone.View.extend({
 
   className: "modal-dialog",
 
+    initialize: function(data) {
+    this.data = data || undefined;
+  },
+
   events: {
     "click #save": "saveUser"
   },
@@ -32,12 +36,14 @@ let addUserView = Backbone.View.extend({
       message: "User saved",
       size: 'small',
       className: 'rubberBand animated'
+
     });
+    
+    let userView = new UserView();
+        userView.render();
   },
 
-  initialize: function(data) {
-    this.data = data || undefined;
-  },
+
 
 
 

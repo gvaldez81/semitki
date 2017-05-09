@@ -20,7 +20,8 @@
 
         <div class="form-group">
           {{#each item}}
-           <input type="hidden" id="username" value="{{username}}"> 
+           <input type="hidden" id="user-name" value="{{username}}"> 
+           <input type="hidden" id="user-id" value="{{id}}"> 
           {{/each }}  
           <input id="delete" type="button" class="process_button btn btn-danger pull-left" value="Yes, Hide It" data-loading-text="Removing...">
           <input type="button" class="btn btn-primary pull-left" value="Cancel" data-loading-text="Canceling...">
