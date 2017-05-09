@@ -21,7 +21,6 @@ let AddPostView = Backbone.View.extend({
       return S.collection2select({id: i.id, text: i.name});
     });
     S.toggleNavigation();
-    //this.scheduler = new SchedulerCreateView();
   },
 
 
@@ -29,7 +28,7 @@ let AddPostView = Backbone.View.extend({
     S.toggleNavigation(true);
     this.scheduler = new SchedulerCreateView();
     this.remove();
-    this.scheduler.render();
+    //this.scheduler.render();
   },
 
 
@@ -57,7 +56,7 @@ let AddPostView = Backbone.View.extend({
     options.error = () => {
       S.logger("bg-danger", "Couldn't schedule new post", true);
     };
-    S.collection.get("posts").sync("create", newPost, {
+    S.collection.get("posts").add(newPost).sync("create", newPost, {
       headers: S.addAuthorizationHeader().headers,
       success: (model, response) => {
         S.logger("bg-success", "Post published succesfully", true);
