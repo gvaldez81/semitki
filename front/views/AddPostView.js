@@ -56,8 +56,10 @@ let AddPostView = Backbone.View.extend({
     options.error = () => {
       S.logger("bg-danger", "Couldn't schedule new post", true);
     };
-    if(newPost.save(post, options))
-      this.closeadd();
+
+    if(newPost.save(post, options)) {
+      console.log(newPost.id);
+    }
   },
 
 
