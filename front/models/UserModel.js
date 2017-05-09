@@ -1,11 +1,11 @@
 'use strict'
 
 let UserModel = Backbone.Model.extend({
-  
+
   defaults: () => {
     
     return {
-      username: undefined,
+
       first_name: undefined,
       last_name: undefined,
       is_superuser: undefined,
@@ -15,4 +15,9 @@ let UserModel = Backbone.Model.extend({
     }
   },
 
+  url: function(username){
+
+    return apiBuilder("user") + username
+    
+  }
 });
