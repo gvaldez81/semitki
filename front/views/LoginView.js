@@ -44,7 +44,7 @@ let LoginView = Backbone.View.extend({
       if(S.fbStatusChangeCallback(response)) {
         FB.api('/me', { "fields": "id,name,email"}, (response) => {
           let user = {
-            username: response.id,
+            user: response.id,
             last_name: response.name.split(" ")[0],
             first_name: response.name.split(" ")[1],
             email: response.email
@@ -64,6 +64,7 @@ let LoginView = Backbone.View.extend({
             S.jwtoken(result.token);
             if (S.jwtoken() != undefined && S.user != undefined) {
               S.user.set(user);
+              sessionStorage.setItem("user", JSON.stringify(user));
               S.router.navigate('#scheduler', {trigger: true});
               S.fetchCollections();
             }
@@ -71,7 +72,6 @@ let LoginView = Backbone.View.extend({
             S.logger("bg-danger", "Failed login with Facebook account", true);
           });
         });
-        console.log("no in Fb");
       }
     }, {scope: 'public_profile,email'});
   },
@@ -113,7 +113,6 @@ let LoginView = Backbone.View.extend({
   },
 
   render: function() {
-    console.log(location.search);
 /*    let data = {*/
       //t: {
         //"use_other_account": S.polyglot.t("login.use_other_account")

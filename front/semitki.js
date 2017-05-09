@@ -133,11 +133,11 @@ let S = {
       return true;
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
-      console.log('loged in fb but not in app');
+      console.log('You need to authorize the facebook app first');
     } else {
       // The person is not logged into Facebook, so we're not sure if
       // they are logged into this app or not.
-      console.log('loginto fb');
+      console.log("Log into Facebook first");
     }
   },
 
