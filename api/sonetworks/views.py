@@ -17,13 +17,12 @@ from rest_auth.registration.views import SocialLoginView
 
 from django.http import HttpResponse, HttpResponseRedirect
 
-from janitor import OAuthDance
-
 import requests
 from requests_oauthlib import OAuth2Session
 from requests_oauthlib.compliance_fixes import facebook_compliance_fix
 from oauthlib.oauth2 import BackendApplicationClient
 from oauthlib.oauth2 import WebApplicationClient
+from janitor import *
 
 
 class FacebookLogin(SocialLoginView):
@@ -169,3 +168,8 @@ def callback(request):
         social_account.save()
 
     return HttpResponseRedirect(os.environ["SEMITKI_LANDING"])
+
+
+def publish_now(request, pk):
+
+    return HttpResponse( stuff_it(pk))

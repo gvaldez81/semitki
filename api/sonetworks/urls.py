@@ -21,7 +21,6 @@ from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 from django.conf.urls import url
 from rest_framework_swagger.views import get_swagger_view
 from .views import *
-from .janitor import OAuthDance
 
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
@@ -47,4 +46,5 @@ urlpatterns = [
     url(r'^api-token-auth/', obtain_jwt_token),
     url(r'^api-token-refresh/', refresh_jwt_token),
     url(r'^callback/$', callback, name='callback'),
+    url(r'^post/(?P<pk>[^/.]+)/publish/$', publish_now, name='publish_now'),
 ]
