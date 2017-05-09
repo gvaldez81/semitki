@@ -15,7 +15,6 @@
     <label for="phaseSelectorBox">Phase</label>
     <select id="phaseSelectorBox" style="width:100%;" disabled></select>
   </div>
-
   <div class="form-group">
     <textarea class="form-control" rows="4" id="postxt"
     placeholder="Post text"></textarea>
@@ -25,20 +24,14 @@
       <button class="btn btn-default" type="button"
       id="addImg">Add image</button>
     </div>
-    <!-- div class="center-block" -->
-      <div class="checkbox">
-        <label><input type="checkbox" id="like" value="like">&lt;3</label>
-      </div>
-      <div class="form-group">
-        <select id="lkgroups" multiple="multiple" style="width:100%;"></select>
-      </div>
-      <div class="checkbox">
-        <label><input type="checkbox" id="rs" value="rs">RS</label>
-      </div>
-      <div class="form-group">
-        <select id="rsgroups" multiple="multiple" style="width:100%;"></select>
-      </div>
-    <!-- /div -->
+
+    <div class="input-group" id="schedule-post">
+      <input type="text" class="form-control" />
+      <span class="input-group-addon">
+        <span class="glyphicon glyphicon-calendar"></span>
+      </span>
+    </div>
+
     <div class="btn-group dropup pull-right">
       <button type="button" class="btn btn-info"
       id="publish-btn">Schedule</button>
@@ -54,6 +47,22 @@
       </ul>
     </div>
   </div>
+  <div class="form-inline">
+    <div class="checkbox">
+      <label><input type="checkbox" id="like" value="like">&lt;3</label>
+    </div>
+    <div class="form-group">
+      <select id="lkgroups" multiple="multiple" style="width:100%;"></select>
+    </div>
+  </div>
+  <div class="form-inline">
+    <div class="checkbox">
+      <label><input type="checkbox" id="rs" value="rs">RS</label>
+    </div>
+    <div class="form-group">
+      <select id="rsgroups" multiple="multiple" style="width:100%;"></select>
+    </div>
+  <div>
 </form>
 
 </script>

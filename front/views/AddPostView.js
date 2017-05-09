@@ -81,13 +81,12 @@ let AddPostView = Backbone.View.extend({
           //method: "POST"
         })
         .done((data) => {
-          console.log(data);
+          this.closeadd();
+          S.logger("bg-success", "Post published succesfully", true);
         })
         .fail((xhr, status, error) => {
-          console.log(xhr);
+          S.logger("bg-danger", "Post error"+ xhr.responseText, true);
         });
-        S.logger("bg-success", "Post published succesfully", true);
-        this.closeadd();
       },
       wait: true,
       headers: S.addAuthorizationHeader().headers
@@ -104,6 +103,14 @@ let AddPostView = Backbone.View.extend({
     this.$el.html(compiled(this.data));
 
     $("#main").html(this.$el);
+
+    // DAtetime picker
+    $("#schedule-post").datetimepicker({
+      useCurrent: false,
+      disabledDates: [
+        new Date()
+      ]
+    });
 
     // Campaigns and phases select
     let c = $("#campaignSelectorBox").select2({data: this.data.campaigns,
