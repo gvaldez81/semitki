@@ -8,6 +8,7 @@ let SchedulerCreateView = Backbone.View.extend({
 
 
   initialize: function() {
+    S.fetchCollections();
     this.navigation = new NavigationView();
     this.footer = new FooterView();
     this.modal = new CalendarModal();
