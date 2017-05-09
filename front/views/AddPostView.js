@@ -11,7 +11,9 @@ let AddPostView = Backbone.View.extend({
 
   events: {
     "click #closeadd": "closeadd",
-    "click #publish-btn": "publish",
+    "click #schedule-enable": "schedule",
+    "click #publish-btn": "schedule",
+    "click #publish-enable": "publish"
   },
 
 
@@ -28,11 +30,17 @@ let AddPostView = Backbone.View.extend({
     S.toggleNavigation(true);
     this.scheduler = new SchedulerCreateView();
     this.remove();
-    //this.scheduler.render();
   },
 
 
-  publish: function() {
+  schedule: function(e) {
+    e.preventDefault();
+    console.log("scheduling");
+  },
+
+
+  publish: function(e) {
+    e.preventDefault();
     let tags = [];
     tags.push(this.data.bucket);
     tags.push({"like": $("#lkgroups").val()});
