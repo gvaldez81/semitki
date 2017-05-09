@@ -55,7 +55,8 @@ let AddPostView = Backbone.View.extend({
       content: content,
       owner: S.user.attributes.pk
     };
-    return new Post(post);
+    let response = new Post(post);
+    return response;
   },
 
 
@@ -72,13 +73,28 @@ let AddPostView = Backbone.View.extend({
         S.logger("bg-danger", "Couldn't schedule new post", true);
       },
       success: (model, reponse) => {
+        console.log(model);
+        let url = S.api("post/" + model.id + "/publish");
+        $.ajax({
+          url: url,
+          headers: S.addAuthorizationHeader().headers,
+          //method: "POST"
+        })
+        .done((data) => {
+          console.log(data);
+        })
+        .fail((xhr, status, error) => {
+          console.log(xhr);
+        });
         S.logger("bg-success", "Post published succesfully", true);
         this.closeadd();
       },
       wait: true,
       headers: S.addAuthorizationHeader().headers
     }
-    S.collection.get("posts").create(this.prepare_post(new Date()), options);
+    let post = S.collection.get("posts")
+      .create(this.prepare_post(new Date()), options);
+
   },
 
 
