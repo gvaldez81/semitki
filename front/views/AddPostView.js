@@ -56,21 +56,19 @@ let AddPostView = Backbone.View.extend({
     options.error = () => {
       S.logger("bg-danger", "Couldn't schedule new post", true);
     };
-    S.collection.get("posts").add(newPost).sync("create", newPost, {
-      headers: S.addAuthorizationHeader().headers,
-      success: (model, response) => {
-        S.logger("bg-success", "Post published succesfully", true);
-        this.closeadd();
-      },
-      error: (model, response) => {
-        console.log(response);
-      }
-    });
+    options.wait = true;
+    S.collection.get("posts").create(newPost, options);
+/*    S.collection.get("posts").add(newPost).sync("create", newPost, {*/
+      //headers: S.addAuthorizationHeader().headers,
+      //success: (model, response) => {
+        //S.logger("bg-success", "Post published succesfully", true);
+        //this.closeadd();
+      //},
+      //error: (model, response) => {
+        //console.log(response);
+      //}
+    /*});*/
 
-/*    if(newPost.save(post, options)) {*/
-      //console.log(newPost.id);
-      //this.closeadd();
-    /*}*/
   },
 
 
