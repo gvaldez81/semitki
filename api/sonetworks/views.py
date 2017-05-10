@@ -172,4 +172,4 @@ def callback(request):
 
 def publish_now(request, pk):
 
-    return HttpResponse( stuff_it(pk))
+    return HttpResponse(stuff_it(pk))

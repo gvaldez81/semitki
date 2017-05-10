@@ -20,6 +20,7 @@ let LoginView = Backbone.View.extend({
   },
 
   recoverPassword: () => {
+    // TODO IT does not work, needs some work in backend
     let url = apiBuilder("auth/password/reset")
     let csrftoken = Cookies.get("csrftoken");
     $.ajax(url,
@@ -43,6 +44,7 @@ let LoginView = Backbone.View.extend({
     FB.login((response) => {
       if(S.fbStatusChangeCallback(response)) {
         FB.api('/me', { "fields": "id,name,email"}, (response) => {
+          console.log(response);
           let user = {
             user: response.id,
             last_name: response.name.split(" ")[0],
