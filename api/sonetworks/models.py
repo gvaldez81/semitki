@@ -3,7 +3,11 @@ import uuid
 
 from django.db import models
 from django.contrib.postgres.fields import JSONField
-
+import urllib
+import os
+import requests
+import urlparse
+from django.core.files.temp import NamedTemporaryFile
 
 
 class Campaign(models.Model):
@@ -61,11 +65,33 @@ class SocialAccount(models.Model):
     username = models.CharField(max_length=140)
     email = models.CharField(max_length=256)
     password = models.CharField(max_length=2048, null=True)
+    bucket_id=models.CharField(max_length=256, null=True)
+    image=models.ImageField(upload_to='img/', blank=True)
+    image_link = models.CharField(max_length=255, null=True, blank=True)
     access_token = JSONField()
     token_expiration = models.DateTimeField(blank=False)
     bucket = models.CharField(max_length=256)
     isactive = models.BooleanField(default = True)
     valid_to = models.DateField(null=True, blank=True)
+    
+    def __unicode__(self):
+        """Unicode class."""
+        return unicode(self.image_link)
+
+    def save(self, *args, **kwargs):
+        """Store image locally if we have a URL"""
+        if self.image_link and not self.image:
+            result = requests.get(self.image_link)
+            profilePic = NamedTemporaryFile(delete=True)
+            profilePic.write(result.content)
+            profilePic.flush()
+            urlclean = urlparse.urljoin(self.image_link, urlparse.urlparse(self.image_link).path)
+            self.image.save(self.bucket_id+'_'
+                +os.path.basename(urlclean), profilePic )
+            self.save()
+        super(SocialAccount, self).save()
+
+
 
 class SocialGroup(models.Model):
     """
