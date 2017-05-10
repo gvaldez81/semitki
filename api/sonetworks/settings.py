@@ -174,7 +174,7 @@ CORS_ORIGIN_WHITELIST = (
         )
 
 SITE_ID = 1
-
+MEDIA_ROOT = '/semitki/storage/'
 
 # Facebook configuration
 SOCIAL_AUTH_FACEBOOK_KEY = os.environ["SOCIAL_AUTH_FACEBOOK_KEY"]
