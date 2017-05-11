@@ -151,19 +151,14 @@ def callback(request):
         oauth = bucket.get_oauth2session()
         token = bucket.get_token(request.get_full_path())
 
-        # Fetch user detail
-        user = json.loads(
-                oauth.get(bucket.graph_url + "me?fields=id,name,email").content)
-        # Fetch user profile image
-        image = json.loads(
-                oauth.get(bucket.graph_url + user["id"]+"/picture?width=160&height=160&redirect=0").content)
+    user = bucket.get_user_detail()
 
     if user is not None:
         social_account = SocialAccount(
                 username = user["name"],
                 email = user["email"],
                 bucket_id = user["id"],
-                image_link = image["data"]["url"],
+                image_link = user["image"],
                 access_token = json.JSONEncoder().encode(token),
                 token_expiration = datetime.fromtimestamp(token["expires_in"]),
                 bucket = "facebook")

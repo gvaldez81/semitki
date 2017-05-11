@@ -1,6 +1,7 @@
 import os
 import sys
 import logging
+import json
 
 from django.conf import settings
 from django.db import migrations, models
@@ -27,6 +28,21 @@ class Facebook(Bucket):
         """Like an existing post"""
         pass
 
+
+    def get_user_detail(self):
+        """
+        Get user details
+        """
+        user = json.loads(
+                self.oauth.get(self.graph_url + "me?fields=id,name,email").content)
+        # Fetch user profile image
+        image = json.loads(
+                self.oauth.get(self.graph_url + user["id"]+"/picture?width=160&height=160&redirect=0").content)
+
+        return { "id": user["id"],
+                "name": user["name"],
+                "email": user["email"],
+                "image": image["data"]["url"] }
 
     def get_oauth2session(self):
         """
