@@ -1,0 +1,11 @@
+{
+  "esversion": 6,
+  "strict": "implied",
+  "unused": true,
+  "varstmt": true,
+  "-W032": false,
+  "jquery": true,
+  "globals": { "Backbone": true, "S": true },
+  "browser": true,
+  "devel": true
+}
