@@ -1,6 +1,8 @@
 import os
 import sys
 import logging
+
+from django.conf import settings
 from django.db import migrations, models
 from BucketFactory import Bucket
 
@@ -15,7 +17,7 @@ class Facebook(Bucket):
 
         self.account_id = account_id
         self.graph_url = 'https://graph.facebook.com/'
-        self.token_url = graph_url + 'oauth/access_token'
+        self.token_url = self.graph_url + 'oauth/access_token'
         self.client_id = settings.SOCIAL_AUTH_FACEBOOK_KEY
         self.client_secret = settings.SOCIAL_AUTH_FACEBOOK_SECRET
         self.redirect_uri = os.environ["OAUTH2_REDIRECT_URI"] + "?chan=facebook"
@@ -32,7 +34,7 @@ class Facebook(Bucket):
         """
         self.oauth = OAuth2Session(client_id = self.client_id,
                 redirect_uri = self.redirect_uri)
-        self.oauth = facebook_compliance_fix(oauth)
+        self.oauth = facebook_compliance_fix(self.oauth)
 
         return self.oauth
 

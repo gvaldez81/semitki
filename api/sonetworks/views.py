@@ -147,16 +147,17 @@ def callback(request):
 
         ## Instance Facebook bucket
         ## bucket.get_token(request.get_full_path())
-        bucket = Facebook()
+        bucket = facebook.Facebook()
         oauth = bucket.get_oauth2session()
         token = bucket.get_token(request.get_full_path())
 
         # Fetch user detail
         user = json.loads(
-                oauth.get(graph_url + "me?fields=id,name,email").content)
+                oauth.get(bucket.graph_url + "me?fields=id,name,email").content)
         # Fetch user profile image
         image = json.loads(
-                oauth.get(graph_url + user["id"]+"/picture?width=160&height=160&redirect=0").content)
+                oauth.get(bucket.graph_url + user["id"]+"/picture?width=160&height=160&redirect=0").content)
+
     if user is not None:
         social_account = SocialAccount(
                 username = user["name"],
