@@ -43,10 +43,19 @@ class CampaignSerializer(serializers.HyperlinkedModelSerializer):
                 'phases')
 
 class SocialAccountSerializer(serializers.HyperlinkedModelSerializer):
+    image_path = serializers.SerializerMethodField()
+
+    def get_image_path(self, account):
+      return account.image.name
+      #account.image.name[account.image.name.rfind('/')+1:]
+      #getattr(account.image, 'name')+'1'
+      #dir(account.image)
+      # account.image.path[account.image.path.rfind('/')+1:]
+
     class Meta:
         model = SocialAccount
         fields = ('url', 'id', 'username', 'email', 'access_token', 'token_expiration', 
-            'isactive', 'valid_to', 'bucket')
+            'isactive', 'valid_to', 'bucket', 'bucket_id', 'image', 'image_path')
 
 class SocialAccountGroupSerializer(serializers.HyperlinkedModelSerializer):
     social_account_url = SocialAccountSerializer(source='social_account')

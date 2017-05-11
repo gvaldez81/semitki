@@ -23,6 +23,10 @@ from requests_oauthlib.compliance_fixes import facebook_compliance_fix
 from oauthlib.oauth2 import BackendApplicationClient
 from oauthlib.oauth2 import WebApplicationClient
 from janitor import *
+#import logging
+#logger = logging.getLogger(__name__)
+
+
 
 
 class FacebookLogin(SocialLoginView):
@@ -154,14 +158,17 @@ def callback(request):
                  ,authorization_response = redirect_response
                 )
         # Fetch user detail
-        #user = json.JSONDecoder().decode(
         user = json.loads(
                 oauth.get(graph_url + "me?fields=id,name,email").content)
-
+        # Fetch user profile image
+        image = json.loads(
+                oauth.get(graph_url + user["id"]+"/picture?width=160&height=160&redirect=0").content)
     if user is not None:
         social_account = SocialAccount(
-                username = user["id"],
+                username = user["name"],
                 email = user["email"],
+                bucket_id = user["id"],
+                image_link = image["data"]["url"],
                 access_token = json.JSONEncoder().encode(token),
                 token_expiration = datetime.fromtimestamp(token["expires_in"]),
                 bucket = "facebook")
