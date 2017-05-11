@@ -17,14 +17,14 @@ class CampaignAdmin(admin.ModelAdmin):
 class PhaseAdmin(admin.ModelAdmin):
     list_display = ['name', 'campaign']
 
+class SocialGroupAdmin(admin.ModelAdmin):
+    list_display = ['name']
 
 admin.site.register(Bucket, BucketAdmin)
 admin.site.register(Post)
 admin.site.register(Phase, PhaseAdmin)
 admin.site.register(Campaign, CampaignAdmin)
 admin.site.register(SocialAccount, SocialAccountAdmin)
-admin.site.register(SocialGroup)
+admin.site.register(SocialGroup, SocialGroupAdmin)
 admin.site.register(SocialAccountGroup)
 admin.site.register(StaticPage)
-
-

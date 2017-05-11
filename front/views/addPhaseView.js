@@ -1,32 +1,29 @@
 'use strict'
 
 let addPhaseView = Backbone.View.extend({
+
   tagName: "div",
-
-
   className: "modal-dialog",
 
     initialize: function(data) {
     this.data = data || undefined;
   },
 
-
   events: {
     "click #save": "savePhases",
   },
-
 
  savePhases:() =>{
 
     let data = {
       name: $("#input_name").val(),
       description: $("#input_description").val(),
-      campaign: "http:"+apiBuilder("campaign/"+$("#campaign").val())
+      campaign: $("#campaign").val()
 
     };
 
     let phase = new Phase(data);
-    S.collection.get("phases")
+      S.collection.get("phases")
       .add(phase)
       .sync("create", phase,{
           //url: S.fixUrl(model.url()),
@@ -58,9 +55,8 @@ let addPhaseView = Backbone.View.extend({
   },
 
   render: function(){
-         let data = {
-        
-      campaign: S.collection.get("campaigns").toJSON()
+         let data = {        
+            campaign: S.collection.get("campaigns").toJSON()
  
       };
 
@@ -69,6 +65,4 @@ let addPhaseView = Backbone.View.extend({
     this.$el.html(compiled(data));
     $("#dialog-crud").html(this.$el);
   },
-
-
 });
