@@ -4,7 +4,7 @@
 module.exports = (grunt) => {
   grunt.initConfig({
     clean: {
-      src: ['dist/*', '!dist/storage/*' ] //do not clean the storage folder
+      src: ['dist/*', '!dist/storage/**' ] //do not clean the storage folder
     },
 
     concat: {
