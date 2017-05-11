@@ -3,7 +3,10 @@
 
 module.exports = (grunt) => {
   grunt.initConfig({
-    clean: ['dist/*'],
+    clean: {
+      src: ['dist/*', '!dist/storage/*' ] //do not clean the storage folder
+    },
+
     concat: {
       core: {
         src: ['index.html','views/*.hbs'],

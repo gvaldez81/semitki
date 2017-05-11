@@ -1,9 +1,8 @@
 'use strict'
 
 let editPhaseView = Backbone.View.extend({
+
   tagName: "div",
-
-
   className: "modal-dialog",
 
   initialize: function(data) {
@@ -15,13 +14,12 @@ let editPhaseView = Backbone.View.extend({
   },
 
   edit: () => {
+  
     let id = $("#edit-id").val();
-    let dialog = new editPhaseView({item: new Array(S.collection.get("phases").get(id).toJSON())});
-
     let model = S.collection.get("phases").get(id);
         model.set({ name: $("#input_name").val(),
                   description: $("#input_description").val(),
-                  campaign: "http:"+apiBuilder("campaign/"+$("#campaign").val())});
+                  campaign: $("#campaign").val()});
 
       S.collection.get("phases").add(model)
         .sync("update", model, {
@@ -69,11 +67,17 @@ let editPhaseView = Backbone.View.extend({
 
 
   render: function(){
+
+    Handlebars.registerHelper('ifCond', function(v1, v2) {
+      if(v1 === v2.campaign) {
+        return "selected";
+      }
+      return null;
+    });
+
     let template = $("#phase-modal-edit").html();
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled(this.data));
     $("#dialog-crud").html(this.$el);
   },
-
-
 });

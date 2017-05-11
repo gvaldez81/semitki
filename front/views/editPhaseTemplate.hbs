@@ -9,17 +9,16 @@
 
       <form method="post" action="edit" role="form">
       <fieldset>
-        {{#each item}}
+        
         <div class="form-group">
           <label for="input_name">Name</label>
-          <input type="text" name="name" class="form-control" id="input_name" placeholder="Name" value="{{name}}">
+            <input type="text" name="name" class="form-control" id="input_name" placeholder="Name" value="{{item.name}}">
         </div>
 
         <div class="form-group">
           <label  for="input_description">Description</label>
-          <input type="text" name="description" class="form-control" id="input_description" placeholder="Description" value="{{description}}">
+            <input type="text" name="description" class="form-control" id="input_description" placeholder="Description" value="{{item.description}}">
         </div>
-        {{/each}}
 
         <div class="alert alert-danger errors-container" style="display: none;">
         </div>
@@ -27,17 +26,16 @@
         <div class="form-group">              
           <label for="campaign">Campaigns</label>
            <select class="form-control" id="campaign">
-               {{#each item}}
-               <option value="">{{campaign}}</option>
-               {{/each}}
+             {{#each campaigns}}
+              <option value="{{id}}" {{ifCond id ../item}}>{{name}}</option>
+             {{/each}}
            </select>
         </div>
 
         <div class="form-group">
-          {{#each item}}
-           <input type="hidden" id="edit-id" value="{{id}}">
-           {{/each}}
-          <input id="edit" type="button" class="btn btn-primary pull-left" value="Save" data-loading-text="Saving...">
+          
+          <input type="hidden" id="edit-id" value="{{item.id}}">
+            <input id="edit" type="button" class="btn btn-primary pull-left" value="Save" data-loading-text="Saving...">
         </div>
 
       </fieldset>
@@ -50,5 +48,4 @@
       </div>
     </form>
   </div>
-
 </script>
