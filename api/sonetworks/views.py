@@ -23,6 +23,7 @@ from requests_oauthlib.compliance_fixes import facebook_compliance_fix
 from oauthlib.oauth2 import BackendApplicationClient
 from oauthlib.oauth2 import WebApplicationClient
 from janitor import *
+from buckets import *
 #import logging
 #logger = logging.getLogger(__name__)
 
@@ -143,20 +144,12 @@ def callback(request):
     user = None
     ## Facebook callback handling
     if (request.GET.get("chan") == "facebook"):
-        client_id = settings.SOCIAL_AUTH_FACEBOOK_KEY
-        client_secret = settings.SOCIAL_AUTH_FACEBOOK_SECRET
-        redirect_response = request.get_full_path()
-        redirect_uri = os.environ["OAUTH2_REDIRECT_URI"] + "?chan=facebook"
-        graph_url = 'https://graph.facebook.com/'
-        token_url = graph_url + 'oauth/access_token'
-        oauth = OAuth2Session(client_id = client_id,
-            redirect_uri = redirect_uri)
-        oauth = facebook_compliance_fix(oauth)
-        token = oauth.fetch_token(
-                 token_url = token_url
-                 ,client_secret = client_secret
-                 ,authorization_response = redirect_response
-                )
+
+        ## Instance Facebook bucket
+        ## bucket.get_token(request.get_full_path())
+        bucket = Facebook()
+        oauth = bucket.get_oauth2session()
+
         # Fetch user detail
         user = json.loads(
                 oauth.get(graph_url + "me?fields=id,name,email").content)

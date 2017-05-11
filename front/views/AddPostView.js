@@ -120,7 +120,6 @@ let AddPostView = Backbone.View.extend({
 
     // DAtetime picker
     $("#schedule-post").datetimepicker({
-      useCurrent: false,
       disabledDates: [
         new Date()
       ]
