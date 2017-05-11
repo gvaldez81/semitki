@@ -149,6 +149,7 @@ def callback(request):
         ## bucket.get_token(request.get_full_path())
         bucket = Facebook()
         oauth = bucket.get_oauth2session()
+        token = bucket.get_token(request.get_full_path())
 
         # Fetch user detail
         user = json.loads(
