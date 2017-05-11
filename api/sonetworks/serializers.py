@@ -25,7 +25,7 @@ class PostSerializer(serializers.ModelSerializer):
         fields = ('id', 'url', 'date', 'content', 'owner', 'phase')
 
 
-class PhaseSerializer(serializers.HyperlinkedModelSerializer):
+class PhaseSerializer(serializers.ModelSerializer):
     class Meta:
         list_serializer_class = FilteredIsActiveListSerializer
         model = Phase

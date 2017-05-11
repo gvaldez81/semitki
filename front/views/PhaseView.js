@@ -3,10 +3,7 @@
 let PhaseView = Backbone.View.extend({
 
   tagName: "div",
-
-
   className: "row",
-
 
   initialize: function() {
     this.navigation = new NavigationView();
@@ -14,7 +11,6 @@ let PhaseView = Backbone.View.extend({
     this.modal_edit = new editPhaseView();
     this.modal_add = new addPhaseView();
   },
-
 
   events: {
        
@@ -30,12 +26,16 @@ let PhaseView = Backbone.View.extend({
   },
 
   editItem: function(ev) {
+
     let id = $(ev.currentTarget).parents('.item')[0].id;
-    let dialog = new editPhaseView({item: new Array(S.collection.get("phases").get(id).toJSON())});
+    let dialog = new editPhaseView({item: S.collection.get("phases").get(id).toJSON(),
+                campaigns: S.collection.get("campaigns").toJSON()
+    });
     dialog.render();
   },
 
   hideItem: function(ev) {
+
     let id = $(ev.currentTarget).parents('.item')[0].id;
     let dialog = new hidePhaseView({item: new Array(S.collection.get("phases").get(id).toJSON())});
     dialog.render();
@@ -52,8 +52,7 @@ let PhaseView = Backbone.View.extend({
     this.modal_add.render();
 
       let data = {
-
-      phase: S.collection.get("phases").toJSON(),
+        phase: S.collection.get("phases").toJSON(),
 
       };
 
