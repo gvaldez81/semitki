@@ -7,13 +7,37 @@ class Bucket:
         pass
 
 
+    def fav(self, social_account):
+        """
+        Like an existing post
+        """
+        pass
+
+
+    def get_user_detail(self):
+        """
+        Get user details
+        """
+        pass
+
+
+    def get_oauth2session(self):
+        """
+        Return a social network requests_oauthlib OAuth2Session
+        """
+
+
     def get_token(self, social_account):
-        """Get a facebook OAuth2 token"""
+        """
+        Get an OAuth2 token
+        """
         pass
 
 
     def post(self, social_account):
-        """New facebook post"""
+        """
+        Publish a post
+        """
         pass
 
 
@@ -22,9 +46,7 @@ class Bucket:
         pass
 
 
-    def fav(self, social_account):
-        """Like an existing post"""
-        pass
-
+    def set_account_id(self, account_id):
+        self.account_id = account_id
 
 

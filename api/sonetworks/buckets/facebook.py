@@ -78,5 +78,5 @@ class Facebook(Bucket):
         pass
 
 
-    def set_account_id(self, account_id):
-        self.account_id = account_id
+#     def set_account_id(self, account_id):
+        # self.account_id = account_id
