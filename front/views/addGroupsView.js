@@ -17,7 +17,7 @@ let addGroupsView = Backbone.View.extend({
 
   saveGroup: function(e) {   
     e.preventDefault();
-      let options = {
+    let options = {
 
       error: (error) => {
         S.logger("bg-danger", "Couldn't group save", true);
@@ -28,32 +28,29 @@ let addGroupsView = Backbone.View.extend({
         console.log(model);
         S.logger("bg-success", "Save Group succesfully", true);
         $('#dialog-crud').modal('hide');
-            let groupView = new GroupsView();
-                groupView.render();          
-        },
+        let groupView = new GroupsView();
+        groupView.render();          
+      },
 
       wait: true,
       headers: S.addAuthorizationHeader().headers            
-      }
+    }
 
-      let group = S.collection.get("groups")
+    let group = S.collection.get("groups")
         .create(this.addgroup(), options);
-          console.log("Group");
+    console.log("Group");
 
-    },
+  },
 
-   addgroup:() =>{
-    
-    let grups = {
+  addgroup:() =>{
+    let groups = {
       name: $("#input_name").val(),
       description: $("#input_description").val()
-
     };
-
-    let groupModel = new Group(grups); 
+    let groupModel = new Group(groups); 
     return groupModel;
 
-    },
+  },
 
   render: function(){
     let template = $("#group-modal-add").html();
