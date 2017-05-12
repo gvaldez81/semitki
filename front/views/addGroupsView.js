@@ -15,45 +15,45 @@ let addGroupsView = Backbone.View.extend({
     this.data = data || undefined;
   },
 
-  saveGroup:() =>{
+  saveGroup: function(e) {   
+    e.preventDefault();
+      let options = {
 
-    let data = {
+      error: (error) => {
+        S.logger("bg-danger", "Couldn't group save", true);
 
+      },
+
+      success: (model, reponse) => {
+        console.log(model);
+        S.logger("bg-success", "Save Group succesfully", true);
+        $('#dialog-crud').modal('hide');
+            let groupView = new GroupsView();
+                groupView.render();          
+        },
+
+      wait: true,
+      headers: S.addAuthorizationHeader().headers            
+      }
+
+      let group = S.collection.get("groups")
+        .create(this.addgroup(), options);
+          console.log("Group");
+
+    },
+
+   addgroup:() =>{
+    
+    let grups = {
       name: $("#input_name").val(),
-      description: $("#input_description").val(),
+      description: $("#input_description").val()
 
     };
 
-    let group = new Group(data);
-    S.collection.get("groups")
-      .add(group)
-      .sync("create", group, {
-          //url: S.fixUrl(model.url()),
-          headers: S.addAuthorizationHeader().headers,
-        success: function(model, response) {
-         console.log("saveGroup")
-              //Cerramos modal
-            $('#dialog-crud').modal('hide')
-            //Abrimos modal de success
-            bootbox.alert({
-              message:   "Group Saved",
-              size:      'small',
-              className: 'rubberBand animated'
-            });
+    let groupModel = new Group(grups); 
+    return groupModel;
 
-          let groupView = new GroupsView();
-              groupView.render();
-
-          },
-
-          error: function(model, response) {
-            console.log("error editGroup")
-            console.log("status = "+model.status)
-            console.log("response = "+model.responseText)
-
-          }
-    });       
-},
+    },
 
   render: function(){
     let template = $("#group-modal-add").html();

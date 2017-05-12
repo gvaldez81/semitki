@@ -12,17 +12,21 @@ let hideGroupsView = Backbone.View.extend({
 
 
   events: {
+    "click #close": "close",
     "click #delete": "delete",
-    "click .process_button": "doProcess"
-  },
+   },
 
-delete: (ev) => {
+  close: function() {
+       $('#dialog-crud').modal('hide')
+      },
+
+  delete: (ev) => {
+
       let id = $("#group-id").val();
-      //$(ev.currentTarget).parents('div.form-group').children('delete').value;
       let dialog = new hideGroupsView({title: new Array(S.collection.get("groups").get(id).toJSON())});
 
       let model = S.collection.get("groups").get(id);
-      model.set({'isactive': false});
+          model.set({'isactive': false});
 
       S.collection.get("groups").add(model)
         .sync("update", model, {
