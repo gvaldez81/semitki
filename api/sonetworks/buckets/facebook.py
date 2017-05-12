@@ -12,7 +12,7 @@ from requests_oauthlib.compliance_fixes import facebook_compliance_fix
 from oauthlib.oauth2 import WebApplicationClient
 
 
-class Facebook(Bucket):
+class Facebook:
 
     def __init__(self, account_id = None):
 
@@ -43,6 +43,7 @@ class Facebook(Bucket):
                 "name": user["name"],
                 "email": user["email"],
                 "image": image["data"]["url"] }
+
 
     def get_oauth2session(self):
         """
