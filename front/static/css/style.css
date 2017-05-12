@@ -204,8 +204,147 @@ a.action:hover {
 div.finder {
   z-index: 300 !important;
 }
-
 .connectedSortable { background-color: #fff }
 .connectedSortable td {  background-color: #eee }
 
+
+
+.sn-pic {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    position: relative;
+}
+
+.sn-pic>img {
+    width: 24px;
+    height: 24px
+}
+
+.sn-pic.sn-pic-bordered:after {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    bottom: 0;
+    content: '';
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0
+}
+
+.sn-pic:before {
+    content: '';
+    position: absolute;
+    bottom: 3px;
+    left: 45;
+    display: block;
+    font-family: FontAwesome;
+    font-size: 11px;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transform: translate(0, 0);
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    text-align: center;
+    border: 1px solid #fff;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    z-index: 10;
+    box-sizing: border-box
+}
+
+.sn-pic.-empty:before {
+    width: 34px;
+    height: 34px;
+    font-size: 18px;
+    line-height: 36px;
+    border: 0
+}
+
+.sn-pic.-empty:after {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    bottom: 0;
+    content: '';
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0
+}
+
+.sn-pic.sn-w40>img {
+    width: 40px;
+    height: 40px
+}
+.sn-pic.sn-w40:before {
+    width: 16px;
+    height: 16px;
+    line-height: 16px
+}
+
+
+.sn-pic.sn-w30>img {
+    width: 30px;
+    height: 30px
+}
+.sn-pic.sn-w30:before {
+    width: 12px;
+    height: 12px;
+    line-height: 12px
+}
+
+.sn3.sn-pic:before,
+.twitter.sn-pic:before  {
+    content: "\f099";
+    color: #fff;
+    background-color: #55acee;
+    background-color: rgba(85, 172, 238, 0.9)
+}
+
+.sn3 .social-title,
+.twitter .social-title{
+    color: #4099ff
+}
+
+
+.sn1.sn-pic:before,
+.facebook.sn-pic:before {
+    content: "\f09a";
+    color: #fff;
+    background-color: #3b5998;
+    background-color: rgba(59, 89, 152, 0.9)
+}
+
+.sn1 .social-title,
+.facebook .social-title {
+    color: #3b5998
+}
+
+
+.unknown.sn-pic:before {
+    content: "\f119";
+    color: #fff;
+    background-color: #3b5998;
+    background-color: rgba(59, 89, 152, 0.9)
+}
+
+.unknown .social-title {
+    color: #3b5998
+}
+
+.account{
+  cursor: pointer;
+}
+
+.community-name {
+    color: #3b5998;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.community-post-date {
+    color: #9197a3;
+    font-size: 10px;
+    text-transform: capitalize;
+}
 
