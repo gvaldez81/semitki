@@ -151,4 +151,19 @@ you can run commands of manage.py for the Django app.
 
     ENV/bin/python manage.py createsuperuser
 
-.
+
+## Misc notes
+
+
+### Avoid received a naive datetime while time zone support is enabled
+
+Set `TIME_ZONE = False` in `settings.py` and use something like the code
+below for date comparison.
+
+
+    from django.utils.timezone import utc
+
+    datetime.utcnow().replace(tzinfo=utc)
+
+
+

@@ -23,6 +23,7 @@ from requests_oauthlib.compliance_fixes import facebook_compliance_fix
 from oauthlib.oauth2 import BackendApplicationClient
 from oauthlib.oauth2 import WebApplicationClient
 from janitor import *
+from buckets import *
 #import logging
 #logger = logging.getLogger(__name__)
 
@@ -143,32 +144,21 @@ def callback(request):
     user = None
     ## Facebook callback handling
     if (request.GET.get("chan") == "facebook"):
-        client_id = settings.SOCIAL_AUTH_FACEBOOK_KEY
-        client_secret = settings.SOCIAL_AUTH_FACEBOOK_SECRET
-        redirect_response = request.get_full_path()
-        redirect_uri = os.environ["OAUTH2_REDIRECT_URI"] + "?chan=facebook"
-        graph_url = 'https://graph.facebook.com/'
-        token_url = graph_url + 'oauth/access_token'
-        oauth = OAuth2Session(client_id = client_id,
-            redirect_uri = redirect_uri)
-        oauth = facebook_compliance_fix(oauth)
-        token = oauth.fetch_token(
-                 token_url = token_url
-                 ,client_secret = client_secret
-                 ,authorization_response = redirect_response
-                )
-        # Fetch user detail
-        user = json.loads(
-                oauth.get(graph_url + "me?fields=id,name,email").content)
-        # Fetch user profile image
-        image = json.loads(
-                oauth.get(graph_url + user["id"]+"/picture?width=160&height=160&redirect=0").content)
+
+        ## Instance Facebook bucket
+        ## bucket.get_token(request.get_full_path())
+        bucket = facebook.Facebook()
+        oauth = bucket.get_oauth2session()
+        token = bucket.get_token(request.get_full_path())
+
+    user = bucket.get_user_detail()
+
     if user is not None:
         social_account = SocialAccount(
                 username = user["name"],
                 email = user["email"],
                 bucket_id = user["id"],
-                image_link = image["data"]["url"],
+                image_link = user["image"],
                 access_token = json.JSONEncoder().encode(token),
                 token_expiration = datetime.fromtimestamp(token["expires_in"]),
                 bucket = "facebook")
@@ -179,4 +169,4 @@ def callback(request):
 
 def publish_now(request, pk):
 
-    return HttpResponse( stuff_it(pk))
+    return HttpResponse(stuff_it(pk))

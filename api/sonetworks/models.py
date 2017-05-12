@@ -47,6 +47,7 @@ class Post(models.Model):
     phase = models.ForeignKey(Phase)
     content = JSONField()
     owner = models.ForeignKey('auth.user', related_name='posts')
+    published = models.BooleanField(default = 0)
 
 
 class Bucket(models.Model):

@@ -1,5 +1,7 @@
 import json
 from models import *
+from datetime import datetime
+from django.utils.timezone import utc
 
 from django.conf import settings
 
@@ -13,7 +15,9 @@ from oauthlib.oauth2 import WebApplicationClient
 def gather():
     """Gather posts from database and distibute among available buckets"""
 
-    Post.objects.get()
+    Post.objects.filter(date__date = datetime.date(
+        datetime.now().replace(tzinfo=utc)
+        )).filter(published = False)
 
     fb = Facebook()
 
@@ -31,6 +35,9 @@ def sweep():
 def stuff_it(pk):
     """Publish a post right away"""
     p = Post.objects.get(pk = pk)
+    o = json.JSONDecoder().decode(p.content)
+    t = SocialAccount.objects.get(
+            )
 
     client_id = settings.SOCIAL_AUTH_FACEBOOK_KEY
     client_secret = settings.SOCIAL_AUTH_FACEBOOK_SECRET

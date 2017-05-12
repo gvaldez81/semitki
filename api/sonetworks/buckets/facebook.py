@@ -1,19 +1,71 @@
+import os
 import sys
 import logging
+import json
+
+from django.conf import settings
 from django.db import migrations, models
 from BucketFactory import Bucket
 
+from requests_oauthlib import OAuth2Session
+from requests_oauthlib.compliance_fixes import facebook_compliance_fix
+from oauthlib.oauth2 import WebApplicationClient
+
+
 class Facebook(Bucket):
 
-    def __init__(self):
-        self.logger = logging.getLogger(__name__)
-        self.logger.info("Facebook bucket instance")
+    def __init__(self, account_id = None):
+
+        self.account_id = account_id
+        self.graph_url = 'https://graph.facebook.com/'
+        self.token_url = self.graph_url + 'oauth/access_token'
+        self.client_id = settings.SOCIAL_AUTH_FACEBOOK_KEY
+        self.client_secret = settings.SOCIAL_AUTH_FACEBOOK_SECRET
+        self.redirect_uri = os.environ["OAUTH2_REDIRECT_URI"] + "?chan=facebook"
 
 
-    def get_token(self, social_account):
-        """Get a facebook OAuth2 token"""
-        self.logger.info(social_account)
-        sys.exit(0)
+    def fav(self, social_account):
+        """Like an existing post"""
+        pass
+
+
+    def get_user_detail(self):
+        """
+        Get user details
+        """
+        user = json.loads(
+                self.oauth.get(self.graph_url + "me?fields=id,name,email").content)
+        # Fetch user profile image
+        image = json.loads(
+                self.oauth.get(self.graph_url + user["id"]+"/picture?width=160&height=160&redirect=0").content)
+
+        return { "id": user["id"],
+                "name": user["name"],
+                "email": user["email"],
+                "image": image["data"]["url"] }
+
+    def get_oauth2session(self):
+        """
+        Returns a Facebook requests_oauthlib OAuth2Session
+        """
+        self.oauth = OAuth2Session(client_id = self.client_id,
+                redirect_uri = self.redirect_uri)
+        self.oauth = facebook_compliance_fix(self.oauth)
+
+        return self.oauth
+
+
+    def get_token(self, redirect_response):
+        """
+        Get a facebook OAuth2 token
+        """
+        token = self.oauth.fetch_token(
+                 token_url = self.token_url,
+                 client_secret = self.client_secret,
+                 authorization_response = redirect_response
+                )
+
+        return token
 
 
     def post(self, social_account):
@@ -26,6 +78,5 @@ class Facebook(Bucket):
         pass
 
 
-    def fav(self, social_account):
-        """Like an existing post"""
-        pass
+#     def set_account_id(self, account_id):
+        # self.account_id = account_id
