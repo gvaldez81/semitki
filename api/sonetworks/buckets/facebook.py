@@ -70,13 +70,13 @@ class Facebook:
         return token
 
 
-    def post(self, token):
+    def post(self, token, post):
         """
         New facebook post
         """
         node = self.graph_url + "me/feed?"
-        payload = { "message": p.content["txt"],
-                "img": p.content["img"]
+        payload = { "message": post.content["txt"],
+                "img": post.content["img"]
                 }
         response = self.oauth.post(node, data = payload)
 

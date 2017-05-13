@@ -44,7 +44,6 @@ let LoginView = Backbone.View.extend({
     FB.login((response) => {
       if(S.fbStatusChangeCallback(response)) {
         FB.api('/me', { "fields": "id,name,email"}, (response) => {
-          console.log(response);
           let user = {
             user: response.id,
             last_name: response.name.split(" ")[0],

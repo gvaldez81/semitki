@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 let AddPostView = Backbone.View.extend({
 
@@ -36,7 +36,7 @@ let AddPostView = Backbone.View.extend({
   prepare_post: function(date) {
     let tags = [];
     tags.push({"account": this.data.bucket});
-    tags.push({"account_id": this.data.username});
+    tags.push({"account_id": this.data.bucket_id});
     tags.push({"like": $("#lkgroups").val()});
     tags.push({"rs": $("#rsgroups").val()});
     let content = {
