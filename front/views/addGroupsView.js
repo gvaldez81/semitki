@@ -23,7 +23,7 @@ let addGroupsView = Backbone.View.extend({
         $('#dialog-crud').modal('hide');
         let groupView = new GroupsView();
         groupView.render();          
-        S.logger("bg-danger", "Couldn't group save", true);
+        S.logger("bg-danger", "Couldn't Group Save", true);
 
       },
 
@@ -32,7 +32,7 @@ let addGroupsView = Backbone.View.extend({
         $('#dialog-crud').modal('hide');       
         let groupView = new GroupsView();
         groupView.render(); 
-        S.logger("bg-success", "Save Group succesfully", true);
+        S.logger("bg-success", "Save Group Succesfully", true);
       },
 
       wait: true,
