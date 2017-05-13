@@ -10,14 +10,18 @@
        <li class="dropdown-submenu"><a tabindex="0">{{name}}</a>
          <ul class="dropdown-menu">
           {{#each related}}
-             <li><a tabindex="0" id="{{social_account_url.id}}"
-             class="account sn-pic sn-w30 {{social_account_url.bucket}} ">
-             {{#if social_account_url.image}}
-              <img src="storage/{{social_account_url.image_path}}">
-              {{/if}}
-             {{social_account_url.username}}
-             
-             </a></li>
+            <li><div style="margin:5px;">
+              <a tabindex="0" id="{{social_account_url.id}}"
+                class="account sn-pic sn-w30 {{social_account_url.bucket}} ">
+                {{#if social_account_url.image}}
+                  <img src="storage/{{social_account_url.image_path}}">
+                {{/if}}
+                <span class="community-name">
+                  {{social_account_url.username}}
+                </span>
+              </a>
+              </div>
+            </li>
           {{/each}}
          </ul>
        </li>

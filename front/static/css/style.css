@@ -63,9 +63,14 @@ div.navbar-inner {
   max-width: 800px;
   padding: 15px;
   margin: 0 auto;
-  border: thin solid #eee;
-  border-radius: 25px;
+  border: thin solid #efa05a;
+  border-radius: 15px;
+  background-color: rgba(255, 149, 36, 0.20);
 }
+
+
+
+
 .addpost-form .form-signin-heading,
 .addpost-form .checkbox {
   margin-bottom: 10px;
@@ -234,8 +239,8 @@ div.finder {
 .sn-pic:before {
     content: '';
     position: absolute;
-    bottom: 3px;
-    left: 45;
+    bottom: 0px;
+    left: 0px;
     display: block;
     font-family: FontAwesome;
     font-size: 11px;
@@ -340,6 +345,7 @@ div.finder {
     text-decoration: none;
     font-size: 12px;
     font-weight: bold;
+    padding-left: 5px;
 }
 
 .community-post-date {
@@ -347,4 +353,23 @@ div.finder {
     font-size: 10px;
     text-transform: capitalize;
 }
+
+.community-info{
+    margin-left: 0px;
+    transition: opacity .15s;
+    display: inline-flex;
+}
+
+.visual-wrap-header {
+    margin-top: 12px;
+    padding: 0 12px;
+}
+
+.img24{
+  height: 24px;
+  width: 24px;
+  float: right;
+}
+
+
 

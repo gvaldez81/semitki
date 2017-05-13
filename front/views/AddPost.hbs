@@ -4,20 +4,47 @@
 <div><button id="closeadd" type="button" class="close" aria-label="Close">
 <span aria-hidden="true">&times;</span></button></div>
 <form id="addpost-form" class="addpost-form">
-  <p class="form-signin-heading">Post from:&nbsp;{{username}}<p>
+  <div class="visual-wrap-header clearfix">
+    <div class="container-fluid" style="margin-bottom:10px">
+      <span class="sn-pic sn-w40 {{bucket}} no-after-check">
+        {{#if image}}
+          <img src="storage/{{image_path}}">
+        {{/if}}
+      </span>
+      <div class="community-info">
+        <div class="community-name" >{{username}}</a>
+        <div class="community-post-date">{{currentDate}}</div>
+      </div>
+    </div>
+  </div>
+
+
+
   <!-- img src="..." alt="..." class="img-rounded" style="width: 70px;" -->
 
   <div class="form-group" id="campaignSelector">
-    <label for="campaignSelectorBox">Campaign</label>
-    <select id="campaignSelectorBox" style="width:100%;"></select>
+    <div class="col-sm-2">
+      <label for="campaignSelectorBox">Campaign</label>
+    </div>
+    <div class="col-sm-10">
+      <select id="campaignSelectorBox" style="width:100%;"></select>
+    </div>
   </div>
+  <br>
+  <br>
   <div class="form-group" id="phaseSelector">
-    <label for="phaseSelectorBox">Phase</label>
-    <select id="phaseSelectorBox" style="width:100%;" disabled></select>
+    <div class="col-sm-2">
+      <label for="phaseSelectorBox">Phase</label>
+    </div>
+    <div class="col-sm-10">
+      <select id="phaseSelectorBox" style="width:100%;" disabled></select>
+    </div>
   </div>
+  <br>
+  <br>
   <div class="form-group">
     <textarea class="form-control" rows="4" id="postxt"
-    placeholder="Post text"></textarea>
+    placeholder="What do you want to share?"></textarea>
   </div>
   <div class="form-inline">
     <div class="btn-group">
@@ -32,37 +59,56 @@
       </span>
     </div>
 
-    <div class="btn-group dropup pull-right">
-      <button type="button" class="btn btn-info"
-      id="publish-btn">Schedule</button>
-      <button class="btn btn-info dropdown-toggle" type="button"
-      data-toggle="dropdown" aria-haspopup="true"
-      aria-expanded="false"><span class="caret"></span>
-      <span class="sr-only">Toggle dropdown</span></button>
-      <ul class="dropdown-menu dropdown-info" aria-labeledby="publish-btn">
-        <li><a href="#" id="schedule-enable" class="btn btn-info"
-           role="button">Schedule</a></li>
-        <li><a href="#" id="publish-enable" class="btn btn-info"
-          role="button">Publish now</a></li>
-      </ul>
+  </div>
+  <br>
+  <div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-inline">
+        <div class="row">
+          <div class="col-sm-2" style="padding-right:0px">
+            <img src="img/like.png" class="img24">
+          </div>
+          <div class="col-sm-10">
+            
+              <select id="lkgroups" multiple="multiple" style="width:100%;"></select>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-inline">
+        <div class="row">
+          <div class="col-sm-2" style="padding-right:0px">
+            <img src="img/share.png"  class="img24">
+          </div>
+          <div class="col-sm-10">
+            
+            <select id="rsgroups" multiple="multiple" style="width:100%;"></select>
+            
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="form-inline">
-    <div class="checkbox">
-      <label><input type="checkbox" id="like" value="like">&lt;3</label>
-    </div>
-    <div class="form-group">
-      <select id="lkgroups" multiple="multiple" style="width:100%;"></select>
-    </div>
   </div>
-  <div class="form-inline">
-    <div class="checkbox">
-      <label><input type="checkbox" id="rs" value="rs">RS</label>
-    </div>
-    <div class="form-group">
-      <select id="rsgroups" multiple="multiple" style="width:100%;"></select>
-    </div>
-  <div>
+  <br>
+  <br>
+  <div class="btn-group dropup pull-right">
+    <button type="button" class="btn btn-info"
+    id="publish-btn">Schedule</button>
+    <button class="btn btn-info dropdown-toggle" type="button"
+    data-toggle="dropdown" aria-haspopup="true"
+    aria-expanded="false"><span class="caret"></span>
+    <span class="sr-only">Toggle dropdown</span></button>
+    <ul class="dropdown-menu dropdown-info" aria-labeledby="publish-btn">
+      <li><a href="#" id="schedule-enable" class="btn btn-info"
+         role="button">Schedule</a></li>
+      <li><a href="#" id="publish-enable" class="btn btn-info"
+        role="button">Publish now</a></li>
+    </ul>
+  </div>
 </form>
 
 </script>

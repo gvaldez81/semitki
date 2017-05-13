@@ -112,8 +112,20 @@ let AddPostView = Backbone.View.extend({
 
 
   render: function() {
+
+    Handlebars.registerHelper('currentDate', function() {
+      let d = new Date();
+      let months = ["January", "February", "March", "April", "May", "June",
+          "July", "August", "September", "October", "November", "December"];
+      let retVal = ("0" + d.getDate()).slice(-2) 
+                + " " + months[d.getMonth()] 
+                + ", " + d.getFullYear() ;
+      return retVal;
+    });
+
     let template = $("#addpost-template").html();
     let compiled = Handlebars.compile(template);
+
     this.$el.html(compiled(this.data));
 
     $("#main").html(this.$el);
