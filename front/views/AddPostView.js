@@ -137,7 +137,9 @@ let AddPostView = Backbone.View.extend({
     // Campaigns and phases select
     let c = $("#campaignSelectorBox").select2({data: this.data.campaigns,
       placeholder: "Select a campaign"});
+
     let p = $("#phaseSelectorBox").select2({placeholder: "Select a phase"});
+    
     c.on("select2:select", (e) => {
       p.select2({data: S.collection.get("campaigns").get(e.target.value).
         toJSON().phases.map((i) => {

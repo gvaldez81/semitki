@@ -206,6 +206,9 @@ a.action:hover {
   text-decoration: none;
 }
 
+a:hover {
+  text-decoration: none;
+}
 div.finder {
   z-index: 300 !important;
 }
