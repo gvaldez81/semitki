@@ -7,60 +7,69 @@ let addCampaignView = Backbone.View.extend({
   className: "modal-dialog",
 
     initialize: function(data) {
-    this.data = data || undefined;
-  },
 
+    this.data = data || undefined;
+
+  },
 
   events: {
     "click #save": "saveCampaign"
   },
 
+  saveCampaign: function(e) { 
 
+    e.preventDefault();
+    let options = {
 
-  saveCampaign:() =>{
-    let data = {
+      error: (error) => {
+
+        $('#dialog-crud').modal('hide');       
+        S.logger("bg-danger", "Couldn't Campaign Save", true);
+
+      },
+
+      success: (model, reponse) => {
+
+        console.log(model);
+        $('#dialog-crud').modal('hide');       
+        let campaignView = new CampaignView();
+        campaignView.render();   
+        S.logger("bg-success", "Save Campaign Succesfully", true);
+
+      },
+
+      wait: true,
+      headers: S.addAuthorizationHeader().headers 
+
+    }
+
+    let campaign = S.collection.get("campaigns")
+        .create(this.addCampaign(), options);
+        console.log("Campaign");
+
+  },
+
+  addCampaign: function(){
+
+    let campaigns = {
       name: $("#input_name").val(),
       description: $("#input_description").val()
     };
 
-    let campaign = new Campaign(data);
-    S.collection.get("campaigns")
-      .add(campaign)
-      .sync("create", campaign, {
-          headers: S.addAuthorizationHeader().headers,
-          success: function(model, response) {
-            console.log("saveCampaign")
-            //Cerramos modal
-            $('#dialog-crud').modal('hide')
-            //Abrimos modal de success
-            bootbox.alert({
-              message: "Campaign saved",
-              size: 'small',
-              className: 'rubberBand animated'
-            });
+    let campaignModel = new Campaign(campaigns); 
+    return campaignModel;
 
-          let campaignView = new CampaignView();
-              campaignView.render();
-          },
-          error: function(model, response) {
-            console.log("error saveCampaing")
-            console.log("status = "+model.status)
-            console.log("response = "+model.responseText)
-
-          }
-    });
-    
   },
 
 
 
-
-
   render: function(){
+
     let template = $("#campaign-modal-add").html();
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled(this.data));
     $("#dialog-crud").html(this.$el);
+
   },
 
 

@@ -142,15 +142,13 @@ def callback(request):
     os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
     user = None
+    bucket = None
     ## Facebook callback handling
     if (request.GET.get("chan") == "facebook"):
-
-        ## Instance Facebook bucket
-        ## bucket.get_token(request.get_full_path())
         bucket = facebook.Facebook()
-        oauth = bucket.get_oauth2session()
-        token = bucket.get_token(request.get_full_path())
 
+    oauth = bucket.get_oauth2session()
+    token = bucket.get_token(request.get_full_path())
     user = bucket.get_user_detail()
 
     if user is not None:
