@@ -34,7 +34,7 @@ let hideGroupsView = Backbone.View.extend({
       error: (error) => {
         
         $('#dialog-crud').modal('hide');
-        S.logger("bg-danger", "Couldn't group delete", true);
+        S.logger("bg-danger", "Couldn't Group Delete", true);
 
       },
 
@@ -44,7 +44,7 @@ let hideGroupsView = Backbone.View.extend({
         $('#dialog-crud').modal('hide');       
         let groupView = new GroupsView();
         groupView.render(); 
-        S.logger("bg-success", "Delete Group succesfully", true);
+        S.logger("bg-success", "Delete Group Succesfully", true);
 
       },
 
