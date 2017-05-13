@@ -12,7 +12,7 @@ from requests_oauthlib.compliance_fixes import facebook_compliance_fix
 from oauthlib.oauth2 import WebApplicationClient
 
 
-class Facebook(Bucket):
+class Facebook:
 
     def __init__(self, account_id = None):
 
@@ -22,6 +22,7 @@ class Facebook(Bucket):
         self.client_id = settings.SOCIAL_AUTH_FACEBOOK_KEY
         self.client_secret = settings.SOCIAL_AUTH_FACEBOOK_SECRET
         self.redirect_uri = os.environ["OAUTH2_REDIRECT_URI"] + "?chan=facebook"
+        self.oauth = None
 
 
     def fav(self, social_account):
@@ -43,6 +44,7 @@ class Facebook(Bucket):
                 "name": user["name"],
                 "email": user["email"],
                 "image": image["data"]["url"] }
+
 
     def get_oauth2session(self):
         """
@@ -68,9 +70,17 @@ class Facebook(Bucket):
         return token
 
 
-    def post(self, social_account):
-        """New facebook post"""
-        pass
+    def post(self, token, post):
+        """
+        New facebook post
+        """
+        node = self.graph_url + "me/feed?"
+        payload = { "message": post.content["txt"],
+                "img": post.content["img"]
+                }
+        response = self.oauth.post(node, data = payload)
+
+        return response
 
 
     def reshare(self, social_account):
@@ -78,5 +88,5 @@ class Facebook(Bucket):
         pass
 
 
-#     def set_account_id(self, account_id):
-        # self.account_id = account_id
+    def set_account_id(self, account_id):
+        self.account_id = account_id
