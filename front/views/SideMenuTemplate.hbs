@@ -11,14 +11,10 @@
          <ul class="dropdown-menu">
           {{#each related}}
              <li><a tabindex="0" id="{{social_account_url.id}}"
-             class="account">
-             <div style="content:'';clear:both;display:table;text-align:center;width:95%">
-             {{#if social_account_url.bucket}}
-              <img src="img/{{social_account_url.bucket}}.png" style="margin-left:5px;float:left;">
-             {{/if}}
+             class="account sn-pic sn-w30 {{social_account_url.bucket}} ">
              {{#if social_account_url.image}}
-              <img src="storage/{{social_account_url.image_path}}" style="margin-right:5px;float:right;width:24px;height:24px;">
-             {{/if}}
+              <img src="storage/{{social_account_url.image_path}}">
+              {{/if}}
              {{social_account_url.username}}
              
              </a></li>
