@@ -5,7 +5,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         {{#each item}}
         <h4 class="modal-title" id="dialog_label">
-        Are you sure that you want to delete campaign [{{name}}]
+        Are you sure that you want to delete campaign: [{{name}}]
         </h4>
         {{/each}}
       </div>
@@ -23,7 +23,7 @@
               <input type="hidden" id="campaign-id" value="{{id}}">
             {{/each }}  
           <input id="delete" type="button" class="process_button btn btn-danger pull-left" value="Yes, Hide It" data-loading-text="Removing...">
-          <input type="button" class="btn btn-primary pull-left" value="Cancel" data-loading-text="Canceling...">
+          <input id="close" type="button" class="btn btn-primary pull-left" value="Cancel" data-loading-text="Canceling...">
         </div>
 
       </div>
