@@ -18,7 +18,6 @@ let GrouppedAccountsRelatedView = Backbone.View.extend({
     if (S.collection.get("related")!== undefined) {
       data.groupped = S.collection.get("related").toJSON()
       data.groupname=S.collection.get("related").toJSON()[0].name
-    
     }
 
     Handlebars.registerHelper('lookup2', function (collection, id) {
@@ -54,12 +53,10 @@ let GrouppedAccountsRelatedView = Backbone.View.extend({
         accept: ".connectedSortable tr",
         hoverClass: "ui-state-hover",
         drop: function (event, ui) {
-            //ACTUALIZCION
-            return false;
+          console.log(ui);
         }
     });
 
-    
     return this;
 
   }

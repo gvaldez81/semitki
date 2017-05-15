@@ -124,6 +124,7 @@ class BucketViewSet(viewsets.ModelViewSet):
     """
     Marketing channels registry
     """
+
     queryset = Bucket.objects.all()
     serializer_class = BucketSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
@@ -165,8 +166,7 @@ def callback(request):
             del request.session['request_token']
             bucket.request_token = request_token
             bucket.verifier = request.GET.get('oauth_verifier')
-        
-            
+
         oauth = bucket.get_oauth2session()
         token = bucket.get_token(request.get_full_path())
         user = bucket.get_user_detail()

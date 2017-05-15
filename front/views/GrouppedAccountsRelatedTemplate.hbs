@@ -1,25 +1,26 @@
 <script type="text/x-handlebars-template" id="grouppedaccounts-related">
-    
-  
-  <table class="table table-striped table-bordered table-list" id='table-related'>
+
+
+<table class="table table-striped table-bordered table-list"
+id='table-related'>
     <tbody class="connectedSortable">
       <tr>
         <th>Network</th>
         <th>Accounts</th>
-      </tr> 
+      </tr>
       {{#each groupped}}
       {{#each related}}
       <tr>
         <td>
         {{social_account_url.bucket}}
         </td>
-        <td> 
+        <td>
         {{social_account_url.username}}
-        </td>  
+        </td>
       </tr>
       {{/each}}
       {{/each}}
     </tbody>
   </table>
-  
+
 </script>

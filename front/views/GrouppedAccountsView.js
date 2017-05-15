@@ -5,12 +5,11 @@ let GrouppedAccountsView = Backbone.View.extend({
   className: "row",
 
   initialize: function () {
-    this.navigation = new NavigationView();   
+    this.navigation = new NavigationView();
     this.footer = new FooterView();
-     this.related = new GrouppedAccountsRelatedView();
+    this.related = new GrouppedAccountsRelatedView();
     this.navigation.render();
     this.footer.render();
- 
   },
 
 
@@ -20,7 +19,7 @@ let GrouppedAccountsView = Backbone.View.extend({
 
 
   filteraccount:() =>{
-    S.collection.get("groups").filtering($('#group').val())
+    S.collection.get("groups").filtering($('#group').val());
     let view = new GrouppedAccountsRelatedView();
     view.render();
   },
@@ -30,7 +29,7 @@ let GrouppedAccountsView = Backbone.View.extend({
     let data = {
       groups: S.collection.get("groups").toJSON(),
     };
-    let cuentasfree = []
+    let cuentasfree = [];
     S.collection.get("accounts").toJSON().forEach(function (element){
         function findAccount(account){
             return account.id === element.id;
@@ -41,16 +40,13 @@ let GrouppedAccountsView = Backbone.View.extend({
     });
     data.free = cuentasfree;
 
-
-
-
     let template = $("#grouppedaccounts").html();
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled(data));
     $("#main").html(this.$el);
     this.related.render();
 
-    let $tabs = $('#table-related')
+    let $tabs = $('#table-related');
     $("tbody.connectedSortable")
         .sortable({
             connectWith: ".connectedSortable",
@@ -64,13 +60,12 @@ let GrouppedAccountsView = Backbone.View.extend({
     let $tab_items = $(".nav-tabs > li", $tabs).droppable({
         accept: ".connectedSortable tr",
         hoverClass: "ui-state-hover",
-        drop: function (event, ui) {
-            //ACTUALIZCION
-            return false;
+        drop: function(event, ui) {
+          console.log(ui);
+          return false;
         }
     });
-    
-    
+
     return this;
   }
 });
