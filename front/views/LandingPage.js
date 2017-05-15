@@ -8,7 +8,8 @@ let LandingPageView = Backbone.View.extend({
 
 
   events: {
-    "click #landing-login": "fbLogin"
+    "click #landing-login-fb": "fbLogin",
+    "click #landing-login-tw": "twLogin"
   },
 
 
@@ -30,6 +31,13 @@ let LandingPageView = Backbone.View.extend({
     );
   },
 
+  twLogin: (e) => {
+    e.preventDefault(); // Keep default action of button from beign triggered
+    location.assign("http://"+SEMITKI_CONFIG.api_url
+      + ":"+SEMITKI_CONFIG.api_port
+      + "/twitter_auth/?action=request_token"
+    );
+  },
 
   render: function() {
     var head = $('head')

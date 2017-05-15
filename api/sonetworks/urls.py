@@ -46,5 +46,6 @@ urlpatterns = [
     url(r'^api-token-auth/', obtain_jwt_token),
     url(r'^api-token-refresh/', refresh_jwt_token),
     url(r'^callback/$', callback, name='callback'),
+    url(r'^twitter_auth/$', twitter_auth, name='twitter_auth'),
     url(r'^post/(?P<pk>[^/.]+)/publish/$', publish_now, name='publish_now'),
 ]
