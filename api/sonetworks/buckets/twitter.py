@@ -12,7 +12,7 @@ from requests_oauthlib import OAuth1Session
 import requests
 from requests_oauthlib import OAuth1
 from urlparse import parse_qs
-import tweetpy
+import tweepy
 
 
 class Twitter:
