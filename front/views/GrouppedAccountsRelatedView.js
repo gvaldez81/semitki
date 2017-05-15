@@ -1,4 +1,12 @@
 'use strict'
+/* global Backbone */
+/* global S */
+/* global NavigationView */
+/* global FooterView */
+/* global AccountGroup */
+/* global apiBuilder */
+/* exported GrouppedAccountsRelatedView */
+
 
 let GrouppedAccountsRelatedView = Backbone.View.extend({
   tagName: "div",
@@ -57,7 +65,6 @@ let GrouppedAccountsRelatedView = Backbone.View.extend({
                 social_group_url: "http:" + apiBuilder("group") + group_id + "/",
                 isactive: true
               });
-              console.log(account2group);
               let options = {
                 error: (error) => {
                   S.logger("bg-danger", "Error saving account to group", true);
