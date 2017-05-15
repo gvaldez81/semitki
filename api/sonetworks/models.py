@@ -70,7 +70,7 @@ class SocialAccount(models.Model):
     image=models.ImageField(upload_to='img/', blank=True)
     image_link = models.CharField(max_length=255, null=True, blank=True)
     access_token = JSONField()
-    token_expiration = models.DateTimeField(blank=False)
+    token_expiration = models.DateTimeField(blank=True, null=True)
     bucket = models.CharField(max_length=256)
     isactive = models.BooleanField(default = True)
     valid_to = models.DateField(null=True, blank=True)
@@ -87,8 +87,7 @@ class SocialAccount(models.Model):
             profilePic.write(result.content)
             profilePic.flush()
             urlclean = urlparse.urljoin(self.image_link, urlparse.urlparse(self.image_link).path)
-            self.image.save(self.bucket_id+'_'
-                +os.path.basename(urlclean), profilePic )
+            self.image.save(str(self.bucket_id)+'_'+os.path.basename(urlclean), profilePic )
             self.save()
         super(SocialAccount, self).save()
 
