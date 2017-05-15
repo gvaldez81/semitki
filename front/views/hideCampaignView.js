@@ -60,10 +60,12 @@ initialize: function(data) {
   },
 
   render: function(){
+
     let template = $("#campaign-modal-hide").html();
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled(this.data));
     $("#dialog-crud").html(this.$el);
+    
   },
 
 });

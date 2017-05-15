@@ -7,7 +7,6 @@
         <h4 class="modal-title" id="dialog_label">
         Are you sure that you want to delete phase: {{name}}
         </h4>
-
         {{/each}}
       </div>
       <form method="post" action="hide" role="form">
@@ -24,7 +23,7 @@
               <input type="hidden" id="phase-id" value="{{id}}">
             {{/each }}  
             <input id="delete" type="button" class="process_button btn btn-danger pull-left" value="Yes, Hide It" data-loading-text="Removing...">
-            <input id="cancel" type="button" class="btn btn-primary pull-left" value="Cancel" data-loading-text="Canceling...">
+            <input id="close" id="cancel" type="button" class="btn btn-primary pull-left" value="Cancel" data-loading-text="Canceling...">
           </div>
 
         </div>
