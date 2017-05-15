@@ -3,7 +3,6 @@
 let addCampaignView = Backbone.View.extend({
   tagName: "div",
 
-
   className: "modal-dialog",
 
     initialize: function(data) {
@@ -38,8 +37,8 @@ let addCampaignView = Backbone.View.extend({
 
       },
 
-      wait: true,
-      headers: S.addAuthorizationHeader().headers 
+        wait: true,
+        headers: S.addAuthorizationHeader().headers 
 
     }
 
@@ -61,8 +60,6 @@ let addCampaignView = Backbone.View.extend({
 
   },
 
-
-
   render: function(){
 
     let template = $("#campaign-modal-add").html();
@@ -71,6 +68,5 @@ let addCampaignView = Backbone.View.extend({
     $("#dialog-crud").html(this.$el);
 
   },
-
 
 });
