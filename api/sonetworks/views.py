@@ -23,7 +23,8 @@ from requests_oauthlib.compliance_fixes import facebook_compliance_fix
 from oauthlib.oauth2 import BackendApplicationClient
 from oauthlib.oauth2 import WebApplicationClient
 from janitor import *
-from buckets import *
+from buckets import facebook
+from buckets import twitter
 #import logging
 #logger = logging.getLogger(__name__)
 
@@ -136,33 +137,56 @@ class StaticPageViewSet(viewsets.ModelViewSet):
     serializer_class = StaticPageSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
+def twitter_auth(request):
+
+    #if 'action' in request.GET:
+    bucket = twitter.Twitter()
+    oauth = bucket.get_oauthsession()
+    url = oauth.get_authorization_url()
+    request.session['request_token'] = oauth.request_token
+    return HttpResponseRedirect(url)
+    #result = getattr(bucket, request.GET.get("action"))()
+    #return HttpResponseRedirect(result)
 
 def callback(request):
     # Set to 0 for production, 1 is for development only
     os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
-    user = None
-    bucket = None
-    ## Facebook callback handling
-    if (request.GET.get("chan") == "facebook"):
-        bucket = facebook.Facebook()
+    # Only process if a chan is present
+    if 'chan' in request.GET:
+        user = None
+        bucket = None
+        ## Facebook callback handling
+        if (request.GET.get("chan") == "facebook"):
+            bucket = facebook.Facebook()
+        elif (request.GET.get("chan") == "twitter"):
+            bucket = twitter.Twitter()
+            request_token = request.session['request_token']
+            del request.session['request_token']
+            bucket.request_token = request_token
+            bucket.verifier = request.GET.get('oauth_verifier')
+        
+            
+        oauth = bucket.get_oauth2session()
+        token = bucket.get_token(request.get_full_path())
+        user = bucket.get_user_detail()
 
-    oauth = bucket.get_oauth2session()
-    token = bucket.get_token(request.get_full_path())
-    user = bucket.get_user_detail()
+        if user is not None:
+            social_account = SocialAccount(
+                    username = user["name"],
+                    email = user["email"],
+                    bucket_id = user["id"],
+                    image_link = user["image"],
+                    access_token = token, #json.JSONEncoder().encode(token),
+                    token_expiration = datetime.fromtimestamp(token["expires_in"])
+                                if "expires_in" in token  else None,
+                    bucket = bucket.tagname)
+            social_account.save()
+        parameter="?action=success"
+    else:
+        parameter="?action=error"
 
-    if user is not None:
-        social_account = SocialAccount(
-                username = user["name"],
-                email = user["email"],
-                bucket_id = user["id"],
-                image_link = user["image"],
-                access_token = json.JSONEncoder().encode(token),
-                token_expiration = datetime.fromtimestamp(token["expires_in"]),
-                bucket = "facebook")
-        social_account.save()
-
-    return HttpResponseRedirect(os.environ["SEMITKI_LANDING"])
+    return HttpResponseRedirect(os.environ["SEMITKI_LANDING"]+parameter)
 
 
 def publish_now(request, pk):

@@ -22,6 +22,7 @@ class Facebook:
         self.client_id = settings.SOCIAL_AUTH_FACEBOOK_KEY
         self.client_secret = settings.SOCIAL_AUTH_FACEBOOK_SECRET
         self.redirect_uri = os.environ["OAUTH2_REDIRECT_URI"] + "?chan=facebook"
+        self.tagname = 'facebook'
         self.oauth = None
 
 
@@ -45,6 +46,13 @@ class Facebook:
                 "email": user["email"],
                 "image": image["data"]["url"] }
 
+
+    def get_oauthsession(self):
+        """
+        Returns a Facebook requests_oauthlib OAuth2Session
+        """
+        
+        return self.get_oauth2session()
 
     def get_oauth2session(self):
         """
@@ -78,6 +86,7 @@ class Facebook:
         payload = { "message": post.content["txt"],
                 "img": post.content["img"]
                 }
+        self.oauth.token = token
         response = self.oauth.post(node, data = payload)
 
         return response

@@ -5,7 +5,8 @@ from django.utils.timezone import utc
 
 from django.conf import settings
 
-from buckets.facebook import Facebook
+from buckets.facebook import *
+from buckets.twitter import *
 from .models import *
 import requests
 from requests_oauthlib import OAuth2Session
@@ -59,16 +60,15 @@ def sweep():
 
 def stuff_it(pk):
     """Publish a post right away"""
-    p = Post.objects.get(pk = pk)
-    chanstr = p.content["tags"][0]["account"]
-    account_id = p.content["tags"][1]["account_id"]
-    chan = None
-    if chanstr == "facebook":
-        chan = Facebook(account_id)
+    post = Post.objects.get(pk = pk)
+    chanstr = post.content["tags"][0]["account"]
+    account_id = post.content["tags"][1]["account_id"]
+    
+    chan = globals()[chanstr.capitalize()]()
 
     if chan != None:
         oauth = chan.get_oauth2session()
-        token = SocialAccount.objects.get(bucket_id = account_id)
-        return chan.post(token, p)
+        token = SocialAccount.objects.get(bucket_id = account_id).access_token
+        return chan.post(token, post)
     else:
         return False
