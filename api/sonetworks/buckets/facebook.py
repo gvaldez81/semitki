@@ -82,11 +82,19 @@ class Facebook:
         """
         New facebook post
         """
-        node = self.graph_url + "me/feed?"
-        payload = { "message": post.content["txt"],
-                "img": post.content["img"]
-                }
+        copy = post.content["txt"]
+        imagen = post.content["img"]
+        if (imagen is None):
+            node = self.graph_url + "me/feed?"
+            payload = { "message": copy}
+        else:
+            node = self.graph_url + "me/photos?"
+            payload = { "message": copy,
+                        "url": imagen
+                    }
         self.oauth.token = token
+
+
         response = self.oauth.post(node, data = payload)
 
         return response
