@@ -41,7 +41,7 @@ let AddPostView = Backbone.View.extend({
     tags.push({"rs": $("#rsgroups").val()});
     let content = {
       txt: $("#postxt").val(),
-      img: "http://images2.fanpop.com/image/photos/13700000/Beautiful-Pug-pugs-13728067-1600-1200.jpg",
+      img: $("#imgUrl").val(),
       tags: tags,
     };
 
@@ -92,6 +92,7 @@ let AddPostView = Backbone.View.extend({
           //method: "POST"
         })
         .done((data) => {
+          console.log(data);
           this.closeadd();
           S.logger("bg-success", "Post published succesfully", true);
         })
