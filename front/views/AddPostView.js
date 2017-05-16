@@ -61,7 +61,8 @@ let AddPostView = Backbone.View.extend({
   schedule: function(e) {
     e.preventDefault();
     let options = {
-      error: (error) => {
+      error: (jqXHR, exception) => {
+        console.log(jqXHR);
         S.logger("bg-danger", "Couldn't schedule new post", true);
       },
       success: (model, reponse) => {
@@ -94,7 +95,7 @@ let AddPostView = Backbone.View.extend({
         .done((data) => {
           console.log(data);
           this.closeadd();
-          S.logger("bg-success", "Post published succesfully", true);
+          S.logger("bg-success", data, true);
         })
         .fail((xhr, status, error) => {
           S.logger("bg-danger", "Post error"+ xhr.responseText, true);
