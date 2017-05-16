@@ -14,8 +14,5 @@ let AccountGroup = Backbone.Model.extend({
     }
   },
 
-  url: () => {
-    return "/account_group/" + this.id;
-  }
 
 });
