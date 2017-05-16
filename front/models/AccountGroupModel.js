@@ -3,19 +3,14 @@
 let AccountGroup = Backbone.Model.extend({
 
 
-  defaults: () => {
+  defaults: function() {
     return {
-      "social_account": undefined,
-      "social_account_url": undefined,
-      "social_group": undefined,
-      "social_group_url": undefined,
-      "isactive": undefined,
-      "valid_to": undefined,
-    }
+      "isactive": true
+    };
   },
 
-  url: () => {
-    return "/account_group/" + this.id;
+  url: function() {
+    return apiBuilder("account_group");
   }
 
 });

@@ -58,14 +58,18 @@ class SocialAccountSerializer(serializers.HyperlinkedModelSerializer):
             'isactive', 'valid_to', 'bucket', 'bucket_id', 'image', 'image_path')
 
 class SocialAccountGroupSerializer(serializers.HyperlinkedModelSerializer):
-    social_account_url = SocialAccountSerializer(source='social_account')
-    social_account = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
-    social_group = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
+    social_account_url = SocialAccountSerializer(source='social_account',
+            read_only=True)
+    social_account_rel = serializers.PrimaryKeyRelatedField(many=False,
+            read_only=True)
+    social_group_rel = serializers.PrimaryKeyRelatedField(many=False,
+            read_only=True)
 
     class Meta:
         model = SocialAccountGroup
-        fields = ('url', 'id', 'social_account', 'social_account_url' ,'social_group', 
-            'isactive','valid_to')
+        fields = ('url', 'id', 'social_account', 'social_account_url'
+                ,'social_group', 'isactive','valid_to', 'social_account_rel',
+                'social_group_rel')
 
 class SocialGroupSerializer(serializers.HyperlinkedModelSerializer):
 

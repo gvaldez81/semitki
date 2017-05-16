@@ -57,15 +57,6 @@ let GrouppedAccountsView = Backbone.View.extend({
         })
         .disableSelection();
 
-    let $tab_items = $(".nav-tabs > li", $tabs).droppable({
-        accept: ".connectedSortable tr",
-        hoverClass: "ui-state-hover",
-        drop: function(event, ui) {
-          console.log(ui);
-          return false;
-        }
-    });
-
     return this;
   }
 });
