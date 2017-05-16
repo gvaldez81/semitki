@@ -82,7 +82,7 @@ class SocialAccount(models.Model):
     bucket = models.CharField(max_length=256)
     isactive = models.BooleanField(default = True)
     valid_to = models.DateField(null=True, blank=True)
-    
+
     def __unicode__(self):
         """Unicode class."""
         return unicode(self.bucket + ' - ' + self.username)
@@ -98,8 +98,6 @@ class SocialAccount(models.Model):
             self.image.save(str(self.bucket_id)+'_'+os.path.basename(urlclean), profilePic )
             self.save()
         super(SocialAccount, self).save()
-
-
 
 
 class SocialGroup(models.Model):
@@ -137,3 +135,12 @@ class StaticPage(models.Model):
     title = models.CharField(max_length=140)
     content = models.TextField()
     template = models.CharField(max_length=140)
+
+
+class ImageStore(models.Model):
+    """
+    Image store
+    """
+    id = models.UUIDField(primary_key = True, default = uuid.uuid4,
+            editable = False)
+    image = models.ImageField(upload_to='uploads/', blank=True)

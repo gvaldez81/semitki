@@ -85,3 +85,10 @@ class StaticPageSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = StaticPage
         fields = ('__all__')
+
+
+class ImageStoreSerializer(serializers.HyperlinkedModelSerializer):
+
+        class Meta:
+            model = ImageStore
+            fields = ('__all__')

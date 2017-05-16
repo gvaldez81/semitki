@@ -138,6 +138,16 @@ class StaticPageViewSet(viewsets.ModelViewSet):
     serializer_class = StaticPageSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
+
+class ImageStoreViewSer(viewsets.ModelViewSet):
+    """
+    Image store vireset
+    """
+    queryset = ImageStore.objects.all()
+    serializer_class = ImageStoreSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+
 def twitter_auth(request):
 
     #if 'action' in request.GET:
@@ -192,3 +202,4 @@ def callback(request):
 def publish_now(request, pk):
 
     return HttpResponse(stuff_it(pk))
+
