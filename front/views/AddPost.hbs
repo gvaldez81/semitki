@@ -3,7 +3,7 @@
 <div id="messages"></div>
 <div><button id="closeadd" type="button" class="close" aria-label="Close">
 <span aria-hidden="true">&times;</span></button></div>
-<form id="addpost-form" class="addpost-form">
+<form id="addpost-form" class="addpost-form" >
   <div class="visual-wrap-header clearfix">
     <div class="container-fluid" style="margin-bottom:10px">
       <span class="sn-pic sn-w40 {{bucket}} no-after-check">
@@ -46,11 +46,13 @@
   </div>
   <div class="form-inline">
     <div class="input-group">
-      <input type="url" class="form-control" id="imgUrl" />
+      <input type="url" class="form-control" id="imgUrl"
+      placeholder="Image link" />
     </div>
-    <div class="btn-group">
-      <button class="btn btn-default" type="button"
-      id="addImg">Add image</button>
+    <div class="input-group">
+      <label class="btn btn-default btn-file">
+        <input type="file" id="imageFile" hidden>
+      </label>
     </div>
 
     <div class="input-group" id="schedule-post">

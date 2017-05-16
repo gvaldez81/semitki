@@ -7,6 +7,8 @@ from rest_framework import viewsets
 from rest_framework import permissions
 from rest_framework import status
 from rest_framework.response import Response
+from rest_framework.parsers import FormParser
+from rest_framework.parsers import MultiPartParser
 from .serializers import *
 from .models import *
 
@@ -139,13 +141,17 @@ class StaticPageViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 
-class ImageStoreViewSer(viewsets.ModelViewSet):
+class ImageStoreViewSet(viewsets.ModelViewSet):
     """
     Image store vireset
     """
     queryset = ImageStore.objects.all()
     serializer_class = ImageStoreSerializer
+    parser_classes = (FormParser, MultiPartParser)
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+    def perform_create(self, serializer):
+        serializer.save(image = self.request.data.get('image'))
 
 
 def twitter_auth(request):

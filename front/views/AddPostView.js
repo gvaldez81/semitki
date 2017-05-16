@@ -13,7 +13,8 @@ let AddPostView = Backbone.View.extend({
     "click #closeadd": "closeadd",
     "click #schedule-enable": "schedule",
     "click #publish-btn": "schedule",
-    "click #publish-enable": "publish"
+    "click #publish-enable": "publish",
+    "change #imageFile": "imageUpload"
   },
 
 
@@ -30,6 +31,28 @@ let AddPostView = Backbone.View.extend({
     S.toggleNavigation(true);
     this.scheduler = new SchedulerCreateView();
     this.remove();
+  },
+
+
+  imageUpload: function(event) {
+    let fileInput = $("#imageFile");
+    let file = fileInput[0].files[0];
+    let form = new FormData($("#addpost-form")[0]);
+    form.append('image', file);
+    $.ajax(S.api("image_upload"),
+      {
+        type: "POST",
+        contentType: "multipart/form-data",
+        data: form,
+        processData: false,
+        headers: S.addAuthorizationHeader().headers,
+        error: (jqXHR, textStatus, error) => {
+          console.log(jqXHR.responseText);
+        },
+        success: (data, textStatus, jqHXR) => {
+          console.log(jqHXR);
+        }
+      });
   },
 
 
