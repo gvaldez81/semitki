@@ -71,7 +71,8 @@ def stuff_it(pk, staff = False):
     if chan != None:
         oauth = chan.get_oauth2session()
         if staff:
-            pass
+            print("STAFFFFFFF")
+            token = User.objects.get(account = account_id).token
         else:
             token = SocialAccount.objects.get(bucket_id = account_id).access_token
 

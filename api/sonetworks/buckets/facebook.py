@@ -83,15 +83,16 @@ class Facebook:
         New facebook post
         """
         copy = post.content["txt"]
-        imagen = post.content["img"]
-        if (imagen is None):
-            node = self.graph_url + "me/feed?"
-            payload = { "message": copy}
-        else:
-            node = self.graph_url + "me/photos?"
-            payload = { "message": copy,
-                        "url": imagen
-                    }
+        node = self.graph_url + "me/"
+        payload = { "message": copy}
+        if ("img" in post.content):
+            imagen = post.content["img"]
+            if (imagen is None):
+                node =+ "feed?"
+            else:
+                node =+ "photos?"
+                payload["url"] = imagen
+
         self.oauth.token = token
 
 

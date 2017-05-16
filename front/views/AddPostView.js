@@ -64,9 +64,11 @@ let AddPostView = Backbone.View.extend({
     tags.push({"rs": $("#rsgroups").val()});
     let content = {
       txt: $("#postxt").val(),
-      img: $("#imgUrl").val(),
       tags: tags,
     };
+    if($("#imgUrl").val().lenght < 1) {
+      content.img = $("#imgUrl").val();
+    }
 
     let post = {
       date: date,
@@ -111,7 +113,8 @@ let AddPostView = Backbone.View.extend({
       success: (model, reponse) => {
         let url = S.api("post/" + model.id + "/publish");
         if(this.data.is_staff)
-          url =+ "?staff=1"
+          url += "?access_token=" + S.jwtoken();
+
         $.ajax({
           url: url,
           headers: S.addAuthorizationHeader().headers,
