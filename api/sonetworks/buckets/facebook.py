@@ -71,7 +71,7 @@ class Facebook:
         """
         token = self.oauth.fetch_token(
                  token_url = self.token_url,
-                 client_secret = self.client_secret,
+u                client_secret = self.client_secret,
                  authorization_response = redirect_response
                 )
 
@@ -93,7 +93,6 @@ class Facebook:
                         "url": imagen
                     }
         self.oauth.token = token
-
 
         response = self.oauth.post(node, data = payload)
 

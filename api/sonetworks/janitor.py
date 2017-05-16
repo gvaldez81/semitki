@@ -63,7 +63,7 @@ def stuff_it(pk):
     post = Post.objects.get(pk = pk)
     chanstr = post.content["tags"][0]["account"]
     account_id = post.content["tags"][1]["account_id"]
-    
+
     chan = globals()[chanstr.capitalize()]()
 
     if chan != None:
