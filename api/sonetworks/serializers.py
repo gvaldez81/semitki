@@ -36,6 +36,7 @@ class PhaseSerializer(serializers.ModelSerializer):
 class CampaignSerializer(serializers.HyperlinkedModelSerializer):
     #phases = PhaseSerializer(many=True, read_only=True)    
     phases = PhaseSerializer(many=True, read_only=True)
+
     class Meta:
         list_serializer_class = FilteredIsActiveListSerializer
         model = Campaign
@@ -47,30 +48,27 @@ class SocialAccountSerializer(serializers.HyperlinkedModelSerializer):
 
     def get_image_path(self, account):
       return account.image.name
-      #account.image.name[account.image.name.rfind('/')+1:]
-      #getattr(account.image, 'name')+'1'
-      #dir(account.image)
-      # account.image.path[account.image.path.rfind('/')+1:]
 
     class Meta:
+        list_serializer_class = FilteredIsActiveListSerializer
         model = SocialAccount
         fields = ('url', 'id', 'username', 'email', 'access_token', 'token_expiration', 
             'isactive', 'valid_to', 'bucket', 'bucket_id', 'image', 'image_path')
 
 class SocialAccountGroupSerializer(serializers.HyperlinkedModelSerializer):
-    social_account_url = SocialAccountSerializer(source='social_account')
-    social_account = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
-    social_group = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
-
+    social_account_url = SocialAccountSerializer(source='social_account',read_only=True)
+    
     class Meta:
+        list_serializer_class = FilteredIsActiveListSerializer
         model = SocialAccountGroup
         fields = ('url', 'id', 'social_account', 'social_account_url' ,'social_group', 
             'isactive','valid_to')
 
 class SocialGroupSerializer(serializers.HyperlinkedModelSerializer):
-
     related = SocialAccountGroupSerializer(many=True, read_only=True)
+
     class Meta:
+        list_serializer_class = FilteredIsActiveListSerializer
         list_serializer_class = FilteredIsActiveListSerializer
         model = SocialGroup
         fields = ('url', 'id', 'name', 'description', 'isactive', 'valid_to', 'related')
