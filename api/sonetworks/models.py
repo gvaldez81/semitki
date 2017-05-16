@@ -1,3 +1,4 @@
+
 # semitki models
 import uuid
 
@@ -20,6 +21,10 @@ class Campaign(models.Model):
     isactive = models.BooleanField(default = True)
     valid_to = models.DateField(null=True, blank=True)
 
+    def __unicode__(self):
+        """Unicode class."""
+        return unicode(self.name)
+
 
 class Phase(models.Model):
     """
@@ -31,6 +36,9 @@ class Phase(models.Model):
     campaign = models.ForeignKey(Campaign, related_name='phases')
     isactive = models.BooleanField(default = True)
     valid_to = models.DateField(null=True, blank=True)
+    def __unicode__(self):
+        """Unicode class."""
+        return unicode(self.name)
 
 class Post(models.Model):
     """
@@ -77,7 +85,7 @@ class SocialAccount(models.Model):
     
     def __unicode__(self):
         """Unicode class."""
-        return unicode(self.image_link)
+        return unicode(self.bucket + ' - ' + self.username)
 
     def save(self, *args, **kwargs):
         """Store image locally if we have a URL"""
@@ -93,6 +101,7 @@ class SocialAccount(models.Model):
 
 
 
+
 class SocialGroup(models.Model):
     """
     Managed social accounts
@@ -102,6 +111,10 @@ class SocialGroup(models.Model):
     description = models.CharField(max_length=256)
     isactive = models.BooleanField(default = True)
     valid_to = models.DateField(null=True, blank=True)
+
+    def __unicode__(self):
+        """Unicode class."""
+        return unicode(self.name)
 
 
 class SocialAccountGroup(models.Model):

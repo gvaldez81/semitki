@@ -122,7 +122,7 @@ class Twitter:
                 else:
                     return("Unable to download image")
             else:
-                return("Tamano de la imagen superior al limite")
+                return("Image size bigger than 3MB")
         
         return "Fail"
 

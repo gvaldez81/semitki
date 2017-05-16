@@ -9,8 +9,4 @@ let AccountGroup = Backbone.Model.extend({
     };
   },
 
-  url: function() {
-    return apiBuilder("account_group");
-  }
-
 });
