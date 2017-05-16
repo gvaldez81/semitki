@@ -60,7 +60,7 @@ def sweep():
     pass
 
 
-def stuff_it(pk, staff = False):
+def stuff_it(pk, access_token = False):
     """Publish a post right away"""
     post = Post.objects.get(pk = pk)
     chanstr = post.content["tags"][0]["account"]
@@ -70,8 +70,7 @@ def stuff_it(pk, staff = False):
 
     if chan != None:
         oauth = chan.get_oauth2session()
-        if staff:
-            print("STAFFFFFFF")
+        if access_token:
             token = User.objects.get(account = account_id).token
         else:
             token = SocialAccount.objects.get(bucket_id = account_id).access_token

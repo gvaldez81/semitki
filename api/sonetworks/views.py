@@ -207,9 +207,5 @@ def callback(request):
 
 def publish_now(request, pk):
 
-    if (access_token is not None):
-        return HttpResponse(stuff_it(pk,
-            access_token = request.GET.get("access_token")))
-    else:
-        return HttpResponse(stuff_it(pk))
+    return HttpResponse(stuff_it(pk))
 

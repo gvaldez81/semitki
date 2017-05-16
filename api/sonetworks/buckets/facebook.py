@@ -88,9 +88,9 @@ class Facebook:
         if ("img" in post.content):
             imagen = post.content["img"]
             if (imagen is None):
-                node =+ "feed?"
+                node = node + "feed?"
             else:
-                node =+ "photos?"
+                node = node + "photos?"
                 payload["url"] = imagen
 
         self.oauth.token = token
