@@ -13,7 +13,7 @@ let NavigationView = Backbone.View.extend({
 
 
   addNewPost: () => {
-    let postView = new AddPostView();
+    let postView = new AddPostView(S.user.toJSON());
     postView.render();
   },
 

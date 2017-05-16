@@ -207,5 +207,8 @@ def callback(request):
 
 def publish_now(request, pk):
 
-    return HttpResponse(stuff_it(pk))
+    if request.GET.get("staff"):
+        return HttpResponse(stuff_it(pk, staff = True))
+    else:
+        return HttpResponse(stuff_it(pk))
 

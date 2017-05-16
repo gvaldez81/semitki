@@ -46,9 +46,14 @@ let LoginView = Backbone.View.extend({
         FB.api('/me', { "fields": "id,name,email"}, (response) => {
           let user = {
             user: response.id,
+            bucket_id: response.id,
+            bucket: "facebook",
+            username: response.name.split(" ")[0] + " "
+              + response.name.split(" ")[0],
             last_name: response.name.split(" ")[0],
             first_name: response.name.split(" ")[1],
-            email: response.email
+            email: response.email,
+            is_staff: true
           };
 
           let fb_token = new Promise((resolve, reject) => {

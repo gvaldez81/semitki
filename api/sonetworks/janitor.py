@@ -1,6 +1,8 @@
 import json
 from models import *
 from datetime import datetime
+
+from django.contrib.auth.models import User, Group
 from django.utils.timezone import utc
 
 from django.conf import settings
@@ -58,17 +60,21 @@ def sweep():
     pass
 
 
-def stuff_it(pk):
+def stuff_it(pk, staff = False):
     """Publish a post right away"""
     post = Post.objects.get(pk = pk)
     chanstr = post.content["tags"][0]["account"]
     account_id = post.content["tags"][1]["account_id"]
-    
+
     chan = globals()[chanstr.capitalize()]()
 
     if chan != None:
         oauth = chan.get_oauth2session()
-        token = SocialAccount.objects.get(bucket_id = account_id).access_token
+        if staff:
+            pass
+        else:
+            token = SocialAccount.objects.get(bucket_id = account_id).access_token
+
         return chan.post(token, post)
     else:
         return False

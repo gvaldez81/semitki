@@ -51,7 +51,7 @@ class Facebook:
         """
         Returns a Facebook requests_oauthlib OAuth2Session
         """
-        
+
         return self.get_oauth2session()
 
     def get_oauth2session(self):

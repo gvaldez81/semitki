@@ -110,6 +110,8 @@ let AddPostView = Backbone.View.extend({
       },
       success: (model, reponse) => {
         let url = S.api("post/" + model.id + "/publish");
+        if(this.data.is_staff)
+          url =+ "?staff=1"
         $.ajax({
           url: url,
           headers: S.addAuthorizationHeader().headers,
