@@ -1,11 +1,12 @@
 {
   "esversion": 6,
-  "strict": "implied",
+  "strict": "true",
   "unused": true,
   "varstmt": true,
   "-W032": false,
+  "sub": true,
   "jquery": true,
-  "globals": { "Backbone": true, "S": true },
+  "globals": { "Backbone": true, "Handlebars": true },
   "browser": true,
   "devel": true
 }

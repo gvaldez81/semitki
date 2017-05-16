@@ -26,42 +26,43 @@ let editUserView = Backbone.View.extend({
                   first_name: $("#input_name").val(),
                   last_name: $("#input_lastname").val(),
                   email: $("#input_email").val(),
-                  username: $("#input_username").val()
-                });
+                  username: $("#input_username").val()});
 
-      S.collection.get("user").add(model)
-        .sync("update", model, {
-          url: S.fixUrl(model.url(username)),    
-          headers: S.addAuthorizationHeader().headers,
-               
-          success: function(model, response) {
-            console.log("EditUser")
-            //Cerramos modal
-            $('#dialog-crud').modal('hide')
-            //Abrimos modal de success
-            bootbox.alert({
-              message: "User Edit",
-              size: 'small',
-              className: 'rubberBand animated'
-            });
-            let userView = new UserView();
-            userView.render();
-          },
-          error: function(model, response) {
-            console.log("error EditdUser")
-            console.log("status = "+model.status)
-            console.log("response = "+model.responseText)
-            
-          }
-    });
- },
+    let options = {
+
+      error: (error) => {
+        
+        $('#dialog-crud').modal('hide');
+        S.logger("bg-danger", "Couldn't User Edit", true);
+
+      },
+
+      success: (model, reponse) => {
+
+        $('#dialog-crud').modal('hide');       
+        let userView = new UserView();
+        userView.render(); 
+        S.logger("bg-success", "Edit User Succesfully", true);
+
+      },
+
+        wait: true,
+        headers: S.addAuthorizationHeader().headers,
+        url: S.fixUrl(model.url(username)) 
+
+ }
+
+        S.collection.get("user").add(model)
+        .sync("update", model, options);
+},
 
   render: function(){
+
     let template = $("#user-modal-edit").html();
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled(this.data));
     $("#dialog-crud").html(this.$el);
-  },
 
+  },
 
 });

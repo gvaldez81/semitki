@@ -34,10 +34,10 @@ router.register(r'account_group', SocialAccountGroupViewSet)
 router.register(r'bucket', BucketViewSet)
 router.register(r'static_page', StaticPageViewSet)
 
-schema_view = get_swagger_view(title='Semitki API')
+#schema_view = get_swagger_view(title='Semitki API')
 
 urlpatterns = [
-    url(r'^$', schema_view),
+    #url(r'^$', schema_view),
     url(r'^', include(router.urls)),
     url(r'^auth/', include('rest_auth.urls')),
     url(r'^auth/', include('allauth.urls'), name='socialaccount_signup'),

@@ -138,3 +138,4 @@ bower_components
 seecrets.txt
 front/config.js
 variables.env
+storage/img/**

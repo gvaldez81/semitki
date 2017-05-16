@@ -57,12 +57,13 @@ class SocialAccountSerializer(serializers.HyperlinkedModelSerializer):
 
 class SocialAccountGroupSerializer(serializers.HyperlinkedModelSerializer):
     social_account_url = SocialAccountSerializer(source='social_account',read_only=True)
-    
+
     class Meta:
         list_serializer_class = FilteredIsActiveListSerializer
         model = SocialAccountGroup
-        fields = ('url', 'id', 'social_account', 'social_account_url' ,'social_group', 
-            'isactive','valid_to')
+        fields = ('url', 'id', 'social_account', 'social_account_url'
+                ,'social_group', 'isactive','valid_to', 'social_account_rel',
+                'social_group_rel')
 
 class SocialGroupSerializer(serializers.HyperlinkedModelSerializer):
     related = SocialAccountGroupSerializer(many=True, read_only=True)

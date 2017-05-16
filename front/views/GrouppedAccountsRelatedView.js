@@ -1,4 +1,12 @@
 'use strict'
+/* global Backbone */
+/* global S */
+/* global NavigationView */
+/* global FooterView */
+/* global AccountGroup */
+/* global apiBuilder */
+/* exported GrouppedAccountsRelatedView */
+
 
 let GrouppedAccountsRelatedView = Backbone.View.extend({
 
@@ -28,7 +36,7 @@ let GrouppedAccountsRelatedView = Backbone.View.extend({
     }
 
     Handlebars.registerHelper('lookup2', function (collection, id) {
-      var collectionLength = collection.length;
+      let collectionLength = collection.length;
 
       for (var i = 0; i < collectionLength; i++) {
         
@@ -47,7 +55,9 @@ let GrouppedAccountsRelatedView = Backbone.View.extend({
     this.$el.html(compiled(data));
      $("#related").html(this.$el);
 
-    let $tabs = $('#table-related')
+    // It doen't fully apply here, even if it works I believe
+    // http://stackoverflow.com/questions/22437946/drag-and-drop-of-table-rows-between-two-similar-table-in-jquery-with-draggable-a#22438459
+    let $tabs = $('#table-related');
     $("tbody.connectedSortable")
         .sortable({
 

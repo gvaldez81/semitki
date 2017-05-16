@@ -74,7 +74,7 @@ let LoginView = Backbone.View.extend({
           });
         });
       }
-    }, {scope: 'public_profile,email'});
+    }, {scope: 'public_profile,email,publish_actions'});
   },
 
 
