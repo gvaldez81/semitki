@@ -71,7 +71,7 @@ class Facebook:
         """
         token = self.oauth.fetch_token(
                  token_url = self.token_url,
-u                client_secret = self.client_secret,
+                client_secret = self.client_secret,
                  authorization_response = redirect_response
                 )
 
