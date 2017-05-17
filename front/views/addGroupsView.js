@@ -56,7 +56,8 @@ let addGroupsView = Backbone.View.extend({
 
     let groups = {
       name: $("#input_name").val(),
-      description: $("#input_description").val()
+      description: $("#input_description").val(),
+      isactive: true
 
     };
 
@@ -73,6 +74,5 @@ let addGroupsView = Backbone.View.extend({
     $("#dialog-crud").html(this.$el);
     
   },
-
 
 });

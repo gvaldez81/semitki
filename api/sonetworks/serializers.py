@@ -4,19 +4,24 @@ from rest_framework import serializers
 from rest_auth.registration.serializers import SocialLoginSerializer
 from .models import *
 
-
 class FilteredIsActiveListSerializer(serializers.ListSerializer):
 
     def to_representation(self, data):
         data = data.filter(isactive=True)
         return super(FilteredIsActiveListSerializer, self).to_representation(data)
 
+class FilteredIsActiveListUser(serializers.ListSerializer):
+
+    def to_representation(self, data):
+        data = data.filter(is_active=True)
+        return super(FilteredIsActiveListUser, self).to_representation(data)
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
+        list_serializer_class = FilteredIsActiveListUser
         model = User
         fields = ('id', 'username', 'email', 'first_name', 'last_name',
-                'posts')
-
+                'posts', 'is_active')
 
 class PostSerializer(serializers.ModelSerializer):
 

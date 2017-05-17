@@ -30,7 +30,7 @@ let hideUserView = Backbone.View.extend({
     let dialog = new hideUserView({title: new Array(S.collection.get("user").get(id).toJSON())});
     //Update
     let model = S.collection.get("user").get(id);
-    model.set({'isactive': false});
+    model.set({'is_active': false});
 
     let options = {
 
