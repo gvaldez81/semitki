@@ -81,10 +81,10 @@ class Twitter:
         auth = tweepy.OAuthHandler(self.client_id, self.client_secret)
         auth.set_access_token(token['access_token'], token['token_secret'])
         api = tweepy.API(auth)
-        copy = post.content["txt"]
-        imagen = post.content["img"]
+        copy = post.content['txt']
+        imagen = post.content['img'] if 'img' in post.content else None
         
-        if (imagen is None):
+        if (imagen is None or imagen == ''):
             try:
                 twit = api.update_status(status=copy)
                 return (twit.id_str)

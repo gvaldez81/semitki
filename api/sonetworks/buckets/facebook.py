@@ -92,6 +92,8 @@ class Facebook:
             else:
                 node = node + "photos?"
                 payload["url"] = imagen
+        else:
+            node = node + "feed?"
 
         self.oauth.token = token
 
