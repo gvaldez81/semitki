@@ -71,7 +71,7 @@ class Facebook:
         """
         token = self.oauth.fetch_token(
                  token_url = self.token_url,
-                 client_secret = self.client_secret,
+                client_secret = self.client_secret,
                  authorization_response = redirect_response
                 )
 
@@ -88,13 +88,14 @@ class Facebook:
         if ("img" in post.content):
             imagen = post.content["img"]
             if (imagen is None):
-                node =+ "feed?"
+                node = node + "feed?"
             else:
-                node =+ "photos?"
+                node = node + "photos?"
                 payload["url"] = imagen
+        else:
+            node = node + "feed?"
 
         self.oauth.token = token
-
 
         response = self.oauth.post(node, data = payload)
 
