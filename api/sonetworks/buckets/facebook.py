@@ -95,11 +95,14 @@ class Facebook:
         else:
             node = node + "feed?"
 
-        self.oauth.token = token
+        if (type(token) != str):
+            self.oauth.token = token
+        else:
+            node = node + "access_token"  + token
 
-        response = self.oauth.post(node, data = payload)
+        #response = self.oauth.post(node, data = payload)
 
-        return response
+        return type(token)
 
 
     def reshare(self, social_account):
