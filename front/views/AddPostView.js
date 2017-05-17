@@ -85,11 +85,9 @@ let AddPostView = Backbone.View.extend({
     e.preventDefault();
     let options = {
       error: (jqXHR, exception) => {
-        console.log(jqXHR);
         S.logger("bg-danger", "Couldn't schedule new post", true);
       },
       success: (model, reponse) => {
-        console.log(model);
         this.closeadd();
         S.logger("bg-success", "Post published succesfully", true);
       },
@@ -98,7 +96,6 @@ let AddPostView = Backbone.View.extend({
     }
     let post = S.collection.get("posts")
       .create(this.prepare_post(new Date($("#scheduleFor").val())), options);
-    console.log("scheduling");
   },
 
 
