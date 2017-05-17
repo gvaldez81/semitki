@@ -105,15 +105,15 @@ let AddPostView = Backbone.View.extend({
       error: (error) => {
         S.logger("bg-danger", "Couldn't schedule new post", true);
       },
+
       success: (model, reponse) => {
         let url = S.api("post/" + model.id + "/publish");
         if(this.data.is_staff)
-          url += "?access_token=" + S.jwtoken();
-
+          url += "?staff=1";
         $.ajax({
           url: url,
           headers: S.addAuthorizationHeader().headers,
-          //method: "POST"
+          // TODO method: "POST"
         })
         .done((data) => {
           this.closeadd();

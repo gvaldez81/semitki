@@ -3,6 +3,9 @@ from models import *
 from datetime import datetime
 
 from django.contrib.auth.models import User, Group
+from allauth.socialaccount.models import SocialAccount as SystemAccount
+from allauth.socialaccount.models import SocialToken
+
 from django.utils.timezone import utc
 
 from django.conf import settings
@@ -60,7 +63,7 @@ def sweep():
     pass
 
 
-def stuff_it(pk, access_token = False):
+def stuff_it(pk, staff = False):
     """Publish a post right away"""
     post = Post.objects.get(pk = pk)
     chanstr = post.content["tags"][0]["account"]
@@ -70,8 +73,9 @@ def stuff_it(pk, access_token = False):
 
     if chan != None:
         oauth = chan.get_oauth2session()
-        if access_token:
-            token = User.objects.get(account = account_id).token
+        if staff:
+            social_user = SystemAccount.objects.get(uid = account_id).id
+            token = SocialToken.objects.get(account_id = social_user).token
         else:
             token = SocialAccount.objects.get(bucket_id = account_id).access_token
 

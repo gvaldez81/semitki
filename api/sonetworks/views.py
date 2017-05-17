@@ -27,10 +27,6 @@ from oauthlib.oauth2 import WebApplicationClient
 from janitor import *
 from buckets import facebook
 from buckets import twitter
-#import logging
-#logger = logging.getLogger(__name__)
-
-
 
 
 class FacebookLogin(SocialLoginView):
@@ -207,5 +203,9 @@ def callback(request):
 
 def publish_now(request, pk):
 
-    return HttpResponse(stuff_it(pk))
+    if ("staff" in request.GET):
+        return HttpResponse(stuff_it(pk = pk,
+            staff = True))
+    else:
+        return HttpResponse(stuff_it(pk))
 
