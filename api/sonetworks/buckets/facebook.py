@@ -78,7 +78,7 @@ class Facebook:
         return token
 
 
-    def post(self, token, post):
+    def post(self, token, post, staff = False):
         """
         New facebook post
         """
@@ -95,10 +95,10 @@ class Facebook:
         else:
             node = node + "feed?"
 
-        if (type(token) is not unicode):
-            self.oauth.token = token
-        else:
+        if (staff):
             self.oauth.access_token = token
+        else:
+            self.oauth.token = token
 
         response = self.oauth.post(node, data = payload)
 
