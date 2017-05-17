@@ -21,39 +21,51 @@ let GroupsView = Backbone.View.extend({
   },
 
   save: () => {
+
     let data = {
       name: $("#name").val(),
       description: $("#description").val(),
       socialaccounts: []
+
     };
+
     let group = new Group(data);
     S.collection.get("groups")
       .add(group)
       .sync("create", group, S.addAuthorizationHeader());
+
   },
 
 
   delete: () => {
+
     let groups = S.collection.get("groups");
     let group = groups.get($("#groupFinder").val());
     groups.sync("delete", group, S.addAuthorizationHeader());
+  
   },
 
   addItem: () => {
+
     let dialog = new addGroupsView();
     dialog.render();
+
   },
 
   hideItem: function(ev) {
+
     let id = $(ev.currentTarget).parents('.item')[0].id;
     let dialog = new hideGroupsView({item: new Array(S.collection.get("groups").get(id).toJSON())});
     dialog.render();
+
   },
 
   editItem: function(ev) {
+
     let id = $(ev.currentTarget).parents('.item')[0].id;
     let dialog = new editGroupsView({item: new Array(S.collection.get("groups").get(id).toJSON())});
     dialog.render();
+
   },
 
   render: function() {
@@ -63,6 +75,7 @@ let GroupsView = Backbone.View.extend({
 
     let data = {
       "groups": S.collection.get("groups").toJSON()
+
     }
 
     let template = $("#group-template").html();
@@ -70,9 +83,9 @@ let GroupsView = Backbone.View.extend({
     this.$el.html(compiled(data));
     $("#container").html(this.$el);
     $("#main").html(this.$el);
-    // Initialie controls
-    //$("#groupFinder").select2();
+
     S.showButtons();
     return this;
   }
+  
 });

@@ -15,8 +15,6 @@ let editUserView = Backbone.View.extend({
     "click #edit": "edituser"
   },
 
-
-
     edituser: (ev) => {
 
     let username= $("#user-name").val();

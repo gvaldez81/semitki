@@ -53,7 +53,9 @@ let addUserView = Backbone.View.extend({
       first_name: $("#input_fname").val(),
       last_name: $("#input_lname").val(),
       email: $("#input_email").val(),
-      username: $("#input_username").val()
+      username: $("#input_username").val(),
+      is_active: true
+      
     };
 
     let users = new UserModel(user);
