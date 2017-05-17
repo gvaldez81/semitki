@@ -116,7 +116,6 @@ let AddPostView = Backbone.View.extend({
           //method: "POST"
         })
         .done((data) => {
-          console.log(data);
           this.closeadd();
           S.logger("bg-success", data, true);
         })
@@ -129,7 +128,6 @@ let AddPostView = Backbone.View.extend({
     };
     let post = S.collection.get("posts")
       .create(this.prepare_post(new Date()), options);
-
   },
 
 
@@ -139,8 +137,8 @@ let AddPostView = Backbone.View.extend({
       let d = new Date();
       let months = ["January", "February", "March", "April", "May", "June",
           "July", "August", "September", "October", "November", "December"];
-      let retVal = ("0" + d.getDate()).slice(-2) 
-                + " " + months[d.getMonth()] 
+      let retVal = ("0" + d.getDate()).slice(-2)
+                + " " + months[d.getMonth()]
                 + ", " + d.getFullYear() ;
       return retVal;
     });
@@ -164,7 +162,7 @@ let AddPostView = Backbone.View.extend({
       placeholder: "Select a campaign"});
 
     let p = $("#phaseSelectorBox").select2({placeholder: "Select a phase"});
-    
+
     c.on("select2:select", (e) => {
       p.select2({data: S.collection.get("campaigns").get(e.target.value).
         toJSON().phases.map((i) => {
