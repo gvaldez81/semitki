@@ -83,6 +83,7 @@ class Facebook:
         New facebook post
         """
         copy = post.content["txt"]
+        linkType = post.content["linkType"]
         if staff:
             node = self.graph_url + account_id + "/"
         else:
@@ -90,15 +91,14 @@ class Facebook:
 
         payload = { "message": copy}
         if ("img" in post.content):
-            imagen = post.content["img"]
+            imagen = post.content["urlTarget"]
             if (imagen is None):
                 node = node + "feed?"
             else:
                 if staff:
-                    node = node + 'feed?access_token=' + token + '&link='
-                    + imagen
-                    if (post.content["linkType"] is "")
-                    node = node + '&caption='
+                    node = node + 'feed?access_token=' + token
+                    if (post.content["linkType"] is "img"):
+                        node = node + '&link=' + imagen + '&caption=' + post.content["urlTarget"]
                     #node = node + "photos?access_token=" + token
                     payload["url"] = imagen
                 else:
