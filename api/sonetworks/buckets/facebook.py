@@ -95,7 +95,9 @@ class Facebook:
                 node = node + "feed?"
             else:
                 if staff:
-                    node = node + 'feed?access_token=' + token + '&link='+imagen+'&caption=http://www.mexicoeligebien.mx'
+                    #node = node + 'feed?access_token=' + token + '&link='+imagen+'&caption=http://www.mexicoeligebien.mx'
+                    node = node + "photos?access_token=" + token
+                    payload["url"] = imagen
                 else:
                     node = node + "photos?"
                     payload["url"] = imagen
