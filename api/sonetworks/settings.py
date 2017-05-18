@@ -179,16 +179,16 @@ MEDIA_ROOT = '/semitki/storage/'
 # Facebook configuration
 SOCIAL_AUTH_FACEBOOK_KEY = os.environ["SOCIAL_AUTH_FACEBOOK_KEY"]
 SOCIAL_AUTH_FACEBOOK_SECRET = os.environ["SOCIAL_AUTH_FACEBOOK_SECRET"]
-
-SOCIAL_AUTH_TWITTER_KEY = os.environ["SOCIAL_AUTH_TWITTER_KEY"]
-SOCIAL_AUTH_TWITTER_SECRET = os.environ["SOCIAL_AUTH_TWITTER_SECRET"]
-
-
 # Define SOCIAL_AUTH_FACEBOOK_SCOPE to get extra permissions from facebook. Email is not sent by default, to get it, you must request the email permission:
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['public_profile', 'email', 'publish_actions']
 SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
             'fields': 'id, name, email'
             }
+
+SOCIAL_AUTH_TWITTER_KEY = os.environ["SOCIAL_AUTH_TWITTER_KEY"]
+SOCIAL_AUTH_TWITTER_SECRET = os.environ["SOCIAL_AUTH_TWITTER_SECRET"]
+
+FACEBOOK_URL_CAPTION=os.environ["FACEBOOK_URL_CAPTION"]
 
 #APPEND_SLASH=False
 # DJANGO ALLAUTH SETTINGS

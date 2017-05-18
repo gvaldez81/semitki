@@ -64,8 +64,8 @@ let AddPostView = Backbone.View.extend({
     tags.push({"rs": $("#rsgroups").val()});
     let content = {
       txt: $("#postxt").val(),
-      lnk: $("#urlTarget").val(),
-      linkType: $("input[name=linkType]").val(),
+      link: $("#urlTarget").val(),
+      linkType: $("input[name=linkType]:checked").val(),
       tags: tags,
     };
 

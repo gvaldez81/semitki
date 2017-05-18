@@ -84,31 +84,40 @@ class Facebook:
         """
         copy = post.content["txt"]
         linkType = post.content["linkType"]
-        if staff:
+        if staff==1:
             node = self.graph_url + account_id + "/"
         else:
             node = self.graph_url + "me/"
 
         payload = { "message": copy}
-        if ("img" in post.content):
-            imagen = post.content["urlTarget"]
-            if (imagen is None):
-                node = node + "feed?"
-            else:
-                if staff:
-                    node = node + 'feed?access_token=' + token
-                    if (post.content["linkType"] is "img"):
-                        node = node + '&link=' + imagen + '&caption=' + post.content["urlTarget"]
-                    #node = node + "photos?access_token=" + token
-                    payload["url"] = imagen
-                else:
-                    node = node + "photos?"
-                    payload["url"] = imagen
-        else:
-            node = node + "feed"
 
-        if (staff):
+        parameter_token = ""
+        if staff:    
+            parameter_token= "access_token=" + token
+
+        # SI EXISTE EL ELEMENTO IMG EN EL CONTENIDO
+        if ("link" in post.content
+            and (post.content["link"] is not None 
+                and post.content["link"] != "")):
+            
+            imagen = post.content["link"]
+            #[POSTEANDO IMAGEN CON CUENTAS USUARIO]
+            
+            #POSTEANDO CON PHOTOS
+            if (post.content["linkType"] == "img"):
+                node = node + "photos?" + parameter_token
+                payload["url"] = imagen
+            else:
+            #POSTEANDO CON LINK
+                node = node + "feed?" + parameter_token + "&link=" + imagen + "&caption=" + settings.FACEBOOK_URL_CAPTION 
+        
+                    
+        else:
+            node = node + "feed?" + parameter_token
+
+        if  staff:
             self.oauth.access_token = token
+            #pass
         else:
             self.oauth.token = token
 
