@@ -78,22 +78,26 @@ class Facebook:
         return token
 
 
-    def post(self, token, post, staff = False):
+    def post(self, token, post, account_id, staff = False):
         """
         New facebook post
         """
         copy = post.content["txt"]
-        node = self.graph_url + "me/"
+        if staff:
+            node = self.graph_url + account_id + "/"
+        else:
+            node = self.graph_url + "me/"
+
         payload = { "message": copy}
         if ("img" in post.content):
             imagen = post.content["img"]
             if (imagen is None):
-                node = node + "feed?"
+                node = node + "feed"
             else:
                 node = node + "photos?"
                 payload["url"] = imagen
         else:
-            node = node + "feed?"
+            node = node + "feed"
 
         if (staff):
             self.oauth.access_token = token

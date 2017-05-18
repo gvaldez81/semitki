@@ -79,6 +79,7 @@ def stuff_it(pk, staff = False):
         else:
             token = SocialAccount.objects.get(bucket_id = account_id).access_token
 
-        return chan.post(token = token, post = post, staff = staff)
+        return chan.post(token = token, post = post, account_id = account_id,
+                staff = staff)
     else:
         return False
