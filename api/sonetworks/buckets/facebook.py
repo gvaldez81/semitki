@@ -83,7 +83,6 @@ class Facebook:
         New facebook post
         """
         copy = post.content["txt"]
-        linkType = post.content["linkType"]
         if staff==1:
             node = self.graph_url + account_id + "/"
         else:
