@@ -5,7 +5,6 @@ import json
 
 from django.conf import settings
 from django.db import migrations, models
-from BucketFactory import Bucket
 
 from requests_oauthlib import OAuth2Session
 from requests_oauthlib.compliance_fixes import facebook_compliance_fix
