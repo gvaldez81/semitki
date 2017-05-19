@@ -249,7 +249,6 @@ let S = {
 
 // Launch the JavaScript client side app
 $(() => {
-  //let hash = window.location.hash;
   if(window.location.hash.startsWith("#landing")) {
     // If landing page render it only
     let app = new LandingPageView();
