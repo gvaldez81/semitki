@@ -3,7 +3,7 @@ services:
   db:
     image: postgres
   app:
-    build: .
+    image: semitki/api
     command: /semitki/run_api.sh
     volumes:
       - ./api:/semitki/api

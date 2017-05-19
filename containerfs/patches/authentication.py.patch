@@ -1,0 +1,15 @@
+--- authentication.py.orig	2017-05-08 16:09:46.719943132 +0000
++++ authentication.py	2017-05-08 16:11:40.979403925 +0000
+@@ -51,9 +51,9 @@
+         User = get_user_model()
+         username = jwt_get_username_from_payload(payload)
+ 
+-        if not username:
+-            msg = _('Invalid payload.')
+-            raise exceptions.AuthenticationFailed(msg)
++        #if not username:
++        #    msg = _('Invalid payload.')
++        #    raise exceptions.AuthenticationFailed(msg)
+ 
+         try:
+             user = User.objects.get_by_natural_key(username)

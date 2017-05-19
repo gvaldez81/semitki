@@ -5,7 +5,7 @@ EXPOSE 8000
 
 ENV PATH="/usr/pgsql-9.6/bin:$PATH"
 
-COPY ./ /semitki
+COPY containerfs/ /semitki
 
 WORKDIR /semitki
 
