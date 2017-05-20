@@ -7,9 +7,20 @@ let GrouppedAccountsView = Backbone.View.extend({
   initialize: function () {
     this.navigation = new NavigationView();
     this.footer = new FooterView();
-    this.related = new GrouppedAccountsRelatedView();
+    this.related = new ConnectedSortable({
+      templateId: "#connected-sortable-template",
+      targetId: "#related",
+      relatedTable: "#related-table"
+    });
+    this.available = new ConnectedSortable({
+      templateId: "#connected-sortable-template",
+      targetId: "#available",
+      relatedTable: "#related-table",
+    });
     this.navigation.render();
     this.footer.render();
+/*    this.available = new AvailableAccounts();*/
+    /*this.available.render();*/
   },
 
 
@@ -46,16 +57,16 @@ let GrouppedAccountsView = Backbone.View.extend({
     $("#main").html(this.$el);
     this.related.render();
 
-    let $tabs = $('#table-related');
-    $("tbody.connectedSortable")
-        .sortable({
-            connectWith: ".connectedSortable",
-            items: "> tr:not(:first)",
-            appendTo: $tabs,
-            helper: "clone",
-            zIndex: 999990
-        })
-        .disableSelection();
+/*    let $tabs = $('#table-related');*/
+    //$("tbody.connectedSortable")
+        //.sortable({
+            //connectWith: ".connectedSortable",
+            //items: "> tr:not(:first)",
+            //appendTo: $tabs,
+            //helper: "clone",
+            //zIndex: 999990
+        //})
+        //.disableSelection();
 
     return this;
   }
