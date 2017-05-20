@@ -27,9 +27,19 @@ class Twitter:
         self.oauth = None
 
 
-    def fav(self, social_account):
-        """Like an existing post"""
-        pass
+    def fav(self,tweetID):
+        """Like an existing tweet"""
+        auth = tweepy.OAuthHandler(self.client_id, self.client_secret)
+        auth.set_access_token(self.oauth.access_token,self.oauth.access_token_secret)
+        api = tweepy.API(auth)
+        try:
+            tweet = api.create_favorite(id=tweetID)
+            return (tweet.id_str)
+        except Exception as e:
+            #print(data['access_token']['screen_name'] + ' ' +
+            #e[0][0]['message'])
+            return(data['access_token']['screen_name'] + ' ' +
+                e[0][0]['message'])
 
 
     def get_user_detail(self):
@@ -127,9 +137,20 @@ class Twitter:
         return "Fail"
 
 
-    def reshare(self, social_account):
-        """Re-shar an existing post given the post url"""
-        pass
+    def reshare(self, tweetID):
+        """Re-tweet an existing tweet given the tweet id"""
+        auth = tweepy.OAuthHandler(self.client_id, self.client_secret)
+        auth.set_access_token(self.oauth.access_token,self.oauth.access_token_secret)
+        api = tweepy.API(auth)
+        
+        try:
+            rt = api.retweet(id=tweetID)
+            #print("Tweet RT ID ="+rt.id_str)
+            return (tweetID)
+        except Exception as e:
+            return(data['access_token']['screen_name'] + ' ' +
+               e[0][0]['message'])
+        
 
 
     def set_account_id(self, account_id):
