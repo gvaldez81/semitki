@@ -5,7 +5,6 @@ import json
 
 from django.conf import settings
 from django.db import migrations, models
-from BucketFactory import Bucket
 
 from requests_oauthlib import OAuth1Session
  # Using OAuth1 auth helper
