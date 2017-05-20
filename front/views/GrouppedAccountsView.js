@@ -19,8 +19,6 @@ let GrouppedAccountsView = Backbone.View.extend({
     });
     this.navigation.render();
     this.footer.render();
-/*    this.available = new AvailableAccounts();*/
-    /*this.available.render();*/
   },
 
 
@@ -56,6 +54,7 @@ let GrouppedAccountsView = Backbone.View.extend({
     this.$el.html(compiled(data));
     $("#main").html(this.$el);
     this.related.render();
+    this.available.render();
 
 /*    let $tabs = $('#table-related');*/
     //$("tbody.connectedSortable")
