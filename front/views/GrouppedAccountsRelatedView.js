@@ -39,9 +39,9 @@ let GrouppedAccountsRelatedView = Backbone.View.extend({
       let collectionLength = collection.length;
 
       for (var i = 0; i < collectionLength; i++) {
-        
+
         if (collection[i].id === id) {
-          
+
           return collection[i];
         }
 
@@ -87,7 +87,7 @@ let GrouppedAccountsRelatedView = Backbone.View.extend({
 
                   },
                   success: (model, response) => {
-                    
+
                     if (desligar){
                       // Si salio de cuentas ligadas hacia cuentas libres
                       // que hay que hacer con ls collections?
@@ -102,7 +102,7 @@ let GrouppedAccountsRelatedView = Backbone.View.extend({
                   },
                   wait: true,
                   headers: S.addAuthorizationHeader().headers,
-                  
+
                 };
 
                 if (desligar){
