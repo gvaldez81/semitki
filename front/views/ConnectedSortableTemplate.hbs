@@ -1,0 +1,16 @@
+<script type="text/x-handlebars-template" id="connected-sortable-template">
+
+    <tbody class="connectedSortable">
+      <tr>
+        <th>Network</th>
+        <th>Accounts</th>
+      </tr>
+      {{#each items}}
+      <tr id="{{id}}">
+        <td>{{social_account_url.bucket}}</td>
+        <td>{{social_account_url.username}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+
+</script>

@@ -7,6 +7,9 @@ let GrouppedAccountsView = Backbone.View.extend({
   initialize: function () {
     this.navigation = new NavigationView();
     this.footer = new FooterView();
+    this.available = new Backbone.Collection.extend({
+      model: Acc
+    });
     this.related = new ConnectedSortable({
       templateId: "#connected-sortable-template",
       targetId: "#related",
