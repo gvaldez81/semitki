@@ -8,6 +8,7 @@ services:
     volumes:
       - ./api:/semitki/api
       - ./storage:/semitki/storage
+      - ./config:/semitki/config
     ports:
       - "8000:8000"
       - "3031:3031"
