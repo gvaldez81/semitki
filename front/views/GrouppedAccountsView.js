@@ -36,6 +36,7 @@ let GrouppedAccountsView = Backbone.View.extend({
       };
       this.related.data = related;
       this.available.data = S.unrelatedAccounts(related);
+      console.log(this.available.data);
       this.related.render();
       this.available.render();
     }

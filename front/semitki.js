@@ -104,7 +104,11 @@ let S = {
     }));
     // Iterate account ids and return JSON for view
     let data = [...accounts].map(account => {
-      return S.collection.get("accounts").get({id: account}).toJSON();
+      let a = S.collection.get("accounts").get({id: account}).toJSON();
+      return {
+        id: a.id,
+        social_account_url: { bucket: a.bucket, username: a.username }
+      };
     });
     return { items: data };
   },
