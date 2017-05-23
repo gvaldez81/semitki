@@ -11,11 +11,13 @@ let GrouppedAccountsView = Backbone.View.extend({
       templateId: "#connected-sortable-template",
       targetId: "#related",
       relatedTable: "#related-table",
+      tableId: "table-related"
     });
     this.available = new ConnectedSortable({
       templateId: "#connected-sortable-template",
       targetId: "#available",
       relatedTable: "#related-table",
+      tableId: "table-for-related"
     });
     this.navigation.render();
     this.footer.render();

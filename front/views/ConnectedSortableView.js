@@ -8,7 +8,7 @@ let ConnectedSortable = Backbone.View.extend({
 
   initialize: function(options) {
     _.extend(this, _.pick(options, "templateId", "targetId", "relatedTable",
-    "data"));
+    "tableId", "data"));
   },
 
 
@@ -16,7 +16,7 @@ let ConnectedSortable = Backbone.View.extend({
 
     let template = $(this.templateId).html();
     let compiled = Handlebars.compile(template);
-    this.$el.html(compiled(this.data));
+    this.$el.html(compiled(this.data)).attr("id", this.tableId);
     $(this.targetId).html(this.$el);
 
     let $tabs = $(this.relatedTable);
@@ -26,8 +26,10 @@ let ConnectedSortable = Backbone.View.extend({
            items: "> tr:not(:first)",
            appendTo: $tabs,
            helper: "clone",
-           zIndex: 999990
+           zIndex: 999990,
+         stop: (event, ui) => {
+          console.log(ui);
+         }
        }).disableSelection();
-
   }
 });
