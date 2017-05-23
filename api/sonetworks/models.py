@@ -45,9 +45,12 @@ class Post(models.Model):
     txt XOR url
     data: {
         txt: "string",
-        url: "string",
-        imgurl: "string",
-        tags: ["fb","tw","<3","r",...],
+        img: "string",
+        tags: [
+                {"account": "facebook"},
+                {"account_id": "idFacebook"},
+                {"like": "idFacebook"},
+                ,...],
     }
     """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -56,6 +59,18 @@ class Post(models.Model):
     content = JSONField()
     owner = models.ForeignKey('auth.user', related_name='posts')
     published = models.BooleanField(default = 0)
+    #publish_id = models.CharField(max_length=100, default='', null=True, blank=True)
+    #publish_result=JSONField()
+    """
+    data: {
+        id: "string",
+        url: "string",
+        likes: ["username1","username2","username3","x",...],
+        likes_count: "string",
+        shares: ["username1","username2","username3","x",...],
+        shares_count: "string",
+    }
+    """
 
 
 class Bucket(models.Model):
@@ -144,3 +159,26 @@ class ImageStore(models.Model):
     id = models.UUIDField(primary_key = True, default = uuid.uuid4,
             editable = False)
     image = models.ImageField(upload_to='uploads/', blank=True)
+
+class PagesToken(models.Model):
+    id = models.UUIDField(primary_key = True, default = uuid.uuid4,
+            editable = False)
+    owner = models.ForeignKey('auth.user', related_name='tokens', default=1)
+    page_id = models.CharField(max_length=256, null=False)
+    name = models.CharField(max_length=256, null=False)
+    token = models.CharField(max_length=256, null=False)
+    image=models.ImageField(upload_to='img/', blank=True)
+    image_link = models.CharField(max_length=255, null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        """Store image locally if we have a URL"""
+        if self.image_link and not self.image:
+            result = requests.get(self.image_link)
+            profilePic = NamedTemporaryFile(delete=True)
+            profilePic.write(result.content)
+            profilePic.flush()
+            urlclean = urlparse.urljoin(self.image_link, urlparse.urlparse(self.image_link).path)
+            self.image.save(str(self.page_id)+'_'+os.path.basename(urlclean), profilePic )
+            self.save()
+        super(PagesToken, self).save()
+    

@@ -47,6 +47,9 @@ class SocialAccountGroupAdmin(admin.ModelAdmin):
     get_account.short_description = 'Username'
     get_account.admin_order_field = 'social_account__username'
 
+class PagesTokenGroupAdmin(admin.ModelAdmin):
+    list_display = ('owner','page_id', 'name')
+
 admin.site.register(Bucket, BucketAdmin)
 admin.site.register(Post, PostAdmin)
 admin.site.register(Phase, PhaseAdmin)
@@ -54,4 +57,5 @@ admin.site.register(Campaign, CampaignAdmin)
 admin.site.register(SocialAccount, SocialAccountAdmin)
 admin.site.register(SocialGroup, SocialGroupAdmin)
 admin.site.register(SocialAccountGroup, SocialAccountGroupAdmin)
+admin.site.register(PagesToken, PagesTokenGroupAdmin)
 admin.site.register(StaticPage)

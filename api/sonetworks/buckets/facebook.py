@@ -30,21 +30,62 @@ class Facebook:
         pass
 
 
+
+    def get_user_image(self):
+        """
+        Get user profile image 
+        """
+        self.image = json.loads(self.oauth.get(self.graph_url 
+            + self.account_id+"/picture?width=160&height=160&redirect=0").content)
+        return 
+
+
+
     def get_user_detail(self):
         """
         Get user details
         """
         user = json.loads(
                 self.oauth.get(self.graph_url + "me?fields=id,name,email").content)
+        
         # Fetch user profile image
-        image = json.loads(
-                self.oauth.get(self.graph_url + user["id"]+"/picture?width=160&height=160&redirect=0").content)
+        self.account_id = user["id"]
+        self.get_user_image()
 
         return { "id": user["id"],
                 "name": user["name"],
                 "email": user["email"] if "email" in user else "sin@email.com",
-                "image": image["data"]["url"] }
+                "image": self.image["data"]["url"] 
+                        if "data" in self.image and "url" in self.image["data"] else None}
 
+
+
+    def get_page_image(self, page_id, token):
+        """
+        Get page profile image 
+        """
+        self.image = json.loads(self.oauth.get(self.graph_url 
+                + page_id+"/picture?access_token="+ token
+                +"&width=160&height=160&redirect=0").content)
+        return 
+
+    def get_user_pages(self, token, account_id):
+        """
+        Get user pages
+        """
+        response = json.loads(self.oauth.get(self.graph_url + "me/accounts?access_token=" + token ).content)
+        pages_list = []
+        for page in response["data"]:
+            pages = {}
+            if "CREATE_CONTENT" in page["perms"]:
+                pages["page_id"] = page["id"]
+                pages["name"] = page["name"]
+                pages["token"] = page["access_token"]
+                pages_list.append(pages)
+        
+        return pages_list
+
+        
 
     def get_oauthsession(self):
         """
