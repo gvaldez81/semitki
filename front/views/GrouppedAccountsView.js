@@ -38,6 +38,21 @@ let GrouppedAccountsView = Backbone.View.extend({
       this.available.data = S.unrelatedAccounts(related);
       this.related.render();
       this.available.render();
+    } else {
+      let data = S.collection.get("accounts").toJSON()
+        .map(account => {
+           return {
+            id: account.id,
+            social_account_url: {
+              bucket: account.bucket,
+              username: account.username
+            }
+          };
+        });
+      this.available.data = { items: data };
+      this.available.render();
+      this.related.data = {};
+      this.related.render();
     }
     return this;
   },
