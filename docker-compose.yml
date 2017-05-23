@@ -10,6 +10,8 @@ services:
       - ./storage:/semitki/storage
     ports:
       - "8000:8000"
+      - "3031:3031"
+      - "9191:9191"
     depends_on:
       - db
     env_file:

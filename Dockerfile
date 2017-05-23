@@ -1,7 +1,7 @@
 FROM centos
-MAINTAINER developer@celisdelafuente.net
+LABEL mantainer "developer@celisdelafuente.net"
 
-EXPOSE 8000
+EXPOSE 8000 3031 9191
 
 ENV PATH="/usr/pgsql-9.6/bin:$PATH"
 
@@ -18,6 +18,7 @@ RUN yum -y update ; \
 RUN  virtualenv ENV ; \
   ENV/bin/pip install --upgrade pip ; \
   ENV/bin/pip install -r requirements.txt ; \
+  ENV/bin/pip install newrelic ; \
   cd /semitki/ENV/lib/python2.7/site-packages/rest_framework_jwt ; \
   patch < /semitki/patches/authentication.py.patch ; \
   patch < /semitki/patches/serializers.py.patch
