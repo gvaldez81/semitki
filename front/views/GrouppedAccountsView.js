@@ -33,6 +33,7 @@ let GrouppedAccountsView = Backbone.View.extend({
   filteraccount: function() {
     if ($("#group").val() !== "") {
       let group = S.collection.get("groups").get($("#group").val());
+      S.collection.get("groups").filtering(group);
       let related = {
         items: group.attributes.related
       };
