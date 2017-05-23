@@ -88,6 +88,28 @@ let S = {
   },
 
 
+  unrelatedAccounts: function(related) {
+    // related = { items: [{social_Account}] }
+    let related_set = new Set(related.items.map(account => {
+      return account.social_account_url.id;
+    }));
+    // Get all accounts in a Set
+    let accounts = new Set(S.collection.get("accounts").toJSON().map(account => {
+      return account.id;
+    }));
+    // Delete from accounts the related ones
+    let unrelated = new Set([...related_set].filter(x => {
+      if(accounts.has(x))
+        accounts.delete(x);
+    }));
+    // Iterate account ids and return JSON for view
+    let data = [...accounts].map(account => {
+      return S.collection.get("accounts").get({id: account}).toJSON();
+    });
+    return { items: data };
+  },
+
+
   fixUrl: (modelUrl) => {
     return modelUrl+(modelUrl.charAt(modelUrl.length - 1) == "/" ? "" : "/");
   },
@@ -203,6 +225,7 @@ let S = {
 
 
   showButtons: () => {
+    // TODO show which buttons? Is it generic enough to be in S?
     $(".list-group-item").hover(function() {
       //$($(this)[0].childNodes[3]).addClass('showme')
       //$($(this)[0]).css("background-color","transparent")

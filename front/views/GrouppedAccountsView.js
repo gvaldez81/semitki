@@ -30,13 +30,14 @@ let GrouppedAccountsView = Backbone.View.extend({
 
   filteraccount: function() {
     if ($("#group").val() !== "") {
+      let group = S.collection.get("groups").get($("#group").val());
       let related = {
-        items: S.collection.get("groups").get($("#group").val())
-          .attributes.related
+        items: group.attributes.related
       };
-      console.log(related);
       this.related.data = related;
+      this.available.data = S.unrelatedAccounts(related);
       this.related.render();
+      this.available.render();
     }
     return this;
   },
