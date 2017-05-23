@@ -134,6 +134,18 @@ should be accesable by an HTTP server. When running with docker-compose
 container.
 
 
+#### Adding new bower components
+
+Every time you install a new component through bower, make sure to add
+`--save` option in order to update `bower.json` with the new dependency.
+
+
+    bower install --save
+    git commit -m"My new bower component" front/bower.json
+
+
+
+
 ## Django App
 
 
