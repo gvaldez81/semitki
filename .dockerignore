@@ -5,3 +5,5 @@ data
 **/bower_components
 **/node_modules
 storage
+varaiables.env
+config
