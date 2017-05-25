@@ -14,7 +14,9 @@
     "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-concat": "^1.0.1",
     "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-less": "^1.4.1",
     "grunt-contrib-uglify": "^3.0.0",
-    "jshint": "^2.9.4"
+    "jshint": "^2.9.4",
+    "less-plugin-clean-css": "^1.5.1"
   }
 }

@@ -140,3 +140,5 @@ front/config.js
 variables.env
 storage/img/**
 config
+static/css/style.css
+front/static/css/style.css

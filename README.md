@@ -121,7 +121,7 @@ Run the API
 ### Frontend development
 
 
-    npm install -g bower grunt-cli
+    npm install -g bower grunt-cli less
     cd semitki/front
     npm install
     bower install

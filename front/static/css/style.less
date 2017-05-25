@@ -1,3 +1,12 @@
+// Color for post box border looks like copper
+@s_copper: #efa05a;
+// Color used in post box Schedule/Post now button
+@s_lightBlue: #46b8da;    // Border of the button and background when selected
+@s_lighterBlue: #5bc0de;  // Background when unselected
+@s_slateBlue: #2a6496;    // TODO ??
+@s_facebookBlue: #3b5998; // Name say it
+@s_grey: #9197a3;
+
 html {
   position: relative;
   min-height: 100%;
@@ -63,7 +72,7 @@ div.navbar-inner {
   max-width: 800px;
   padding: 15px;
   margin: 0 auto;
-  border: thin solid #efa05a;
+  border: thin solid @s_copper;
   border-radius: 15px;
   background-color: rgba(255, 149, 36, 0.20);
 }
@@ -170,14 +179,14 @@ button#landing-login-tw {
 
 /* Misc */
 ul.dropdown-info {
-  background-color: #5bc0de;
-  border-color: #46b8da;
+  background-color: @s_lighterBlue;
+  border-color: @s_lightBlue;
 }
 ul.dropdown-info li {
-  background-color: #46b8da;
+  background-color: @s_lightBlue;
 }
 ul.dropdown-info li a:hover {
-  background-color: #46b8da;
+  background-color: @s_lightBlue;
 }
 .crud_item {
 
@@ -197,12 +206,12 @@ ul.dropdown-info li a:hover {
 }
 
 a.action {
-  border-bottom: 1px dashed #2a6496;
+  border-bottom: 1px dashed @s_slateBlue;
   text-decoration: none;
 }
 
 a.action:hover {
-  border-bottom: 1px dashed #2a6496;
+  border-bottom: 1px dashed @s_slateBlue;
   text-decoration: none;
 }
 
@@ -255,7 +264,7 @@ div.finder {
     height: 18px;
     line-height: 18px;
     text-align: center;
-    border: 1px solid #fff;
+    border: 1px solid white;
     border: 1px solid rgba(255, 255, 255, 0.08);
     z-index: 10;
     box-sizing: border-box
@@ -303,7 +312,7 @@ div.finder {
 .sn3.sn-pic:before,
 .twitter.sn-pic:before  {
     content: "\f099";
-    color: #fff;
+    color: white;
     background-color: #55acee;
     background-color: rgba(85, 172, 238, 0.9)
 }
@@ -317,26 +326,26 @@ div.finder {
 .sn1.sn-pic:before,
 .facebook.sn-pic:before {
     content: "\f09a";
-    color: #fff;
-    background-color: #3b5998;
+    color: white;
+    background-color: @s_facebookBlue;
     background-color: rgba(59, 89, 152, 0.9)
 }
 
 .sn1 .social-title,
 .facebook .social-title {
-    color: #3b5998
+    color: @s_facebookBlue
 }
 
 
 .unknown.sn-pic:before {
     content: "\f119";
-    color: #fff;
-    background-color: #3b5998;
+    color: white;
+    background-color: @s_facebookBlue;
     background-color: rgba(59, 89, 152, 0.9)
 }
 
 .unknown .social-title {
-    color: #3b5998
+    color: @s_facebookBlue
 }
 
 .account{
@@ -344,7 +353,7 @@ div.finder {
 }
 
 .community-name {
-    color: #3b5998;
+    color: @s_facebookBlue;
     text-decoration: none;
     font-size: 12px;
     font-weight: bold;
@@ -352,7 +361,7 @@ div.finder {
 }
 
 .community-post-date {
-    color: #9197a3;
+    color: @s_grey;
     font-size: 10px;
     text-transform: capitalize;
 }
@@ -373,6 +382,3 @@ div.finder {
   width: 24px;
   float: right;
 }
-
-
-
