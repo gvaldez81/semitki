@@ -173,6 +173,6 @@ module.exports = (grunt) => {
   grunt.loadNpmTasks('grunt-contrib-less')
 
   grunt.registerTask('default', ['clean', 'less:dev', 'concat', 'copy', 'bower']);
-  grunt.registerTask('prod', ['clean', 'concat', 'copy', 'bower']);
+  grunt.registerTask('prod', ['clean', 'less:prod', 'concat', 'copy', 'bower']);
 
 };
