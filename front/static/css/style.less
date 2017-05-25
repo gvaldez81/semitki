@@ -7,6 +7,21 @@
 @s_facebookBlue: #3b5998; // Name say it
 @s_grey: #9197a3;
 
+/* Mixins */
+
+.slide-animation(@offset) {
+  -webkit-transform: translateX(@offset);
+  -ms-transform: translateX(@offset);
+  -o-transform: translateX(@offset);
+  transform: translateX(@offset);
+}
+
+.s_transition(@delay) {
+  -webkit-transition: @delay;
+  -o-transition: @delay;
+  transition: @delay;
+}
+
 html {
   position: relative;
   min-height: 100%;
@@ -43,10 +58,13 @@ div.navbar-inner {
   padding: 15px;
   margin: 0 auto;
 }
+
+// TODO learn how to do this sort of mix
 .form-signin .form-signin-heading,
 .form-signin .checkbox {
   margin-bottom: 10px;
 }
+
 .form-signin {
   .form-control {
     position: relative;
@@ -58,14 +76,21 @@ div.navbar-inner {
     font-size: 16px;
   }
 }
-.form-signin .form-control:focus {
-  z-index: 2;
+
+.form-signin {
+  .form-control {
+    &:focus {
+      z-index: 2;
+    }
+  }
 }
+
 .form-signin input[type="email"] {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
+
 .form-signin input[type="password"] {
   margin-bottom: 10px;
   border-bottom-right-radius: 0;
@@ -83,24 +108,29 @@ div.navbar-inner {
   background-color: rgba(255, 149, 36, 0.20);
 }
 
-
-
-
 .addpost-form .form-signin-heading,
 .addpost-form .checkbox {
   margin-bottom: 10px;
 }
-.addpost-form .form-control {
-  position: relative;
-  height: auto;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -box-sizing: border-box;
-  padding: 10px;
-  font-size: 16px;
+
+.addpost-form {
+  .form-control {
+    position: relative;
+    height: auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -box-sizing: border-box;
+    padding: 10px;
+    font-size: 16px;
+  }
 }
-.addpost-form .form-control:focus {
-  z-index: 2;
+
+.addpost-form {
+  .form-control {
+    &:focus {
+      z-index: 2;
+    }
+  }
 }
 
 
@@ -125,12 +155,8 @@ footer {
 .menu-slide {
   position: absolute;
   float: left;
-  -webkit-transform: translateX(-200px);
-  -ms-transform: translateX(-200px);
-  -o-transform: translateX(-200px);
-  transform: translateX(-200);
-  -webkit-transition: 500ms;
-  -o-transition: 500ms;
+  .slide-animation(-200px);
+  .s_transition(500ms);
   margin:0;
   padding-top: 40px;
   padding-right: 0px;
@@ -141,27 +167,21 @@ footer {
   background: rgba(235, 238, 238, 0.0);
   border: 1px solid #eee;
 }
+
 .menu-slide-show {
-  -webkit-transform: translateX(0);
-  -ms-transform: translateX(0);
-  -o-transform: translateX(0);
-  transform: translateX(0);
+  .slide-animation(0px);
 }
+
 .corp {
 /*  position: absolute; */
-  -webkit-transition: 500ms;
-  -o-transition: 500ms;
-  transition: 500ms;
+  .s_transition(500ms);
   margin: 0;
   padding: 0;
   width: 50%;
   height: 100%;
 }
 .corp-show {
-  -webkit-transform: translateX(250px);
-  -ms-transform: translateX(250px);
-  -o-transform: translateX(250px);
-  transform: translateX(250px);
+  .slide-animation(250px);
 }
 
 
@@ -195,7 +215,7 @@ ul.dropdown-info li a:hover {
   background-color: @s_lightBlue;
 }
 .crud_item {
-
+// TODO ???
 }
 
 .crud_item .crud_buttons {
@@ -224,11 +244,16 @@ a.action:hover {
 a:hover {
   text-decoration: none;
 }
+
 div.finder {
   z-index: 300 !important;
 }
+
 .connectedSortable { background-color: #fff }
-.connectedSortable td {  background-color: #eee }
+
+.connectedSortable {
+  td {  background-color: #eee }
+}
 
 
 
@@ -350,11 +375,13 @@ div.finder {
     background-color: rgba(59, 89, 152, 0.9)
 }
 
-.unknown .social-title {
+.unknown {
+  .social-title {
     color: @s_facebookBlue
+  }
 }
 
-.account{
+.account {
   cursor: pointer;
 }
 
