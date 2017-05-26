@@ -1,0 +1,5 @@
+---
+- hosts: bigfoot
+  tasks:
+    - name: Re-build services
+      shell: chdir=/opt/semitki docker-compose up -d --build

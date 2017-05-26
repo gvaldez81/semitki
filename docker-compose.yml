@@ -18,9 +18,11 @@ services:
     env_file:
       - variables.env
   web:
-    image: nginx:stable
+    image: semitki/web
+    build: ./front
     ports:
       - "80:80"
     volumes:
+      - ./config/conf.d:/etc/nginx/conf.d
       - ./front/dist:/usr/share/nginx/html
       - ./storage:/usr/share/nginx/html/storage
