@@ -23,5 +23,6 @@ services:
     ports:
       - "80:80"
     volumes:
+      - ./config/conf.d:/etc/nginx/conf.d
       - ./front/dist:/usr/share/nginx/html
       - ./storage:/usr/share/nginx/html/storage
