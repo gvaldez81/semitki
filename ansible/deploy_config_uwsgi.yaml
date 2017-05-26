@@ -1,0 +1,6 @@
+---
+- hosts: bigfoot
+  tasks:
+    - name: Deploy uWSGI config
+      copy: src=../config/emperor.ini dest=/opt/semitki/config backup=yes
+
