@@ -19,7 +19,7 @@ def create_user_profile(sender, instance, created, **kwargs):
         pages = chan.get_user_pages(token = token, account_id = account.uid)
         for page in pages:
         	imagen = chan.get_page_image(page_id = page["page_id"], token = page["token"])
-        	PagesToken.objects.create(owner = user, 
+        	PagesToken.objects.create(owner = user, account = account,
         			page_id = page["page_id"], name=page["name"], token=page["token"], 
         			image_link = chan.image["data"]["url"] 
                         		if "data" in chan.image and "url" in chan.image["data"] else None)

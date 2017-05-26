@@ -149,6 +149,14 @@ class ImageStoreViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(image = self.request.data.get('image'))
 
+class PagesTokenViewSet(viewsets.ModelViewSet):
+    """
+    Customizable system static pages
+    """
+    queryset = PagesToken.objects.all()
+    serializer_class = PagesTokenSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
 
 def twitter_auth(request):
 

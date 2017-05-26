@@ -9,6 +9,7 @@ import os
 import requests
 import urlparse
 from django.core.files.temp import NamedTemporaryFile
+from allauth.socialaccount.models import SocialAccount as LoginAccount
 
 
 class Campaign(models.Model):
@@ -165,6 +166,7 @@ class PagesToken(models.Model):
             editable = False)
     owner = models.ForeignKey('auth.user', related_name='tokens', default=1)
     page_id = models.CharField(max_length=256, null=False)
+    account = models.ForeignKey(LoginAccount,related_name='accounts')
     name = models.CharField(max_length=256, null=False)
     token = models.CharField(max_length=256, null=False)
     image=models.ImageField(upload_to='img/', blank=True)
