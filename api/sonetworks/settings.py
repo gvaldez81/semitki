@@ -140,6 +140,7 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 ## REST API
 REST_FRAMEWORK = {
@@ -169,8 +170,7 @@ CORS_ORIGIN_WHITELIST = (
         '127.0.0.1:9080',
         'localhost:9080',
         '159.203.134.236:9080',
-        'tj.patito.ninja:9080',
-        '192.168.43.204:9080'
+        '174.138.68.40',
         )
 
 SITE_ID = 1

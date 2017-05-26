@@ -3,13 +3,16 @@ services:
   db:
     image: postgres
   app:
-    build: .
+    image: semitki/api
     command: /semitki/run_api.sh
     volumes:
       - ./api:/semitki/api
       - ./storage:/semitki/storage
+      - ./config:/semitki/config
     ports:
       - "8000:8000"
+      - "3031:3031"
+      - "9191:9191"
     depends_on:
       - db
     env_file:
@@ -17,7 +20,7 @@ services:
   web:
     image: nginx:stable
     ports:
-      - "9080:80"
+      - "80:80"
     volumes:
       - ./front/dist:/usr/share/nginx/html
       - ./storage:/usr/share/nginx/html/storage

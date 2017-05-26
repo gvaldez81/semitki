@@ -7,6 +7,31 @@ module.exports = (grunt) => {
       src: ['dist/*', '!dist/storage/**' ] //do not clean the storage folder
     },
 
+
+    // Compile LESS
+    less: {
+      development: {
+        options: {
+          paths: ['static/css']
+        },
+        files: {
+          'dist/css/style.css': 'static/css/style.less'
+        }
+      },
+      production: {
+        options: {
+          paths: ['static/css'],
+          plugins: [
+            new (require('less-plugin-clean-css'))()
+          ]
+        },
+        files: {
+          'dist/css/style.css': 'static/css/style.less'
+        }
+      }
+    },
+
+
     concat: {
       core: {
         src: ['index.html','views/*.hbs'],
@@ -65,7 +90,7 @@ module.exports = (grunt) => {
       js: {
         expand: true,
         src: '*.js',
-        dest: 'dist/js',
+        dest: 'dist/js/',
         filter: 'isFile'
       },
       img: {
@@ -145,8 +170,11 @@ module.exports = (grunt) => {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-bower');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-less')
 
-  grunt.registerTask('default', ['clean', 'concat', 'copy', 'bower']);
-  grunt.registerTask('prod', ['clean', 'concat', 'copy', 'bower']);
+  grunt.registerTask('default', ['clean', 'less:development', 'concat',
+    'copy', 'bower']);
+  grunt.registerTask('production', ['clean', 'less:production', 'concat',
+    'copy', 'bower']);
 
 };

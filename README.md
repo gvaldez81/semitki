@@ -121,7 +121,7 @@ Run the API
 ### Frontend development
 
 
-    npm install -g bower grunt-cli
+    npm install -g bower grunt-cli less
     cd semitki/front
     npm install
     bower install
@@ -132,6 +132,18 @@ Running grunt will create a `semitki/frontend/dist` directory which
 should be accesable by an HTTP server. When running with docker-compose
 `dist` gets mounted in the path `/usr/share/nginx/html` within the web
 container.
+
+
+#### Adding new bower components
+
+Every time you install a new component through bower, make sure to add
+`--save` option in order to update `bower.json` with the new dependency.
+
+
+    bower install --save
+    git commit -m"My new bower component" front/bower.json
+
+
 
 
 ## Django App

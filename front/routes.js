@@ -6,19 +6,14 @@ let SemitkiRouter = Backbone.Router.extend({
   routes: {
     "": "index",
     "scheduler": "schedulerCreate",
-    "dashboard": "dashboard",
     "groups": "groups",
     "groupedaccounts": "groupedAccounts",
     "landing": "landing",
     "accounts": "accounts",
-    "about": "about", // TODO Check if still used
     "user": "user",
     "campaign": "campaign",
     "permissions": "permissions",
-    "contact": "contact",
-    "billing": "billing",
     "accountinfo": "accountinfo",
-    "pricing": "pricing",
     "grouppedaccounts": "grouppedaccounts",
     "phases": "phases",
   },
@@ -57,6 +52,7 @@ let SemitkiRouter = Backbone.Router.extend({
     view.render();
   },
 
+
   schedulerCreate: () => {
     S.refreshToken(() => {
       let view = new SchedulerCreateView();
@@ -64,12 +60,6 @@ let SemitkiRouter = Backbone.Router.extend({
     });
   },
 
-  dashboard: () => {
-    S.refreshToken(() => {
-      let view = new DashboardView();
-      view.render();
-    });
-  },
 
   groups: () => {
     S.refreshToken(() => {
@@ -77,6 +67,7 @@ let SemitkiRouter = Backbone.Router.extend({
       view.render();
     });
   },
+
 
   groupedAccounts: () => {
     S.refreshToken(() => {
@@ -99,12 +90,6 @@ let SemitkiRouter = Backbone.Router.extend({
     });
   },
 
-  about: () => { // TODO Check if is still used, I think it is  not
-    S.refreshToken(() => {
-      let view = new AboutView();
-      view.render();
-    });
-  },
 
   user: () => {
     S.refreshToken(() => {
@@ -113,12 +98,14 @@ let SemitkiRouter = Backbone.Router.extend({
     });
   },
 
+
   campaign: () => {
     S.refreshToken(() => {
       let view = new CampaignView();
       view.render();
     });
   },
+
 
   campaigndetail: () => {
     S.refreshToken(() => {
@@ -127,6 +114,7 @@ let SemitkiRouter = Backbone.Router.extend({
     });
   },
 
+
   permissions: () => {
     S.refreshToken(() => {
       let view = new PermissionsView();
@@ -134,19 +122,6 @@ let SemitkiRouter = Backbone.Router.extend({
     });
   },
 
-  contact: () => {
-    S.refreshToken(() => {
-      let view = new ContactView();
-      view.render();
-    });
-  },
-
-  billing: () => {
-    S.refreshToken(() => {
-      let view = new BillingView();
-      view.render();
-    });
-  },
 
   accountinfo: () => {
     S.refreshToken(() => {
@@ -155,12 +130,6 @@ let SemitkiRouter = Backbone.Router.extend({
     });
   },
 
-  pricing: () => {
-    S.refreshToken(() => {
-      let view = new PricingView();
-      view.render();
-    });
-  },
 
   grouppedaccounts: () => {
     S.refreshToken(() => {
@@ -168,6 +137,7 @@ let SemitkiRouter = Backbone.Router.extend({
       view.render();
     });
   },
+
 
   phases:() => {
       S.refreshToken(() => {

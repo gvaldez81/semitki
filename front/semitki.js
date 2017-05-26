@@ -89,6 +89,32 @@ let S = {
   },
 
 
+  unrelatedAccounts: function(related) {
+    // related = { items: [{social_Account}] }
+    let related_set = new Set(related.items.map(account => {
+      return account.social_account_url.id;
+    }));
+    // Get all accounts in a Set
+    let accounts = new Set(S.collection.get("accounts").toJSON().map(account => {
+      return account.id;
+    }));
+    // Delete from accounts the related ones
+    let unrelated = new Set([...related_set].filter(x => {
+      if(accounts.has(x))
+        accounts.delete(x);
+    }));
+    // Iterate account ids and return JSON for view
+    let data = [...accounts].map(account => {
+      let a = S.collection.get("accounts").get({id: account}).toJSON();
+      return {
+        id: a.id,
+        social_account_url: { bucket: a.bucket, username: a.username }
+      };
+    });
+    return { items: data };
+  },
+
+
   fixUrl: (modelUrl) => {
     return modelUrl+(modelUrl.charAt(modelUrl.length - 1) == "/" ? "" : "/");
   },
@@ -204,6 +230,7 @@ let S = {
 
 
   showButtons: () => {
+    // TODO show which buttons? Is it generic enough to be in S?
     $(".list-group-item").hover(function() {
       //$($(this)[0].childNodes[3]).addClass('showme')
       //$($(this)[0]).css("background-color","transparent")
@@ -250,7 +277,6 @@ let S = {
 
 // Launch the JavaScript client side app
 $(() => {
-  //let hash = window.location.hash;
   if(window.location.hash.startsWith("#landing")) {
     // If landing page render it only
     let app = new LandingPageView();

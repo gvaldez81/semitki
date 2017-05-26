@@ -1,0 +1,6 @@
+---
+- hosts: bigfoot
+  tasks:
+    - name: Git pull
+      shell: chdir=/opt/semitki git pull >> /opt/semitki/log/git.log
+
