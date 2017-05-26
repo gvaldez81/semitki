@@ -171,6 +171,7 @@ CORS_ORIGIN_WHITELIST = (
         'localhost:9080',
         '159.203.134.236:9080',
         '174.138.68.40',
+        'mexicoeligebien.mx'
         )
 
 SITE_ID = 1
