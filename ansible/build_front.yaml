@@ -1,0 +1,6 @@
+---
+- hosts: bigfoot
+  tasks:
+    - name: Build frontend grunt production
+    shell: chdir=/opt/semitki/front grunt prod
+
