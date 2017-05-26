@@ -94,6 +94,20 @@ class StaticPageSerializer(serializers.HyperlinkedModelSerializer):
 
 class ImageStoreSerializer(serializers.HyperlinkedModelSerializer):
 
-        class Meta:
-            model = ImageStore
-            fields = ('__all__')
+    class Meta:
+        model = ImageStore
+        fields = ('__all__')
+
+
+class PagesTokenSerializer(serializers.HyperlinkedModelSerializer):
+    image_path = serializers.SerializerMethodField()
+    account_id = serializers.SerializerMethodField()
+    def get_account_id(self, pages):
+      return pages.account.uid
+
+    def get_image_path(self, pages):
+      return pages.image.name
+
+    class Meta:
+        model = PagesToken
+        fields = ('page_id', 'name', 'account_id', 'image_link', 'image', 'image_path')

@@ -30,6 +30,8 @@
     "jquery-ui": "^1.12.1",
     "bootbox.js": "bootbox#^4.4.0",
     "components-font-awesome": "^4.7.0",
-    "glyphicons-halflings": "*"
+    "glyphicons-halflings": "*",
+    "bootstrap-select": "^1.12.2",
+    "bootstrap-dropdown": "*"
   }
 }

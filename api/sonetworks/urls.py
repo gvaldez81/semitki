@@ -35,6 +35,7 @@ router.register(r'account_group', SocialAccountGroupViewSet)
 router.register(r'bucket', BucketViewSet)
 router.register(r'static_page', StaticPageViewSet)
 router.register(r'image_upload', ImageStoreViewSet)
+router.register(r'page', PagesTokenViewSet)
 
 #schema_view = get_swagger_view(title='Semitki API')
 
