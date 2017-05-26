@@ -40,6 +40,7 @@ let LandingPageView = Backbone.View.extend({
   },
 
   render: function() {
+    /*
     var head = $('head')
     head.append('<meta name="twitter:card" content="summary_large_image">')
     head.append('<meta name="twitter:site" content="@MexicoEligeBien">')
@@ -47,6 +48,7 @@ let LandingPageView = Backbone.View.extend({
     head.append('<meta name="twitter:title" content="Mexico, es momento de elegir, #ElegirBien">')
     head.append('<meta name="twitter:description" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu finibus metus, ut eleifend odio. Praesent a ligula bibendum ex pulvinar tempor.">')
     head.append('<meta property="og:image" content="http://mexicoeligebien.mx/img/background.png">')
+    */
 
     let template = $("#landing-template").html();
     let compiled = Handlebars.compile(template);
