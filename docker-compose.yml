@@ -20,7 +20,7 @@ services:
   web:
     image: nginx:stable
     ports:
-      - "9080:80"
+      - "80:80"
     volumes:
       - ./front/dist:/usr/share/nginx/html
       - ./storage:/usr/share/nginx/html/storage
