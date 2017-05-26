@@ -10,7 +10,7 @@ module.exports = (grunt) => {
 
     // Compile LESS
     less: {
-      dev: {
+      development: {
         options: {
           paths: ['static/css']
         },
@@ -18,7 +18,7 @@ module.exports = (grunt) => {
           'dist/css/style.css': 'static/css/style.less'
         }
       },
-      prod: {
+      production: {
         options: {
           paths: ['static/css'],
           plugins: [
@@ -172,7 +172,9 @@ module.exports = (grunt) => {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-less')
 
-  grunt.registerTask('default', ['clean', 'less:dev', 'concat', 'copy', 'bower']);
-  grunt.registerTask('prod', ['clean', 'less:prod', 'concat', 'copy', 'bower']);
+  grunt.registerTask('default', ['clean', 'less:development', 'concat',
+    'copy', 'bower']);
+  grunt.registerTask('production', ['clean', 'less:production', 'concat',
+    'copy', 'bower']);
 
 };
