@@ -32,15 +32,26 @@ let GrouppedAccountsView = Backbone.View.extend({
 
   filteraccount: function() {
     if ($("#group").val() !== "") {
-      let group = S.collection.get("groups").get($("#group").val());
-      S.collection.get("groups").filtering(group);
-      let related = {
-        items: group.attributes.related
+      let options = {
+        success: (collection, response, options) => {
+          let group = S.collection.get("groups").get($("#group").val());
+          S.collection.get("groups").filtering(group);
+          let related = {
+            items: group.attributes.related
+          };
+          this.related.data = related;
+          this.available.data = S.unrelatedAccounts(related);
+          this.related.render();
+          this.available.render();
+
+        },
+        error: (conllection, response, options) => {
+          S.logger("bg-danger", "Couldn't fetch groups from server", true);
+        },
+        headers: S.addAuthorizationHeader().headers
       };
-      this.related.data = related;
-      this.available.data = S.unrelatedAccounts(related);
-      this.related.render();
-      this.available.render();
+      S.collection.get("groups").fetch(options);
+
     } else {
       let data = S.collection.get("accounts").toJSON()
         .map(account => {
