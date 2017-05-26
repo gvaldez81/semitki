@@ -95,10 +95,10 @@ let LoginView = Backbone.View.extend({
     $.ajax(url,
        {
          beforeSend: (xhr, settings) => {
-          //if (!csrfSafeMethod(settings.type)
-            //&& sameOrigin(settings.url)) {
+          if (!csrfSafeMethod(settings.type)
+            && sameOrigin(settings.url)) {
             xhr.setRequestHeader("X-CSRFToken", csrftoken);
-          //}
+          }
         },
         data: {
           username: this.username,
