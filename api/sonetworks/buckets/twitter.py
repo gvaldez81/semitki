@@ -83,7 +83,7 @@ class Twitter:
         return token
 
 
-    def post(self, token, post):
+    def post(self, token, post, account_id = 0, staff = False):
         """
         New twitter post
         """
