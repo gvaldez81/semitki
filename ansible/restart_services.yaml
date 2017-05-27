@@ -1,0 +1,5 @@
+---
+- hosts: bigfoot
+  tasks:
+    - name: Restart services
+      shell: chdir=/opt/semitki docker-compose restart
