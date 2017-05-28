@@ -17,6 +17,7 @@
     "grunt-contrib-less": "^1.4.1",
     "grunt-contrib-uglify": "^3.0.0",
     "jshint": "^2.9.4",
-    "less-plugin-clean-css": "^1.5.1"
+    "less-plugin-clean-css": "^1.5.1",
+    "webpack": "^2.6.1"
   }
 }

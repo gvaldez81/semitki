@@ -88,6 +88,10 @@ module.exports = (grunt) => {
         dest: 'dist/js/',
         filter: 'isFile'
       },
+      html: {
+        src: '*.html',
+        dest: 'dist/'
+      },
       img: {
         expand: true,
         cwd: 'static/img',
