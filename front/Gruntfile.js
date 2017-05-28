@@ -89,7 +89,7 @@ module.exports = (grunt) => {
         filter: 'isFile'
       },
       html: {
-        src: ['terms.html', 'privacypolicy.hmtl'],
+        src: ['terms.html', 'privacypolicy.html'],
         dest: 'dist/'
       },
       img: {
