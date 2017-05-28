@@ -1,28 +1,21 @@
 <script type="text/x-handlebars-template" id="login-template">
 
-      <form id="login-form" class="form-signin">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <div id="messages"></div>
-        <label for="username" class="sr-only">Username</label>
-        <input type="email" class="form-control" id="username" name="username"
+    <form id="login-form" class="form-signin">
+      <h2 class="form-signin-heading">Please sign in</h2>
+      <div id="messages"></div>
+      <input type="email" class="form-control" id="username" name="username"
         placeholder="User name">
-        <label for="password" class="sr-only">Password</label>
-        <input type="password" class="form-control" id="password"
+      <input type="password" class="form-control" id="password"
         name="password" placeholder="Password">
-        <div class="checkbox">
-          <label for="remember">
-            <input type="checkbox" id="remember" name="remember"> Remember me
-          </label>
-        </div>
-        <button type="button" class="btn btn-lg btn-info btn-block"
-        id="login-button">Log In</button>
-        <p><button type="button" class="btn btn-sm btn-link" id="recover-pass">
-          Forgot your password?</button></p>
-        <br /><br />
-        <button type="button" class="btn btn-primary btn-lg"
+      <button type="button" class="btn btn-lg btn-info btn-block"
+      id="login-button">Log In</button>
+      <p><button type="button" class="btn btn-sm btn-link" id="recover-pass">
+        Forgot your password?</button></p>
+      <br /><br />
+      <button type="button" class="btn btn-primary btn-lg"
         id="fb-login">Facebook</button>
-        <button type="button" class="btn btn-info btn-lg"
+      <button type="button" class="btn btn-info btn-lg"
         id="twitter-login">Twitter</button>
-      </form>
+    </form>
 
 </script>
