@@ -21,13 +21,12 @@ let LoginView = Backbone.View.extend({
 
   recoverPassword: () => {
     // TODO IT does not work, needs some work in backend
-    let url = apiBuilder("auth/password/reset")
+    let url = S.api("auth/password/reset");
     let csrftoken = Cookies.get("csrftoken");
     $.ajax(url,
     {
        beforeSend: (xhr, settings) => {
-        if (!csrfSafeMethod(settings.type)
-          && sameOrigin(settings.url)) {
+        if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
           xhr.setRequestHeader("X-CSRFToken", csrftoken);
         }
       },
@@ -78,7 +77,8 @@ let LoginView = Backbone.View.extend({
           });
         });
       }
-    }, {scope: 'public_profile,email,publish_actions,user_photos, manage_pages, publish_pages'});
+    }, {scope: 'public_profile,email,publish_actions,user_photos,' +
+      'manage_pages,publish_pages'});
   },
 
 
@@ -90,13 +90,12 @@ let LoginView = Backbone.View.extend({
   tryLogin: () => {
     this.username = $("input[name='username']").val();
     this.password = $("input[name='password']").val();
-    let url = apiBuilder("auth/login")
+    let url = S.api("auth/login");
     let csrftoken = Cookies.get("csrftoken");
     $.ajax(url,
        {
          beforeSend: (xhr, settings) => {
-          if (!csrfSafeMethod(settings.type)
-            && sameOrigin(settings.url)) {
+          if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
             xhr.setRequestHeader("X-CSRFToken", csrftoken);
           }
         },
