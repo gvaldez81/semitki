@@ -37,14 +37,6 @@ module.exports = (grunt) => {
         src: ['index.html','views/*.hbs'],
         dest: 'dist/index.html'
       },
-      privacy: {
-        src: ['privacypolicy.html'],
-        dest: 'dist/privacypolicy.html'
-      },
-      terms: {
-        src: ['terms.html'],
-        dest: 'dist/terms.html'
-      },
       models: {
         options: {
           separator: ';\n',
@@ -79,6 +71,9 @@ module.exports = (grunt) => {
         dest: 'dist/js/views.js'
       },
     },
+
+
+    // COPY
     copy: {
       css: {
         expand: true,
