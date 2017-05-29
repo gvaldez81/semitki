@@ -104,16 +104,21 @@ let LoginView = Backbone.View.extend({
           password: this.password
         },
         method: "POST",
-        dataType: "JSON"
-      }).done((data) => {
-        S.jwtoken(data.token);
-        S.user.set(data.user);
-        sessionStorage.setItem("user", JSON.stringify(data.user));
-        S.router.navigate("#scheduler", {trigger: true});
-        S.fetchCollections();
-     }).fail((xhr) => {
-       S.logger("bg-danger", "Failed login, check your credentials", true);
-     });
+        dataType: "JSON",
+        success: (data) => {
+          S.jwtoken(data.token);
+          S.user.set(data.user);
+          sessionStorage.setItem("user", JSON.stringify(data.user));
+          S.router.navigate("#scheduler", {trigger: true});
+          S.fetchCollections();
+       },
+       error: (jqXHR, textStatus, errorTrhown) => {
+         console.log(jqXHR);
+         console.log(textStatus);
+         console.log(errorTrhown);
+         S.logger("bg-danger", "Failed login, check your credentials", true);
+       }
+      });
   },
 
   render: function() {
