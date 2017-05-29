@@ -14,6 +14,14 @@ let SideMenuView = Backbone.View.extend({
     "click .account": "addNewPost"
   },
 
+ initialize: function() {
+    this.data = {
+      user: S.user.toJSON(),
+      groups: S.collection.get("groups").toJSON()
+    };
+
+   return this;
+ },
 
   addNewPost: (e) => {
     let postView = new AddPostView(S.collection.get("accounts")
@@ -39,14 +47,9 @@ let SideMenuView = Backbone.View.extend({
 
 
   render: function() {
-    let data = {
-      user: S.user.toJSON(),
-      groups: S.collection.get("groups").toJSON()
-    };
-
     let template = $("#side-menu-template").html();
     let compiled = Handlebars.compile(template);
-    this.$el.html(compiled(data));
+    this.$el.html(compiled(this.data));
     $(".menu-slide").html(this.$el);
 
     $('[data-submenu]').submenupicker();
