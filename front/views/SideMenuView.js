@@ -14,14 +14,14 @@ let SideMenuView = Backbone.View.extend({
     "click .account": "addNewPost"
   },
 
- initialize: function() {
-    this.data = {
-      user: S.user.toJSON(),
-      groups: S.collection.get("groups").toJSON()
-    };
+  initialize: function() {
+     this.data = {
+       user: S.user.toJSON(),
+       groups: S.collection.get("groups").toJSON()
+     };
 
-   return this;
- },
+    return this;
+  },
 
   addNewPost: (e) => {
     let postView = new AddPostView(S.collection.get("accounts")
