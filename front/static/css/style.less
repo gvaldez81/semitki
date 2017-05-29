@@ -6,7 +6,8 @@
 @s_lighterBlue: #5bc0de;  // Background when unselected
 @s_slateBlue: #2a6496;    // TODO ??
 @s_facebookBlue: #3b5998; // Name say it
-@s_grey: #9197a3;
+//@s_grey: #9197a3;
+@s_grey: #222;
 
 /*** MARGINS ***/
 
@@ -37,6 +38,7 @@ body {
 
 /** Navigation **/
 .navbar {
+  display: none;
   .nav {
     li {
       float: none;
@@ -140,17 +142,19 @@ footer {
 .menu-slide {
   position: absolute;
   float: left;
+  display: none;
   .slide-animation(-200px);
-  .s_transition(500ms);
+  .s_transition(400ms);
   margin:0;
   padding-top: 40px;
   padding-right: 0px;
   padding-bottom: 0px;
   padding-left: 0px;
   width: 230px;
-  height: 80%;
-  background: rgba(235, 238, 238, 0.0);
-  border: 1px solid #eee;
+  height: 90%;
+  //background: rgba(235, 238, 238, 0.0);
+  background-color: @s_grey;
+  border: thin solid @s_grey;
 }
 
 .menu-slide-show {
@@ -159,7 +163,7 @@ footer {
 
 .corp {
 /*  position: absolute; */
-  .s_transition(500ms);
+  .s_transition(700ms);
   margin: 0;
   padding: 0;
   width: 50%;
@@ -233,7 +237,7 @@ div.finder {
 .connectedSortable {
   background-color: #fff;
   td {
-    background-color: #eee;
+    background-color: @s_grey;
   }
 }
 
