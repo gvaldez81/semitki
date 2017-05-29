@@ -33,6 +33,8 @@ let SideMenuView = Backbone.View.extend({
     $("#main").removeClass("corp-show"); // Ugly hack :P
     S.router.index();
     this.remove();
+
+    return this;
   },
 
 
