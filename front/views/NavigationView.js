@@ -13,7 +13,10 @@ let NavigationView = Backbone.View.extend({
 
 
   addNewPost: () => {
-    let postView = new AddPostView(S.user.toJSON());
+    let data = S.user.toJSON()
+    S.collection.get("pages").filtering(S.user.get('bucket_id'));
+
+    let postView = new AddPostView(data);
     postView.render();
   },
 

@@ -23,6 +23,11 @@ let AddPostView = Backbone.View.extend({
     this.data.campaigns = S.collection.get("campaigns").toJSON().map((i) => {
       return S.collection2select({id: i.id, text: i.name});
     });
+
+    if (S.collection.get("pages_related")!== undefined) {
+      data.pages = S.collection.get("pages_related").toJSON()
+    }
+
     S.toggleNavigation();
   },
 
@@ -182,6 +187,8 @@ let AddPostView = Backbone.View.extend({
         return  S.collection2select({id: i.id, text: i.name });
       })
     });
+
+    $("#selectpage").selectpicker('render') ;
 
     return this;
   }

@@ -36,7 +36,7 @@ class Facebook:
         Get user profile image 
         """
         self.image = json.loads(self.oauth.get(self.graph_url 
-            + self.account_id+"/picture?width=160&height=160&redirect=0").content)
+            + self.account_id+"/picture?width=32&height=32&redirect=0").content)
         return 
 
 
@@ -66,7 +66,7 @@ class Facebook:
         """
         self.image = json.loads(self.oauth.get(self.graph_url 
                 + page_id+"/picture?access_token="+ token
-                +"&width=160&height=160&redirect=0").content)
+                +"&width=32&height=32&redirect=0").content)
         return 
 
     def get_user_pages(self, token, account_id):
