@@ -2,10 +2,10 @@
 
 let SideMenuView = Backbone.View.extend({
 
-  tagName: "ul",
+  tagName: "div",
 
 
-  className: "nav nav-pills nav-stacked",
+  className: "panel-group",
 
 
   events: {
@@ -49,6 +49,9 @@ let SideMenuView = Backbone.View.extend({
   render: function() {
     let template = $("#side-menu-template").html();
     let compiled = Handlebars.compile(template);
+    this.$el.attr("role", "tablist");
+    this.$el.attr("aria-multiselectable", "true");
+    this.$el.attr("id", "accordion");
     this.$el.html(compiled(this.data));
     $(".menu-slide").html(this.$el);
 

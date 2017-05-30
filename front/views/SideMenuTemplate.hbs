@@ -1,64 +1,81 @@
 <script type="x-handlebars-template" id="side-menu-template">
 
-  <ul class="nav nav-pills nav-stacked">
-    <li>
-      <button class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-      data-submenu aria-haspopup="true" aria-expanded="false">Social accounts
-      <span class="caret"></span></button>
-      <ul class="dropdown-menu">
-      {{#each groups}}
-       <li class="dropdown-submenu"><a tabindex="0">{{name}}</a>
-         <ul class="dropdown-menu">
-          {{#each related}}
-            <li><div style="margin:5px;">
-              <a tabindex="0" id="{{social_account_url.id}}"
-                class="account sn-pic sn-w30 {{social_account_url.bucket}} ">
-                {{#if social_account_url.image}}
-                  <img src="storage/{{social_account_url.image_path}}">
-                {{/if}}
-                <span class="community-name">
-                  {{social_account_url.username}}
-                </span>
-              </a>
-              </div>
-            </li>
-          {{/each}}
-         </ul>
-       </li>
-      {{/each}}
-      </ul>
-    </li>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingAccounts">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion"
+          href="#collapseAccounts" aria-expanded="true"
+          aria-controls="collapseAccounts">
+          Social accounts
+        </a>
+      </h4>
+    </div>
+    <div id="collapseAccounts" class="panel-collapse collapse in"
+      role="tablpanel" aria-labelledby="headingAccounts">
+      <div class="panel-body">
+        <ul class="list-group">
+        {{#each groups}}
+         <li class="list-group-item">{{name}}</li>
+        {{/each}}
+        </ul>
+      </div>
+    </div>
+  </div>
 
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingSettings">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion"
+          href="#collapseSettings" aria-expanded="true"
+          aria-controls="collapseSettings">
+          Settings
+        </a>
+      </h4>
+    </div>
+    <div id="collapseSettings" class="panel-collapse collapse"
+      role="tablpanel" aria-labelledby="headingSettings">
+      <div class="panel-body">
+        <ul class="list-group">
+         <li class="list-group-item">
+           <a href="#campaign" type="button" class="btn btn-link"
+             role="button" id="campaigns">Campaigns</a>
+         </li>
+         <li class="list-group-item">
+           <a href="#phases" type="button" class="btn btn-link"
+             role="button" >Phases</a></li>
+         <li class="list-group-item">
+           <a href="#groups" type="button" class="btn btn-link"
+             role="button">Groups</a></li>
+         <li class="list-group-item">
+           <a href="#grouppedaccounts" type="button" class="btn btn-link"
+             role="button">Groups &amp; accounts</a></li>
+         <li class="list-group-item">
+           <a href="#user" type="button" class="btn btn-link"
+             role="button">Users</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-    <li role="separator" class="divider"></li>
-    <li>
-      <button class="btn btn-default dropdown-toggle" type="button"
-      id="user-menu-button" data-toggle="dropdown" aria-haspopup="true"
-      aria-expanded="false">{{user.email}}<span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu" aria-labelledby="user-menu-button">
-        <li><button id="settings" type="button"
-        class="btn btn-link">Settings</button></li>
-        <li><button id="logout" type="button"
-        class="btn btn-link">Log out</button></li>
-      </ul>
-    </li>
-
-    <li role="separator" class="divider"></li>
-
-    <li>
-      <button class="btn btn-default dropdown-toggle" type="button"
-      id="user-menu-button" data-toggle="dropdown" aria-haspopup="true"
-      aria-expanded="false">Settings<span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu" aria-labelledby="user-menu-button">
-        <li><a  href="#campaign" button id="campaigns" type="button" class="btn btn-link" role="button" >Campaigns </a></li>
-        <li><a  href="#phases" button id="phases" type="button"     class="btn btn-link">Phases</a></li>
-        <li><a  href="#groups" button id="groups" type="button"     class="btn btn-link">Groups</a></li>
-        <li><a  href="#grouppedaccounts" button id="groupped" type="button"     class="btn btn-link">Groups &amp; Accounts</a></li>
-        <li><a  href="#user" button id="users" type="button"     class="btn btn-link">Users</a></li> 
-      </ul>
-    </li>
-  </ul>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingProfile">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion"
+          href="#collapseProfile" aria-expanded="true"
+          aria-controls="collapseProfile">{{user.username}}
+        </a>
+      </h4>
+    </div>
+    <div id="collapseProfile" class="panel-collapse collapse"
+      role="tablpanel" aria-labelledby="headingProfile">
+      <div class="panel-body">
+        <ul class="list-group">
+         <li class="list-group-item">
+           <a href="#" type="button" class="btn btn-link" id="logout"
+             role="button"Log out</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
 </script>
