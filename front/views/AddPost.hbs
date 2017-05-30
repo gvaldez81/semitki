@@ -6,6 +6,14 @@
 <form id="addpost-form" class="addpost-form" >
   <div class="visual-wrap-header clearfix">
     <div class="container-fluid" style="margin-bottom:10px">
+      <div class="row">
+        <select title="Select your Page"  id="selectpage" class="selectpicker">
+          <option>Select...</option>
+          {{#each pages}}
+            <option data-content="<img src='storage/{{image_path}}'><span >{{name}}</span>">{{name}}</option>
+          {{/each}}
+        </select>
+
       <span class="sn-pic sn-w40 {{bucket}} no-after-check">
         {{#if image}}
           <img src="storage/{{image_path}}">

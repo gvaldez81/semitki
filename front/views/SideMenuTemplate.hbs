@@ -6,19 +6,11 @@
         <a role="button" data-toggle="collapse" data-parent="#accordion"
           href="#collapseAccounts" aria-expanded="true"
           aria-controls="collapseAccounts">
-          Social accounts
+          Accounts
         </a>
       </h4>
     </div>
-    <div id="collapseAccounts" class="panel-collapse collapse"
-      role="tablpanel" aria-labelledby="headingAccounts">
-      <div class="panel-body">
-        <ul class="list-group">
-        {{#each groups}}
-         <li class="list-group-item">{{name}}</li>
-        {{/each}}
-        </ul>
-      </div>
+    <div id="collapseAccounts" class="panel-collapse collapse in" id="group-menu">
     </div>
   </div>
 
@@ -33,7 +25,7 @@
       </h4>
     </div>
     <div id="collapseSettings" class="panel-collapse collapse"
-      role="tablpanel" aria-labelledby="headingSettings">
+      role="tabpanel" aria-labelledby="headingSettings">
       <div class="panel-body">
         <ul class="list-group">
          <li class="list-group-item">
@@ -67,7 +59,7 @@
       </h4>
     </div>
     <div id="collapseProfile" class="panel-collapse collapse"
-      role="tablpanel" aria-labelledby="headingProfile">
+      role="tabpanel" aria-labelledby="headingProfile">
       <div class="panel-body">
         <ul class="list-group">
          <li class="list-group-item">

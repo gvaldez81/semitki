@@ -17,7 +17,6 @@ let SideMenuView = Backbone.View.extend({
   initialize: function() {
      this.data = {
        user: S.user.toJSON(),
-       groups: S.collection.get("groups").toJSON()
      };
 
     return this;
