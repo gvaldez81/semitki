@@ -11,7 +11,7 @@ let SideMenuView = Backbone.View.extend({
   events: {
     "click #logout": "logout",
     "click #settings-btn": "goSettings",
-    "click .account": "addNewPost"
+    "change .account-select": "addNewPost"
   },
 
   initialize: function() {
@@ -24,7 +24,10 @@ let SideMenuView = Backbone.View.extend({
 
   addNewPost: (e) => {
     let postView = new AddPostView(S.collection.get("accounts")
-      .get(e.currentTarget.id).toJSON());
+      .get($(".account-select").val()).toJSON());
+/*    let postView = new AddPostView(S.collection.get("accounts")*/
+      /*.get(e.currentTarget.id).toJSON());*/
+
     postView.render();
   },
 
