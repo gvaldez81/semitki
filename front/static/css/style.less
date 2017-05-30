@@ -1,3 +1,4 @@
+/*** COLORS ***/
 // Color for post box border looks like copper
 @s_copper: #efa05a;
 // Color used in post box Schedule/Post now button
@@ -5,9 +6,12 @@
 @s_lighterBlue: #5bc0de;  // Background when unselected
 @s_slateBlue: #2a6496;    // TODO ??
 @s_facebookBlue: #3b5998; // Name say it
-@s_grey: #9197a3;
+//@s_grey: #9197a3;
+@s_grey: #222;
 
-/* Mixins */
+/*** MARGINS ***/
+
+/*** MIXINS ***/
 
 .slide-animation(@offset) {
   -webkit-transform: translateX(@offset);
@@ -34,6 +38,7 @@ body {
 
 /** Navigation **/
 .navbar {
+  display: none;
   .nav {
     li {
       float: none;
@@ -57,16 +62,16 @@ div.navbar-inner {
   max-width: 330px;
   padding: 15px;
   margin: 0 auto;
-}
-
-// TODO learn how to do this sort of mix
-.form-signin .form-signin-heading,
-.form-signin .checkbox {
-  margin-bottom: 10px;
-}
-
-.form-signin {
+  .form-signin-heading {
+    @margin_bottom_10;
+  }
+  .checkbox {
+    @margin_bottom_10;
+  }
   .form-control {
+    &:focus {
+      z-index: 2;
+    }
     position: relative;
     height: auto;
     -webkit-box-sizing: border-box;
@@ -75,28 +80,17 @@ div.navbar-inner {
     padding: 10px;
     font-size: 16px;
   }
-}
-
-.form-signin {
-  .form-control {
-    &:focus {
-      z-index: 2;
-    }
+  input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  input[type="password"] {
+    margin-bottom: 10px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
   }
 }
-
-.form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
-.form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
 
 /** Form Add Post **/
 .addpost-form {
@@ -106,15 +100,16 @@ div.navbar-inner {
   border: thin solid @s_copper;
   border-radius: 15px;
   background-color: rgba(255, 149, 36, 0.20);
-}
-
-.addpost-form .form-signin-heading,
-.addpost-form .checkbox {
-  margin-bottom: 10px;
-}
-
-.addpost-form {
+  .form-signin-heading {
+    @margin_bottom_10;
+  }
+  .checkbox {
+    @margin_bottom_10;
+  }
   .form-control {
+    &:focus {
+      z-index: 2;
+    }
     position: relative;
     height: auto;
     -webkit-box-sizing: border-box;
@@ -122,14 +117,6 @@ div.navbar-inner {
     -box-sizing: border-box;
     padding: 10px;
     font-size: 16px;
-  }
-}
-
-.addpost-form {
-  .form-control {
-    &:focus {
-      z-index: 2;
-    }
   }
 }
 
@@ -155,17 +142,19 @@ footer {
 .menu-slide {
   position: absolute;
   float: left;
+  display: none;
   .slide-animation(-200px);
-  .s_transition(500ms);
+  .s_transition(400ms);
   margin:0;
   padding-top: 40px;
   padding-right: 0px;
   padding-bottom: 0px;
   padding-left: 0px;
   width: 230px;
-  height: auto;
-  background: rgba(235, 238, 238, 0.0);
-  border: 1px solid #eee;
+  height: 90%;
+  //background: rgba(235, 238, 238, 0.0);
+  background-color: @s_grey;
+  border: thin solid @s_grey;
 }
 
 .menu-slide-show {
@@ -174,7 +163,7 @@ footer {
 
 .corp {
 /*  position: absolute; */
-  .s_transition(500ms);
+  .s_transition(700ms);
   margin: 0;
   padding: 0;
   width: 50%;
@@ -207,20 +196,21 @@ button#landing-login-tw {
 ul.dropdown-info {
   background-color: @s_lighterBlue;
   border-color: @s_lightBlue;
-}
-ul.dropdown-info li {
-  background-color: @s_lightBlue;
-}
-ul.dropdown-info li a:hover {
-  background-color: @s_lightBlue;
-}
-.crud_item {
-// TODO ???
+  li {
+    background-color: @s_lightBlue;
+    a {
+      &:hover {
+        background-color: @s_lightBlue;
+      }
+    }
+  }
 }
 
-.crud_item .crud_buttons {
-  float: right;
-  margin-right: 10px;
+.crud_item {
+  .crud_buttons {
+    float: right;
+    margin-right: 10px;
+  }
 }
 
 .hideme {
@@ -234,25 +224,21 @@ ul.dropdown-info li a:hover {
 a.action {
   border-bottom: 1px dashed @s_slateBlue;
   text-decoration: none;
-}
-
-a.action:hover {
-  border-bottom: 1px dashed @s_slateBlue;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: none;
+  &:hover {
+    border-bottom: 1px dashed @s_slateBlue;
+    text-decoration: none;
+  }
 }
 
 div.finder {
   z-index: 300 !important;
 }
 
-.connectedSortable { background-color: #fff }
-
 .connectedSortable {
-  td {  background-color: #eee }
+  background-color: #fff;
+  td {
+    background-color: @s_grey;
+  }
 }
 
 
@@ -298,7 +284,7 @@ div.finder {
     border: 1px solid white;
     border: 1px solid rgba(255, 255, 255, 0.08);
     z-index: 10;
-    box-sizing: border-box
+    box-sizing: border-box;
 }
 
 .sn-pic.-empty:before {
@@ -306,7 +292,7 @@ div.finder {
     height: 34px;
     font-size: 18px;
     line-height: 36px;
-    border: 0
+    border: 0;
 }
 
 .sn-pic.-empty:after {
@@ -316,7 +302,7 @@ div.finder {
     left: 0;
     position: absolute;
     right: 0;
-    top: 0
+    top: 0;
 }
 
 .sn-pic.sn-w40>img {
@@ -359,12 +345,12 @@ div.finder {
     content: "\f09a";
     color: white;
     background-color: @s_facebookBlue;
-    background-color: rgba(59, 89, 152, 0.9)
+    background-color: rgba(59, 89, 152, 0.9);
 }
 
 .sn1 .social-title,
 .facebook .social-title {
-    color: @s_facebookBlue
+    color: @s_facebookBlue;
 }
 
 
@@ -372,12 +358,12 @@ div.finder {
     content: "\f119";
     color: white;
     background-color: @s_facebookBlue;
-    background-color: rgba(59, 89, 152, 0.9)
+    background-color: rgba(59, 89, 152, 0.9);
 }
 
 .unknown {
   .social-title {
-    color: @s_facebookBlue
+    color: @s_facebookBlue;
   }
 }
 
