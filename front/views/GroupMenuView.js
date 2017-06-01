@@ -42,18 +42,15 @@ let GroupMenuView = Backbone.View.extend({
       return $t;
     };
 
-    let data = [{id: "1", text: "algo"}, {id: "2", text: "mas"}];
-
     $(".account-select").select2({
       placeholder: "Select account",
-      data: data
+      data: this.accounts
     });
 
 
     $(".account-select").select2({
       templateResult: templateSelect,
-      templateSelection: templateSelect,
-      debug: true
+      templateSelection: templateSelect
     });
     return this;
   }
