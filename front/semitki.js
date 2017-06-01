@@ -7,7 +7,7 @@ let S = {
     Backbone.history.start({pushState: false});        // Initialize Backbone web browser history support
     this.router = new SemitkiRouter();                // Initialize Backbone routes
     // Select boxes default settings
-    $.fn.select2.defaults.set("allowClear", true);
+    $.fn.select2.defaults.set("allowClear", false);
     this.jwtheader = "JWT ";                          // Token prefix for authorization custom header
     // BackBone collection instances
     // Heil ES6 Map!

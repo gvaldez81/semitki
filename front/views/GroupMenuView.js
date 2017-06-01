@@ -33,10 +33,28 @@ let GroupMenuView = Backbone.View.extend({
     this.$el.html(compiled());
     $("#account-menu").html(this.$el);
 
+    let templateSelect = function(account) {
+      if(!account.id) { return account.text; }
+      let $t = $(
+        '<span><img src="'+account.image+'"></span><span>'+
+        account.username+' ['+account.bucket+']</span>'
+      );
+      return $t;
+    };
+
+    let data = [{id: "1", text: "algo"}, {id: "2", text: "mas"}];
+
     $(".account-select").select2({
-      data: this.accounts
+      placeholder: "Select account",
+      data: data
     });
 
+
+    $(".account-select").select2({
+      templateResult: templateSelect,
+      templateSelection: templateSelect,
+      debug: true
+    });
     return this;
   }
 
