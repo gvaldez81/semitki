@@ -7,18 +7,15 @@ let GroupMenuView = Backbone.View.extend({
   className: "panel-body",
 
   initialize: function() {
-    let groups = S.collection.get("groups").toJSON();
+    let acts = S.collection.get("accounts").toJSON();
 
-    this.accounts = groups.map((group) => {
+    this.accounts = acts.map((a) => {
       let account = {
-        "group": group.name
+        id: a.id,
+        text: a.username,
+        avatar: a.image_path,
+        group: a.name
       };
-      group.related.forEach((a) => {
-        account.id = a.social_account_url.id;
-        account.text = a.social_account_url.username;
-        account.bucket = a.social_account_url.bucket;
-        account.image = a.social_account_url.image;
-      });
 
       return account;
     });
