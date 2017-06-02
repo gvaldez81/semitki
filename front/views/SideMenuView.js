@@ -36,7 +36,7 @@ let SideMenuView = Backbone.View.extend({
     } else if(sourceType === "fb-pages-menu") {
       // TODO maybe it does not work, I have no pages on my test profiles
       postView = new AddPostView(S.collection.get("pages")
-        .get(source_id).toJSON());
+        .findWhere({page_id: source_id}).toJSON());
     }
 
     if(postView !== undefined )
