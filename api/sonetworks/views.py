@@ -16,6 +16,9 @@ from allauth.account.adapter import get_adapter
 from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from rest_auth.registration.views import SocialLoginView
+from allauth.socialaccount.providers.twitter.views import TwitterOAuthAdapter
+from rest_auth.views import LoginView
+from rest_auth.social_serializers import TwitterLoginSerializer
 
 from django.http import HttpResponse, HttpResponseRedirect
 
@@ -31,7 +34,7 @@ from buckets import twitter
 
 class FacebookLogin(SocialLoginView):
     """
-    Facebook login
+    Facebook login for system user accounts
     """
     adapter_class = FacebookOAuth2Adapter
     client_class = OAuth2Client
@@ -40,6 +43,11 @@ class FacebookLogin(SocialLoginView):
 
     def process_login(self):
         get_adapter(self.request).login(self.request, self.user)
+
+
+class TwitterLogin(LoginView):
+    serializer_class = TwitterLoginSerializer
+    adapter_class = TwitterOAuthAdapter
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -159,7 +167,9 @@ class PagesTokenViewSet(viewsets.ModelViewSet):
 
 
 def twitter_auth(request):
-
+    """
+    Twitter login of Follower accounts only
+    """
     #if 'action' in request.GET:
     bucket = twitter.Twitter()
     oauth = bucket.get_oauthsession()
@@ -170,6 +180,10 @@ def twitter_auth(request):
     #return HttpResponseRedirect(result)
 
 def callback(request):
+    """
+    Generic (perhaps) callback endpoint for any social network
+    when registering Follower accounts.
+    """
     # Set to 0 for production, 1 is for development only
     os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 

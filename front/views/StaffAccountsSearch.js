@@ -7,14 +7,14 @@ let StaffAccountsView = Backbone.View.extend({
   className: "panel-body",
 
   initialize: function() {
-    let acts = S.collection.get("user").toJSON();
+    let acts = S.collection.get("user").where({is_superuser: false});
 
     this.accounts = acts.map((a) => {
       let account = {
-        id: a.id,
-        text: a.username,
-        avatar: a.image_path,
-        group: a.name
+        id: a.attributes.id,
+        text: a.attributes.username,
+        avatar: a.attributes.image_path,
+        group: a.attributes.name
       };
 
       return account;

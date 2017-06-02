@@ -21,7 +21,7 @@ class UserSerializer(serializers.ModelSerializer):
         list_serializer_class = FilteredIsActiveListUser
         model = User
         fields = ('id', 'username', 'email', 'first_name', 'last_name',
-                'posts', 'is_active')
+                'posts', 'is_active', 'is_staff', 'is_superuser')
 
 class PostSerializer(serializers.ModelSerializer):
 
