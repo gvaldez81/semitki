@@ -20,6 +20,19 @@ let StaffAccountsView = Backbone.View.extend({
       return account;
     });
 
+    let pages = S.collection.get("pages").toJSON();
+
+    this.fbPages = pages.map((p) => {
+      let page = {
+        id: p.page_id,
+        text: p.name,
+        avatar: p.image
+      };
+
+      return page;
+    });
+
+
     return this;
   },
 
@@ -32,7 +45,7 @@ let StaffAccountsView = Backbone.View.extend({
 
     $("#staff-menu .account-select").select2({
       placeholder: "Select account",
-      data: this.accounts
+      data: this.accounts.concat(this.fbPages)
     });
 
     return this;

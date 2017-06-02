@@ -28,8 +28,8 @@ let SchedulerCreateView = Backbone.View.extend({
     groupMenu.render();
     let staffMenu = new StaffAccountsView();
     staffMenu.render();
-    let fbPages = new FbPageSearch();
-    fbPages.render();
+/*    let fbPages = new FbPageSearch();*/
+    /*fbPages.render();*/
 
     let posts = new Post();
     posts.fetch(S.addAuthorizationHeader());
