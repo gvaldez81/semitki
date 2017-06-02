@@ -26,6 +26,8 @@ let SchedulerCreateView = Backbone.View.extend({
 
     let groupMenu = new GroupMenuView();
     groupMenu.render();
+    let staffMenu = new StaffAccountsView();
+    staffMenu.render();
 
     let posts = new Post();
     posts.fetch(S.addAuthorizationHeader());

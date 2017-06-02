@@ -13,11 +13,11 @@ let UserView = Backbone.View.extend({
     S.users.fetch(S.addAuthorizationHeader());
 
   },
-  
+
 
 
   events: {
-    
+
     "click #delete": "delete",
     "click .item_button_edit": "editItem",
     "click .item_button_remove": "hideItem",
@@ -35,7 +35,7 @@ let UserView = Backbone.View.extend({
 
     let user = new UserModel();
     user.save(data, S.addAuthorizationHeader());
-    
+
   },
 
   delete: () => {
