@@ -15,7 +15,7 @@ let LoginView = Backbone.View.extend({
   events: {
     "click #login-button": "tryLogin",
     "click #fb-login": "tryFbLogin",
-    "click #tw-login": "tryTwLogin",
+    "click #twitter-login": "tryTwLogin",
     "click #recover-pass": "recoverPassword",
   },
 
@@ -83,7 +83,28 @@ let LoginView = Backbone.View.extend({
 
 
   tryTwLogin: () => {
-    S.logger("bg-danger", "Login with Twitter TODO", true);
+    //location.assign(SEMITKI_CONFIG.tw_api_url + "oauth/request_token");
+    let url = SEMITKI_CONFIG.tw_api_url + "oauth/request_token";
+    $.ajax(url,
+      {
+        beforeSend: (jqXHR, settings) => {
+//          jqXHR.setRequestHeader("OAuth oauth_nonce", "");
+          jqXHR.setRequestHeader("oauth_callback",
+            SEMITKI_CONFIG.api_oauth_callback + "?chan=twitter");
+          jqXHR.setRequestHeader("oauth_signature_method", "HMAC-SHA1");
+          jqXHR.setRequestHeader("oauth_timestamp", "1300228849");
+          jqXHR.setRequestHeader("oauth_consumer_key",
+            SEMITKI_CONFIG.tw_consumer_key);
+          jqXHR.setRequestHeader("oauth_signature", "");
+        },
+        method: "POST",
+        success: (response) => {
+          console.log(response);
+        },
+        error: (jqXHR, textStatus, errorThrown) => {
+          console.log(jqXHR);
+        }
+      });
   },
 
 

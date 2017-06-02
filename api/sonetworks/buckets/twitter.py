@@ -35,8 +35,6 @@ class Twitter:
             tweet = api.create_favorite(id=tweetID)
             return (tweet.id_str)
         except Exception as e:
-            #print(data['access_token']['screen_name'] + ' ' +
-            #e[0][0]['message'])
             return(data['access_token']['screen_name'] + ' ' +
                 e[0][0]['message'])
 
@@ -50,7 +48,7 @@ class Twitter:
         api = tweepy.API(auth)
         user = api.verify_credentials()
 
-        
+
         return { "id": user.id,
                 "name": user.screen_name,
                 "email": user["email"] if hasattr(user, 'email') else 'sin@email.com',
@@ -60,17 +58,19 @@ class Twitter:
         """
         Returns a Twitter OAuth session
         """
-        self.oauth = tweepy.OAuthHandler(self.client_id, self.client_secret,self.redirect_uri)
+        self.oauth = tweepy.OAuthHandler(self.client_id, self.client_secret,
+                self.redirect_uri)
         return self.oauth
 
     def get_oauthsession(self):
         """
         Returns a Twitter OAuth session
         """
-        self.oauth = tweepy.OAuthHandler(self.client_id, self.client_secret,self.redirect_uri)
+        self.oauth = tweepy.OAuthHandler(self.client_id, self.client_secret,
+                self.redirect_uri)
         return self.oauth
 
-    
+
 
     def get_token(self, redirect_response):
         """
@@ -79,7 +79,8 @@ class Twitter:
         self.oauth = tweepy.OAuthHandler(self.client_id, self.client_secret)
         self.oauth.request_token = self.request_token
         self.oauth.get_access_token(self.verifier)
-        token = {"access_token":self.oauth.access_token, "token_secret":self.oauth.access_token_secret}
+        token = {"access_token":self.oauth.access_token,
+                "token_secret":self.oauth.access_token_secret}
         return token
 
 
@@ -92,7 +93,7 @@ class Twitter:
         api = tweepy.API(auth)
         copy = post.content['txt']
         imagen = post.content['img'] if 'img' in post.content else None
-        
+
         if (imagen is None or imagen == ''):
             try:
                 twit = api.update_status(status=copy)
@@ -122,7 +123,7 @@ class Twitter:
                         os.remove(file)
                     #upload = api.media_upload(filename=file)
                     #media_ids = [upload.media_id_string]
-                    
+
                     #try:
                     #    twit = api.update_status(media_ids, status=copy[:140])
                     #    return (twit.id_str)
@@ -132,7 +133,7 @@ class Twitter:
                     return("Unable to download image")
             else:
                 return("Image size bigger than 3MB")
-        
+
         return "Fail"
 
 
@@ -141,7 +142,7 @@ class Twitter:
         auth = tweepy.OAuthHandler(self.client_id, self.client_secret)
         auth.set_access_token(self.oauth.access_token,self.oauth.access_token_secret)
         api = tweepy.API(auth)
-        
+
         try:
             rt = api.retweet(id=tweetID)
             #print("Tweet RT ID ="+rt.id_str)
@@ -149,7 +150,7 @@ class Twitter:
         except Exception as e:
             return(data['access_token']['screen_name'] + ' ' +
                e[0][0]['message'])
-        
+
 
 
     def set_account_id(self, account_id):

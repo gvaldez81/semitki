@@ -14,8 +14,6 @@ let LandingPageView = Backbone.View.extend({
 
 
   initialize: function() {
-    //this.footer = new FooterView();
-    //S.toggleNavigation();
     S.sessionDestroy();
   },
 
@@ -23,13 +21,13 @@ let LandingPageView = Backbone.View.extend({
   fbLogin: (e) => {
     let api_port = undefined;
     SEMITKI_CONFIG.api_port == ""  ? (
-        
+
         api_port = ""
-      
+
       ):(
-        
+
         api_port = ":"+SEMITKI_CONFIG.api_port
-        
+
     );
 
     e.preventDefault(); // Keep default action of button from beign triggered
@@ -51,16 +49,6 @@ let LandingPageView = Backbone.View.extend({
   },
 
   render: function() {
-    /*
-    var head = $('head')
-    head.append('<meta name="twitter:card" content="summary_large_image">')
-    head.append('<meta name="twitter:site" content="@MexicoEligeBien">')
-    head.append('<meta name="twitter:creator" content="@SirGerri">')
-    head.append('<meta name="twitter:title" content="Mexico, es momento de elegir, #ElegirBien">')
-    head.append('<meta name="twitter:description" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu finibus metus, ut eleifend odio. Praesent a ligula bibendum ex pulvinar tempor.">')
-    head.append('<meta property="og:image" content="http://mexicoeligebien.mx/img/background.png">')
-    */
-
     let template = $("#landing-template").html();
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled);

@@ -170,14 +170,12 @@ def twitter_auth(request):
     """
     Twitter login of Follower accounts only
     """
-    #if 'action' in request.GET:
     bucket = twitter.Twitter()
     oauth = bucket.get_oauthsession()
     url = oauth.get_authorization_url()
     request.session['request_token'] = oauth.request_token
     return HttpResponseRedirect(url)
-    #result = getattr(bucket, request.GET.get("action"))()
-    #return HttpResponseRedirect(result)
+
 
 def callback(request):
     """
@@ -224,7 +222,7 @@ def callback(request):
 
 
 def publish_now(request, pk):
-
+    """Publish a new post"""
     if ("staff" in request.GET):
         return HttpResponse(stuff_it(pk = pk,
             staff = True))
