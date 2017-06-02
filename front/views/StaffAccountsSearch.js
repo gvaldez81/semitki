@@ -30,7 +30,7 @@ let StaffAccountsView = Backbone.View.extend({
     this.$el.html(compiled());
     $("#staff-menu").html(this.$el);
 
-    $(".account-select").select2({
+    $("#staff-menu .account-select").select2({
       placeholder: "Select account",
       data: this.accounts
     });

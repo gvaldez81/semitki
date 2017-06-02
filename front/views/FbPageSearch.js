@@ -29,7 +29,7 @@ let FbPageSearch = Backbone.View.extend({
     this.$el.html(compiled());
     $("#fb-pages-menu").html(this.$el);
 
-    $(".account-select").select2({
+    $("#fb-pages-menu .account-select").select2({
       placeholder: "Select page",
       data: this.fbPages
     });
