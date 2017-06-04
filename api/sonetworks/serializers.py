@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 from rest_auth.registration.serializers import SocialLoginSerializer
+from allauth.socialaccount.models import SocialAccount as SystemAccount
 from .models import *
 
 class FilteredIsActiveListSerializer(serializers.ListSerializer):
@@ -17,11 +18,27 @@ class FilteredIsActiveListUser(serializers.ListSerializer):
         return super(FilteredIsActiveListUser, self).to_representation(data)
 
 class UserSerializer(serializers.ModelSerializer):
+    bucket_id = serializers.SerializerMethodField()
+    bucket = serializers.SerializerMethodField()
+    def get_bucket_id(self, user):
+        try:
+            bucket_id = SystemAccount.objects.get(user=user.id).uid
+        except SystemAccount.DoesNotExist:
+            bucket_id = ''
+        return bucket_id;
+
+    def get_bucket(self, user):
+        try:
+            bucket = SystemAccount.objects.get(user=user.id).provider
+        except SystemAccount.DoesNotExist:
+            bucket = ''
+        return bucket;
+
     class Meta:
         list_serializer_class = FilteredIsActiveListUser
         model = User
         fields = ('id', 'username', 'email', 'first_name', 'last_name',
-                'posts', 'is_active', 'is_staff', 'is_superuser')
+                'posts', 'is_active', 'is_staff', 'is_superuser', 'bucket_id', 'bucket')
 
 class PostSerializer(serializers.ModelSerializer):
 
@@ -75,7 +92,6 @@ class SocialGroupSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         list_serializer_class = FilteredIsActiveListSerializer
-        list_serializer_class = FilteredIsActiveListSerializer
         model = SocialGroup
         fields = ('url', 'id', 'name', 'description', 'isactive', 'valid_to', 'related')
 
@@ -102,12 +118,21 @@ class ImageStoreSerializer(serializers.HyperlinkedModelSerializer):
 class PagesTokenSerializer(serializers.HyperlinkedModelSerializer):
     image_path = serializers.SerializerMethodField()
     account_id = serializers.SerializerMethodField()
+    bucket = serializers.SerializerMethodField()
+    bucket_id = serializers.SerializerMethodField()
     def get_account_id(self, pages):
       return pages.account.uid
 
     def get_image_path(self, pages):
       return pages.image.name
 
+    def get_bucket(self, pages):
+      return 'facebook'
+
+    def get_bucket_id(self, pages):
+      return pages.page_id
+
     class Meta:
         model = PagesToken
-        fields = ('page_id', 'name', 'account_id', 'image_link', 'image', 'image_path')
+        fields = ('page_id', 'name', 'account_id', 'image_link', 
+            'image', 'image_path', 'bucket', 'bucket_id')

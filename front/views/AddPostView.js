@@ -23,11 +23,6 @@ let AddPostView = Backbone.View.extend({
     this.data.campaigns = S.collection.get("campaigns").toJSON().map((i) => {
       return S.collection2select({id: i.id, text: i.name});
     });
-
-    if (S.collection.get("pages_related")!== undefined) {
-      data.pages = S.collection.get("pages_related").toJSON()
-    }
-
     S.toggleNavigation();
   },
 
@@ -116,6 +111,8 @@ let AddPostView = Backbone.View.extend({
         let url = S.api("post/" + model.id + "/publish");
         if(this.data.is_staff)
           url += "?staff=1";
+        else if(this.data.is_page)
+          url += "?page=1";
         $.ajax({
           url: url,
           headers: S.addAuthorizationHeader().headers,

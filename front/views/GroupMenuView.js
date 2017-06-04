@@ -10,11 +10,22 @@ let GroupMenuView = Backbone.View.extend({
     let acts = S.collection.get("accounts").toJSON();
 
     this.accounts = acts.map((a) => {
+      let groups = '';
+      S.collection.get("groups").map(function (group){
+      if (group.get('related').length>0){
+        group.get('related').forEach(function(account) {
+          if (account.social_account_url.id==a.id){
+            groups = groups+'['+group.get('name')+']';
+          }
+        }); 
+      }
+      });
       let account = {
         id: a.id,
         text: a.username,
         avatar: a.image_path,
-        group: a.name
+        group: groups,
+        bucket: a.bucket
       };
 
       return account;
@@ -33,22 +44,27 @@ let GroupMenuView = Backbone.View.extend({
     let templateSelect = function(account) {
       if(!account.id) { return account.text; }
       let $t = $(
-        '<span><img src="'+account.image+'"></span><span>'+
-        account.username+' ['+account.bucket+']</span>'
+
+        '<span class="sn-pic sn-w40 '+account.bucket+' no-after-check">'
+        +'<img src="storage/'+account.avatar+'">'
+        +'</span>'
+        +'<div class="community-info">'
+        +'  <div class="community-name">'+account.text
+        +'   <div class="community-post-date">'+account.group+'</div>'
+        +'  </div>'
+        +'</div>'
       );
       return $t;
     };
 
     $("#account-menu .account-select").select2({
       placeholder: "Select account",
-      data: this.accounts
-    });
-
-
-    $("#account-menu .account-select").select2({
+      data: this.accounts,
       templateResult: templateSelect,
       templateSelection: templateSelect
     });
+
+
     return this;
   }
 

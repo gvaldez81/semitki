@@ -11,10 +11,10 @@ let StaffAccountsView = Backbone.View.extend({
 
     this.accounts = acts.map((a) => {
       let account = {
-        id: a.attributes.id,
+        id: 'u_'+a.attributes.id,
         text: a.attributes.username,
-        avatar: a.attributes.image_path,
-        group: a.attributes.name
+        avatar: 'img/semitki.png',
+        pagina: false
       };
 
       return account;
@@ -24,9 +24,10 @@ let StaffAccountsView = Backbone.View.extend({
 
     this.fbPages = pages.map((p) => {
       let page = {
-        id: p.page_id,
+        id: 'p_'+p.page_id,
         text: p.name,
-        avatar: p.image
+        avatar: p.image_path,
+        pagina: true
       };
 
       return page;
@@ -43,9 +44,26 @@ let StaffAccountsView = Backbone.View.extend({
     this.$el.html(compiled());
     $("#staff-menu").html(this.$el);
 
+    let templateSelect = function(account) {
+      if(!account.id) { return account.text; }
+      let $t = $(
+
+        '<span class="sn-pic sn-w40 '+account.bucket+' no-after-check">'
+        +'<img src="storage/'+account.avatar+'">'
+        +'</span>'
+        +'<div class="community-info">'
+        +'  <div class="community-name">'+account.text
+        +'  </div>'
+        +'</div>'
+      );
+      return $t;
+    };
+
     $("#staff-menu .account-select").select2({
       placeholder: "Select account",
-      data: this.accounts.concat(this.fbPages)
+      data: this.accounts.concat(this.fbPages),
+      templateResult: templateSelect,
+      templateSelection: templateSelect
     });
 
     return this;

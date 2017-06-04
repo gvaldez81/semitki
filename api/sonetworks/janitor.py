@@ -1,22 +1,19 @@
 import json
-from models import *
-from datetime import datetime
-
-from django.contrib.auth.models import User, Group
-from allauth.socialaccount.models import SocialAccount as SystemAccount
-from allauth.socialaccount.models import SocialToken
-
-from django.utils.timezone import utc
-
-from django.conf import settings
-
-from buckets.facebook import *
-from buckets.twitter import *
-from .models import *
 import requests
 from requests_oauthlib import OAuth2Session
 from requests_oauthlib.compliance_fixes import facebook_compliance_fix
+from django.utils.timezone import utc
+from django.conf import settings
+from django.contrib.auth.models import User, Group
+from allauth.socialaccount.models import SocialAccount as SystemAccount
+from allauth.socialaccount.models import SocialToken
 from oauthlib.oauth2 import WebApplicationClient
+from datetime import datetime
+
+from buckets.facebook import *
+from buckets.twitter import *
+from .models import PagesToken
+from .models import Post
 
 def gather():
     """
@@ -63,7 +60,7 @@ def sweep():
     pass
 
 
-def stuff_it(pk, staff = False):
+def stuff_it(pk, staff = False, page = False):
     """Publish a post right away"""
     post = Post.objects.get(pk = pk)
     chanstr = post.content["tags"][0]["account"]
@@ -76,6 +73,8 @@ def stuff_it(pk, staff = False):
         if staff:
             social_user = SystemAccount.objects.get(uid = account_id).id
             token = SocialToken.objects.get(account_id = social_user).token
+        elif page:
+            token = PagesToken.objects.get(page_id = account_id).token
         else:
             token = SocialAccount.objects.get(bucket_id = account_id).access_token
 

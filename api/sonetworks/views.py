@@ -223,9 +223,11 @@ def callback(request):
 
 def publish_now(request, pk):
     """Publish a new post"""
+    staff = False
+    page = False
     if ("staff" in request.GET):
-        return HttpResponse(stuff_it(pk = pk,
-            staff = True))
-    else:
-        return HttpResponse(stuff_it(pk))
+        staff = True
+    if ("page" in request.GET):
+        page = True
+    return HttpResponse(stuff_it(pk, staff, page))
 
