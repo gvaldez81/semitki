@@ -14,6 +14,7 @@ from buckets.facebook import *
 from buckets.twitter import *
 from .models import PagesToken
 from .models import Post
+from .models import SocialAccount
 
 def gather():
     """
@@ -79,6 +80,6 @@ def stuff_it(pk, staff = False, page = False):
             token = SocialAccount.objects.get(bucket_id = account_id).access_token
 
         return chan.post(token = token, post = post, account_id = account_id,
-                staff = staff)
+                staff = staff if staff else page )
     else:
         return False
