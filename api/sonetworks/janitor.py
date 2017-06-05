@@ -65,9 +65,9 @@ def sweep():
 
     response = None
     for p in posts:
-        if(p.content["tags"][4]["is_staff"][0]):
+        if(p.content["tags"][5]["is_staff"][0]):
             response = stuff_it(pk = p.id, staff = True)
-        if(p.content["tags"][5]["is_page"][0]):
+        if(p.content["tags"][4]["is_page"][0]):
             response = stuff_it(pk = p.id, page = True)
 
         print(response)
@@ -106,23 +106,23 @@ def stuff_it(pk, staff = False, page = False):
 
         if  status == requests.codes.ok:
             #vamos a mandar llamar el share y like
-            permalink_url = chan.url 
+            permalink_url = chan.url
             if chanstr == 'facebook':
                 permalink_url = chan.permalink_url + account_id + '/'
                 if ("linkType" in post.content
                     and post.content["linkType"] == "img") :
-                    permalink_url = permalink_url + 'photos/' 
+                    permalink_url = permalink_url + 'photos/'
                 else:
                     permalink_url = permalink_url + 'posts/'
                     post_id = post_id.split("_",1)[1]
             else:
                 permalink_url = permalink_url + user_tw + '/status/'
-                
+
             permalink_url = permalink_url + post_id
             post.content['permalink'] = permalink_url
             post.published = True
             post.save()
-            
+
             if (post.content['tags'][3]['rs'] is not None):
 
                 for grupo in post.content['tags'][3]['rs']:
@@ -131,7 +131,7 @@ def stuff_it(pk, staff = False, page = False):
                     for ag in account_groups:
                         account = SocialAccount.objects.get(pk = ag.social_account_id)
                         #print grupo + '|'+ account.bucket + '|' + account.bucket_id + '|'+ account.username
-                        share = chan.share(account.access_token, 
+                        share = chan.share(account.access_token,
                             permalink_url, account.bucket_id, post_id )
 
             if (post.content['tags'][2]['like'] is not None):
@@ -141,9 +141,9 @@ def stuff_it(pk, staff = False, page = False):
                     for ag in account_groups:
                         account = SocialAccount.objects.get(pk = ag.social_account_id)
                         #print grupo + '|'+ account.bucket + '|' + account.bucket_id + '|'+ account.username
-                        share = chan.fav(account.access_token, 
+                        share = chan.fav(account.access_token,
                             permalink_url, account.bucket_id, post_id )
-            
+
         return response
 
     else:
