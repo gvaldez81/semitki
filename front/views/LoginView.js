@@ -86,10 +86,11 @@ let LoginView = Backbone.View.extend({
   tryTwLogin: () => {
     //location.assign(SEMITKI_CONFIG.tw_api_url + "oauth/request_token");
     let url = SEMITKI_CONFIG.tw_api_url + "oauth/request_token";
+    let nonce = Math.random().toString(36).replace(/[^a-z]/, '').substr(2);
     $.ajax(url,
       {
         beforeSend: (jqXHR, settings) => {
-//          jqXHR.setRequestHeader("OAuth oauth_nonce", "");
+          jqXHR.setRequestHeader("OAuth oauth_nonce", nonce);
           jqXHR.setRequestHeader("oauth_callback",
             SEMITKI_CONFIG.api_oauth_callback + "?chan=twitter");
           jqXHR.setRequestHeader("oauth_signature_method", "HMAC-SHA1");

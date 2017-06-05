@@ -64,10 +64,14 @@ def sweep():
 
     response = None
     for p in posts:
-        if(p.content["tags"][4]["is_page"][0]):
+        if(p.content["tags"][4]["is_page"]):
+            print ("page")
             response = stuff_it(pk = p.id, page = True)
-        if(p.content["tags"][5]["is_staff"][0]):
+            print ("page_success")
+        if(p.content["tags"][5]["is_staff"]):
+            print ("staff")
             response = stuff_it(pk = p.id, staff = True)
+            print ("staff_success")
 
         if(response):
             p.published = True
