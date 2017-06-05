@@ -44,14 +44,16 @@ let SchedulerCreateView = Backbone.View.extend({
     let calendarFeed = () => {
       /* Build the calendar feed */
       let postArray = S.collection.get("posts").toArray();
+      
       let feed = postArray.map((post) => {
-      let phase = S.collection.get("phases").get(post.attributes.phase);
-      let user = S.collection.get("user").get(post.attributes.owner)
       let item = {
           "id": post.attributes.url,
 //          "url": post.attributes.url,
-          "url": "http://localhost:9080/#scheduler",
-          "title": user.attributes.first_name,
+          "url": (post.attributes.content.permalink == undefined ? '' : post.attributes.content.permalink),
+          "title": post.attributes.content.tags[0].account.charAt(0).toUpperCase() 
+                  + post.attributes.content.tags[0].account.slice(1) +
+                  ' | ' + (post.attributes.content.username==undefined ? 'N/A' : post.attributes.content.username) +
+                  ' | ' + post.attributes.content.txt,
           "class": "event-info",
           "start": Date.parse(post.attributes.date),
           "end": Date.parse(post.attributes.date),

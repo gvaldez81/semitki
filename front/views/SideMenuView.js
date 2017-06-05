@@ -32,15 +32,22 @@ let SideMenuView = Backbone.View.extend({
     
 
     if(sourceType === "account-menu") {
-      postView = new AddPostView(S.collection.get("accounts")
-        .get(source_id).toJSON());
+      let data = S.collection.get("accounts")
+        .get(source_id).toJSON()
+      data.username = data.username
+      postView = new AddPostView(data);
     } else if(sourceType === "staff-menu") {
-      postView = new AddPostView(S.collection.get("user")
-        .get(source_id.substr(2)).toJSON());
+      let data = S.collection.get("user")
+        .get(source_id.substr(2)).toJSON()
+      data.username = data.first_name + ' ' + data.last_name
+
+      postView = new AddPostView(data);
     } else if(sourceType === "fb-pages-menu") {
       // TODO maybe it does not work, I have no pages on my test profiles
       let data = S.collection.get("pages")
         .findWhere({page_id: source_id.substr(2)}).toJSON()
+      data.username = data.name
+
       data.is_page = true;
       postView = new AddPostView(data);
     }

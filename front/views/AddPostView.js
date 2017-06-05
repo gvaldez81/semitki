@@ -77,6 +77,7 @@ let AddPostView = Backbone.View.extend({
       link: $("#urlTarget").val(),
       linkType: $("input[name=linkType]:checked").val(),
       tags: tags,
+      username: this.data.username
     };
 
     let post = {
