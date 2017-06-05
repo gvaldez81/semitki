@@ -173,19 +173,30 @@ let AddPostView = Backbone.View.extend({
         })}).prop("disabled", false);
     });
 
+
+    let selectplace = "Select group(s)"
+
     // RS and Like group selects
     let lk = $("#lkgroups").select2({data: S.collection.get("groups")
       .toJSON().map((i) => {
         return  S.collection2select({id: i.id, text: i.name });
       })
-    });
+      , placeholder : selectplace});
     let rs = $("#rsgroups").select2({data: S.collection.get("groups")
       .toJSON().map((i) => {
         return  S.collection2select({id: i.id, text: i.name });
       })
+      , placeholder : selectplace
     });
 
-    $("#selectpage").selectpicker('render') ;
+    if (this.data.bucket=='facebook'){
+      lk.empty().trigger('change');
+      lk.select2({
+          placeholder: "Not available for Facebook Posts"
+      });
+    }
+
+    //$("#selectpage").selectpicker('render') ;
 
     return this;
   }
