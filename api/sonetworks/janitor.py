@@ -59,18 +59,21 @@ def mop():
 
 def sweep():
     """Sweep posts accross buckets"""
-    posts = Post.objects.filter(date__lte = datetime.date(
-        datetime.now().replace(tzinfo=utc)
-        )).filter(published = False)
+    posts = Post.objects.filter(date__lte = datetime.now().replace(tzinfo=utc)
+        ).filter(published = False)
 
     response = None
     for p in posts:
-        if(p.content["tags"][5]["is_staff"][0]):
-            response = stuff_it(pk = p.id, staff = True)
         if(p.content["tags"][4]["is_page"][0]):
             response = stuff_it(pk = p.id, page = True)
+        if(p.content["tags"][5]["is_staff"][0]):
+            response = stuff_it(pk = p.id, staff = True)
 
-        print(response)
+        if(response):
+            p.published = True
+            p.save()
+
+    print(response)
 
 
 
