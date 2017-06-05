@@ -67,10 +67,11 @@ let LoginView = Backbone.View.extend({
           fb_token.then((result) => {
             S.jwtoken(result.token);
             if (S.jwtoken() != undefined && S.user != undefined) {
+              S.fetchCollections();
+              S.collection.get("user").findWhere({email: user.email}).toJSON();
               S.user.set(user);
               sessionStorage.setItem("user", JSON.stringify(user));
               S.router.navigate('#scheduler', {trigger: true});
-              S.fetchCollections();
             }
           }, (err) => {
             S.logger("bg-danger", "Failed login with Facebook account", true);
