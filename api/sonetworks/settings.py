@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+import datetime
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -169,6 +170,7 @@ JWT_AUTH = {
          'JWT_RESPONSE_PAYLOAD_HANDLER':
          'sonetworks.utils.jwt_response_payload_handler',
          'JWT_ALLOW_REFRESH': True,
+         'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=600),
          }
 
 CORS_ORIGIN_WHITELIST = (
