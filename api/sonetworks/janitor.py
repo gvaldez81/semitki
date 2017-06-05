@@ -107,25 +107,29 @@ def stuff_it(pk, staff = False, page = False):
                 
             permalink_url = permalink_url + post_id
             post.content['permalink'] = permalink_url
+            post.published = True
             post.save()
+            
+            if (post.content['tags'][3]['rs'] is not None):
 
-            for grupo in post.content['tags'][3]['rs']:
-                account_groups = SocialAccountGroup.objects.filter(
-                    social_group_id = grupo, isactive = True)
-                for ag in account_groups:
-                    account = SocialAccount.objects.get(pk = ag.social_account_id)
-                    #print grupo + '|'+ account.bucket + '|' + account.bucket_id + '|'+ account.username
-                    share = chan.share(account.access_token, 
-                        permalink_url, account.bucket_id, post_id )
+                for grupo in post.content['tags'][3]['rs']:
+                    account_groups = SocialAccountGroup.objects.filter(
+                        social_group_id = grupo, isactive = True)
+                    for ag in account_groups:
+                        account = SocialAccount.objects.get(pk = ag.social_account_id)
+                        #print grupo + '|'+ account.bucket + '|' + account.bucket_id + '|'+ account.username
+                        share = chan.share(account.access_token, 
+                            permalink_url, account.bucket_id, post_id )
 
-            for grupo in post.content['tags'][2]['like']:
-                account_groups = SocialAccountGroup.objects.filter(
-                    social_group_id = grupo, isactive = True)
-                for ag in account_groups:
-                    account = SocialAccount.objects.get(pk = ag.social_account_id)
-                    #print grupo + '|'+ account.bucket + '|' + account.bucket_id + '|'+ account.username
-                    share = chan.fav(account.access_token, 
-                        permalink_url, account.bucket_id, post_id )
+            if (post.content['tags'][2]['like'] is not None):
+                for grupo in post.content['tags'][2]['like']:
+                    account_groups = SocialAccountGroup.objects.filter(
+                        social_group_id = grupo, isactive = True)
+                    for ag in account_groups:
+                        account = SocialAccount.objects.get(pk = ag.social_account_id)
+                        #print grupo + '|'+ account.bucket + '|' + account.bucket_id + '|'+ account.username
+                        share = chan.fav(account.access_token, 
+                            permalink_url, account.bucket_id, post_id )
             
         return response
 
