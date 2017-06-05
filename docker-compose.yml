@@ -2,6 +2,9 @@ version: '2'
 services:
   db:
     image: postgres
+# broker:
+#   image: rabbitmq:3
+#   container_name: rabbit
   app:
     image: semitki/api
     command: /semitki/run_api.sh
@@ -15,6 +18,10 @@ services:
       - "9191:9191"
     depends_on:
       - db
+        #- broker
+    links:
+      - db
+        #      - broker
     env_file:
       - variables.env
   web:
@@ -27,4 +34,6 @@ services:
       - ./front/dist:/usr/share/nginx/html
       - ./storage:/usr/share/nginx/html/storage
     depends_on:
+      - app
+    links:
       - app
