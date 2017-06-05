@@ -94,9 +94,9 @@ def stuff_it(pk, staff = False, page = False):
 
         if  status == requests.codes.ok:
             #vamos a mandar llamar el share y like
-            
+            permalink_url = chan.url 
             if chanstr == 'facebook':
-                permalink_url = chan.url + account_id + '/'
+                permalink_url = chan.permalink_url + account_id + '/'
                 if ("linkType" in post.content
                     and post.content["linkType"] == "img") :
                     permalink_url = permalink_url + 'photos/' 
