@@ -13,6 +13,7 @@ from rest_framework.response import Response
 import requests
 from requests_oauthlib import OAuth1
 from urlparse import parse_qs
+from urlparse import urlparse
 import tweepy
 
 
@@ -150,6 +151,13 @@ class Twitter:
         auth = tweepy.OAuthHandler(self.client_id, self.client_secret)
         auth.set_access_token(token['access_token'], token['token_secret'])
         api = tweepy.API(auth)
+
+        if post_id == 0:
+            path = urlparse(permalink).path
+            if path.endswith('/'):
+                path = path[:len(path)-1]
+            k = path.rfind("/")
+            post_id = path[k+1:]
 
         try:
             rt = api.retweet(id=post_id)

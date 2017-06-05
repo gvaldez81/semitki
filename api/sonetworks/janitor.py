@@ -1,5 +1,6 @@
 import json
 import requests
+from django.http import HttpResponse
 from requests_oauthlib import OAuth2Session
 from requests_oauthlib.compliance_fixes import facebook_compliance_fix
 from django.utils.timezone import utc
@@ -82,21 +83,23 @@ def stuff_it(pk, staff = False, page = False):
             token = sac.access_token
             user_tw = sac.username
 
-        response =  chan.post(token = token, post = post, account_id = account_id,
-                staff = staff if staff else page )
-        if chanstr == 'facebook':
-            out = json.loads(response.text)
-            post_id = out['id']
-            status = response.status_code
-        else:
-            status = requests.codes.ok
-            post_id = response
+        copy = post.content["txt"]
 
-        if  status == requests.codes.ok:
+        #SI LA PUBLICACION NO ES UNA LIGA URL DE SOCIAL NETWORK 
+        if (not copy.startswith(chan.url)):
+            response =  chan.post(token = token, post = post, account_id = account_id,
+                staff = staff if staff else page )
+            if chanstr == 'facebook':
+                out = json.loads(response.text)
+                post_id = out['id']
+                status_ok = response.status_code
+            else:
+                status_ok = requests.codes.ok
+                post_id = response
             #vamos a mandar llamar el share y like
             permalink_url = chan.url 
             if chanstr == 'facebook':
-                permalink_url = chan.permalink_url + account_id + '/'
+                permalink_url = permalink_url + account_id + '/'
                 if ("linkType" in post.content
                     and post.content["linkType"] == "img") :
                     permalink_url = permalink_url + 'photos/' 
@@ -107,6 +110,15 @@ def stuff_it(pk, staff = False, page = False):
                 permalink_url = permalink_url + user_tw + '/status/'
                 
             permalink_url = permalink_url + post_id
+        else:    
+            status_ok = status.HTTP_200_OK
+            permalink_url = copy
+            post_id = 0
+
+        if  status_ok == requests.codes.ok:
+            response = HttpResponse('Succesfully posted', 
+                    status=status.HTTP_200_OK)
+
             post.content['permalink'] = permalink_url
             post.published = True
             post.save()
