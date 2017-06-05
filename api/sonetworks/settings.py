@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.twitter',
     # our app
     'sonetworks',
+    'django_cron',
 ]
 
 MIDDLEWARE = [
@@ -65,6 +66,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CRON_CLASSES = [
+        "cron.SemitkiCron",
+        ]
 
 ROOT_URLCONF = 'sonetworks.urls'
 
