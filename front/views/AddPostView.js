@@ -62,6 +62,16 @@ let AddPostView = Backbone.View.extend({
     tags.push({"account_id": this.data.bucket_id});
     tags.push({"like": $("#lkgroups").val()});
     tags.push({"rs": $("#rsgroups").val()});
+    if(this.data.is_page) {
+      tags.push({"is_page": true});
+    } else {
+      tags.push({"is_page": false});
+    }
+    if(this.data.is_staff) {
+      tags.push({"is_staff": true});
+    } else {
+      tags.push({"is_staff": false});
+    }
     let content = {
       txt: $("#postxt").val(),
       link: $("#urlTarget").val(),
