@@ -14,7 +14,8 @@ let StaffAccountsView = Backbone.View.extend({
         id: 'u_'+a.attributes.id,
         text: a.attributes.username,
         avatar: 'img/semitki.png',
-        pagina: false
+        page: '',
+        bucket: a.attributes.bucket
       };
 
       return account;
@@ -27,7 +28,8 @@ let StaffAccountsView = Backbone.View.extend({
         id: 'p_'+p.page_id,
         text: p.name,
         avatar: p.image_path,
-        pagina: true
+        page: 'Page',
+        bucket: p.bucket
       };
 
       return page;
@@ -53,6 +55,7 @@ let StaffAccountsView = Backbone.View.extend({
         +'</span>'
         +'<div class="community-info">'
         +'  <div class="community-name">'+account.text
+        +'   <div class="community-post-date">'+account.page+'</div>'
         +'  </div>'
         +'</div>'
       );
