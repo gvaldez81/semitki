@@ -27,7 +27,7 @@ let StaffAccountsView = Backbone.View.extend({
       let page = {
         id: 'p_'+p.page_id,
         text: p.name,
-        avatar: p.image_path,
+        avatar: 'storage/'+p.image_path,
         page: 'Page',
         bucket: p.bucket
       };
@@ -51,7 +51,7 @@ let StaffAccountsView = Backbone.View.extend({
       let $t = $(
 
         '<span class="sn-pic sn-w40 '+account.bucket+' no-after-check">'
-        +'<img src="storage/'+account.avatar+'">'
+        +'<img src="'+account.avatar+'">'
         +'</span>'
         +'<div class="community-info">'
         +'  <div class="community-name">'+account.text
