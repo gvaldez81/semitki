@@ -66,9 +66,9 @@ def sweep():
     response = None
     for p in posts:
         if(p.content["tags"][4]["is_staff"][0]):
-            response = stuff_it(p.id, staff = True)
+            response = stuff_it(pk = p.id, staff = True)
         if(p.content["tags"][5]["is_page"][0]):
-            response = stuff_it(p.id, page = True)
+            response = stuff_it(pk = p.id, page = True)
 
         print(response)
 
