@@ -23,6 +23,7 @@ class Facebook:
         self.redirect_uri = os.environ["OAUTH2_REDIRECT_URI"] + "?chan=facebook"
         self.tagname = 'facebook'
         self.oauth = None
+        self.url = 'https://www.facebook.com/'
 
 
     def fav(self, social_account):
@@ -165,9 +166,27 @@ class Facebook:
         return response
 
 
-    def reshare(self, social_account):
-        """Re-shar an existing post given the post url"""
-        pass
+    def share(self, token, permalink, account_id, post_id):
+        """
+        New facebook post
+        """
+        #copy = post.content["txt"]
+        parameter_token= "access_token=" + token["access_token"]
+        self.oauth.access_token = token
+
+        node = self.graph_url + account_id + "/"
+        
+        node = node + "feed?" + parameter_token
+
+        payload = { "link" : permalink
+                    # Si agregamos message no cuenta los share
+                    #,"message": 'Elige Bien'
+                    }
+
+
+        response = self.oauth.post(node, data = payload)
+
+        return response
 
 
     def set_account_id(self, account_id):

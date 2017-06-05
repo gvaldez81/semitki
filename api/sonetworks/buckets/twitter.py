@@ -7,6 +7,8 @@ from django.conf import settings
 from django.db import migrations, models
 
 from requests_oauthlib import OAuth1Session
+from rest_framework import status
+from rest_framework.response import Response
  # Using OAuth1 auth helper
 import requests
 from requests_oauthlib import OAuth1
@@ -24,19 +26,23 @@ class Twitter:
         self.redirect_uri = os.environ["OAUTH2_REDIRECT_URI"] + "?chan=twitter"
         self.tagname = 'twitter'
         self.oauth = None
+        self.url = 'https://www.twitter.com/'
 
 
-    def fav(self,tweetID):
-        """Like an existing tweet"""
+    def fav(self, token, permalink, account_id, post_id):
+        """Like an existing tweet given the tweet id"""
         auth = tweepy.OAuthHandler(self.client_id, self.client_secret)
-        auth.set_access_token(self.oauth.access_token,self.oauth.access_token_secret)
+        auth.set_access_token(token['access_token'], token['token_secret'])
         api = tweepy.API(auth)
+
         try:
-            tweet = api.create_favorite(id=tweetID)
-            return (tweet.id_str)
+            rt = api.create_favorite(id=post_id)
+            #print("Tweet RT ID ="+rt.id_str)
+            return (rt.id_str)
         except Exception as e:
             return(data['access_token']['screen_name'] + ' ' +
-                e[0][0]['message'])
+               e[0][0]['message'])
+
 
 
     def get_user_detail(self):
@@ -92,12 +98,14 @@ class Twitter:
         auth.set_access_token(token['access_token'], token['token_secret'])
         api = tweepy.API(auth)
         copy = post.content['txt']
-        imagen = post.content['img'] if 'img' in post.content else None
+        imagen = post.content['link'] if 'link' in post.content else None
 
         if (imagen is None or imagen == ''):
             try:
                 twit = api.update_status(status=copy)
                 return (twit.id_str)
+                #return Response({'id': twit.id_str}, 
+                #        status=status.HTTP_200_OK)
             except Exception as e:
                 return(e[0][0]['message'])
         #Si la imagen empieza con http hay que descargarla
@@ -137,16 +145,16 @@ class Twitter:
         return "Fail"
 
 
-    def reshare(self, tweetID):
+    def share(self, token, permalink, account_id, post_id):
         """Re-tweet an existing tweet given the tweet id"""
         auth = tweepy.OAuthHandler(self.client_id, self.client_secret)
-        auth.set_access_token(self.oauth.access_token,self.oauth.access_token_secret)
+        auth.set_access_token(token['access_token'], token['token_secret'])
         api = tweepy.API(auth)
 
         try:
-            rt = api.retweet(id=tweetID)
+            rt = api.retweet(id=post_id)
             #print("Tweet RT ID ="+rt.id_str)
-            return (tweetID)
+            return (rt.id_str)
         except Exception as e:
             return(data['access_token']['screen_name'] + ' ' +
                e[0][0]['message'])

@@ -120,6 +120,7 @@ let AddPostView = Backbone.View.extend({
         })
         .done((data) => {
           this.closeadd();
+          console.log(data)
           S.logger("bg-success", data, true);
         })
         .fail((xhr, status, error) => {

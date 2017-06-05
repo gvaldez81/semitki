@@ -15,6 +15,7 @@ from buckets.twitter import *
 from .models import PagesToken
 from .models import Post
 from .models import SocialAccount
+from .models import SocialAccountGroup
 
 def gather():
     """
@@ -77,9 +78,56 @@ def stuff_it(pk, staff = False, page = False):
         elif page:
             token = PagesToken.objects.get(page_id = account_id).token
         else:
-            token = SocialAccount.objects.get(bucket_id = account_id).access_token
+            sac = SocialAccount.objects.get(bucket_id = account_id)
+            token = sac.access_token
+            user_tw = sac.username
 
-        return chan.post(token = token, post = post, account_id = account_id,
+        response =  chan.post(token = token, post = post, account_id = account_id,
                 staff = staff if staff else page )
+        if chanstr == 'facebook':
+            out = json.loads(response.text)
+            post_id = out['id']
+            status = response.status_code
+        else:
+            status = requests.codes.ok
+            post_id = response
+
+        if  status == requests.codes.ok:
+            #vamos a mandar llamar el share y like
+            permalink_url = chan.url + account_id + '/'
+            if chanstr == 'facebook':
+                if ("linkType" in post.content
+                    and post.content["linkType"] == "img") :
+                    permalink_url = permalink_url + 'photos/' 
+                else:
+                    permalink_url = permalink_url + 'posts/'
+                    post_id = post_id.split("_",1)[1]
+            else:
+                permalink_url = permalink_url + user_tw + '/status/'
+                
+            permalink_url = permalink_url + post_id
+            post.content['permalink'] = permalink_url
+            post.save()
+
+            for grupo in post.content['tags'][3]['rs']:
+                account_groups = SocialAccountGroup.objects.filter(
+                    social_group_id = grupo, isactive = True)
+                for ag in account_groups:
+                    account = SocialAccount.objects.get(pk = ag.social_account_id)
+                    #print grupo + '|'+ account.bucket + '|' + account.bucket_id + '|'+ account.username
+                    share = chan.share(account.access_token, 
+                        permalink_url, account.bucket_id, post_id )
+
+            for grupo in post.content['tags'][2]['like']:
+                account_groups = SocialAccountGroup.objects.filter(
+                    social_group_id = grupo, isactive = True)
+                for ag in account_groups:
+                    account = SocialAccount.objects.get(pk = ag.social_account_id)
+                    #print grupo + '|'+ account.bucket + '|' + account.bucket_id + '|'+ account.username
+                    share = chan.fav(account.access_token, 
+                        permalink_url, account.bucket_id, post_id )
+            
+        return response
+
     else:
         return False
