@@ -8,7 +8,8 @@ let SchedulerCreateView = Backbone.View.extend({
 
 
   initialize: function() {
-    S.fetchCollections();
+    // TODO And it still fails, argh!!
+//    S.persistSignedUser(); // Ulgy hack, find a better way to persist the user!
     this.navigation = new NavigationView();
     this.footer = new FooterView();
     this.modal = new CalendarModal();
@@ -19,6 +20,7 @@ let SchedulerCreateView = Backbone.View.extend({
   },
 
   render: function() {
+    S.fetchCollections();
     let template = $("#scheduler-template").html();
     let compiled = Handlebars.compile(template);
 
@@ -33,7 +35,6 @@ let SchedulerCreateView = Backbone.View.extend({
 
     let posts = new Post();
     posts.fetch(S.addAuthorizationHeader());
-    S.fetchCollections();
     let data = {
       campaigns: S.collection.get("campaigns").toJSON(),
       phases: S.collection.get("phases").toJSON(),
@@ -44,13 +45,13 @@ let SchedulerCreateView = Backbone.View.extend({
     let calendarFeed = () => {
       /* Build the calendar feed */
       let postArray = S.collection.get("posts").toArray();
-      
+
       let feed = postArray.map((post) => {
       let item = {
           "id": post.attributes.url,
 //          "url": post.attributes.url,
           "url": (post.attributes.content.permalink == undefined ? '' : post.attributes.content.permalink),
-          "title": post.attributes.content.tags[0].account.charAt(0).toUpperCase() 
+          "title": post.attributes.content.tags[0].account.charAt(0).toUpperCase()
                   + post.attributes.content.tags[0].account.slice(1) +
                   ' | ' + (post.attributes.content.username==undefined ? 'N/A' : post.attributes.content.username) +
                   ' | ' + post.attributes.content.txt,
@@ -70,8 +71,6 @@ let SchedulerCreateView = Backbone.View.extend({
 
     // Initialize datimepicker here after rendering, otherwise it won't work
     $('#scheduledForPicker').datetimepicker();
-    // Initialize all select controls as select2
-    //$("#accordion").find("select").select2();
     // Initialize calendar view
     let calendar = $("#calendar-panel").calendar({
       language: S.lang,

@@ -144,6 +144,16 @@ let S = {
     for (let [key, value] of S.collection) {
       value.fetch(S.addAuthorizationHeader());
     }
+    return true;
+  },
+
+
+  persistSignedUser: () => {
+    let u = S.collection.get("user").findWhere({
+      email: S.user.attributes.email
+    });
+    u.set(S.user.toJSON());
+    S.collection.get("user").sync("update", u, S.addAuthorizationHeader());
   },
 
 

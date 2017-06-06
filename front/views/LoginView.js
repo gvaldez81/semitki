@@ -64,16 +64,16 @@ let LoginView = Backbone.View.extend({
             }).done(resolve).fail(reject);
           });
 
-          fb_token.then((result) => {
+          fb_token.then((result) => { // The promise of the FB token succeded
             S.jwtoken(result.token);
             if (S.jwtoken() != undefined && S.user != undefined) {
-              S.fetchCollections();
-              S.collection.get("user").findWhere({email: user.email}).toJSON();
-              S.user.set(user);
-              sessionStorage.setItem("user", JSON.stringify(user));
-              S.router.navigate('#scheduler', {trigger: true});
+              if(S.fetchCollections()) {
+                S.user.set(user);
+                sessionStorage.setItem("user", JSON.stringify(user));
+                S.router.navigate('#scheduler', {trigger: true});
+              }
             }
-          }, (err) => {
+          }, (err) => { // The promise of FB token failed
             S.logger("bg-danger", "Failed login with Facebook account", true);
           });
         });
@@ -90,7 +90,7 @@ let LoginView = Backbone.View.extend({
     $.ajax(url,
       {
         beforeSend: (jqXHR, settings) => {
-          jqXHR.setRequestHeader("OAuth oauth_nonce", nonce);
+          jqXHR.setRequestHeader("Authorization OAuth oauth_nonce", nonce);
           jqXHR.setRequestHeader("oauth_callback",
             SEMITKI_CONFIG.api_oauth_callback + "?chan=twitter");
           jqXHR.setRequestHeader("oauth_signature_method", "HMAC-SHA1");
