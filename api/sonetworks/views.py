@@ -1,6 +1,7 @@
 import os, time
 import json
 from datetime import datetime, tzinfo
+from django.conf import settings
 from django.contrib.auth.models import User, Group
 from rest_framework.decorators import detail_route
 from rest_framework import viewsets
@@ -38,7 +39,7 @@ class FacebookLogin(SocialLoginView):
     """
     adapter_class = FacebookOAuth2Adapter
     client_class = OAuth2Client
-    callback_url = "localhost:9080"
+    callback_url = os.environ["OAUTH2_REDIRECT_URI"] + "?chan=facebook"
     serializer_class = SocialLoginSerializer
 
     def process_login(self):
@@ -203,13 +204,20 @@ def callback(request):
         token = bucket.get_token(request.get_full_path())
         user = bucket.get_user_detail()
 
+        # Get a longlived token
+        ltoken = oauth.get(bucket.token_url + "?grant_type=fb_exchange_token" +
+                "&client_id=" + settings.SOCIAL_AUTH_FACEBOOK_KEY +
+                "&client_secret=" + settings.SOCIAL_AUTH_FACEBOOK_SECRET +
+                "fb_exchange_toke={short-lived-token}")
+
+
         if user is not None:
             social_account = SocialAccount(
                     username = user["name"],
                     email = user["email"],
                     bucket_id = user["id"],
                     image_link = user["image"],
-                    access_token = token, #json.JSONEncoder().encode(token),
+                    access_token = ltoken, #json.JSONEncoder().encode(token),
                     token_expiration = datetime.fromtimestamp(token["expires_in"])
                                 if "expires_in" in token  else None,
                     bucket = bucket.tagname)

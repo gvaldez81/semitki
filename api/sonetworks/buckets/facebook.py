@@ -34,11 +34,11 @@ class Facebook:
 
     def get_user_image(self):
         """
-        Get user profile image 
+        Get user profile image
         """
-        self.image = json.loads(self.oauth.get(self.graph_url 
+        self.image = json.loads(self.oauth.get(self.graph_url
             + self.account_id+"/picture?width=160&height=160&redirect=0").content)
-        return 
+        return
 
 
 
@@ -48,7 +48,7 @@ class Facebook:
         """
         user = json.loads(
                 self.oauth.get(self.graph_url + "me?fields=id,name,email").content)
-        
+
         # Fetch user profile image
         self.account_id = user["id"]
         self.get_user_image()
@@ -56,19 +56,19 @@ class Facebook:
         return { "id": user["id"],
                 "name": user["name"],
                 "email": user["email"] if "email" in user else "sin@email.com",
-                "image": self.image["data"]["url"] 
+                "image": self.image["data"]["url"]
                         if "data" in self.image and "url" in self.image["data"] else None}
 
 
 
     def get_page_image(self, page_id, token):
         """
-        Get page profile image 
+        Get page profile image
         """
-        self.image = json.loads(self.oauth.get(self.graph_url 
+        self.image = json.loads(self.oauth.get(self.graph_url
                 + page_id+"/picture?access_token="+ token
                 +"&width=160&height=160&redirect=0").content)
-        return 
+        return
 
     def get_user_pages(self, token, account_id):
         """
@@ -83,10 +83,10 @@ class Facebook:
                 pages["name"] = page["name"]
                 pages["token"] = page["access_token"]
                 pages_list.append(pages)
-        
+
         return pages_list
 
-        
+
 
     def get_oauthsession(self):
         """
@@ -119,6 +119,13 @@ class Facebook:
         return token
 
 
+    def refresh_token(selfi, account_id):
+        """
+        Extend token lifetime
+        """
+
+
+
     def post(self, token, post, account_id, staff = False):
         """
         New facebook post
@@ -132,26 +139,26 @@ class Facebook:
         payload = { "message": copy}
 
         parameter_token = ""
-        if staff:    
+        if staff:
             parameter_token= "access_token=" + token
 
         # SI EXISTE EL ELEMENTO IMG EN EL CONTENIDO
         if ("link" in post.content
-            and (post.content["link"] is not None 
+            and (post.content["link"] is not None
                 and post.content["link"] != "")):
-            
+
             imagen = post.content["link"]
             #[POSTEANDO IMAGEN CON CUENTAS USUARIO]
-            
+
             #POSTEANDO CON PHOTOS
             if (post.content["linkType"] == "img"):
                 node = node + "photos?" + parameter_token
                 payload["url"] = imagen
             else:
             #POSTEANDO CON LINK
-                node = node + "feed?" + parameter_token + "&link=" + imagen + "&caption=" + settings.FACEBOOK_URL_CAPTION 
-        
-                    
+                node = node + "feed?" + parameter_token + "&link=" + imagen + "&caption=" + settings.FACEBOOK_URL_CAPTION
+
+
         else:
             node = node + "feed?" + parameter_token
 
@@ -175,7 +182,7 @@ class Facebook:
         self.oauth.access_token = token
 
         node = self.graph_url + account_id + "/"
-        
+
         node = node + "feed?" + parameter_token
 
         payload = { "link" : permalink
