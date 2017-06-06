@@ -27,7 +27,7 @@ class Twitter:
         self.redirect_uri = os.environ["OAUTH2_REDIRECT_URI"] + "?chan=twitter"
         self.tagname = 'twitter'
         self.oauth = None
-        self.url = 'https://www.twitter.com/'
+        self.url = 'https://twitter.com/'
 
 
     def fav(self, token, permalink, account_id, post_id):
