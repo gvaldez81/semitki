@@ -8,7 +8,8 @@ let SchedulerCreateView = Backbone.View.extend({
 
 
   initialize: function() {
-    S.persistSignedUser(); // Ulgy hack, find a better way to persist the user!
+    // TODO And it still fails, argh!!
+//    S.persistSignedUser(); // Ulgy hack, find a better way to persist the user!
     this.navigation = new NavigationView();
     this.footer = new FooterView();
     this.modal = new CalendarModal();
