@@ -18,6 +18,8 @@ from .models import Post
 from .models import SocialAccount
 from .models import SocialAccountGroup
 
+
+
 def gather():
     """
     Gather posts from database and distibute among available buckets
@@ -60,7 +62,26 @@ def mop():
 
 def sweep():
     """Sweep posts accross buckets"""
-    pass
+    posts = Post.objects.filter(date__lte = datetime.now().replace(tzinfo=utc)
+        ).filter(published = False)
+
+    response = None
+    for p in posts:
+        if(p.content["tags"][4]["is_page"]):
+            print ("page")
+            response = stuff_it(pk = p.id, page = True)
+            print ("page_success")
+        if(p.content["tags"][5]["is_staff"]):
+            print ("staff")
+            response = stuff_it(pk = p.id, staff = True)
+            print ("staff_success")
+
+        if(response):
+            p.published = True
+            p.save()
+
+    print(response)
+
 
 
 def stuff_it(pk, staff = False, page = False):
@@ -97,18 +118,18 @@ def stuff_it(pk, staff = False, page = False):
                 status_ok = requests.codes.ok
                 post_id = response
             #vamos a mandar llamar el share y like
-            permalink_url = chan.url 
+            permalink_url = chan.url
             if chanstr == 'facebook':
                 permalink_url = permalink_url + account_id + '/'
                 if ("linkType" in post.content
                     and post.content["linkType"] == "img") :
-                    permalink_url = permalink_url + 'photos/' 
+                    permalink_url = permalink_url + 'photos/'
                 else:
                     permalink_url = permalink_url + 'posts/'
                     post_id = post_id.split("_",1)[1]
             else:
                 permalink_url = permalink_url + user_tw + '/status/'
-                
+
             permalink_url = permalink_url + post_id
         else:    
             status_ok = status.HTTP_200_OK
@@ -116,13 +137,13 @@ def stuff_it(pk, staff = False, page = False):
             post_id = 0
 
         if  status_ok == requests.codes.ok:
-            response = HttpResponse('Succesfully posted', 
+            response = HttpResponse('Succesfully posted',
                     status=status.HTTP_200_OK)
 
             post.content['permalink'] = permalink_url
             post.published = True
             post.save()
-            
+
             if (post.content['tags'][3]['rs'] is not None):
 
                 for grupo in post.content['tags'][3]['rs']:
@@ -131,7 +152,7 @@ def stuff_it(pk, staff = False, page = False):
                     for ag in account_groups:
                         account = SocialAccount.objects.get(pk = ag.social_account_id)
                         #print grupo + '|'+ account.bucket + '|' + account.bucket_id + '|'+ account.username
-                        share = chan.share(account.access_token, 
+                        share = chan.share(account.access_token,
                             permalink_url, account.bucket_id, post_id )
 
             if (post.content['tags'][2]['like'] is not None):
@@ -141,9 +162,9 @@ def stuff_it(pk, staff = False, page = False):
                     for ag in account_groups:
                         account = SocialAccount.objects.get(pk = ag.social_account_id)
                         #print grupo + '|'+ account.bucket + '|' + account.bucket_id + '|'+ account.username
-                        share = chan.fav(account.access_token, 
+                        share = chan.fav(account.access_token,
                             permalink_url, account.bucket_id, post_id )
-            
+
         return response
 
     else:
