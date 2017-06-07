@@ -115,6 +115,13 @@ class Facebook:
                 client_secret = self.client_secret,
                  authorization_response = redirect_response
                 )
+        ltoken = self.oauth.fetch_token(
+                 token_url = self.token_url +
+                 '?grant_type=fb_exchange_token&' +
+                 'fb_exchange_token={short-lived-token}',
+                client_secret = self.client_secret,
+                 authorization_response = redirect_response
+                )
 
         return token
 
