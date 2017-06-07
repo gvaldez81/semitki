@@ -123,7 +123,7 @@ class Facebook:
                  authorization_response = redirect_response
                 )
 
-        return token
+        return ltoken
 
 
     def refresh_token(selfi, account_id):
