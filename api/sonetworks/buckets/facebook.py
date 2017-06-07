@@ -115,6 +115,16 @@ class Facebook:
                 client_secret = self.client_secret,
                  authorization_response = redirect_response
                 )
+        ltoken = self.oauth.fetch_token(
+                 token_url = token_url +
+                 'grant_type=fb_exchange_token&' +
+                 'client_id='+settings.SOCIAL_AUTH_FACEBOOK_KEY +
+                 '&client_secret=' + settings.SOCIAL_AUTH_FACEBOOK_SECRET +
+                 '&fb_exchange_token='+token['access_token'],
+                client_secret = self.client_secret,
+                 authorization_response = redirect_response
+                )
+
 
         return token
 
