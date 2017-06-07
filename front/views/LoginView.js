@@ -53,50 +53,32 @@ let LoginView = Backbone.View.extend({
             email: response.email,
             is_staff: true
           };
-
-          $.ajax(S.api("auth/fb_exchange"),
+          let fb_token = new Promise((resolve, reject) => {
+            $.ajax(S.api("auth/facebook"),
             {
               data: {
-                "access_token": S.fbtoken()
+                "access_token": S.fbtoken(),
               },
-              method: "GET",
-              success: (data, textStatus) => {
-                console.log(JSON.parse(data)["access_token"]);
-                S.fbtoken(JSON.parse(data)["access_token"]);
-                let fb_token = new Promise((resolve, reject) => {
-                  $.ajax(S.api("auth/facebook"),
-                  {
-                    data: {
-                      "access_token": JSON.parse(data)["access_token"],
-                    },
-                    method: "POST",
-                  }).done(resolve).fail(reject);
-                });
-
-
-                fb_token.then((result) => { // The promise of the FB token succeded
-                  S.jwtoken(result.token);
-                  if (S.jwtoken() != undefined && S.user != undefined) {
-                    if(S.fetchCollections()) {
-                      S.user.set(user);
-                      sessionStorage.setItem("user", JSON.stringify(user));
-                      S.router.navigate('#scheduler', {trigger: true});
-                    }
-                  }
-                }, (err) => { // The promise of FB token failed
-                  S.logger("bg-danger", "Failed login with Facebook account", true);
-                });
-
-            },
-              error: (error) => {
-                console.error(error);
+              method: "POST",
+            }).done(resolve).fail(reject);
+          });
+          fb_token.then((result) => { // The promise of the FB token succeded
+            S.jwtoken(result.token);
+            if (S.jwtoken() != undefined && S.user != undefined) {
+              if(S.fetchCollections()) {
+                S.user.set(user);
+                sessionStorage.setItem("user", JSON.stringify(user));
+                S.router.navigate('#scheduler', {trigger: true});
               }
-            });
+            }
+          }, (err) => { // The promise of FB token failed
+            S.logger("bg-danger", "Failed login with Facebook account", true);
+          });
 
-        });
-      }
-    }, {scope: 'public_profile,email,publish_actions,user_photos,' +
+      }, {scope: 'public_profile,email,publish_actions,user_photos,' +
       'manage_pages,publish_pages'});
+      }
+    });
   },
 
 
