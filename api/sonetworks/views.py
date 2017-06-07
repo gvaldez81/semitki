@@ -231,3 +231,11 @@ def publish_now(request, pk):
         page = True
     return HttpResponse(stuff_it(pk, staff, page))
 
+
+def fb_exchange_token(request):
+    fb = facebook.Facebook()
+    r = requests.get(fb.token_url + '?grant_type=fb_exchange_token' +
+            '&client_id=' + settings.SOCIAL_AUTH_FACEBOOK_KEY +
+            '&client_secret=' + settings.SOCIAL_AUTH_FACEBOOK_SECRET +
+            '&fb_exchange_token=' + request.GET['access_token'])
+    return HttpResponse(r.text)
