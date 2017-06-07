@@ -68,6 +68,12 @@ Besides the code you'll need various tools.
     docker build -t semitki_app .
 
 
+Push image to public docker registry
+
+
+    docker push semitki/api
+
+
 ## Run in Docker with docker-compose
 
 
@@ -132,6 +138,9 @@ Running grunt will create a `semitki/frontend/dist` directory which
 should be accesable by an HTTP server. When running with docker-compose
 `dist` gets mounted in the path `/usr/share/nginx/html` within the web
 container.
+
+Some grunt tasks have both `development` and `production` targets, the
+default is to execute development targets.
 
 
 #### Adding new bower components

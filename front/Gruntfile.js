@@ -76,93 +76,152 @@ module.exports = (grunt) => {
     // COPY
     copy: {
       css: {
-        expand: true,
-        cwd: 'static/css',
-        src: '*.css',
-        dest: 'dist/css',
-        filter: 'isFile'
-      },
-      js: {
-        expand: true,
-        src: '*.js',
-        dest: 'dist/js/',
-        filter: 'isFile'
-      },
-      html: {
-        src: ['terms.html', 'privacypolicy.html'],
-        dest: 'dist/'
-      },
-      img: {
-        expand: true,
-        cwd: 'static/img',
-        src: '*.png',
-        dest: 'dist/img',
-      },
-      i18n: {
-        expand: true,
-        src: 'i18n/**', dest: 'dist', filter: 'isFile'
-      },
-      bootstrap: {
-        expand: true,
-        cwd: 'bower_components/bootstrap/dist/css',
-        src: '*', dest: 'dist/css/', filter: 'isFile'
-      },
-      bootstrapfonts: {
-        expand: true,
-        cwd: 'bower_components/bootstrap/dist/fonts',
-        src: '*', dest: 'dist/fonts', filter: 'isFile'
-      },
-      bootstrapdatepicker: {
-        expand: true,
-        cwd: 'bower_components/eonasdan-bootstrap-datepicker/build/css',
-        src: '*', dest: 'dist/css', filter: 'isFile'
-      },
-      select2css: {
-        expand: true,
-        cwd: 'bower_components/select2/dist/css',
-        src: '*', dest: 'dist/css', filter: 'isFile'
-      },
-      select2js: {
-        expand: true,
-        cwd: 'bower_components/select2/dist/js',
-        src: '*', dest: 'dist/js', filter: 'isFile'
-      },
+        files: [
+          { // Semitki custom styles
+            src: ['*.css'], dest: 'dist/css/',
+            expand: true,
+            cwd: 'static/css',
+            filter: 'isFile'
+          },
+          { // Javascript
+            expand: true,
+            src: '*.js',
+            dest: 'dist/js/',
+            filter: 'isFile'
+          },
+          { // HTML
+            src: '*.html',
+            dest: 'dist/'
+          },
+          { // Images PNG only
+            expand: true,
+            cwd: 'static/img',
+            src: '*.png',
+            dest: 'dist/img',
+          },
+          { // Polyglot translations
+            expand: true,
+            src: 'i18n/**', dest: 'dist', filter: 'isFile'
+          },
+          { // underscore
+            src: 'bower_components/underscore/*.js',
+            dest: 'dist/js/'
+          },
+          { // handlbars
+            src: 'bower_components/handlebars/*.js',
+            dest: 'dist/js/'
+          },
 
-      select2boostrap: {
-        expand: true,
-        cwd: 'bower_components/select2-bootstrap-theme/dist',
-        src: '*', dest: 'dist/css', filter: 'isFile'
+          { // BAckbone
+            src: 'bower_components/backbone/*.js',
+            dest: 'dist/js/'
+          },
+          { // bootbox
+            src: 'bower_components/bootbox.js/*.js',
+            dest: 'dist/js/', filter: 'isFile'
+          },
+          { // bootstrap-submenu
+          src: 'bower_components/bootstrap-submenu/dist/js/*.js',
+            dest: 'dist/js/'
+          },
+          { // bootstrap-submenu css
+            src: 'bower_components/bootstrap-submenu/dist/css/*.css',
+            dest: 'dist/css/'
+          },
+
+          { // Bootstrap CSS
+            expand: true,
+            cwd: 'bower_components/bootstrap/dist/css',
+            src: '*.*', dest: 'dist/css/'
+          },
+          { // Bootstrap JS
+            src: 'bower_components/bootstrap/dist/js/*.js',
+            dest: 'dist/js/', filter: 'isFile'
+          },
+          { //bootstrapfonts
+            expand: true,
+            cwd: 'bower_components/bootstrap/dist/fonts',
+            src: '*', dest: 'dist/fonts', filter: 'isFile'
+          },
+          { // boostrap-select JS
+            expand: true,
+            src: 'bower_components/bootstrap-select/dist/js/*.*',
+            dest: 'dist/js/'
+          },
+          { // boostrap-select CSS
+            expand: true,
+            src: 'bower_components/bootstrap-select/dist/css/*.*',
+            dest: 'dist/css/'
+          },
+          { // datetimepicker js
+            src: 'bower_components/eonasdan-bootstrap-datetimepicker/build/js/*.*',
+            dest: 'dist/js/'
+          },
+          { // datetimepicker css
+            src: 'bower_components/eonasdan-bootstrap-datetimepicker/build/css/*.*',
+            dest: 'dist/css/'
+          },
+          { // Calendar templates
+            expand: true,
+            src: 'tmpls/**', dest: 'dist/'
+          },
+          { // Calendar CSS
+            src: 'bower_components/bootstrap-calendar/css/*.css',
+            dest: 'dist/css/', filter: 'isFile'
+          },
+          { // Calendar JS
+            src: 'bower_components/bootstrap-calendar/js/*.js',
+            dest: 'dist/js/'
+          },
+          { // jQuery
+            expand: true,
+            src: 'bower_components/jquery/dist/*.*',
+            dest: 'dist/js/',
+            filter: 'isFile'
+          },
+          { // jQuery UI
+            expand: true,
+            src: 'bower_components/jquery-ui/*.js',
+            dest: 'dist/js/',
+            filter: 'isFile'
+          },
+          { // jscookie
+            expand: true,
+            src: 'bower_components/js-cookie/src/*.js',
+            dest: 'dist/js/',
+            filter: 'isFile'
+          },
+
+          { // moment
+            expand: true,
+            src: 'bower_components/moment/min/*.*',
+            dest: 'dist/js/',
+            filter: 'isFile'
+          },
+          { // requirejs
+            expand: true,
+            src: 'bower_components/requirejs/*.js',
+            dest: 'dist/js/',
+            filter: 'isFile'
+          },
+          { // select2css
+            expand: true,
+            cwd: 'bower_components/select2/dist/css',
+            src: '*', dest: 'dist/css', filter: 'isFile'
+          },
+          { // select2js
+            expand: true,
+            cwd: 'bower_components/select2/dist/js',
+            src: '*', dest: 'dist/js', filter: 'isFile'
+          },
+          { // select2boostrap
+            expand: true,
+            cwd: 'bower_components/select2-bootstrap-theme/dist',
+            src: '*', dest: 'dist/css', filter: 'isFile'
+          },
+        ]
       },
-
-      bootstrapmenu: {
-        expand: true,
-        cwd: 'bower_components/bootstrap-submenu/dist/css',
-        src: '*', dest: 'dist/css', filter: 'isFile'
-      },
-
-      calendartmpls: {
-        expand: true,
-        src: 'tmpls/**', dest: 'dist/'
-      }
-
     },
-    bower: {
-      dev: {
-        dest: 'dist',
-        js_dest: 'dist/js/vendor',
-        css_dest: 'dist/css',
-        options: {
-          packageSpecific: {
-            'bootstrap': {
-              files: { src:'dist/**', dest:'dist/css' }
-            },
-            'handlebars': {
-              files: ['./*.js']
-            }
-          }
-        }
-      }
-    }
   });
 
   grunt.loadNpmTasks('grunt-contrib-concat');
@@ -172,8 +231,8 @@ module.exports = (grunt) => {
   grunt.loadNpmTasks('grunt-contrib-less')
 
   grunt.registerTask('default', ['clean', 'less:development', 'concat',
-    'copy', 'bower']);
+    'copy']);
   grunt.registerTask('production', ['clean', 'less:production', 'concat',
-    'copy', 'bower']);
+    'copy']);
 
 };
