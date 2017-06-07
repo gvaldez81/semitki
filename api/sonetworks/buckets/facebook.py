@@ -118,7 +118,7 @@ class Facebook:
         ltoken = self.oauth.fetch_token(
                  token_url = self.token_url +
                  '?grant_type=fb_exchange_token&' +
-                 'fb_exchange_token=' + token,
+                 'fb_exchange_token=' + token['access_token'],
                 client_secret = self.client_secret,
                  authorization_response = redirect_response
                 )
