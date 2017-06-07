@@ -204,20 +204,13 @@ def callback(request):
         token = bucket.get_token(request.get_full_path())
         user = bucket.get_user_detail()
 
-        # Get a longlived token
-        ltoken = oauth.get(bucket.token_url + "?grant_type=fb_exchange_token" +
-                "&client_id=" + settings.SOCIAL_AUTH_FACEBOOK_KEY +
-                "&client_secret=" + settings.SOCIAL_AUTH_FACEBOOK_SECRET +
-                "fb_exchange_toke={short-lived-token}")
-
-
         if user is not None:
             social_account = SocialAccount(
                     username = user["name"],
                     email = user["email"],
                     bucket_id = user["id"],
                     image_link = user["image"],
-                    access_token = ltoken, #json.JSONEncoder().encode(token),
+                    access_token = token, #json.JSONEncoder().encode(token),
                     token_expiration = datetime.fromtimestamp(token["expires_in"])
                                 if "expires_in" in token  else None,
                     bucket = bucket.tagname)
