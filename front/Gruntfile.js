@@ -90,7 +90,7 @@ module.exports = (grunt) => {
             filter: 'isFile'
           },
           { // HTML
-            src: '*.html',
+            src: ['*.html', '!index.html'],
             dest: 'dist/'
           },
           { // Images PNG only
