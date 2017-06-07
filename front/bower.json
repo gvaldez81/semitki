@@ -1,6 +1,6 @@
 {
   "name": "front",
-  "homepage": "https://github.com/gvaldez81/semitki",
+  "homepage": "https://github.com/semitki/semitki",
   "authors": [
     "Ernesto Celis <developer@celisdelafuente.net>"
   ],
@@ -24,7 +24,8 @@
     "select2": "^4.0.3",
     "select2-bootstrap-theme": "^0.1.0-beta.9",
     "bootstrap-wysiwyg": "*",
-    "bootstrap-calendar": "^0.2.5",
+    "bootstrap-calendar":
+      "https://github.com/Serhioromano/bootstrap-calendar.git#master",
     "requirejs": "^2.3.3",
     "bootstrap-submenu": "^2.0.4",
     "jquery-ui": "^1.12.1",
