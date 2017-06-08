@@ -165,7 +165,7 @@ class Twitter:
             return (rt.id_str)
         except Exception as e:
             return(account_id + ' | error =  ' 
-                +  e[0][0]['code'] + ' - ' + e[0][0]['message'])
+                +  str(e[0][0]['code']) + ' - ' + e[0][0]['message'])
 
     def set_account_id(self, account_id):
         self.account_id = account_id
