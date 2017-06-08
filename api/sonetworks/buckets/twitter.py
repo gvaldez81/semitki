@@ -164,10 +164,8 @@ class Twitter:
             #print("Tweet RT ID ="+rt.id_str)
             return (rt.id_str)
         except Exception as e:
-            return(data['access_token']['screen_name'] + ' ' +
-               e[0][0]['message'])
-
-
+            return(account_id + ' | error =  ' 
+                +  e[0][0]['code'] + ' - ' + e[0][0]['message'])
 
     def set_account_id(self, account_id):
         self.account_id = account_id
