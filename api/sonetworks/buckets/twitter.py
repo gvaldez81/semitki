@@ -17,6 +17,17 @@ from urlparse import urlparse
 import tweepy
 
 
+def get_post_id(permalink):
+        """
+        Returns a Twitter Post Id from permalink
+        """
+        path = urlparse(permalink).path
+        if path.endswith('/'):
+            path = path[:len(path)-1]
+        k = path.rfind("/")
+        return path[k+1:]
+
+
 class Twitter:
 
     def __init__(self, account_id = None):
@@ -29,15 +40,7 @@ class Twitter:
         self.oauth = None
         self.url = 'https://twitter.com/'
 
-    def get_post_id(self, permalink):
-        """
-        Returns a Twitter Post Id from permalink
-        """
-        path = urlparse(permalink).path
-        if path.endswith('/'):
-            path = path[:len(path)-1]
-        k = path.rfind("/")
-        return path[k+1:]
+    
 
     def fav(self, token, permalink, account_id, post_id):
         """Like an existing tweet given the tweet id"""
