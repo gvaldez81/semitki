@@ -34,9 +34,12 @@ let S = {
       }
     });
     this.lang = "en-EN"                                  // UX language
+    this.polyglot = new Polyglot({locale: this.lang});
     S.initPolyglot(this);                                // Initialize internationalization
     this.hideSideMenu = true;                           // Keep the side menu hidden fro start
-
+    this.pt = Handlebars.registerHelper("pt", (phrase, options) => {
+      this.polyglot.t(phrase, options.hash);
+    });
     return this;
   },
 
@@ -190,7 +193,7 @@ let S = {
       dataType: "json"
     });
     phrases.done((xhr) => {
-      semitki.polyglot = new Polyglot({phrases: xhr});
+      semitki.polyglot.replace(xhr);
     });
   },
 
