@@ -120,6 +120,14 @@ module.exports = (grunt) => {
             src: 'bower_components/bootbox.js/*.js',
             dest: 'dist/js/', filter: 'isFile'
           },
+          { // bootstrap-tour JS
+          src: 'bower_components/bootstrap-tour/build/js/*.js',
+            dest: 'dist/js/'
+          },
+          { // bootstrap-tour CSS
+          src: 'bower_components/bootstrap-tour/build/css/*.css',
+            dest: 'dist/css/'
+          },
           { // bootstrap-submenu
           src: 'bower_components/bootstrap-submenu/dist/js/*.js',
             dest: 'dist/js/'
@@ -128,7 +136,6 @@ module.exports = (grunt) => {
             src: 'bower_components/bootstrap-submenu/dist/css/*.css',
             dest: 'dist/css/'
           },
-
           { // Bootstrap CSS
             expand: true,
             cwd: 'bower_components/bootstrap/dist/css',

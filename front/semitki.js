@@ -33,13 +33,15 @@ let S = {
         headers: {'X-CSRFToken': Cookies.get("CSRFToken")}
       }
     });
+    this.hideSideMenu = true;                           // Keep the side menu hidden fro start
+
     this.lang = "en-EN"                                  // UX language
     this.polyglot = new Polyglot({locale: this.lang});
-    S.initPolyglot(this);                                // Initialize internationalization
-    this.hideSideMenu = true;                           // Keep the side menu hidden fro start
+    this.initPolyglot();
     this.pt = Handlebars.registerHelper("pt", (phrase, options) => {
       this.polyglot.t(phrase, options.hash);
     });
+
     return this;
   },
 
@@ -143,6 +145,8 @@ let S = {
   },
 
 
+  // TODO something like fetchCollections(success, error)
+  // for callbacks to be passed to Backbone.collection.fetch
   fetchCollections: () => {
     for (let [key, value] of S.collection) {
       value.fetch(S.addAuthorizationHeader());
@@ -152,6 +156,7 @@ let S = {
 
 
   persistSignedUser: () => {
+    // TODO not working, user's update is not persisted if found
     let u = S.collection.get("user").findWhere({
       email: S.user.attributes.email
     });
@@ -187,14 +192,15 @@ let S = {
   },
 
 
-  initPolyglot: (semitki) => {
+  initPolyglot: function() {
     // Start Internationalization support
-    let phrases = $.get("i18n/"+semitki.lang+".json", {
-      dataType: "json"
-    });
-    phrases.done((xhr) => {
-      semitki.polyglot.replace(xhr);
-    });
+/*    let phrases = $.get("i18n/"+semitki.lang+".json", {*/
+      //dataType: "json"
+    //});
+    //phrases.done((xhr) => {
+      //semitki.polyglot.replace(xhr);
+    /*});*/
+    this.polyglot.replace(polen);
   },
 
 

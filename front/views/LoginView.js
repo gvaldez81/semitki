@@ -10,6 +10,8 @@ let LoginView = Backbone.View.extend({
   initialize: function() {
     this.footer = new FooterView();
     S.toggleNavigation();
+
+    tour.init();
   },
 
   events: {
@@ -156,6 +158,8 @@ let LoginView = Backbone.View.extend({
 
     this.$el.html(compiled);
     $("#main").html(this.$el);
+
+    tour.start(true);
 
     return this;
   },

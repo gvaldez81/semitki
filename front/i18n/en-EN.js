@@ -1,4 +1,4 @@
-{
+let polen = {
   "login.use_other_account": "Use your social account",
   "login.remember_me": "Remember me",
   "login.login": "Log In",
@@ -76,5 +76,4 @@
   "accountinfo.loadphoto": "Upload a Different Photo...",
   "accountinfo.search": "Search...",
   "accountinfo.search": ""
-  }
-
+  };
