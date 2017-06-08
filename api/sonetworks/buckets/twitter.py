@@ -165,7 +165,7 @@ class Twitter:
         api = tweepy.API(auth)
 
         if post_id == 0:
-            post_id = get_post_id(permalink)
+            post_id = self.get_post_id(permalink)
 
         try:
             rt = api.retweet(id=post_id)
