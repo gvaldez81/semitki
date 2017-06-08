@@ -47,14 +47,22 @@ let SchedulerCreateView = Backbone.View.extend({
       let postArray = S.collection.get("posts").toArray();
 
       let feed = postArray.map((post) => {
+
+      let long = 50;
+      let bucket = post.attributes.content.tags[0].account.charAt(0).toUpperCase()
+                  + post.attributes.content.tags[0].account.slice(1);
+      let account = (post.attributes.content.username==undefined ? "N/A" : post.attributes.content.username).substring(0,10);
+      let text = post.attributes.content.txt;
+      let cut = post.attributes.content.txt.substring(0,long);
+
+      let content = cut.padEnd((text.length>long ? long+3 : cut.length),'.') 
+      content = content + (text.length>long ? " and " + (text.length - long) + " characters more" : "") 
+                
+
       let item = {
           "id": post.attributes.url,
-//          "url": post.attributes.url,
           "url": (post.attributes.content.permalink == undefined ? '' : post.attributes.content.permalink),
-          "title": post.attributes.content.tags[0].account.charAt(0).toUpperCase()
-                  + post.attributes.content.tags[0].account.slice(1) +
-                  ' | ' + (post.attributes.content.username==undefined ? 'N/A' : post.attributes.content.username) +
-                  ' | ' + post.attributes.content.txt,
+          "title": bucket + " | " + account + " | " + content,
           "class": "event-info",
           "start": Date.parse(post.attributes.date),
           "end": Date.parse(post.attributes.date),
@@ -73,6 +81,7 @@ let SchedulerCreateView = Backbone.View.extend({
     $('#scheduledForPicker').datetimepicker();
     // Initialize calendar view
     let calendar = $("#calendar-panel").calendar({
+      tooltip_container: "main",
       language: S.lang,
       modal: "#dialog",
       tmpl_path: "/tmpls/",
