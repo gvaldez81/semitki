@@ -36,13 +36,16 @@ class Twitter:
         auth.set_access_token(token['access_token'], token['token_secret'])
         api = tweepy.API(auth)
 
+        if post_id == 0:
+            post_id = get_post_id(permalink)
+
         try:
             rt = api.create_favorite(id=post_id)
             #print("Tweet RT ID ="+rt.id_str)
             return (rt.id_str)
         except Exception as e:
-            return(data['access_token']['screen_name'] + ' ' +
-               e[0][0]['message'])
+            return(account_id + ' | error =  ' 
+                +  str(e[0][0]['code']) + ' - ' + e[0][0]['message'])
 
 
 
@@ -78,6 +81,15 @@ class Twitter:
         return self.oauth
 
 
+    def get_post_id(self, permalink):
+        """
+        Returns a Twitter Post Id from permalink
+        """
+        path = urlparse(permalink).path
+        if path.endswith('/'):
+            path = path[:len(path)-1]
+        k = path.rfind("/")
+        return path[k+1:]
 
     def get_token(self, redirect_response):
         """
@@ -153,11 +165,7 @@ class Twitter:
         api = tweepy.API(auth)
 
         if post_id == 0:
-            path = urlparse(permalink).path
-            if path.endswith('/'):
-                path = path[:len(path)-1]
-            k = path.rfind("/")
-            post_id = path[k+1:]
+            post_id = get_post_id(permalink)
 
         try:
             rt = api.retweet(id=post_id)
