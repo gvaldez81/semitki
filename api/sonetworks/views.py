@@ -212,11 +212,11 @@ def callback(request):
                 obj, created = SocialAccount.objects.get_or_create(
                         bucket_id = user["id"], bucket = bucket.tagname,
                         defaults = {
-                            username: user["name"],
-                            email: user["email"],
-                            image_link: user["image"],
-                            access_token: token, #json.JSONEncoder().encode(token),
-                            token_expiration: datetime.fromtimestamp(token["expires_in"])
+                            'username': user["name"],
+                            'email': user["email"],
+                            'image_link': user["image"],
+                            'access_token': token, #json.JSONEncoder().encode(token),
+                            'token_expiration': datetime.fromtimestamp(token["expires_in"])
                                         if "expires_in" in token  else None,
                             }
                         )
