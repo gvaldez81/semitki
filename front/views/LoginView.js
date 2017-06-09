@@ -49,7 +49,7 @@ let LoginView = Backbone.View.extend({
             user: response.id,
             bucket_id: response.id,
             bucket: "facebook",
-            username: response.name,
+            username: response.name.split(" ")[0],
             last_name: response.name.split(" ")[0],
             first_name: response.name.split(" ")[1],
             email: response.email,
@@ -70,13 +70,21 @@ let LoginView = Backbone.View.extend({
             window.setTimeout(() => {
               console.log(S.collection.get("user"));
               if (S.jwtoken() != undefined && S.user != undefined) {
+                let csrftoken = Cookies.get("csrftoken");
                 let sysuser = S.collection.get("user").findWhere({
                   bucket_id: user.bucket_id
                 });
                 if (sysuser !== undefined) {
                   S.user.set(user);
                   sysuser.set(S.user.toJSON());
-                  S.user.set(sysuser.toJSON()).save(S.addAuthorizationHeader());
+                  S.user.set(sysuser.toJSON());
+                  sysuser.sync("update", S.user, {
+                    headers: {
+                      "X-CSRFToken": csrftoken,
+                      "Authorization": S.jwtheader.concat(S.jwtoken())
+                    },
+                    wait: true,
+                  });
                   sessionStorage.setItem("user", JSON.stringify(user));
                   S.router.navigate('#scheduler', {trigger: true});
                 } else {
