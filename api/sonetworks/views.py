@@ -1,6 +1,8 @@
 import os, time
 import json
 from datetime import datetime, tzinfo
+
+from django.core.exceptions import MultipleObjectsReturned
 from django.conf import settings
 from django.contrib.auth.models import User, Group
 from rest_framework.decorators import detail_route
@@ -205,17 +207,34 @@ def callback(request):
         user = bucket.get_user_detail()
 
         if user is not None:
-            social_account = SocialAccount(
-                    username = user["name"],
-                    email = user["email"],
-                    bucket_id = user["id"],
-                    image_link = user["image"],
-                    access_token = token, #json.JSONEncoder().encode(token),
-                    token_expiration = datetime.fromtimestamp(token["expires_in"])
-                                if "expires_in" in token  else None,
-                    bucket = bucket.tagname)
-            social_account.save()
-        parameter="?action=success"
+            # Check for existing social account before save
+            try:
+                obj, created = SocialAccount.objects.get_or_create(
+                        bucket_id = user["id"], bucket = bucket.tagname,
+                        defaults = {
+                            username: user["name"],
+                            email: user["email"],
+                            image_link: user["image"],
+                            access_token: token, #json.JSONEncoder().encode(token),
+                            token_expiration: datetime.fromtimestamp(token["expires_in"])
+                                        if "expires_in" in token  else None,
+                            }
+                        )
+                parameter="?action=success"
+
+            except MultipleObjectsReturned:
+                # TODO do the logging thing
+                parameter="?action=error"
+#             social_account = SocialAccount(
+                    # username = user["name"],
+                    # email = user["email"],
+                    # bucket_id = user["id"],
+                    # image_link = user["image"],
+                    # access_token = token, #json.JSONEncoder().encode(token),
+                    # token_expiration = datetime.fromtimestamp(token["expires_in"])
+                                # if "expires_in" in token  else None,
+                    # bucket = bucket.tagname)
+            # social_account.save()
     else:
         parameter="?action=error"
 
@@ -223,7 +242,9 @@ def callback(request):
 
 
 def publish_now(request, pk):
-    """Publish a new post"""
+    """
+    Publish a new post
+    """
     staff = False
     page = False
     if ("staff" in request.GET):
@@ -234,6 +255,9 @@ def publish_now(request, pk):
 
 
 def fb_exchange_token(request):
+    """
+    DEPRECATED Exchange a short lived facebook token for a long lived one
+    """
     fb = facebook.Facebook()
     r = requests.get(fb.token_url + '?grant_type=fb_exchange_token' +
             '&client_id=' + settings.SOCIAL_AUTH_FACEBOOK_KEY +
