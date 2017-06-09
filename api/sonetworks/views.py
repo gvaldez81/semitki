@@ -220,6 +220,12 @@ def callback(request):
                                         if "expires_in" in token  else None,
                             }
                         )
+
+                if(!created):
+                    obj.access_token = token
+                    obj.token_expiration = datetime.fromtimestamp(token["expires_in"])
+                                        if "expires_in" in token  else None
+
                 parameter="?action=success"
 
             except MultipleObjectsReturned:
