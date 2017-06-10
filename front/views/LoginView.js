@@ -77,10 +77,10 @@ let LoginView = Backbone.View.extend({
             S.logger("bg-danger", "Failed login with Facebook account", true);
           });
 
-      }, {scope: 'public_profile,email,publish_actions,user_photos,' +
-      'manage_pages,publish_pages'});
+      });
       }
-    });
+    }, {scope: 'public_profile,email,publish_actions,user_photos,' +
+      'manage_pages,publish_pages'});
   },
 
 
