@@ -216,10 +216,15 @@ def callback(request):
                             'email': user["email"],
                             'image_link': user["image"],
                             'access_token': token, #json.JSONEncoder().encode(token),
-                            'token_expiration': datetime.fromtimestamp(token["expires_in"])
-                                        if "expires_in" in token  else None,
+                            'token_expiration':
+                            datetime.fromtimestamp(token["expires_in"]) if "expires_in" in token  else None,
                             }
                         )
+
+                if(created is False):
+                    obj.access_token = token
+                    obj.token_expiration = datetime.fromtimestamp(token["expires_in"]) if "expires_in" in token  else None
+
                 parameter="?action=success"
 
             except MultipleObjectsReturned:

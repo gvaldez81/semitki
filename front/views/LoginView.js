@@ -49,7 +49,7 @@ let LoginView = Backbone.View.extend({
             user: response.id,
             bucket_id: response.id,
             bucket: "facebook",
-            username: response.name,
+            username: response.name.split(" ")[0],
             last_name: response.name.split(" ")[0],
             first_name: response.name.split(" ")[1],
             email: response.email,
@@ -66,13 +66,34 @@ let LoginView = Backbone.View.extend({
           });
           fb_token.then((result) => { // The promise of the FB token succeded
             S.jwtoken(result.token);
-            if (S.jwtoken() != undefined && S.user != undefined) {
-              if(S.fetchCollections()) {
-                S.user.set(user);
-                sessionStorage.setItem("user", JSON.stringify(user));
-                S.router.navigate('#scheduler', {trigger: true});
-              }
-            }
+            S.fetchCollections();
+            window.setTimeout(() => {
+              console.log(S.collection.get("user"));
+              if (S.jwtoken() != undefined && S.user != undefined) {
+                let csrftoken = Cookies.get("csrftoken");
+                let sysuser = S.collection.get("user").findWhere({
+                  bucket_id: user.bucket_id
+                });
+                if (sysuser !== undefined) {
+                  S.user.set(user);
+                  sysuser.set(S.user.toJSON());
+                  S.user.set(sysuser.toJSON());
+                  sysuser.sync("update", S.user, {
+                    headers: {
+                      "X-CSRFToken": csrftoken,
+                      "Authorization": S.jwtheader.concat(S.jwtoken())
+                    },
+                    wait: true,
+                  });
+                  sessionStorage.setItem("user", JSON.stringify(user));
+                  S.router.navigate('#scheduler', {trigger: true});
+                } else {
+                  S.logger("bg-danger",
+                    "Couldn't associate Facebook user with system user",
+                    true);
+                }
+              }},
+              3000);
           }, (err) => { // The promise of FB token failed
             S.logger("bg-danger", "Failed login with Facebook account", true);
           });
@@ -146,11 +167,6 @@ let LoginView = Backbone.View.extend({
   },
 
   render: function() {
-/*    let data = {*/
-      //t: {
-        //"use_other_account": S.polyglot.t("login.use_other_account")
-      //}
-/*    }*/;
     let template = $("#login-template").html();
     let compiled = Handlebars.compile(template);
 
@@ -165,4 +181,3 @@ let LoginView = Backbone.View.extend({
   },
 
 });
-
