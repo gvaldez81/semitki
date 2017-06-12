@@ -39,7 +39,7 @@ let S = {
     this.polyglot = new Polyglot({locale: this.lang});
     this.initPolyglot();
     this.pt = Handlebars.registerHelper("pt", (phrase, options) => {
-      this.polyglot.t(phrase, options.hash);
+      return this.polyglot.t(phrase, options.hash);
     });
 
     return this;
