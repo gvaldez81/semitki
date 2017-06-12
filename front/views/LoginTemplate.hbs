@@ -1,16 +1,16 @@
 <script type="text/x-handlebars-template" id="login-template">
 
     <form id="login-form" class="form-signin">
-      <h2 class="form-signin-heading">Please sign in</h2>
+      <h2 class="form-signin-heading">{{pt "login.sing_face_twit"}}</h2>
       <div id="messages"></div>
       <input type="email" class="form-control" id="username" name="username"
-        placeholder="User name">
+        placeholder="{{{pt "login.usernameplaceholder"}}}">
       <input type="password" class="form-control" id="password"
-        name="password" placeholder="Password">
+        name="password" placeholder="{{pt 'login.passplaceholder'}}">
       <button type="button" class="btn btn-lg btn-info btn-block"
-                            id="login-button">{{pt "login.login"}}</button>
+        id="login-button">{{pt "login.login"}}</button>
       <p><button type="button" class="btn btn-sm btn-link" id="recover-pass">
-        Forgot your password?</button></p>
+        {{pt "login.forgot_your_pass"}}</button></p>
       <br /><br />
       <button type="button" class="btn btn-primary btn-lg"
         id="fb-login">Facebook</button>
