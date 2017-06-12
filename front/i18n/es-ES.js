@@ -1,4 +1,4 @@
-{
+let poles = {
   "login.use_other_account": "Iniciar Sesion con",
   "login.remember_me": "Recordar",
   "login.login": "Iniciar Sesión",
@@ -75,4 +75,4 @@
   "accountinfo.passconfirm": "Confirmar Contraseña:",
   "accountinfo.loadphoto": "Subir una Foto Diferente...",
   "accountinfo.search": "Examinar..."
-}
+};

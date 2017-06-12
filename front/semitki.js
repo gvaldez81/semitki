@@ -35,7 +35,7 @@ let S = {
     });
     this.hideSideMenu = true;                           // Keep the side menu hidden fro start
 
-    this.lang = "en-EN"                                  // UX language
+    this.lang = "es-ES"                                  // UX language
     this.polyglot = new Polyglot({locale: this.lang});
     this.initPolyglot();
     this.pt = Handlebars.registerHelper("pt", (phrase, options) => {
@@ -200,7 +200,7 @@ let S = {
     //phrases.done((xhr) => {
       //semitki.polyglot.replace(xhr);
     /*});*/
-    this.polyglot.replace(polen);
+    this.polyglot.replace(poles);
   },
 
 
