@@ -33,6 +33,7 @@
     "glyphicons-halflings": "*",
     "bootstrap-select": "^1.12.2",
     "bootstrap-dropdown": "*",
-    "bootstrap-tour": "^0.11.0"
+    "bootstrap-tour": "^0.11.0",
+    "jquery-oauthpopup": "^0.0.2"
   }
 }
