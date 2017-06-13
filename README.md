@@ -3,6 +3,8 @@
 
 [![Shipping faster with ZenHub](https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png)](https://www.zenhub.com)
 [![Codeship Status for semitki/semitki](https://app.codeship.com/projects/2b89f950-cac9-0134-a140-7e371e5d68a3/status?branch=master)](https://app.codeship.com/projects/199702)
+[![Codacy
+Badge](https://api.codacy.com/project/badge/Grade/cda75ec3b3174abe9530dcb3ffaddba3)](https://www.codacy.com/app/semitki/semitki?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=semitki/semitki&amp;utm_campaign=Badge_Grade)
 
 
 ## Notes
