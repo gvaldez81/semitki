@@ -1,2 +1,5 @@
-[bigfoot]
-174.138.68.40
+[[production]
+production ansible_host=174.138.68.40
+
+[testing]
+testing ansible_host=159.203.134.236

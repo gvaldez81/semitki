@@ -1,5 +1,5 @@
 ---
-- hosts: bigfoot
+- hosts: testing
   tasks:
     - name: Deploy NewRelic config
       copy: src=../config/newrelic.ini dest=/opt/semitki/config backup=yes
