@@ -1,6 +1,6 @@
 
 ---
-- hosts: bigfoot
+- hosts: testing
   tasks:
     - name: Run deploy script
       shell: chdir=/opt/semitki ./deploy.sh

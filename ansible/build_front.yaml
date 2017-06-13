@@ -1,5 +1,5 @@
 ---
-- hosts: bigfoot
+- hosts: testing
   tasks:
     - name: Build frontend grunt production
       shell: chdir=/opt/semitki/front /opt/node/bin/grunt production
