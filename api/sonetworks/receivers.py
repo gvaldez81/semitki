@@ -5,11 +5,13 @@ from .models import PagesToken
 from buckets import facebook
 from allauth.socialaccount.models import SocialAccount 
 from allauth.socialaccount.models import SocialToken
-
+from allauth.socialaccount.models import SocialApp
 
 @receiver(post_save, sender=SocialToken)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
+def create_user_pages(sender, instance, created, **kwargs):
+    #provider = SocialApp.objects.get(id = instance.provider)
+    if created and instance.app.provider=='facebook':
+
     	chan = facebook.Facebook()
     	oauth = chan.get_oauth2session()
         token = instance.token

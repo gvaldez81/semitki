@@ -95,8 +95,14 @@ def stuff_it(pk, staff = False, page = False):
     if chan != None:
         oauth = chan.get_oauth2session()
         if staff:
-            social_user = SystemAccount.objects.get(uid = account_id).id
-            token = SocialToken.objects.get(account_id = social_user).token
+            social_user = SystemAccount.objects.get(uid = account_id)
+            social_token = SocialToken.objects.get(account_id = social_user.id)
+            if chanstr == 'facebook':
+                token = social_token.token
+            else:
+                token = {'access_token':social_token.token, 'token_secret':social_token.token_secret}
+                user_tw = social_user.extra_data['screen_name']
+
         elif page:
             token = PagesToken.objects.get(page_id = account_id).token
         else:

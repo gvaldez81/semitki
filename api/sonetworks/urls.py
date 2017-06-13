@@ -54,4 +54,5 @@ urlpatterns = [
     url(r'^twitter_auth/$', twitter_auth, name='twitter_auth'),
     url(r'^post/(?P<pk>[^/.]+)/publish/$', publish_now, name='publish_now'),
     url(r'^auth/fb_exchange/$', fb_exchange_token, name='fb_exchange_token'),
+    url(r'^auth/tw_request_token/$', tw_request_token, name='tw_request_token'),
 ]

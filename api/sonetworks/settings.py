@@ -174,13 +174,11 @@ JWT_AUTH = {
          }
 
 CORS_ORIGIN_WHITELIST = (
-        '127.0.0.1:9080',
-        'localhost:9080',
         'localhost',
         '127.0.0.1',
-        '159.203.134.236:9080',
+        '159.203.134.236',
         '174.138.68.40',
-        'mexicoeligebien.mx'
+        'mexicoeligebien.mx',
         )
 
 SITE_ID = 1
@@ -198,6 +196,9 @@ SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
 
 SOCIAL_AUTH_TWITTER_KEY = os.environ["SOCIAL_AUTH_TWITTER_KEY"]
 SOCIAL_AUTH_TWITTER_SECRET = os.environ["SOCIAL_AUTH_TWITTER_SECRET"]
+TWITTER_REQUEST_TOKEN_URL = "https://api.twitter.com/oauth/request_token"
+TWITTER_AUTHENTICATE_URL = "https://api.twitter.com/oauth/authenticate?oauth_token="
+TWITTER_ACCESS_TOKEN_URL = "https://api.twitter.com/oauth/access_token"
 
 FACEBOOK_URL_CAPTION=os.environ["FACEBOOK_URL_CAPTION"]
 
@@ -208,7 +209,8 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'
 SOCIALACCOUNT_PROVIDERS = {
         'facebook': {
             'EXCHANGE_TOKEN': False
-            }
+            },
+        'twitter':{}
         }
 
 SWAGGER_SETTINGS = {
