@@ -16,10 +16,9 @@ let addUserView = Backbone.View.extend({
 
   saveuser: function(e) {
 
-    if ($("#input_confpass").val() === $("#input_password").val()){
+  if ($("#input_confpass").val() === $("#input_password").val()){
 
-
-         e.preventDefault();
+    e.preventDefault();
     let options = {
 
       error: (error) => {
@@ -48,13 +47,11 @@ let addUserView = Backbone.View.extend({
         .create(this.adduser(), options);
         console.log("User");
 
-
       }else{
 
         S.logger("bg-danger", "Passwords do not match.", true);
 
       }
-
 
    },
 
