@@ -249,14 +249,15 @@ def callback(request):
             # social_account.save()
     elif 'login' in request.GET:
 
-        request_key = request.session['tw_request_token_key']
-        request_secret = request.session['tw_request_token_secret']
-        del request.session['tw_request_token_key']
-        del request.session['tw_request_token_secret']
-
         response = HttpResponse('<script type="text/javascript">window.close(); </script>')
-            
-        if 'denied' not in request.GET:
+        
+        if 'denied'  in request.GET:
+            response.set_cookie('tw_denied', 'Access Denied')
+        else:
+            request_key = request.session['tw_request_token_key']
+            request_secret = request.session['tw_request_token_secret']
+            del request.session['tw_request_token_key']
+            del request.session['tw_request_token_secret']
             
             token_verifier = request.GET.get('oauth_verifier')
             
@@ -269,9 +270,7 @@ def callback(request):
             r = requests.post(url=settings.TWITTER_ACCESS_TOKEN_URL, auth=oauth)
 
             credentials = parse_qs(r.content)
-            #request.session['tw_access_token'] = credentials.get('oauth_token')[0]
-            #request.session['tw_access_token_secret'] = credentials.get('oauth_token_secret')[0]
-            response = HttpResponse('<script type="text/javascript">window.close(); </script>')
+            response.set_cookie('tw_response', r.text)
             response.set_cookie('tw_access_token', credentials.get('oauth_token')[0])
             response.set_cookie('tw_access_token_secret', credentials.get('oauth_token_secret')[0])
             response.set_cookie('tw_bucket_id', credentials.get('user_id')[0])

@@ -74,6 +74,7 @@ let LoginView = Backbone.View.extend({
             }).done(resolve).fail(reject);
           });
           fb_token.then((result) => { // The promise of the FB token succeded
+            S.logger("bg-success", "Access granted, creating user. Please wait... ", true);
             S.jwtoken(result.token);
             S.fetchCollections();
             window.setTimeout(() => {
@@ -111,47 +112,52 @@ let LoginView = Backbone.View.extend({
         path: S.api("auth/tw_request_token"),
         callback: function(param)
         {
+          let d = new Date();
+          d.setDate(d.getDate() - 1);
+          let expires = ";expires="+d;
           
-          let tw_token = new Promise((resolve, reject) => {
-            $.ajax(S.api("auth/twitter"),{
-            data: {
-                "access_token": Cookies('tw_access_token'),
-                "token_secret": Cookies('tw_access_token_secret'),
-            },
-            method: "POST",
-            }).done(resolve).fail(reject);
-          });
-          tw_token.then((result) => { // The promise of the FB token succeded
-            S.jwtoken(result.token);
-            S.fetchCollections();
-            window.setTimeout(() => {
-              if (S.jwtoken() != undefined && S.user != undefined) {
-                let csrftoken = Cookies.get("csrftoken");
-                let sysuser = S.collection.get("user").findWhere({
-                  bucket_id: Cookies('tw_bucket_id')
-                });
-                if (sysuser !== undefined) {
-                  let d = new Date();
-                  d.setDate(d.getDate() - 1);
-                  let expires = ";expires="+d;
-                  document.cookie = 'tw_access_token=;'+expires
-                  document.cookie = 'tw_access_token_secret=;'+expires
-                  document.cookie = 'tw_bucket_id=;'+expires
-                  S.user.set(sysuser.toJSON());
-                  sessionStorage.setItem("user", JSON.stringify(sysuser.toJSON()));
-                  S.router.navigate('#scheduler', {trigger: true});
-                } else {
-                  S.logger("bg-danger",
-                    "Couldn't associate Twitter user with system user",
-                    true);
-                }
-              }},
-              3000);
-          }, (err) => { // The promise of FB token failed
-            S.logger("bg-danger", "Failed login with Twitter account", true);
-          });
-          //S.logger("bg-success", "Cerro el PopUp", true);
-          //do callback stuff
+          if (Cookies('tw_denied') == undefined){
+
+            let tw_token = new Promise((resolve, reject) => {
+              $.ajax(S.api("auth/twitter"),{
+              data: {
+                  "access_token": Cookies('tw_access_token'),
+                  "token_secret": Cookies('tw_access_token_secret'),
+              },
+              method: "POST",
+              }).done(resolve).fail(reject);
+            });
+            tw_token.then((result) => { // The promise of the FB token succeded
+              S.logger("bg-success", "Access granted, creating user. Please wait... ", true);
+              S.jwtoken(result.token);
+              S.fetchCollections();
+              window.setTimeout(() => {
+                if (S.jwtoken() != undefined && S.user != undefined) {
+                  let csrftoken = Cookies.get("csrftoken");
+                  let sysuser = S.collection.get("user").findWhere({
+                    bucket_id: Cookies('tw_bucket_id')
+                  });
+                  if (sysuser !== undefined) {
+                    document.cookie = 'tw_access_token=;'+expires
+                    document.cookie = 'tw_access_token_secret=;'+expires
+                    document.cookie = 'tw_bucket_id=;'+expires
+                    S.user.set(sysuser.toJSON());
+                    sessionStorage.setItem("user", JSON.stringify(sysuser.toJSON()));
+                    S.router.navigate('#scheduler', {trigger: true});
+                  } else {
+                    S.logger("bg-danger",
+                      "Couldn't associate Twitter user with system user",
+                      true);
+                  }
+                }},
+                3000);
+            }, (err) => { // The promise of FB token failed
+              S.logger("bg-danger", "Failed login with Twitter account", true);
+            });
+          }else{
+            document.cookie = 'tw_denied=;'+expires
+            S.logger("bg-danger", "Access to Twitter account info denied", true);
+          }
         }
     });
     
