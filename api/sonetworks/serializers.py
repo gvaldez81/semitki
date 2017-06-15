@@ -18,8 +18,25 @@ class FilteredIsActiveListUser(serializers.ListSerializer):
         return super(FilteredIsActiveListUser, self).to_representation(data)
 
 class UserSerializer(serializers.ModelSerializer):
+
+    password = serializers.CharField(write_only=True)
+
     bucket_id = serializers.SerializerMethodField()
     bucket = serializers.SerializerMethodField()
+
+    def create(self, validated_data):
+        user = User.objects.create(
+                username=validated_data["username"],
+                first_name=validated_data["first_name"],
+                last_name=validated_data["last_name"],
+                email=validated_data["email"],
+                is_active=validated_data["is_active"]
+                )
+        user.set_password(validated_data["password"])
+        user.save()
+
+        return user
+
     def get_bucket_id(self, user):
         try:
             bucket_id = SystemAccount.objects.get(user=user.id).uid
@@ -37,8 +54,10 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         list_serializer_class = FilteredIsActiveListUser
         model = User
-        fields = ('id', 'username', 'email', 'first_name', 'last_name',
+        fields = ('id', 'username', 'password', 'email', 'first_name', 'last_name',
                 'posts', 'is_active', 'is_staff', 'is_superuser', 'bucket_id', 'bucket')
+
+
 
 class PostSerializer(serializers.ModelSerializer):
 
