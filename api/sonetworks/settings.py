@@ -178,11 +178,13 @@ CORS_ORIGIN_WHITELIST = (
         '127.0.0.1',
         '159.203.134.236',
         '174.138.68.40',
-        'mexicoeligebien.mx',
+        'mexicoeligebien.mx'
         )
 
 SITE_ID = 1
 MEDIA_ROOT = '/semitki/storage/'
+
+SESSION_COOKIE_DOMAIN=os.environ["COOKIES_DOMAIN"]
 
 # Facebook configuration
 SOCIAL_AUTH_FACEBOOK_KEY = os.environ["SOCIAL_AUTH_FACEBOOK_KEY"]
