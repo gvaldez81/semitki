@@ -29,6 +29,15 @@ class Twitter:
         self.oauth = None
         self.url = 'https://twitter.com/'
 
+    def get_post_id(self, permalink):
+        """
+        Returns a Twitter Post Id from permalink
+        """
+        path = urlparse(permalink).path
+        if path.endswith('/'):
+            path = path[:len(path)-1]
+        k = path.rfind("/")
+        return path[k+1:]
 
     def fav(self, token, permalink, account_id, post_id):
         """Like an existing tweet given the tweet id"""
@@ -36,13 +45,16 @@ class Twitter:
         auth.set_access_token(token['access_token'], token['token_secret'])
         api = tweepy.API(auth)
 
+        if post_id == 0:
+            post_id = self.get_post_id(permalink)
+
         try:
             rt = api.create_favorite(id=post_id)
             #print("Tweet RT ID ="+rt.id_str)
             return (rt.id_str)
         except Exception as e:
-            return(data['access_token']['screen_name'] + ' ' +
-               e[0][0]['message'])
+            return(account_id + ' | error =  ' 
+                +  str(e[0][0]['code']) + ' - ' + e[0][0]['message'])
 
 
 
@@ -78,7 +90,7 @@ class Twitter:
         return self.oauth
 
 
-
+    
     def get_token(self, redirect_response):
         """
         Get a twitter OAuth token
@@ -153,21 +165,15 @@ class Twitter:
         api = tweepy.API(auth)
 
         if post_id == 0:
-            path = urlparse(permalink).path
-            if path.endswith('/'):
-                path = path[:len(path)-1]
-            k = path.rfind("/")
-            post_id = path[k+1:]
+            post_id = self.get_post_id(permalink)
 
         try:
             rt = api.retweet(id=post_id)
             #print("Tweet RT ID ="+rt.id_str)
             return (rt.id_str)
         except Exception as e:
-            return(data['access_token']['screen_name'] + ' ' +
-               e[0][0]['message'])
-
-
+            return(account_id + ' | error =  ' 
+                +  str(e[0][0]['code']) + ' - ' + e[0][0]['message'])
 
     def set_account_id(self, account_id):
         self.account_id = account_id

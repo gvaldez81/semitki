@@ -174,13 +174,11 @@ JWT_AUTH = {
          }
 
 CORS_ORIGIN_WHITELIST = (
-        '127.0.0.1:9080',
-        'localhost:9080',
         'localhost',
         '127.0.0.1',
-        '159.203.134.236:9080',
+        '159.203.134.236',
         '174.138.68.40',
-        'mexicoeligebien.mx'
+        'mexicoeligebien.mx',
         )
 
 SITE_ID = 1
@@ -190,13 +188,17 @@ MEDIA_ROOT = '/semitki/storage/'
 SOCIAL_AUTH_FACEBOOK_KEY = os.environ["SOCIAL_AUTH_FACEBOOK_KEY"]
 SOCIAL_AUTH_FACEBOOK_SECRET = os.environ["SOCIAL_AUTH_FACEBOOK_SECRET"]
 # Define SOCIAL_AUTH_FACEBOOK_SCOPE to get extra permissions from facebook. Email is not sent by default, to get it, you must request the email permission:
-SOCIAL_AUTH_FACEBOOK_SCOPE = ['public_profile', 'email', 'publish_actions']
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['public_profile', 'email', 'publish_actions',
+        'user_photos','manage_pages','publish_pages']
 SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
             'fields': 'id, name, email'
             }
 
 SOCIAL_AUTH_TWITTER_KEY = os.environ["SOCIAL_AUTH_TWITTER_KEY"]
 SOCIAL_AUTH_TWITTER_SECRET = os.environ["SOCIAL_AUTH_TWITTER_SECRET"]
+TWITTER_REQUEST_TOKEN_URL = "https://api.twitter.com/oauth/request_token"
+TWITTER_AUTHENTICATE_URL = "https://api.twitter.com/oauth/authenticate?oauth_token="
+TWITTER_ACCESS_TOKEN_URL = "https://api.twitter.com/oauth/access_token"
 
 FACEBOOK_URL_CAPTION=os.environ["FACEBOOK_URL_CAPTION"]
 
@@ -206,8 +208,9 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 SOCIALACCOUNT_PROVIDERS = {
         'facebook': {
-            'EXCHANGE_TOKEN': True
-            }
+            'EXCHANGE_TOKEN': False
+            },
+        'twitter':{}
         }
 
 SWAGGER_SETTINGS = {

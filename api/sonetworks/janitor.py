@@ -95,8 +95,14 @@ def stuff_it(pk, staff = False, page = False):
     if chan != None:
         oauth = chan.get_oauth2session()
         if staff:
-            social_user = SystemAccount.objects.get(uid = account_id).id
-            token = SocialToken.objects.get(account_id = social_user).token
+            social_user = SystemAccount.objects.get(uid = account_id)
+            social_token = SocialToken.objects.get(account_id = social_user.id)
+            if chanstr == 'facebook':
+                token = social_token.token
+            else:
+                token = {'access_token':social_token.token, 'token_secret':social_token.token_secret}
+                user_tw = social_user.extra_data['screen_name']
+
         elif page:
             token = PagesToken.objects.get(page_id = account_id).token
         else:
@@ -151,7 +157,6 @@ def stuff_it(pk, staff = False, page = False):
                         social_group_id = grupo, isactive = True)
                     for ag in account_groups:
                         account = SocialAccount.objects.get(pk = ag.social_account_id)
-                        #print grupo + '|'+ account.bucket + '|' + account.bucket_id + '|'+ account.username
                         share = chan.share(account.access_token,
                             permalink_url, account.bucket_id, post_id )
 
@@ -161,8 +166,7 @@ def stuff_it(pk, staff = False, page = False):
                         social_group_id = grupo, isactive = True)
                     for ag in account_groups:
                         account = SocialAccount.objects.get(pk = ag.social_account_id)
-                        #print grupo + '|'+ account.bucket + '|' + account.bucket_id + '|'+ account.username
-                        share = chan.fav(account.access_token,
+                        fav = chan.fav(account.access_token,
                             permalink_url, account.bucket_id, post_id )
 
         return response

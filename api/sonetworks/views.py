@@ -1,6 +1,8 @@
 import os, time
 import json
 from datetime import datetime, tzinfo
+
+from django.core.exceptions import MultipleObjectsReturned
 from django.conf import settings
 from django.contrib.auth.models import User, Group
 from rest_framework.decorators import detail_route
@@ -24,6 +26,8 @@ from rest_auth.social_serializers import TwitterLoginSerializer
 from django.http import HttpResponse, HttpResponseRedirect
 
 import requests
+from requests_oauthlib import OAuth1
+from urlparse import parse_qs
 from requests_oauthlib import OAuth2Session
 from requests_oauthlib.compliance_fixes import facebook_compliance_fix
 from oauthlib.oauth2 import BackendApplicationClient
@@ -47,9 +51,13 @@ class FacebookLogin(SocialLoginView):
 
 
 class TwitterLogin(LoginView):
-    serializer_class = TwitterLoginSerializer
     adapter_class = TwitterOAuthAdapter
-
+    #client_class = OAuth2Client
+    #callback_url = os.environ["OAUTH2_REDIRECT_URI"] + "?chan=facebook"
+    serializer_class = TwitterLoginSerializer
+    
+    def process_login(self):
+        get_adapter(self.request).login(self.request, self.user)
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -185,6 +193,7 @@ def callback(request):
     """
     # Set to 0 for production, 1 is for development only
     os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
+    
 
     # Only process if a chan is present
     if 'chan' in request.GET:
@@ -205,25 +214,81 @@ def callback(request):
         user = bucket.get_user_detail()
 
         if user is not None:
-            social_account = SocialAccount(
-                    username = user["name"],
-                    email = user["email"],
-                    bucket_id = user["id"],
-                    image_link = user["image"],
-                    access_token = token, #json.JSONEncoder().encode(token),
-                    token_expiration = datetime.fromtimestamp(token["expires_in"])
-                                if "expires_in" in token  else None,
-                    bucket = bucket.tagname)
-            social_account.save()
-        parameter="?action=success"
+            # Check for existing social account before save
+            try:
+                obj, created = SocialAccount.objects.get_or_create(
+                        bucket_id = user["id"], bucket = bucket.tagname,
+                        defaults = {
+                            'username': user["name"],
+                            'email': user["email"],
+                            'image_link': user["image"],
+                            'access_token': token, #json.JSONEncoder().encode(token),
+                            'token_expiration':
+                            datetime.fromtimestamp(token["expires_in"]) if "expires_in" in token  else None,
+                            }
+                        )
+
+                if(created is False):
+                    obj.access_token = token
+                    obj.token_expiration = datetime.fromtimestamp(token["expires_in"]) if "expires_in" in token  else None
+
+                parameter="?action=success"
+
+            except MultipleObjectsReturned:
+                # TODO do the logging thing
+                parameter="?action=error"
+#             social_account = SocialAccount(
+                    # username = user["name"],
+                    # email = user["email"],
+                    # bucket_id = user["id"],
+                    # image_link = user["image"],
+                    # access_token = token, #json.JSONEncoder().encode(token),
+                    # token_expiration = datetime.fromtimestamp(token["expires_in"])
+                                # if "expires_in" in token  else None,
+                    # bucket = bucket.tagname)
+            # social_account.save()
+    elif 'login' in request.GET:
+
+        request_key = request.session['tw_request_token_key']
+        request_secret = request.session['tw_request_token_secret']
+        del request.session['tw_request_token_key']
+        del request.session['tw_request_token_secret']
+
+        response = HttpResponse('<script type="text/javascript">window.close(); </script>')
+            
+        if 'denied' not in request.GET:
+            
+            token_verifier = request.GET.get('oauth_verifier')
+            
+            oauth = OAuth1(settings.SOCIAL_AUTH_TWITTER_KEY,
+                       client_secret=settings.SOCIAL_AUTH_TWITTER_SECRET,
+                       resource_owner_key=request_key,
+                       resource_owner_secret=request_secret,
+                       verifier=token_verifier,
+            ) 
+            r = requests.post(url=settings.TWITTER_ACCESS_TOKEN_URL, auth=oauth)
+
+            credentials = parse_qs(r.content)
+            #request.session['tw_access_token'] = credentials.get('oauth_token')[0]
+            #request.session['tw_access_token_secret'] = credentials.get('oauth_token_secret')[0]
+            response = HttpResponse('<script type="text/javascript">window.close(); </script>')
+            response.set_cookie('tw_access_token', credentials.get('oauth_token')[0])
+            response.set_cookie('tw_access_token_secret', credentials.get('oauth_token_secret')[0])
+            response.set_cookie('tw_bucket_id', credentials.get('user_id')[0])
+        
+        return response
+
     else:
+
         parameter="?action=error"
 
     return HttpResponseRedirect(os.environ["SEMITKI_LANDING"]+parameter)
 
 
 def publish_now(request, pk):
-    """Publish a new post"""
+    """
+    Publish a new post
+    """
     staff = False
     page = False
     if ("staff" in request.GET):
@@ -234,9 +299,29 @@ def publish_now(request, pk):
 
 
 def fb_exchange_token(request):
+    """
+    DEPRECATED Exchange a short lived facebook token for a long lived one
+    """
     fb = facebook.Facebook()
     r = requests.get(fb.token_url + '?grant_type=fb_exchange_token' +
             '&client_id=' + settings.SOCIAL_AUTH_FACEBOOK_KEY +
             '&client_secret=' + settings.SOCIAL_AUTH_FACEBOOK_SECRET +
             '&fb_exchange_token=' + request.GET['access_token'])
     return HttpResponse(r.text)
+
+
+
+def tw_request_token(request):
+    
+    oauth = OAuth1(settings.SOCIAL_AUTH_TWITTER_KEY,
+                   client_secret=settings.SOCIAL_AUTH_TWITTER_SECRET)
+    
+    payload = {'oauth_callback': os.environ["OAUTH2_REDIRECT_URI"]+"?login=twitter"}
+
+    r = requests.post(url=settings.TWITTER_REQUEST_TOKEN_URL, auth=oauth, params=payload)
+    credentials = parse_qs(r.content)
+    request.session['tw_request_token_key'] = credentials.get('oauth_token')[0]
+    request.session['tw_request_token_secret'] = credentials.get('oauth_token_secret')[0]
+    authorize_url = settings.TWITTER_AUTHENTICATE_URL + credentials.get('oauth_token')[0]
+    return HttpResponseRedirect(authorize_url)
+

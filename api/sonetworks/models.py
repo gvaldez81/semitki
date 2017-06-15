@@ -1,4 +1,3 @@
-
 # semitki models
 import uuid
 

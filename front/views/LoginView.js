@@ -10,8 +10,17 @@ let LoginView = Backbone.View.extend({
   initialize: function() {
     this.footer = new FooterView();
     S.toggleNavigation();
-
     tour.init();
+
+//    S.collections.getTourSteps(
+//      )
+
+//    Iterar :
+//    tour.addSteps(
+//      Step:)
+    //
+    //Traer elementos del modelos tourlements
+    //addSteps
   },
 
   events: {
@@ -66,48 +75,88 @@ let LoginView = Backbone.View.extend({
           });
           fb_token.then((result) => { // The promise of the FB token succeded
             S.jwtoken(result.token);
-            if (S.jwtoken() != undefined && S.user != undefined) {
-              if(S.fetchCollections()) {
-                S.user.set(user);
-                sessionStorage.setItem("user", JSON.stringify(user));
-                S.router.navigate('#scheduler', {trigger: true});
-              }
-            }
+            S.fetchCollections();
+            window.setTimeout(() => {
+              if (S.jwtoken() != undefined && S.user != undefined) {
+                let csrftoken = Cookies.get("csrftoken");
+                let sysuser = S.collection.get("user").findWhere({
+                  bucket_id: user.bucket_id
+                });
+                if (sysuser !== undefined) {
+                  S.user.set(user);
+                  sysuser.set(S.user.toJSON());
+                  sessionStorage.setItem("user", JSON.stringify(user));
+                  S.router.navigate('#scheduler', {trigger: true});
+                } else {
+                  S.logger("bg-danger",
+                    "Couldn't associate Facebook user with system user",
+                    true);
+                }
+              }},
+              3000);
           }, (err) => { // The promise of FB token failed
             S.logger("bg-danger", "Failed login with Facebook account", true);
           });
 
-      }, {scope: 'public_profile,email,publish_actions,user_photos,' +
-      'manage_pages,publish_pages'});
+      });
       }
-    });
+    }, {scope: 'public_profile,email,publish_actions,user_photos,' +
+      'manage_pages,publish_pages'});
   },
 
 
   tryTwLogin: () => {
-    //location.assign(SEMITKI_CONFIG.tw_api_url + "oauth/request_token");
-    let url = SEMITKI_CONFIG.tw_api_url + "oauth/request_token";
-    let nonce = Math.random().toString(36).replace(/[^a-z]/, '').substr(2);
-    $.ajax(url,
-      {
-        beforeSend: (jqXHR, settings) => {
-          jqXHR.setRequestHeader("Authorization OAuth oauth_nonce", nonce);
-          jqXHR.setRequestHeader("oauth_callback",
-            SEMITKI_CONFIG.api_oauth_callback + "?chan=twitter");
-          jqXHR.setRequestHeader("oauth_signature_method", "HMAC-SHA1");
-          jqXHR.setRequestHeader("oauth_timestamp", "1300228849");
-          jqXHR.setRequestHeader("oauth_consumer_key",
-            SEMITKI_CONFIG.tw_consumer_key);
-          jqXHR.setRequestHeader("oauth_signature", "");
-        },
-        method: "POST",
-        success: (response) => {
-          console.log(response);
-        },
-        error: (jqXHR, textStatus, errorThrown) => {
-          console.log(jqXHR);
+    
+    $.oauthpopup({
+        path: S.api("auth/tw_request_token"),
+        callback: function(param)
+        {
+          
+          let tw_token = new Promise((resolve, reject) => {
+            $.ajax(S.api("auth/twitter"),{
+            data: {
+                "access_token": Cookies('tw_access_token'),
+                "token_secret": Cookies('tw_access_token_secret'),
+            },
+            method: "POST",
+            }).done(resolve).fail(reject);
+          });
+          tw_token.then((result) => { // The promise of the FB token succeded
+            S.jwtoken(result.token);
+            S.fetchCollections();
+            window.setTimeout(() => {
+              if (S.jwtoken() != undefined && S.user != undefined) {
+                let csrftoken = Cookies.get("csrftoken");
+                let sysuser = S.collection.get("user").findWhere({
+                  bucket_id: Cookies('tw_bucket_id')
+                });
+                if (sysuser !== undefined) {
+                  let d = new Date();
+                  d.setDate(d.getDate() - 1);
+                  let expires = ";expires="+d;
+                  document.cookie = 'tw_access_token=;'+expires
+                  document.cookie = 'tw_access_token_secret=;'+expires
+                  document.cookie = 'tw_bucket_id=;'+expires
+                  S.user.set(sysuser.toJSON());
+                  sessionStorage.setItem("user", JSON.stringify(sysuser.toJSON()));
+                  S.router.navigate('#scheduler', {trigger: true});
+                } else {
+                  S.logger("bg-danger",
+                    "Couldn't associate Twitter user with system user",
+                    true);
+                }
+              }},
+              3000);
+          }, (err) => { // The promise of FB token failed
+            S.logger("bg-danger", "Failed login with Twitter account", true);
+          });
+          //S.logger("bg-success", "Cerro el PopUp", true);
+          //do callback stuff
         }
-      });
+    });
+    
+    
+
   },
 
 
@@ -146,11 +195,6 @@ let LoginView = Backbone.View.extend({
   },
 
   render: function() {
-/*    let data = {*/
-      //t: {
-        //"use_other_account": S.polyglot.t("login.use_other_account")
-      //}
-/*    }*/;
     let template = $("#login-template").html();
     let compiled = Handlebars.compile(template);
 
@@ -159,10 +203,12 @@ let LoginView = Backbone.View.extend({
     this.$el.html(compiled);
     $("#main").html(this.$el);
 
-    tour.start(true);
+
+    //Traer usuario y tourView, 
+    //verTour =  (tourView existe, tourView.view, True)
+    //tour.start(verTour);
 
     return this;
   },
 
 });
-

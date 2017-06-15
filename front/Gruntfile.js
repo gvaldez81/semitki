@@ -186,6 +186,12 @@ module.exports = (grunt) => {
             dest: 'dist/js/',
             filter: 'isFile'
           },
+          { // jQuery oauthpopup
+            expand: true,
+            src: 'bower_components/jquery-oauthpopup/*.js',
+            dest: 'dist/js/',
+            filter: 'isFile'
+          },
           { // jQuery UI
             expand: true,
             src: 'bower_components/jquery-ui/*.js',
