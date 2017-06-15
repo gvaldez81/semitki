@@ -313,12 +313,19 @@ def fb_exchange_token(request):
 
 def tw_request_token(request):
     
+
+    ts = str(int(time.time()))
+
     oauth = OAuth1(settings.SOCIAL_AUTH_TWITTER_KEY,
-                   client_secret=settings.SOCIAL_AUTH_TWITTER_SECRET)
+                   client_secret=settings.SOCIAL_AUTH_TWITTER_SECRET,
+                   timestamp = ts)
     
     payload = {'oauth_callback': os.environ["OAUTH2_REDIRECT_URI"]+"?login=twitter"}
 
     r = requests.post(url=settings.TWITTER_REQUEST_TOKEN_URL, auth=oauth, params=payload)
+
+    h = r.headers
+    out = r.text
     credentials = parse_qs(r.content)
     request.session['tw_request_token_key'] = credentials.get('oauth_token')[0]
     request.session['tw_request_token_secret'] = credentials.get('oauth_token_secret')[0]
