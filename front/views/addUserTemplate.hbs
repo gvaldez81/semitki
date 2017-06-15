@@ -29,8 +29,20 @@
         <input type="text" name="uname" class="form-control" id="input_username" placeholder="User Name" >
         </div>
 
-        <div class="alert alert-danger errors-container" style="display: none;">
+        <div class="form-group">
+        <label for="input_uname">Password</label>
+        <input type="password" name="pass" class="form-control" id="input_password" placeholder="Enter your Password" >        
         </div>
+
+        <div class="form-group">
+        <label for="input_uname">Confirm Password</label>
+        <input type="password" name="pass" class="form-control" id="input_confpass" placeholder="Confirm your Password">        
+        </div>
+
+         <div class="row">
+              <div class="col-md-12" id="messages"></div>
+         </div>
+
         <div class="form-group">
           <input id="save" type="button" name="save" class="btn btn-primary pull-left" value="Save" data-loading-text="Saving...">
         </div>
