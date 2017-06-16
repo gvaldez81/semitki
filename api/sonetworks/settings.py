@@ -175,10 +175,14 @@ JWT_AUTH = {
 
 CORS_ORIGIN_WHITELIST = (
         'localhost',
+        'localhost:9080',
         '127.0.0.1',
+        '127.0.0.1:9080',
         '159.203.134.236',
+        '159.203.134.236:9080',
         '174.138.68.40',
-        'mexicoeligebien.mx'
+        'mexicoeligebien.mx',
+        'mexicoeligebien.mx:9080'
         )
 
 SITE_ID = 1
