@@ -214,7 +214,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 SOCIALACCOUNT_PROVIDERS = {
         'facebook': {
-            'EXCHANGE_TOKEN': False
+            'EXCHANGE_TOKEN': True
             },
         'twitter':{}
         }
