@@ -1,9 +1,24 @@
 from django.conf import settings
 from django.contrib.auth.models import User, Group
+from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 from rest_auth.registration.serializers import SocialLoginSerializer
 from allauth.socialaccount.models import SocialAccount as SystemAccount
 from .models import *
+
+
+class ChangePasswordSerializer(serializers.Serializer):
+    """
+    Serializer for password change endpoint.
+    """
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
+
+    def validate_new_password(self, value):
+        validate_password(value)
+        return value
+
+
 
 class FilteredIsActiveListSerializer(serializers.ListSerializer):
 
@@ -16,6 +31,8 @@ class FilteredIsActiveListUser(serializers.ListSerializer):
     def to_representation(self, data):
         data = data.filter(is_active=True)
         return super(FilteredIsActiveListUser, self).to_representation(data)
+
+
 
 class UserSerializer(serializers.ModelSerializer):
 

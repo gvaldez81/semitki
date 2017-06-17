@@ -19,6 +19,7 @@ from allauth.account.adapter import get_adapter
 from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from rest_auth.registration.views import SocialLoginView
+from rest_framework.views import APIView
 from allauth.socialaccount.providers.twitter.views import TwitterOAuthAdapter
 from rest_auth.views import LoginView
 from rest_auth.social_serializers import TwitterLoginSerializer
@@ -35,6 +36,35 @@ from oauthlib.oauth2 import WebApplicationClient
 from janitor import *
 from buckets import facebook
 from buckets import twitter
+
+
+class UpdatePassword(APIView):
+    """
+    An endpoint for changing password.
+    """
+    permission_classes = (permissions.IsAuthenticated, )
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def put(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        serializer = ChangePasswordSerializer(data=request.data)
+
+        if serializer.is_valid():
+            # Check old password
+            old_password = serializer.data.get("old_password")
+            if not self.object.check_password(old_password):
+                return Response({"old_password": ["Wrong password."]}, 
+                                status=status.HTTP_400_BAD_REQUEST)
+            # set_password also hashes the password that the user will get
+            self.object.set_password(serializer.data.get("new_password"))
+            self.object.save()
+
+            return Response({'message': 'success'}, status=status.HTTP_200_OK) 
+            #Response(status=status.HTTP_204_NO_CONTENT)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class FacebookLogin(SocialLoginView):
