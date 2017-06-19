@@ -3,40 +3,41 @@
   <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="dialog_label">Add User </h4>
+        <h4 class="modal-title" id="dialog_label">{{pt "adduser.title"}}</h4>
       </div>
       <div class="modal-body modal-body-default" style="padding-bottom: 0;">
 
       <form method="post" action="add" role="form">
       <fieldset>
         <div class="form-group">
-          <label for="input_name">First Name</label>
-          <input type="text" name="name" class="form-control" id="input_fname" placeholder="Name" >
+          <label for="input_name">{{pt "generics.fname"}}</label>
+          <input type="text" name="name" class="form-control" id="input_fname"
+            placeholder="{{pt "generics.fname"}}">
         </div>
 
         <div class="form-group">
-          <label  for="input_lname">Last Name</label>
-          <input type="text" name="lname" class="form-control" id="input_lname" placeholder="Last Name">
+          <label  for="input_lname">{{pt "generics.lname"}}</label>
+          <input type="text" name="lname" class="form-control" id="input_lname" placeholder="{{pt "generics.lname"}}">
         </div>
 
         <div class="form-group">
-          <label for="input_email">E-mail</label>
-          <input type="text" name="email" class="form-control" id="input_email" placeholder="E-mail" >
+          <label for="input_email">{{pt "generics.email"}}</label>
+          <input type="text" name="email" class="form-control" id="input_email" placeholder="{{pt "generics.email"}}" >
         </div>
 
         <div class="form-group">
-        <label for="input_uname">User Name</label>
-        <input type="text" name="uname" class="form-control" id="input_username" placeholder="User Name" >
+        <label for="input_uname">{{pt "generics.username"}}</label>
+        <input type="text" name="uname" class="form-control" id="input_username" placeholder="{{pt "generics.username"}}" >
         </div>
 
         <div class="form-group">
-        <label for="input_uname">Password</label>
-        <input type="password" name="pass" class="form-control" id="input_password" placeholder="Enter your Password" >        
+        <label for="input_uname">{{pt "generics.password"}}</label>
+        <input type="password" name="pass" class="form-control" id="input_password" placeholder="{{pt "generics.password"}}" >
         </div>
 
         <div class="form-group">
-        <label for="input_uname">Confirm Password</label>
-        <input type="password" name="pass" class="form-control" id="input_confpass" placeholder="Confirm your Password">        
+        <label for="input_uname">{{pt "generics.confirmpass"}}</label>
+        <input type="password" name="pass" class="form-control" id="input_confpass" placeholder="{{pt "generics.confirmpass"}}">
         </div>
 
          <div class="row">
@@ -44,7 +45,9 @@
          </div>
 
         <div class="form-group">
-          <input id="save" type="button" name="save" class="btn btn-primary pull-left" value="Save" data-loading-text="Saving...">
+          <input id="save" type="button" name="save"
+         class="btn btn-primary pull-left" value="{{pt "button.save"}}"
+         data-loading-text="Saving...">
         </div>
       </fieldset>
       </form>

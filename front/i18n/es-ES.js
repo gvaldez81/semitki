@@ -12,10 +12,17 @@ let poles = {
   "accountinfo.loadphoto": "Subir una Foto Diferente...",
   "accountinfo.search": "Examinar...",
 
-  "acctions.title": "Acciones",
+  "adduser.title": "Agregar usuario",
 
   "button.save": "Guardar",
   "button.delete": "Eliminar",
+
+  "generics.fname": "Nombre",
+  "generics.lname": "Apellido",
+  "generics.email": "Correo electrónico",
+  "generics.username": "Nombre de usuario",
+  "generics.password": "Contraseña",
+  "generics.confirmpass": "Confirmar contraseña",
 
   "login.use_other_account": "Iniciar Sesion con",
   "login.remember_me": "Recordar",
