@@ -14,6 +14,8 @@ let poles = {
 
   "adduser.title": "Agregar usuario",
 
+  "button.add": "Agregar",
+  "button.edit": "Editar",
   "button.save": "Guardar",
   "button.delete": "Eliminar",
 
