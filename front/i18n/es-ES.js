@@ -45,6 +45,11 @@ let poles = {
   "groups.title": "Grupos",
   "groups.name": "Nombre del Grupo",
   "groups.desc": "Descripción del Grupo",
+
+  "phase.title": "Fases",
+  "phase.add": "Agregar fase",
+  "phase.edit": "Editar fase",
+
   "project.name": "Nombre de Proyecto",
   "project.desc": "Descripcion del Proyecto",
   "permissions.title": "Permisos",

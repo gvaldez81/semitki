@@ -3,8 +3,8 @@
 
 <div class="container">
 	<ul class="breadcrumb">
-	  <li><a href="#scheduler">Dash board</a></li>
-	  <li class="active">Phases</li>
+    <li><a href="#scheduler">{{pt "scheduler.title"}}</a></li>
+    <li class="active">{{pt "phase.title"}}</li>
 	</ul>
 
 
@@ -13,13 +13,11 @@
 			<div class="list-group crud_item" id="phases_items">
 			{{#each phase}}
 				<a  class="list-group-item item" id="{{id}}" style="background: #eee"  >
-				    <div class="pull-right"><strong>{{@index}}</strong></div>
+          <div class="item_buttons hideme crud_buttons">
 
-            		<div class="item_buttons hideme crud_buttons">
-
-						<button class="btn btn-default btn-xs item_button_remove" data-toggle="modal" data-target="#dialog-crud"><span class="glyphicon glyphicon-trash"></span> Remove
+            <button class="btn btn-default btn-xs item_button_remove" data-toggle="modal" data-target="#dialog-crud"><span class="glyphicon glyphicon-trash"></span>{{pt "button.delete"}}
 						</button>
-            			<button class="btn btn-default btn-xs item_button_edit" data-toggle="modal" data-target="#dialog-crud"><span class="glyphicon glyphicon-pencil"></span> Edit
+                  <button class="btn btn-default btn-xs item_button_edit" data-toggle="modal" data-target="#dialog-crud"><span class="glyphicon glyphicon-pencil"></span>{{pt "button.edit"}}
             			</button>
 					</div>
 					<h4 class="list-group-item-heading">
@@ -27,7 +25,7 @@
 					</h4>
 				</a>
 			{{else}}
-				<div class="alert alert-warning" role="alert">No Data</div>
+       <div class="alert alert-warning" role="alert">{{pt "msg.nodata"}}</div>
 			{{/each}}
 			</div>
 				<div class="row">
@@ -36,17 +34,10 @@
 		</div>
 
 		<div class="col-xs-12 col-md-3">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">Actions</h3>
-				</div>
-				<div class="panel-body">
-					<ul class="nav nav-pills nav-stacked">
-						<li><a href="#" class="add_phase" data-status="active" data-toggle="modal" data-target="#dialog-crud"><span class="glyphicon glyphicon-plus"></span> Add </a></li>
-					</ul>
-				</div>
-			</div>
-
+      <ul class="nav nav-pills nav-stacked">
+        <li><a href="#" class="btn btn-default btn-fab btn-add" data-status="active" data-toggle="modal" data-target="#dialog-crud">
+        <i class="material-icons">add_circle</i></a></li>
+      </ul>
 		</div>
 	</div>
 </div>

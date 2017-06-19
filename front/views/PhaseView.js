@@ -13,11 +13,11 @@ let PhaseView = Backbone.View.extend({
   },
 
   events: {
-       
+
     "click #delete": "delete",
     "click .item_button_edit": "editItem",
     "click .item_button_remove": "hideItem",
-    "click .add_phase": "addItem"
+    "click .btn-add": "addItem"
   },
 
   addItem: () => {
