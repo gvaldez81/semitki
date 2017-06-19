@@ -1,17 +1,5 @@
 let poles = {
 
-  "accountinfo.title": "Editar Información de la Cuenta",
-  "accountinfo.accountinfo": "Información de la Cuenta",
-  "accountinfo.fname": "Nombre:",
-  "accountinfo.lname": "Apellidos:",
-  "accountinfo.company": "Empresa:",
-  "accountinfo.email": "Correo:",
-  "accountinfo.username": "Usuario:",
-  "accountinfo.pass": "Contraseña:",
-  "accountinfo.passconfirm": "Confirmar Contraseña:",
-  "accountinfo.loadphoto": "Subir una Foto Diferente...",
-  "accountinfo.search": "Examinar...",
-
   "adduser.title": "Agregar usuario",
 
   "button.add": "Agregar",
@@ -52,36 +40,13 @@ let poles = {
   "phase.add": "Agregar fase",
   "phase.edit": "Editar fase",
 
-  "project.name": "Nombre de Proyecto",
-  "project.desc": "Descripcion del Proyecto",
-
   "related.title": "Cuentas relacionadas",
   "related.selector": "Cuentas relacionadas a:",
   "related.free": "Cuentas disponibles",
 
-  "permissions.title": "Permisos",
-  "permissions.name": "Usuario",
-  "permissions.permission": "Permisos",
-  "permissions.page": "Páginas",
-  "billing.title": "Dirección de Facturación",
-  "billing.fname": "Nombre",
-  "billing.lname": "Apellidos",
-  "billing.email": "Correo",
-  "billing.nombile_no": "Celular",
-  "billing.country": "País",
-  "billing.city": "Ciudad",
-  "billing.city": "CP",
-  "pricing.title": "Precios",
-  "pricing.basic": "Basico",
-  "pricing.deluxe": "Deluxe",
-  "pricing.ultimate": "Ultimate",
-  "pricing.month10": "$10 / Mes",
-  "pricing.month20": "$20 / Mes",
-  "pricing.month40": "$40 / Mes",
-  "pricing.personal_use": "Uso Personal",
-  "pricing.unlimited_projects": "Proyectos Ilimitados",
-  "pricing.support": "24/7 Atención",
-  "pricing.buynow": "Comprar!",
+  "sidemenu.followers": "Seguidores",
+  "sidemenu.settings": "Ajustes",
+  "sidemenu.related": "Grupos y cuentas",
 
   "scheduler.title": "Calendario",
 
