@@ -41,22 +41,18 @@ let CampaignView = Backbone.View.extend({
     let id = $(ev.currentTarget).parents('.item')[0].id;
     let dialog = new hideCampaignView({item: new Array(S.collection.get("campaigns").get(id).toJSON())});
     dialog.render();
-    //return false;
   },
 
   delete: () => {
     let campaigns = S.collection.get("campaigns");
     let campaign = campaigns.get($("#campaignFinder").val());
     campaigns.sync("delete", campaign, S.addAuthorizationHeader());
-    //recargar el listado.
   },
 
   render: function(){
-    //this.modal.render();
     this.modal_add.render();
     let data = {
       campaigns: S.collection.get("campaigns").toJSON()
-      //phases: S.collection.get("phases").toJSON();
     };
 
     let template = $("#campaign-template").html();

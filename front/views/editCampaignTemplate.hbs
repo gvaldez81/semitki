@@ -3,7 +3,7 @@
   <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="dialog_label">Edit Campaign</h4>
+        <h4 class="modal-title" id="dialog_label">{{pt "campaign.edit"}}</h4>
       </div>
       <div class="modal-body modal-body-default" style="padding-bottom: 0;">
 
@@ -11,13 +11,15 @@
       <fieldset>
         {{#each item}}
         <div class="form-group">
-          <label for="input_name">Name</label>
-          <input type="text" name="name" class="form-control" id="input_name" placeholder="Name" value="{{name}}">
+          <label for="input_name">{{pt "generics.name"}}</label>
+          <input type="text" name="name" class="form-control" id="input_name"
+          placeholder="{{pt "generics.name"}}" value="{{name}}">
         </div>
 
         <div class="form-group">
-          <label  for="input_description">Description</label>
-          <input type="text" name="description" class="form-control" id="input_description" placeholder="Description" value="{{description}}">
+          <label  for="input_description">{{pt "generics.description"}}</label>
+          <input type="text" name="description" class="form-control"
+          id="input_description" placeholder="{{pt "generics.description"}}" value="{{description}}">
         </div>
         {{/each}}
         <div class="alert alert-danger errors-container" style="display: none;">
@@ -25,8 +27,9 @@
         <div class="form-group">
           {{#each item}}
             <input type="hidden" id="edit-id" value="{{id}}">
-          {{/each}}  
-            <input id="edit" type="button" class="btn btn-primary pull-left" value="Save" data-loading-text="Saving...">          
+          {{/each}}
+            <input id="edit" type="button" class="btn btn-primary pull-left"
+            value="{{pt "button.save"}}" data-loading-text="Saving...">
         </div>
       </fieldset>
       </form>

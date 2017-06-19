@@ -19,8 +19,13 @@ let poles = {
   "button.save": "Guardar",
   "button.delete": "Eliminar",
 
-  "generics.fname": "Nombre",
+  "campaign.title": "Campañas",
+  "campaign.add": "Agregar campaña",
+  "campaign.edit": "Editar campaña",
+
+  "generics.name": "Nombre",
   "generics.lname": "Apellido",
+  "generics.description": "Descripción",
   "generics.email": "Correo electrónico",
   "generics.username": "Nombre de usuario",
   "generics.password": "Contraseña",
