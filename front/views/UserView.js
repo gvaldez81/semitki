@@ -21,7 +21,7 @@ let UserView = Backbone.View.extend({
     "click #delete": "delete",
     "click .item_button_edit": "editItem",
     "click .item_button_remove": "hideItem",
-    "click .add_user": "addItem"
+    "click .btn-add": "addItem"
   },
 
 
