@@ -79,10 +79,9 @@ let poles = {
   "scheduler.title": "Calendario",
 
   "user.title": "Usuarios",
+  "user.add": "Agregar usuario",
+  "user.edit": "Editar usuario",
   "user.username": "Nombre Usuario",
-  "user.e_mail": "Correo",
-  "user.fname": "Nombre",
-  "user.lname": "Apellidos",
   "user.user_type": "Tipo Usuario",
   "user.operator": "Operador",
   "user.administrator": "Administrador",
