@@ -31,6 +31,10 @@ let poles = {
   "generics.password": "Contraseña",
   "generics.confirmpass": "Confirmar contraseña",
 
+  "group.title": "Grupos",
+  "group.add": "Agregar grupo",
+  "group.edit": "Editar grupo",
+
   "login.use_other_account": "Iniciar Sesion con",
   "login.remember_me": "Recordar",
   "login.login": "Iniciar Sesión",
@@ -41,10 +45,6 @@ let poles = {
   "login.passplaceholder": "Contraseña",
 
   "msg.nodata": "Sin datos",
-
-  "groups.title": "Grupos",
-  "groups.name": "Nombre del Grupo",
-  "groups.desc": "Descripción del Grupo",
 
   "phase.title": "Fases",
   "phase.add": "Agregar fase",

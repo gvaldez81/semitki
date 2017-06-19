@@ -11,11 +11,11 @@ let GroupsView = Backbone.View.extend({
     this.modal_add = new addGroupsView();
     this.modal_edit = new editGroupsView();
   },
-  
+
   events: {
     "click #save": "save",
     "click #delete": "delete",
-    "click .add_group": "addItem",
+    "click .btn-add": "addItem",
     "click .item_button_edit": "editItem",
     "click .item_button_remove": "hideItem",
   },
@@ -42,7 +42,7 @@ let GroupsView = Backbone.View.extend({
     let groups = S.collection.get("groups");
     let group = groups.get($("#groupFinder").val());
     groups.sync("delete", group, S.addAuthorizationHeader());
-  
+
   },
 
   addItem: () => {
@@ -87,5 +87,5 @@ let GroupsView = Backbone.View.extend({
     S.showButtons();
     return this;
   }
-  
+
 });
