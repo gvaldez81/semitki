@@ -19,7 +19,7 @@ class FilteredIsActiveListUser(serializers.ListSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
 
-    password = serializers.CharField(write_only=True)
+    password = serializers.CharField(write_only=True,required=False)
 
     bucket_id = serializers.SerializerMethodField()
     bucket = serializers.SerializerMethodField()

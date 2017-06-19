@@ -182,4 +182,4 @@ class PagesToken(models.Model):
             self.image.save(str(self.page_id)+'_'+os.path.basename(urlclean), profilePic )
             self.save()
         super(PagesToken, self).save()
-    
+

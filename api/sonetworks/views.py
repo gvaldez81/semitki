@@ -55,7 +55,7 @@ class TwitterLogin(LoginView):
     #client_class = OAuth2Client
     #callback_url = os.environ["OAUTH2_REDIRECT_URI"] + "?chan=facebook"
     serializer_class = TwitterLoginSerializer
-    
+
     def process_login(self):
         get_adapter(self.request).login(self.request, self.user)
 
@@ -193,7 +193,7 @@ def callback(request):
     """
     # Set to 0 for production, 1 is for development only
     os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
-    
+
 
     # Only process if a chan is present
     if 'chan' in request.GET:
@@ -250,7 +250,7 @@ def callback(request):
     elif 'login' in request.GET:
 
         response = HttpResponse('<script type="text/javascript">window.close(); </script>')
-        
+
         if 'denied'  in request.GET:
             response.set_cookie('tw_denied', 'Access Denied', domain=settings.SESSION_COOKIE_DOMAIN)
         else:
@@ -258,15 +258,15 @@ def callback(request):
             request_secret = request.session['tw_request_token_secret']
             del request.session['tw_request_token_key']
             del request.session['tw_request_token_secret']
-            
+
             token_verifier = request.GET.get('oauth_verifier')
-            
+
             oauth = OAuth1(settings.SOCIAL_AUTH_TWITTER_KEY,
                        client_secret=settings.SOCIAL_AUTH_TWITTER_SECRET,
                        resource_owner_key=request_key,
                        resource_owner_secret=request_secret,
                        verifier=token_verifier,
-            ) 
+            )
             r = requests.post(url=settings.TWITTER_ACCESS_TOKEN_URL, auth=oauth)
 
             credentials = parse_qs(r.content)
@@ -274,7 +274,7 @@ def callback(request):
             response.set_cookie('tw_access_token', credentials.get('oauth_token')[0], domain=settings.SESSION_COOKIE_DOMAIN)
             response.set_cookie('tw_access_token_secret', credentials.get('oauth_token_secret')[0], domain=settings.SESSION_COOKIE_DOMAIN)
             response.set_cookie('tw_bucket_id', credentials.get('user_id')[0], domain=settings.SESSION_COOKIE_DOMAIN)
-        
+
         return response
 
     else:
@@ -311,14 +311,14 @@ def fb_exchange_token(request):
 
 
 def tw_request_token(request):
-    
+
 
     ts = str(int(time.time()))
 
     oauth = OAuth1(settings.SOCIAL_AUTH_TWITTER_KEY,
                    client_secret=settings.SOCIAL_AUTH_TWITTER_SECRET,
                    timestamp = ts)
-    
+
     payload = {'oauth_callback': os.environ["OAUTH2_REDIRECT_URI"]+"?login=twitter"}
 
     r = requests.post(url=settings.TWITTER_REQUEST_TOKEN_URL, auth=oauth, params=payload)
