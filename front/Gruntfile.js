@@ -107,12 +107,12 @@ module.exports = (grunt) => {
             src: 'bower_components/underscore/*.js',
             dest: 'dist/js/'
           },
-          { // handlbars
+          { // handlebars
             src: 'bower_components/handlebars/*.js',
             dest: 'dist/js/'
           },
 
-          { // BAckbone
+          { // Backbone
             src: 'bower_components/backbone/*.js',
             dest: 'dist/js/'
           },
@@ -144,6 +144,10 @@ module.exports = (grunt) => {
           { // Bootstrap JS
             src: 'bower_components/bootstrap/dist/js/*.js',
             dest: 'dist/js/', filter: 'isFile'
+          },
+          { // Bootstrap Material Design CSS
+            src: 'bower_components/bootstrap-material-design/dist/css/*.css',
+            dest: 'dist/css/'
           },
           { //bootstrapfonts
             expand: true,

@@ -3,8 +3,8 @@
 
 <div class="container">
   <ul class="breadcrumb">
-    <li><a href="#scheduler">Dash board</a></li>
-    <li class="active">Users</li>
+    <li><a href="#scheduler">{{pt "scheduler.title"}}</a></li>
+    <li class="active">{{pt "user.title"}}</li>
   </ul>
 
 
@@ -27,7 +27,7 @@
           </h4>
         </a>
       {{else}}
-        <div class="alert alert-warning" role="alert">No Data</div>
+       <div class="alert alert-warning" role="alert">{{pt "msg.nodata"}}</div>
       {{/each}}
       </div>
         <div class="row">

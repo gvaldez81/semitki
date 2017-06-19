@@ -34,6 +34,7 @@
     "bootstrap-select": "^1.12.2",
     "bootstrap-dropdown": "*",
     "bootstrap-tour": "^0.11.0",
-    "jquery-oauthpopup": "^0.0.2"
+    "jquery-oauthpopup": "^0.0.2",
+    "bootstrap-material-design": "^0.5.10"
   }
 }
