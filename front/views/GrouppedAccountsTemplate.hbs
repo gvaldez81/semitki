@@ -1,15 +1,15 @@
 <script type="text/x-handlebars-template" id="grouppedaccounts">
 
   <ul class="breadcrumb">
-    <li><a href="#scheduler">Dash board</a></li>
-      <li class="active">Accounts Related</li>
+    <li><a href="#scheduler">{{pt "scheduler.title"}}</a></li>
+      <li class="active">{{pt "related.title"}}</li>
   </ul>
 
    <div class="row">
       <div class="col-xs-12">
          <div class="panel panel-default">
             <div class="panel-heading">
-               <h3 class="panel-title">Groupped Accounts</h3>
+               <h3 class="panel-title">{{pt "related.title"}}</h3>
             </div>
             <div class="panel-body">
                <div class="row">
@@ -20,8 +20,7 @@
                            <div class="panel-heading">
                               <div class="row">
                                 <div class="col-xs-6">
-                                  <h3 class="panel-title">Accounts related to:  
-                                  </h3>
+                                  <h3 class="panel-title">{{pt "related.selector"}}</h3>
                                 </div>
                                 <div class="col-xs-6">
                                   <select class="form-control" id="group">
@@ -40,7 +39,7 @@
                      <div class="col-sm-6">
                         <div class="panel panel-default">
                            <div class="panel-heading">
-                              <h3 class="panel-title">Accounts Free</h3>
+                              <h3 class="panel-title">{{pt "related.free"}}</h3>
                            </div>
                            <div class="panel-body" id="available">
                            <!-- TABLE HERE -->

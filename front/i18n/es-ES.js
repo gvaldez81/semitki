@@ -30,6 +30,8 @@ let poles = {
   "generics.username": "Nombre de usuario",
   "generics.password": "Contraseña",
   "generics.confirmpass": "Confirmar contraseña",
+  "generics.network": "Red social",
+  "generics.accounts": "Cuentas",
 
   "group.title": "Grupos",
   "group.add": "Agregar grupo",
@@ -52,6 +54,11 @@ let poles = {
 
   "project.name": "Nombre de Proyecto",
   "project.desc": "Descripcion del Proyecto",
+
+  "related.title": "Cuentas relacionadas",
+  "related.selector": "Cuentas relacionadas a:",
+  "related.free": "Cuentas disponibles",
+
   "permissions.title": "Permisos",
   "permissions.name": "Usuario",
   "permissions.permission": "Permisos",
