@@ -28,7 +28,7 @@ let ConnectedSortable = Backbone.View.extend({
            helper: "clone",
            zIndex: 999990,
         stop: (event, ui) => {
-          console.log(ui);
+          //console.log(ui);
 
           /*
           *                   Basado en el parentElement del target

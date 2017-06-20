@@ -33,7 +33,6 @@ let addGroupsView = Backbone.View.extend({
 
       success: (model, reponse) => {
 
-        console.log(model);
         $('#dialog-crud').modal('hide');       
         let groupView = new GroupsView();
         groupView.render(); 
@@ -48,7 +47,6 @@ let addGroupsView = Backbone.View.extend({
 
     let group = S.collection.get("groups")
         .create(this.addgroup(), options);
-        console.log("Group");
 
   },
 

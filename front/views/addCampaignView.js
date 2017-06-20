@@ -29,7 +29,6 @@ let addCampaignView = Backbone.View.extend({
 
       success: (model, reponse) => {
 
-        console.log(model);
         $('#dialog-crud').modal('hide');       
         let campaignView = new CampaignView();
         campaignView.render();   
@@ -44,7 +43,6 @@ let addCampaignView = Backbone.View.extend({
 
     let campaign = S.collection.get("campaigns")
         .create(this.addCampaign(), options);
-        console.log("Campaign");
 
   },
 

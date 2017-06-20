@@ -29,7 +29,6 @@ let addPhaseView = Backbone.View.extend({
 
       success: (model, reponse) => {
 
-        console.log(model);
         $('#dialog-crud').modal('hide');       
         let phaseView = new PhaseView();
         phaseView.render(); 
@@ -44,7 +43,6 @@ let addPhaseView = Backbone.View.extend({
 
     let group = S.collection.get("phases")
         .create(this.addphase(), options);
-        console.log("Phase");
 
   },
 
