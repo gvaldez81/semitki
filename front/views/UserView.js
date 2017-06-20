@@ -72,7 +72,6 @@ let UserView = Backbone.View.extend({
       users: S.collection.get("user").toJSON()
 
     };
-    console.log(data);
     let template = $("#user-template").html();
     let compiled = Handlebars.compile(template);
 
