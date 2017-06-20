@@ -6,6 +6,7 @@ let S = {
   initialize: function() {
     Backbone.history.start({pushState: false});        // Initialize Backbone web browser history support
     this.router = new SemitkiRouter();                // Initialize Backbone routes
+    $.material.init();                                // Boostrap Material Design
     // Select boxes default settings
     $.fn.select2.defaults.set("allowClear", false);
     this.jwtheader = "JWT ";                          // Token prefix for authorization custom header

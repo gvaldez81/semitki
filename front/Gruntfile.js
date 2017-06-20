@@ -148,7 +148,12 @@ module.exports = (grunt) => {
           { // Bootstrap Material Design CSS
             src: 'bower_components/bootstrap-material-design/dist/css/*.css',
             dest: 'dist/css/'
+         },
+           { // Bootstrap Material Design CSS
+            src: 'bower_components/bootstrap-material-design/dist/js/*.js',
+            dest: 'dist/js/'
           },
+
           { //bootstrapfonts
             expand: true,
             cwd: 'bower_components/bootstrap/dist/fonts',
