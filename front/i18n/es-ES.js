@@ -1,11 +1,15 @@
 let poles = {
 
+  "addpost.photolinks": "Enlace fotográfico",
+
   "adduser.title": "Agregar usuario",
 
   "button.add": "Agregar",
   "button.edit": "Editar",
   "button.save": "Guardar",
   "button.delete": "Eliminar",
+  "button.schedule": "Programar",
+  "button.publishnow": "Publicar ahora",
 
   "campaign.title": "Campañas",
   "campaign.add": "Agregar campaña",
@@ -20,6 +24,9 @@ let poles = {
   "generics.confirmpass": "Confirmar contraseña",
   "generics.network": "Red social",
   "generics.accounts": "Cuentas",
+  "generics.image": "Imágen",
+  "generics.link": "Enlace",
+  "generics.spread": "P R O P A G A R",
 
   "group.title": "Grupos",
   "group.add": "Agregar grupo",
@@ -45,8 +52,10 @@ let poles = {
   "related.free": "Cuentas disponibles",
 
   "sidemenu.followers": "Seguidores",
+  "sidemenu.staff": "Personal",
   "sidemenu.settings": "Ajustes",
   "sidemenu.related": "Grupos y cuentas",
+  "sidemenu.logout": "Salir",
 
   "scheduler.title": "Calendario",
 
