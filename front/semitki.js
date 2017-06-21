@@ -23,6 +23,9 @@ let S = {
     this.collection.set("pages", new Pages());
     this.collection.set("posts", new Posts());
     this.collection.set("user", new Users());
+    this.collection.set("tour_view",new TourViews());
+    this.collection.set("tour_element",new TourElements());
+    this.collection.set("tour_relates",new TourRelates());
     this.user = new UserModel();                      // Signed in user
     if(sessionStorage.getItem("user")) {
       this.user.set(JSON.parse(sessionStorage.user));
