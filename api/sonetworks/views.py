@@ -330,4 +330,23 @@ def tw_request_token(request):
     request.session['tw_request_token_secret'] = credentials.get('oauth_token_secret')[0]
     authorize_url = settings.TWITTER_AUTHENTICATE_URL + credentials.get('oauth_token')[0]
     return HttpResponseRedirect(authorize_url)
+    
 
+class TourViewSet(viewsets.ModelViewSet):
+
+    queryset = TourView.objects.all()
+    serializer_class = TourViewSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+
+
+class TourElementSet(viewsets.ModelViewSet):
+
+    queryset = TourElement.objects.all()
+    serializer_class = TourElementSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+
+class TourRelatedSet(viewsets.ModelViewSet):
+
+    queryset = TourRelated.objects.all()
+    serializer_class = TourRelatedSerializer
+    permission_classes = (permissions.IsAuthenticated,)

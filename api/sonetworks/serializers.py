@@ -156,3 +156,23 @@ class PagesTokenSerializer(serializers.HyperlinkedModelSerializer):
         model = PagesToken
         fields = ('page_id', 'name', 'account_id', 'image_link', 
             'image', 'image_path', 'bucket', 'bucket_id')
+        
+
+class TourViewSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = TourView
+        fields = ('__all__')
+
+
+class TourElementSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = TourElement
+        fields = ('__all__')
+
+class TourRelatedSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = TourRelated
+        fields = ('__all__')

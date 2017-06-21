@@ -50,6 +50,17 @@ class SocialAccountGroupAdmin(admin.ModelAdmin):
 class PagesTokenGroupAdmin(admin.ModelAdmin):
     list_display = ('owner','page_id', 'name')
 
+class PagesTokenGroupAdmin(admin.ModelAdmin):
+    list_display = ('owner','page_id', 'name')
+
+class TourViewGroupAdmin(admin.ModelAdmin):
+    list_display = ('name','description', 'isactive')
+
+class TourElementAdmin(admin.ModelAdmin):
+    list_display = ['name','get_tourview', 'isactive']
+    def get_tourview(self, obj):
+        return obj.tourview.name
+
 admin.site.register(Bucket, BucketAdmin)
 admin.site.register(Post, PostAdmin)
 admin.site.register(Phase, PhaseAdmin)
@@ -59,3 +70,6 @@ admin.site.register(SocialGroup, SocialGroupAdmin)
 admin.site.register(SocialAccountGroup, SocialAccountGroupAdmin)
 admin.site.register(PagesToken, PagesTokenGroupAdmin)
 admin.site.register(StaticPage)
+admin.site.register(TourView, TourViewGroupAdmin)
+admin.site.register(TourElement,TourElementAdmin)
+admin.site.register(TourRelated)

@@ -183,3 +183,29 @@ class PagesToken(models.Model):
             self.save()
         super(PagesToken, self).save()
 
+
+class TourView(models.Model):
+    id = models.UUIDField(primary_key = True, default = uuid.uuid4,
+            editable = False)
+    name = models.CharField(max_length=256, null=False)
+    description = models.CharField(max_length=256, null=False)
+    isactive = models.BooleanField(default = True)
+
+
+class TourElement(models.Model):
+    id = models.UUIDField(primary_key = True, default = uuid.uuid4,
+            editable = False)
+    name = models.CharField(max_length=256, null=False)
+    title = models.CharField(max_length=256, null=False)
+    content = models.CharField(max_length=256, null=False)
+    options = JSONField()
+    tourview = models.ForeignKey(TourView)
+    isactive = models.BooleanField(default = True)
+
+
+class TourRelated(models.Model):
+    id = models.UUIDField(primary_key = True, default = uuid.uuid4,
+            editable = False)
+    tourview = models.ForeignKey(TourView)
+    owner = models.ForeignKey('auth.user', related_name='user')
+    show = models.BooleanField(default = True)
