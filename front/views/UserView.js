@@ -69,7 +69,7 @@ let UserView = Backbone.View.extend({
     this.modal_add.render();
     this.modal_edit.render();
     let data = {
-      users: S.collection.get("user").toJSON()
+      users: S.collection.get("user").toJSON() //.where({is_superuser: false})
 
     };
     console.log(data);

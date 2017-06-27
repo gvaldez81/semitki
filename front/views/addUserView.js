@@ -76,6 +76,7 @@ let addUserView = Backbone.View.extend({
 
   render: function(){
 
+    
     let template = $("#user-modal-add").html();
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled(this.data));

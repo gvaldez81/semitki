@@ -13,6 +13,19 @@ let CampaignView = Backbone.View.extend({
     this.footer = new FooterView();
     this.modal = new editCampaignView();
     this.modal_add = new addCampaignView();
+    this.tour = new Tour();
+    this.tour.init();
+    //let user = S.user
+       let data = S.collection.get("tour_element").toArray()
+        .map(element => {
+           return {
+            //id: element.id,
+            element: element.attributes.name,
+            title :  element.attributes.title
+            
+          };
+        });
+    return this.tour.addSteps(data);
   },
 
 
@@ -61,6 +74,8 @@ let CampaignView = Backbone.View.extend({
     $("#container").html(this.$el);
     $("#main").html(this.$el);
     S.showButtons();
+    this.tour.start(true);
+    //this.tour.next();  
     return this;
   }
 });

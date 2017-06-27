@@ -6,8 +6,36 @@ let SchedulerCreateView = Backbone.View.extend({
 
   className: "container",
 
+  //    S.collections.getTourSteps(
+//      )
+
+//    Iterar :
+//    tour.addSteps(
+//      Step:)
+    //
+    //Traer elementos del modelos tourlements
+    //addSteps
+
 
   initialize: function() {
+  this.tour = new Tour();
+  this.tour.init();
+  //let user = S.user
+  let data = S.collection.get("tour_element").toArray()
+        .map(element => {
+           return {
+            //id: element.id,
+            element: element.attributes.name,
+            title :  element.attributes.title
+            
+          };
+        });
+    return this.tour.addSteps(data);//{ items: data };
+
+
+     let sysuser = S.collection.get("user").findWhere({
+                  bucket_id: user.bucket_id
+                });
     // TODO And it still fails, argh!!
 //    S.persistSignedUser(); // Ulgy hack, find a better way to persist the user!
     this.navigation = new NavigationView();
@@ -17,6 +45,7 @@ let SchedulerCreateView = Backbone.View.extend({
     this.footer.render();
     this.modal.render();
     this.render();
+
   },
 
   render: function() {
@@ -41,6 +70,7 @@ let SchedulerCreateView = Backbone.View.extend({
       buckets: S.collection.get("buckets").toJSON(),
       account_groups: S.collection.get("account_groups").toJSON()
     };
+
 
     let calendarFeed = () => {
       /* Build the calendar feed */
@@ -117,6 +147,8 @@ let SchedulerCreateView = Backbone.View.extend({
     $("#btn-next").on("click", () => {
       calendar.navigate("next");
     });
+
+    this.tour.start(true);
 
     return this;
   }
