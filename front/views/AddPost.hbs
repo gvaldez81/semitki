@@ -10,16 +10,22 @@
   <div class="visual-wrap-header clearfix">
     <div class="container-fluid" style="margin-bottom:10px">
       <div class="row" style = "padding-left: 15px;margin-bottom: 10px;">
-        <span class="sn-pic sn-w40 {{bucket}} no-after-check">
-          {{#if image}}
-            <img src="storage/{{image_path}}">
-          {{else}}
-            <img src="storage/img/semitki.png">
-          {{/if}}
-        </span>
-        <div class="community-info">
-          <div class="community-name" >{{username}}</div>
-          <div class="community-post-date">{{currentDate}}</div>
+        <div class="list-group">
+          <div class="list-group-item">
+            <div class="row-picture">
+                <span class="sn-pic sn-w40 {{bucket}} no-after-check">
+                  {{#if image}}
+                    <img class="circle" src="storage/{{image_path}}">
+                  {{else}}
+                    <img class="circle" src="storage/img/semitki.png">
+                  {{/if}}
+                </span>
+            </div>
+            <div class="row-content">
+              <h6 class="list-group-item-heading">{{username}}</h6>
+              <p class="list-group-item-text">{{currentDate}}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -72,13 +78,15 @@
         <div class="radio">
           <label>
             <input type="radio" name="linkType" id="imgUrl" value="img" />
-            <span  class="circle"></span><span class="check"></span>{{pt "generics.image"}}
+            <span  class="circle"></span><span class="check"></span>
+            {{pt "generics.image"}}
           </label>
         </div>
         <div class="radio">
           <label>
             <input type="radio" name="linkType" id="lnkUrl" value="lnk" />
-            <span  class="circle"></span><span class="check"></span>{{pt "generics.link"}}
+            <span  class="circle"></span><span class="check"></span>
+            {{pt "generics.link"}}
           </label>
         </div>
       </div>
