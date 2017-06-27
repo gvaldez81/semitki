@@ -22,7 +22,7 @@ h6 {
 }
 
 .topnav {
-    font-size: 14px; 
+    font-size: 14px;
 }
 
 .lead {
@@ -179,7 +179,7 @@ legend.scheduler-border {
     text-align: left !important;
     width:inherit; /* Or auto */
     padding:0 10px;
-    margin-bottom: 5px; 
+    margin-bottom: 5px;
     border-bottom:none;
 
 }

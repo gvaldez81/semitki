@@ -37,6 +37,7 @@ let poles = {
   "generics.image": "Imágen",
   "generics.link": "Enlace",
   "generics.spread": "P R O P A G A R",
+  "generics.toggle_navigation": "Activar navegación",
 
   "group.title": "Grupos",
   "group.add": "Agregar grupo",
