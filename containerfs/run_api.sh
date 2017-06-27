@@ -10,4 +10,4 @@ else
   /semitki/ENV/bin/uwsgi --ini /semitki/config/emperor.ini
 fi
 ## Django development server
-/semitki/ENV/bin/python /semitki/api/manage.py runserver 0.0.0.0:8000
+#/semitki/ENV/bin/python /semitki/api/manage.py runserver 0.0.0.0:8000

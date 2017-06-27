@@ -139,7 +139,9 @@ seecrets.txt
 front/config.js
 variables.env
 storage/img/**
-config
+#config
+*.log
+*.pid
 static/css/style.css
 front/static/css/style.css
 *.retry
