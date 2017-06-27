@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.twitter',
     # our app
     'sonetworks',
+    'django_extensions',
     'django_cron',
 ]
 

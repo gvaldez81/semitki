@@ -8,32 +8,32 @@ let addPhaseView = Backbone.View.extend({
     initialize: function(data) {
 
     this.data = data || undefined;
-    
+
   },
 
   events: {
     "click #save": "savephase",
   },
 
-  savephase: function(e) { 
+  savephase: function(e) {
 
     e.preventDefault();
     let options = {
 
       error: (error) => {
 
-        $('#dialog-crud').modal('hide');     
-        S.logger("bg-danger", "Couldn't Phase Save", true);
+        $('#dialog-crud').modal('hide');
+        S.logger("bg-danger", S.polyglot.t("phase.create_error"));
 
       },
 
       success: (model, reponse) => {
 
         console.log(model);
-        $('#dialog-crud').modal('hide');       
+        $('#dialog-crud').modal('hide');
         let phaseView = new PhaseView();
-        phaseView.render(); 
-        S.logger("bg-success", "Save Phase Succesfully", true);
+        phaseView.render();
+        S.logger("bg-success", S.polyglot.t("phase.create_success"));
 
       },
 
@@ -57,13 +57,13 @@ let addPhaseView = Backbone.View.extend({
 
     };
 
-    let phaseModel = new Phase(phase); 
+    let phaseModel = new Phase(phase);
     return phaseModel;
 
   },
 
   render: function(){
-     let data = {        
+     let data = {
         campaign: S.collection.get("campaigns").toJSON()
 
      };
