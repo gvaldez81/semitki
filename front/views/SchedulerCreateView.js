@@ -7,37 +7,41 @@ let SchedulerCreateView = Backbone.View.extend({
   className: "container",
 
   initialize: function() {
-    
+
     let tourFiltered = S.collection.get("tour_element").filter(
-      function(obj){ return obj.attributes.view == "SchedulerCreateView"})
+      function(obj) {
+        return obj.attributes.view == "SchedulerCreateView"
+      }
+    );
+
     if (tourFiltered.length>0){
-      this.tour = new Tour({storage:false});
+      this.tour = new Tour({storage: false});
       this.tour.init();
       //sorteamos el arreglo por el Title. Importante a la hora de registrar elementos
-      tourFiltered.sort(function(a,b) {
-          return (a.title > b.title) 
-                  ? 1 : ((b.title > a.title) 
-          ? -1 : 0);} );
-      
+      tourFiltered.sort(function(a, b) {
+        return (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0);
+      });
+
       let data = tourFiltered.map(element => {
-            let salida  = {
-              element: element.attributes.name,
-              title :  element.attributes.title,
-              content : element.attributes.content,  
-            };
-            //TODO Change for JS
-            return $.extend(salida, element.attributes.options)
-        });
-      return this.tour.addSteps(data);
+        let salida  = {
+          element: element.attributes.name,
+          title :  element.attributes.title,
+          content : element.attributes.content,
+        };
+        //TODO Change for JS
+        return $.extend(salida, element.attributes.options)
+      });
+
+      this.tour.addSteps(data);
+
+      return this;
     }
-    
+
 
    let sysuser = S.collection.get("user").findWhere({
-                bucket_id: user.bucket_id
-              });
+     bucket_id: S.user.bucket_id });
 
     // TODO And it still fails, argh!!
-//    S.persistSignedUser(); // Ulgy hack, find a better way to persist the user!
     this.navigation = new NavigationView();
     this.footer = new FooterView();
     this.modal = new CalendarModal();
@@ -46,7 +50,9 @@ let SchedulerCreateView = Backbone.View.extend({
     this.modal.render();
     this.render();
 
-    return this.tour.addSteps(data);//{ items: data };
+    this.tour.addSteps(data);//{ items: data };
+
+    return this;
 
   },
 
@@ -61,8 +67,6 @@ let SchedulerCreateView = Backbone.View.extend({
     groupMenu.render();
     let staffMenu = new StaffAccountsView();
     staffMenu.render();
-/*    let fbPages = new FbPageSearch();*/
-    /*fbPages.render();*/
 
     let posts = new Post();
     posts.fetch(S.addAuthorizationHeader());
@@ -80,59 +84,62 @@ let SchedulerCreateView = Backbone.View.extend({
 
       let feed = postArray.map((post) => {
 
-      let FIXED_USER_LONG = 10
+        let FIXED_USER_LONG = 10
 
-      let bucket = post.attributes.content.tags[0].account.charAt(0).toUpperCase()
-                  + post.attributes.content.tags[0].account.slice(1);
+        let bucket = post.attributes.content.tags[0].account.charAt(0)
+          .toUpperCase() + post.attributes.content.tags[0].account.slice(1);
 
-      let username = (post.attributes.content.username==undefined ? "N/A" : post.attributes.content.username );
-      let user_length = username.length;
-      username = username.substring(0,FIXED_USER_LONG);
-      username = username.padEnd((user_length>FIXED_USER_LONG ? FIXED_USER_LONG+3 : user_length ), '.');
+        let username = (post.attributes.content.username == undefined ? "N/A"
+          : post.attributes.content.username );
+        let user_length = username.length;
+        username = username.substring(0,FIXED_USER_LONG);
+        username = username.padEnd((user_length > FIXED_USER_LONG
+          ? FIXED_USER_LONG + 3 : user_length ), '.');
 
-      let FIXED_TEXT_LONG = 60;
-      let text = post.attributes.content.txt;
-      let text_length = text.length;
-      text = text.substring(0,FIXED_TEXT_LONG);
-      text =  text.padEnd((text_length>FIXED_TEXT_LONG ? FIXED_TEXT_LONG+3 : text_length),'.')
-      text = text + (text_length>FIXED_TEXT_LONG ? " and " + (text_length - FIXED_TEXT_LONG) + " characters more" : "")
+        let FIXED_TEXT_LONG = 60;
+        let text = post.attributes.content.txt;
+        let text_length = text.length;
+        text = text.substring(0,FIXED_TEXT_LONG);
+        text =  text.padEnd((text_length > FIXED_TEXT_LONG ? FIXED_TEXT_LONG + 3
+          : text_length), '.');
+        text = text + (text_length > FIXED_TEXT_LONG ? " and "
+          + (text_length - FIXED_TEXT_LONG) + " characters more" : "");
 
-      //.padEnd(FIXED_USER_LONG+3, "\u00A0")
-      let item = {
-          "id": post.attributes.url,
-          "url": (post.attributes.content.permalink == undefined ? '' : post.attributes.content.permalink),
-          "title":  bucket
-                    + " | " + username
-                    + " | " + text,
-          "class": "event-info",
-          "start": Date.parse(post.attributes.date),
-          "end": Date.parse(post.attributes.date),
-        };
-        return item;
+        let item = {
+            "id": post.attributes.url,
+            "url": (post.attributes.content.permalink == undefined ? '' : post.attributes.content.permalink),
+            "title":  bucket
+                      + " | " + username
+                      + " | " + text,
+            "class": "event-info",
+            "start": Date.parse(post.attributes.date),
+            "end": Date.parse(post.attributes.date),
+          };
+
+          return item;
       });
+
       return feed;
     }
 
     this.$el.html(compiled(data));
-
     $("#main").html(this.$el);
-
 
     // Initialize datimepicker here after rendering, otherwise it won't work
     $('#scheduledForPicker').datetimepicker();
     // Initialize calendar view
     let calendar = $("#calendar-panel").calendar({
       tooltip_container: "main",
-      language: S.lang,
+      language: S.lang.substr(0, 2),
+      locale: S.lang.substr(0, 2),
       modal: "#dialog",
       tmpl_path: "/tmpls/",
       modal_type: "ajax",
       events_source: calendarFeed()
     });
+
     // Calendar navigation
     // TODO make this with Array.each() method
-
-
     $("#btn-prev").on("click", () => {
       calendar.navigate("prev");
     });
@@ -150,8 +157,8 @@ let SchedulerCreateView = Backbone.View.extend({
     });
 
     if (this.tour != undefined){
-      this.tour.start(true);  
-    }    
+      this.tour.start(true);
+    }
 
     return this;
   }

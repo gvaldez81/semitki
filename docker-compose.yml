@@ -7,6 +7,7 @@ services:
 #   container_name: rabbit
   app:
     image: semitki/api
+    build: ./api
     command: /semitki/run_api.sh
     volumes:
       - ./api:/semitki/api

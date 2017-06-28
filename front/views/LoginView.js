@@ -107,7 +107,7 @@ let LoginView = Backbone.View.extend({
 
 
   tryTwLogin: () => {
-    
+
     $.oauthpopup({
         path: S.api("auth/tw_request_token"),
         callback: function(param)
@@ -115,7 +115,7 @@ let LoginView = Backbone.View.extend({
           let d = new Date();
           d.setDate(d.getDate() - 1);
           let expires = ";expires="+d;
-          
+
           if (Cookies('tw_denied') == undefined){
 
             let tw_token = new Promise((resolve, reject) => {
@@ -160,8 +160,8 @@ let LoginView = Backbone.View.extend({
           }
         }
     });
-    
-    
+
+
 
   },
 
@@ -210,7 +210,7 @@ let LoginView = Backbone.View.extend({
     $("#main").html(this.$el);
 
 
-    //Traer usuario y tourView, 
+    //Traer usuario y tourView,
     //verTour =  (tourView existe, tourView.view, True)
     //tour.start(verTour);
 
