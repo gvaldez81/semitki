@@ -14,7 +14,7 @@ let SchedulerCreateView = Backbone.View.extend({
       }
     );
 
-    if (tourFiltered.length>0){
+    if (tourFiltered.length > 0) {
       this.tour = new Tour({storage: false});
       this.tour.init();
       //sorteamos el arreglo por el Title. Importante a la hora de registrar elementos
@@ -33,13 +33,11 @@ let SchedulerCreateView = Backbone.View.extend({
       });
 
       this.tour.addSteps(data);
-
-      return this;
     }
 
-
-   let sysuser = S.collection.get("user").findWhere({
-     bucket_id: S.user.bucket_id });
+    let sysuser = S.collection.get("user").findWhere({
+      bucket_id: S.user.bucket_id
+    });
 
     // TODO And it still fails, argh!!
     this.navigation = new NavigationView();
@@ -49,8 +47,6 @@ let SchedulerCreateView = Backbone.View.extend({
     this.footer.render();
     this.modal.render();
     this.render();
-
-    this.tour.addSteps(data);//{ items: data };
 
     return this;
 
