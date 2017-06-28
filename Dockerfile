@@ -13,7 +13,7 @@ RUN yum -y update ; \
   yum -y install epel-release ; \
   yum -y install https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-7-x86_64/pgdg-centos96-9.6-3.noarch.rpm ; \
   yum -y install gcc make patch python-pip postgresql96 \
-    postgresql96-devel python-devel ; \
+    postgresql96-devel python-devel graphviz graphviz-devel ; \
   pip install virtualenv
 RUN  virtualenv ENV ; \
   ENV/bin/pip install --upgrade pip ; \
@@ -21,7 +21,8 @@ RUN  virtualenv ENV ; \
   ENV/bin/pip install newrelic ; \
   cd /semitki/ENV/lib/python2.7/site-packages/rest_framework_jwt ; \
   patch < /semitki/patches/authentication.py.patch ; \
-  patch < /semitki/patches/serializers.py.patch
+  patch < /semitki/patches/serializers.py.patch ; \
+  yum -y remove *-devel
 
 #ENTRYPOINT /semitki/ENV/bin/python
 
