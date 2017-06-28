@@ -190,6 +190,9 @@ class TourView(models.Model):
     name = models.CharField(max_length=256, null=False)
     description = models.CharField(max_length=256, null=False)
     isactive = models.BooleanField(default = True)
+    def __unicode__(self):
+        """Unicode class."""
+        return unicode(self.name)
 
 
 class TourElement(models.Model):

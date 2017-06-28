@@ -6,36 +6,35 @@ let SchedulerCreateView = Backbone.View.extend({
 
   className: "container",
 
-  //    S.collections.getTourSteps(
-//      )
-
-//    Iterar :
-//    tour.addSteps(
-//      Step:)
-    //
-    //Traer elementos del modelos tourlements
-    //addSteps
-
-
   initialize: function() {
-  this.tour = new Tour();
-  this.tour.init();
-  //let user = S.user
-  let data = S.collection.get("tour_element").toArray()
-        .map(element => {
-           return {
-            //id: element.id,
-            element: element.attributes.name,
-            title :  element.attributes.title
-            
-          };
+    
+    let tourFiltered = S.collection.get("tour_element").filter(
+      function(obj){ return obj.attributes.view == "SchedulerCreateView"})
+    if (tourFiltered.length>0){
+      this.tour = new Tour({storage:false});
+      this.tour.init();
+      //sorteamos el arreglo por el Title. Importante a la hora de registrar elementos
+      tourFiltered.sort(function(a,b) {
+          return (a.title > b.title) 
+                  ? 1 : ((b.title > a.title) 
+          ? -1 : 0);} );
+      
+      let data = tourFiltered.map(element => {
+            let salida  = {
+              element: element.attributes.name,
+              title :  element.attributes.title,
+              content : element.attributes.content,  
+            };
+            //TODO Change for JS
+            return $.extend(salida, element.attributes.options)
         });
-    return this.tour.addSteps(data);//{ items: data };
+      return this.tour.addSteps(data);
+    }
+    
 
-
-     let sysuser = S.collection.get("user").findWhere({
-                  bucket_id: user.bucket_id
-                });
+   let sysuser = S.collection.get("user").findWhere({
+                bucket_id: user.bucket_id
+              });
     // TODO And it still fails, argh!!
 //    S.persistSignedUser(); // Ulgy hack, find a better way to persist the user!
     this.navigation = new NavigationView();
@@ -148,7 +147,9 @@ let SchedulerCreateView = Backbone.View.extend({
       calendar.navigate("next");
     });
 
-    this.tour.start(true);
+    if (this.tour != undefined){
+      this.tour.start(true);  
+    }    
 
     return this;
   }
