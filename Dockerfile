@@ -22,7 +22,7 @@ RUN  virtualenv ENV ; \
   cd /semitki/ENV/lib/python2.7/site-packages/rest_framework_jwt ; \
   patch < /semitki/patches/authentication.py.patch ; \
   patch < /semitki/patches/serializers.py.patch ; \
-  yum -y remove *-devel
+  yum -y remove *-devel make patch
 
 #ENTRYPOINT /semitki/ENV/bin/python
 
