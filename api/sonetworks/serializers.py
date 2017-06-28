@@ -166,10 +166,12 @@ class TourViewSerializer(serializers.ModelSerializer):
 
 
 class TourElementSerializer(serializers.ModelSerializer):
-
+    view = serializers.SerializerMethodField()
+    def get_view(self, element):
+      return element.tourview.name
     class Meta:
         model = TourElement
-        fields = ('__all__')
+        fields = ('id', 'isactive','name','options','title', 'view')
 
 class TourRelatedSerializer(serializers.ModelSerializer):
 

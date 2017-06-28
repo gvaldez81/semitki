@@ -4,11 +4,35 @@ let CampaignView = Backbone.View.extend({
 
   tagName: "div",
 
-
   className: "row",
 
-
   initialize: function() {
+
+    let tourFiltered = S.collection.get("tour_element").filter(
+      function(obj){ return obj.attributes.view == "CampaignView"})
+
+    if (tourFiltered.length>0){
+
+      this.tour = new Tour({storage:false});
+      this.tour.init();
+      //sorteamos el arreglo por el Title. Importante a la hora de registrar elementos
+      tourFiltered.sort(function(a,b) {
+          return (a.title > b.title)
+                  ? 1 : ((b.title > a.title)
+          ? -1 : 0);} );
+
+      let data = tourFiltered.map(element => {
+            let salida  = {
+              element: element.attributes.name,
+              title :  element.attributes.title,
+              content : element.attributes.content,
+            };
+            //TODO Change for JS
+            return $.extend(salida, element.attributes.options)
+        });
+      return this.tour.addSteps(data);
+    }
+
     this.navigation = new NavigationView();
     this.footer = new FooterView();
     this.modal = new editCampaignView();
@@ -16,16 +40,18 @@ let CampaignView = Backbone.View.extend({
     this.tour = new Tour();
     this.tour.init();
     //let user = S.user
-       let data = S.collection.get("tour_element").toArray()
+      let data = S.collection.get("tour_element").toArray()
         .map(element => {
            return {
-            //id: element.id,
-            element: element.attributes.name,
-            title :  element.attributes.title
-
-          };
+              element: element.attributes.name,
+              title :  element.attributes.title,
+              content : element.attributes.content,
+              opt:{
+                options: element.attributes.options
+              }
+           };
         });
-    return this.tour.addSteps(data);
+      return this.tour.addSteps(data);
   },
 
 
@@ -45,14 +71,17 @@ let CampaignView = Backbone.View.extend({
 
   editItem: function(ev) {
     let id = $(ev.currentTarget).parents('.item')[0].id;
-    let dialog = new editCampaignView({item: new Array(S.collection.get("campaigns").get(id).toJSON())});
+    let dialog = new editCampaignView({
+      item: new Array(S.collection.get("campaigns").get(id).toJSON())
+    });
     dialog.render();
-    //return false;
   },
 
   hideItem: function(ev) {
     let id = $(ev.currentTarget).parents('.item')[0].id;
-    let dialog = new hideCampaignView({item: new Array(S.collection.get("campaigns").get(id).toJSON())});
+    let dialog = new hideCampaignView({
+      item: new Array(S.collection.get("campaigns").get(id).toJSON())
+    });
     dialog.render();
   },
 
@@ -74,8 +103,11 @@ let CampaignView = Backbone.View.extend({
     $("#container").html(this.$el);
     $("#main").html(this.$el);
     S.showButtons();
-    this.tour.start(true);
-    //this.tour.next();
+
+    if (this.tour != undefined){
+      this.tour.start(true);
+    }
+
     return this;
   }
 });

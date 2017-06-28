@@ -8,9 +8,9 @@ let TourElement = Backbone.Model.extend({
     	
       "name": undefined,
       "title": undefined,
-	  "content": undefined,
+	    "content": undefined,
       "options": undefined,
-      "tourview": undefined,
+      "view": undefined,
       "isactive": undefined
       
     }
