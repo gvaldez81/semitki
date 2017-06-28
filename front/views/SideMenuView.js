@@ -29,7 +29,7 @@ let SideMenuView = Backbone.View.extend({
     let postView = undefined;
     sourceType = value.substring(0,1)=='u' ? "staff-menu" : sourceType ;
     sourceType = value.substring(0,1)=='p' ? "fb-pages-menu" : sourceType ;
-    
+
 
     if(sourceType === "account-menu") {
       let data = S.collection.get("accounts")

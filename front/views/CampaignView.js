@@ -22,7 +22,7 @@ let CampaignView = Backbone.View.extend({
             //id: element.id,
             element: element.attributes.name,
             title :  element.attributes.title
-            
+
           };
         });
     return this.tour.addSteps(data);
@@ -75,7 +75,7 @@ let CampaignView = Backbone.View.extend({
     $("#main").html(this.$el);
     S.showButtons();
     this.tour.start(true);
-    //this.tour.next();  
+    //this.tour.next();
     return this;
   }
 });

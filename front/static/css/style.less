@@ -2,12 +2,11 @@
 // Color for post box border looks like copper
 @s_copper: #efa05a;
 // Color used in post box Schedule/Post now button
-@s_lightBlue: #46b8da;    // Border of the button and background when selected
-@s_lighterBlue: #5bc0de;  // Background when unselected
+@light-blue: #b3e5fc;    // Border of the button and background when selected
+@s_lighterBlue: #e1f5fe;  // Background when unselected
 @s_slateBlue: #2a6496;    // TODO ??
 @s_facebookBlue: #3b5998; // Name say it
-//@s_grey: #9197a3;
-@s_grey: #222;
+@s_grey: rgba(0,0,0, 0.26);
 @indigo: #3f51b5;
 @teal: #009688;
 
@@ -135,8 +134,7 @@ footer {
   bottom: 0;
   width: 100%;
   height: 40px;
-//  background-color: #222;
-//  color: grey;
+  color: @s_grey;
 }
 
 
@@ -154,9 +152,7 @@ footer {
   padding-left: 0px;
   width: 230px;
   height: 100%;
-  //background: rgba(235, 238, 238, 0.0);
   background-color: @teal;
-//  border: thin solid @teal;
 }
 
 .menu-slide-show {
@@ -181,6 +177,23 @@ footer {
   .panel-heading {
     color: white;
     background-color: @teal;
+    padding: 0;
+    h4.panel-title {
+      a {
+        display: block;
+        padding: 10px 15px;
+        &:focus {
+          color: white;
+          background-color: #42B2A6;
+          text-decoration: none;
+        }
+        &:hover {
+          color: white;
+          background-color: #42B2A6;
+          text-decoration: none;
+        }
+      }
+    }
   }
   .panel-body {
     border: 0;
@@ -190,6 +203,21 @@ footer {
         background-color: @teal;
         border: 0;
         color: whitesmoke;
+        a {
+          color: whitesmoke;
+          display: block;
+          padding: 10px 15px;
+          &:focus {
+            color: white;
+            background-color: #42B2A6;
+            text-decoration: none;
+          }
+          &:hover {
+            color: white;
+            background-color: #42B2A6;
+            text-decoration: none;
+          }
+        }
       }
     }
   }
@@ -197,7 +225,7 @@ footer {
 
 /* Calendar */
 #cal-slide-box {
-  background-color: #222;
+  background-color: @s_grey;
 }
 
 /* Landing */
@@ -212,20 +240,6 @@ button#landing-login-tw {
   border: none;
   padding: 20px 90px;
 }
-
-/* Misc */
-/*ul.dropdown-info {*/
-  /*background-color: @s_lighterBlue;*/
-  /*border-color: @s_lightBlue;*/
-  /*li {*/
-    /*background-color: @s_lightBlue;*/
-    /*a {*/
-      /*&:hover {*/
-        /*background-color: @s_lightBlue;*/
-      /*}*/
-    /*}*/
-  /*}*/
-/*}*/
 
 .crud_item {
   .crud_buttons {
@@ -373,13 +387,12 @@ div.finder {
 .unknown.sn-pic:before {
     content: "\f119";
     color: white;
-    background-color: @s_facebookBlue;
-    background-color: rgba(59, 89, 152, 0.9);
+    background-color: @light-blue;
 }
 
 .unknown {
   .social-title {
-    color: @s_facebookBlue;
+    color: @light-blue;
   }
 }
 
@@ -388,7 +401,7 @@ div.finder {
 }
 
 .community-name {
-    color: @s_facebookBlue;
+    color: @light-blue;
     text-decoration: none;
     font-size: 12px;
     font-weight: bold;
@@ -396,7 +409,7 @@ div.finder {
 }
 
 .community-post-date {
-    color: @teal;
+    color: black;
     font-size: 10px;
     text-transform: capitalize;
     overflow: hidden;
