@@ -35,6 +35,7 @@ let SchedulerCreateView = Backbone.View.extend({
    let sysuser = S.collection.get("user").findWhere({
                 bucket_id: user.bucket_id
               });
+
     // TODO And it still fails, argh!!
 //    S.persistSignedUser(); // Ulgy hack, find a better way to persist the user!
     this.navigation = new NavigationView();
@@ -44,6 +45,8 @@ let SchedulerCreateView = Backbone.View.extend({
     this.footer.render();
     this.modal.render();
     this.render();
+
+    return this.tour.addSteps(data);//{ items: data };
 
   },
 
@@ -78,29 +81,28 @@ let SchedulerCreateView = Backbone.View.extend({
       let feed = postArray.map((post) => {
 
       let FIXED_USER_LONG = 10
-      
+
       let bucket = post.attributes.content.tags[0].account.charAt(0).toUpperCase()
                   + post.attributes.content.tags[0].account.slice(1);
-      
+
       let username = (post.attributes.content.username==undefined ? "N/A" : post.attributes.content.username );
       let user_length = username.length;
       username = username.substring(0,FIXED_USER_LONG);
       username = username.padEnd((user_length>FIXED_USER_LONG ? FIXED_USER_LONG+3 : user_length ), '.');
 
-
       let FIXED_TEXT_LONG = 60;
       let text = post.attributes.content.txt;
-      let text_length = text.length; 
+      let text_length = text.length;
       text = text.substring(0,FIXED_TEXT_LONG);
-      text =  text.padEnd((text_length>FIXED_TEXT_LONG ? FIXED_TEXT_LONG+3 : text_length),'.') 
-      text = text + (text_length>FIXED_TEXT_LONG ? " and " + (text_length - FIXED_TEXT_LONG) + " characters more" : "") 
-                
-      //.padEnd(FIXED_USER_LONG+3, "\u00A0") 
+      text =  text.padEnd((text_length>FIXED_TEXT_LONG ? FIXED_TEXT_LONG+3 : text_length),'.')
+      text = text + (text_length>FIXED_TEXT_LONG ? " and " + (text_length - FIXED_TEXT_LONG) + " characters more" : "")
+
+      //.padEnd(FIXED_USER_LONG+3, "\u00A0")
       let item = {
           "id": post.attributes.url,
           "url": (post.attributes.content.permalink == undefined ? '' : post.attributes.content.permalink),
-          "title":  bucket 
-                    + " | " + username 
+          "title":  bucket
+                    + " | " + username
                     + " | " + text,
           "class": "event-info",
           "start": Date.parse(post.attributes.date),

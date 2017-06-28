@@ -6,7 +6,8 @@ let AddPostView = Backbone.View.extend({
   tagName: "div",
 
 
-  className: "container addpost-form",
+  className: "panel panel-default",
+  //className: "container addpost-form",
 
 
   events: {
@@ -97,11 +98,11 @@ let AddPostView = Backbone.View.extend({
     e.preventDefault();
     let options = {
       error: (jqXHR, exception) => {
-        S.logger("bg-danger", "Couldn't schedule new post", true);
+        S.logger("bg-danger", S.polyglot.t("addpost.schedule_error"));
       },
       success: (model, reponse) => {
         this.closeadd();
-        S.logger("bg-success", "Post published succesfully", true);
+        S.logger("bg-success", S.polyglot.t("addpost.schedule_success"));
       },
       wait: true,
       headers: S.addAuthorizationHeader().headers
@@ -115,7 +116,7 @@ let AddPostView = Backbone.View.extend({
     e.preventDefault();
     let options = {
       error: (error) => {
-        S.logger("bg-danger", "Couldn't schedule new post", true);
+        S.logger("bg-danger", S.polyglot.t("addpost.publish_error"));
       },
 
       success: (model, reponse) => {
@@ -132,10 +133,10 @@ let AddPostView = Backbone.View.extend({
         .done((data) => {
           this.closeadd();
           console.log(data)
-          S.logger("bg-success", data, true);
+          S.logger("bg-success", S.polyglot.t("addpost.publish_success"));
         })
         .fail((xhr, status, error) => {
-          S.logger("bg-danger", "Post error"+ xhr.responseText, true);
+          S.logger("bg-danger", S.polyglot.t("addpost.publish_error"));
         });
       },
       wait: true,
@@ -150,8 +151,7 @@ let AddPostView = Backbone.View.extend({
 
     Handlebars.registerHelper('currentDate', function() {
       let d = new Date();
-      let months = ["January", "February", "March", "April", "May", "June",
-          "July", "August", "September", "October", "November", "December"];
+      let months = poles["calendar.months"];
       let retVal = ("0" + d.getDate()).slice(-2)
                 + " " + months[d.getMonth()]
                 + ", " + d.getFullYear() ;
@@ -174,9 +174,10 @@ let AddPostView = Backbone.View.extend({
 
     // Campaigns and phases select
     let c = $("#campaignSelectorBox").select2({data: this.data.campaigns,
-      placeholder: "Select a campaign"});
+      placeholder: S.polyglot.t("addpost.select_campaign")});
 
-    let p = $("#phaseSelectorBox").select2({placeholder: "Select a phase"});
+    let p = $("#phaseSelectorBox").select2(
+      {placeholder: S.polyglot.t("addpost.select_phase")});
 
     c.on("select2:select", (e) => {
       p.select2({data: S.collection.get("campaigns").get(e.target.value).
@@ -186,7 +187,7 @@ let AddPostView = Backbone.View.extend({
     });
 
 
-    let selectplace = "Select group(s)"
+    let selectplace = S.polyglot.t("addpost.select_group");
 
     // RS and Like group selects
     let lk = $("#lkgroups").select2({data: S.collection.get("groups")
@@ -204,11 +205,9 @@ let AddPostView = Backbone.View.extend({
     if (this.data.bucket=='facebook'){
       lk.empty().trigger('change');
       lk.select2({
-          placeholder: "Not available for Facebook Posts"
+          placeholder: S.polyglot.t("addpost.notforfacebook")
       });
     }
-
-    //$("#selectpage").selectpicker('render') ;
 
     return this;
   }

@@ -82,47 +82,18 @@ Push image to public docker registry
     docker-compose up
 
 
-Browse the API at http://127.0.0.1:8000 and the web frontend at
-http://127.0.0.1:9080
+Browse the API at http://127.0.0.1:3031 and the web frontend at
+http://127.0.0.1
 
 
 ### Backend development
 
-We use:
+We use (among others, check requirements.txt):
 
 * [Django](https://www.djangoproject.com/)
 * [django-rest-framework](http://www.django-rest-framework.org/)
 * [django-rest-framework-scoial-oauth2](https://github.com/PhilipGarnero/django-rest-framework-social-oauth2)
 * [django-rest-framework-jwt](http://getblimp.github.io/django-rest-framework-jwt/)
-
-
-Run the API
-
-
-    cd semitki/api
-    virtualenv -p $(which python2.7) ENV
-    . ENV/bin/activate
-    pip install -U pip
-    pip install -r requirements.txt
-
-    ENV/bin/python manage runserver 0.0.0.0:8000
-    ENV/bin/python manage migrate
-    ENV/bin/python manage migrations sonetworks
-
-
-### Importing models from non-Django code
-
-
-    import os
-    import django
-    import django.settings
-
-    os.environ.setdefault("DJANGO_SETTINGS_DEFAULT",
-      "sonetworks.settings")
-    settings.configure()
-    django.setup()
-
-
 
 
 ### Frontend development
@@ -188,4 +159,20 @@ below for date comparison.
     datetime.utcnow().replace(tzinfo=utc)
 
 
+### Install graphtool
+
+
+_Requires graphviz installed_
+
+
+    pip install django-extensions
+
+
+    INSTALLED_APPS = (
+    ...
+    'django_extensions',
+    )
+
+
+    manage.py graph_models --pygraphviz -a -g -o my_project_visualized.png
 

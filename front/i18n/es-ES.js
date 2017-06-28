@@ -1,6 +1,16 @@
 let poles = {
 
   "addpost.photolinks": "Enlace fotográfico",
+  "addpost.postplaceholder": "¿Que quieres compartir?",
+  "addpost.urlplaceholder": "URL ej. http://ejemplo.com/imagen.png",
+  "addpost.schedule_error": "Ocurrió un error intentando programr la publicación",
+  "addpost.schedule_success": "Publicación programada con éxito",
+  "addpost.post_error": "Ocurrió un error intentando publicar",
+  "addpost.post_success": "Publicación exitosa",
+  "addpost.select_campaign": "Selecciona campaña",
+  "addpost.select_phase": "Selecciona fase",
+  "addpost.select_group": "Selecciona los grupos",
+  "addpost.notforfacebook": "No disponible para Facebook",
 
   "adduser.title": "Agregar usuario",
 
@@ -27,6 +37,7 @@ let poles = {
   "generics.image": "Imágen",
   "generics.link": "Enlace",
   "generics.spread": "P R O P A G A R",
+  "generics.toggle_navigation": "Activar navegación",
 
   "group.title": "Grupos",
   "group.add": "Agregar grupo",
@@ -46,6 +57,8 @@ let poles = {
   "phase.title": "Fases",
   "phase.add": "Agregar fase",
   "phase.edit": "Editar fase",
+  "phase.create_success": "Fase guardada con éxito",
+  "phase.create_error": "Ocurrió un error al guardar la fase",
 
   "related.title": "Cuentas relacionadas",
   "related.selector": "Cuentas relacionadas a:",
@@ -66,5 +79,8 @@ let poles = {
   "user.user_type": "Tipo Usuario",
   "user.operator": "Operador",
   "user.administrator": "Administrador",
+
+  "calendar.months": ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
 
 };

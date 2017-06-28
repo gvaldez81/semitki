@@ -146,7 +146,7 @@ module.exports = (grunt) => {
             dest: 'dist/js/', filter: 'isFile'
           },
           { // Bootstrap Material Design CSS
-            src: 'bower_components/bootstrap-material-design/dist/css/*.css',
+            src: 'bower_components/bootstrap-material-design/dist/css/*.*',
             dest: 'dist/css/'
          },
            { // Bootstrap Material Design CSS

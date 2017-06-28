@@ -1,79 +1,98 @@
 <script type="text/x-handlebars-template" id="addpost-template">
 
 <div id="messages"></div>
-<div><button id="closeadd" type="button" class="close" aria-label="Close">
-<span aria-hidden="true">&times;</span></button></div>
+<div>
+  <button id="closeadd" type="button" class="close" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
 <form id="addpost-form" class="addpost-form" >
   <div class="visual-wrap-header clearfix">
     <div class="container-fluid" style="margin-bottom:10px">
       <div class="row" style = "padding-left: 15px;margin-bottom: 10px;">
-
-      <span class="sn-pic sn-w40 {{bucket}} no-after-check">
-        {{#if image}}
-          <img src="storage/{{image_path}}">
-        {{else}}
-          <img src="storage/img/semitki.png">
-        {{/if}}
-      </span>
-      <div class="community-info">
-        <div class="community-name" >{{username}}</a>
-        <div class="community-post-date">{{currentDate}}</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- img src="..." alt="..." class="img-rounded" style="width: 70px;" -->
-  <div class="row" style="padding-bottom: 5px;">
-    <div class="col-sm-6">
-      <div class="form-group" id="campaignSelector" >
-        <div class="col-sm-3">
-          <label for="campaignSelectorBox">{{pt "campaign.title"}}</label>
-        </div>
-        <div class="col-sm-9">
-          <select id="campaignSelectorBox" style="width:100%;"></select>
+        <div class="list-group">
+          <div class="list-group-item">
+            <div class="row-picture">
+                <span class="sn-pic sn-w40 {{bucket}} no-after-check">
+                  {{#if image}}
+                    <img class="circle" src="storage/{{image_path}}">
+                  {{else}}
+                    <img class="circle" src="storage/img/semitki.png">
+                  {{/if}}
+                </span>
+            </div>
+            <div class="row-content">
+              <h6 class="list-group-item-heading">{{username}}</h6>
+              <p class="list-group-item-text">{{currentDate}}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-sm-6">
-      <div class="form-group" id="phaseSelector" >
-        <div class="col-sm-2">
-          <label for="phaseSelectorBox">{{pt "phase.title"}}</label>
+
+    <!-- img src="..." alt="..." class="img-rounded" style="width: 70px;" -->
+    <div class="row" style="padding-bottom: 5px;">
+      <div class="col-sm-6">
+        <div class="form-group" id="campaignSelector" >
+          <div class="col-sm-3">
+            <label for="campaignSelectorBox">{{pt "campaign.title"}}</label>
+          </div>
+          <div class="col-sm-9">
+            <select id="campaignSelectorBox" style="width:100%;"></select>
+          </div>
         </div>
-        <div class="col-sm-10">
-          <select id="phaseSelectorBox" style="width:100%;" disabled></select>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group" id="phaseSelector" >
+          <div class="col-sm-2">
+            <label for="phaseSelectorBox">{{pt "phase.title"}}</label>
+          </div>
+          <div class="col-sm-10">
+            <select id="phaseSelectorBox" style="width:100%;" disabled></select>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="form-group" style="padding-bottom: 5px;margin-bottom:0px">
-    <textarea class="form-control" rows="4" id="postxt"
-    placeholder="What do you want to share?"></textarea>
-  </div>
+    <div class="form-group" style="padding-bottom: 5px;margin-bottom:0px">
+      <textarea class="form-control" rows="4" id="postxt"
+        placeholder="{{pt "addpost.postplaceholder"}}"></textarea>
+    </div>
+
   <div class="row">
     <fieldset class="scheduler-border">
       <legend class="scheduler-border">{{pt "addpost.photolinks"}}</legend>
-    <div class="col-sm-9" style="">
-      <div class="input-group" style="display:flex;">
-        <input type="url" class="form-control" id="urlTarget"
-        placeholder="Url i.e. http://your.image.com/logo.png" />
+      <div class="col-sm-9" style="">
+        <div class="input-group" style="display:flex;">
+          <input type="url" class="form-control" id="urlTarget"
+          placeholder="{{pt "addpost.urlplaceholder"}}" />
+        </div>
       </div>
-    </div>
       <!-- div class="input-group">
         <label class="btn btn-default btn-file">
           <input type="file" id="imageFile" hidden>
         </label>
       </div -->
-    <div class="col-sm-3" style="">
-      <label class="radio-inline" style="align-self: center;">
-        <input type="radio" name="linkType" id="imgUrl" value="img" /{{pt "generics.image"}}>
-      </label>
-      <label class="radio-inline" style="align-self: center;">
-        <input type="radio" name="linkType" id="lnkUrl" value="lnk" />{{pt "generics.link"}}
-      </label>
-    </div>
+
+      <div class="col-sm-3">
+        <div class="radio">
+          <label>
+            <input type="radio" name="linkType" id="imgUrl" value="img" />
+            <span  class="circle"></span><span class="check"></span>
+            {{pt "generics.image"}}
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" name="linkType" id="lnkUrl" value="lnk" />
+            <span  class="circle"></span><span class="check"></span>
+            {{pt "generics.link"}}
+          </label>
+        </div>
+      </div>
     </fieldset>
   </div>
+
   <div class="row">
     <fieldset class="scheduler-border">
       <legend class="scheduler-border">{{pt "generics.spread"}}</legend>
@@ -96,9 +115,7 @@
               <img src="img/share.png"  class="img24">
             </div>
             <div class="col-sm-10">
-
               <select id="rsgroups" multiple="multiple" style="width:100%;"></select>
-
             </div>
           </div>
         </div>
@@ -119,17 +136,17 @@
     </div>
     <div class="col-sm-6" style="">
       <div class="btn-group dropup pull-right">
-        <button type="button" class="btn btn-info"
-                              id="publish-btn">{{pt "button.schedule"}}</button>
-        <button class="btn btn-info dropdown-toggle" type="button"
+        <button type="button" class="btn btn-primary btn-raised"
+          id="publish-btn">{{pt "button.schedule"}}</button>
+        <button class="btn btn-primary btn-raised dropdown-toggle" type="button"
         data-toggle="dropdown" aria-haspopup="true"
         aria-expanded="false"><span class="caret"></span>
         <span class="sr-only">Toggle dropdown</span></button>
         <ul class="dropdown-menu dropdown-info" aria-labeledby="publish-btn">
-          <li><a href="#" id="schedule-enable" class="btn btn-info"
-                                               role="button">{{pt "button.schedule"}}</a></li>
-          <li><a href="#" id="publish-enable" class="btn btn-info"
-                                              role="button">{{pt "button.publishnow"}}</a></li>
+          <li><a href="#" id="schedule-enable" class="btn btn-primary btn-raised"
+          role="button">{{pt "button.schedule"}}</a></li>
+          <li><a href="#" id="publish-enable" class="btn btn-primary btn-raised"
+          role="button">{{pt "button.publishnow"}}</a></li>
         </ul>
       </div>
     </div>
