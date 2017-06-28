@@ -2,13 +2,10 @@
 
 let AddPostView = Backbone.View.extend({
 
-
   tagName: "div",
-
 
   className: "panel panel-default",
   //className: "container addpost-form",
-
 
   events: {
     "click #closeadd": "closeadd",
@@ -18,15 +15,38 @@ let AddPostView = Backbone.View.extend({
     "change #imageFile": "imageUpload"
   },
 
-
   initialize: function(data) {
     this.data = data || {};
     this.data.campaigns = S.collection.get("campaigns").toJSON().map((i) => {
       return S.collection2select({id: i.id, text: i.name});
     });
     S.toggleNavigation();
-  },
 
+    let tourFiltered = S.collection.get("tour_element").filter(
+      function(obj){ return obj.attributes.view == "AddPostView"})
+
+    if (tourFiltered.length>0){
+
+      this.tour = new Tour({storage:false});
+      this.tour.init();
+      //sorteamos el arreglo por el Title. Importante a la hora de registrar elementos
+      tourFiltered.sort(function(a,b) {
+          return (a.title > b.title) 
+                  ? 1 : ((b.title > a.title) 
+          ? -1 : 0);} );
+      
+      let data = tourFiltered.map(element => {
+            let salida  = {
+              element: element.attributes.name,
+              title :  element.attributes.title,
+              content : element.attributes.content,  
+            };
+            //TODO Change for JS
+            return $.extend(salida, element.attributes.options)
+        });
+      return this.tour.addSteps(data);
+    }
+  },
 
   closeadd: function() {
     S.toggleNavigation(true);
@@ -207,6 +227,10 @@ let AddPostView = Backbone.View.extend({
       lk.select2({
           placeholder: S.polyglot.t("addpost.notforfacebook")
       });
+    }
+
+    if (this.tour != undefined){
+        this.tour.start(true);  
     }
 
     return this;

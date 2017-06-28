@@ -33,26 +33,10 @@ let CampaignView = Backbone.View.extend({
       return this.tour.addSteps(data);
     }
 
-    this.navigation = new NavigationView();
-    this.footer = new FooterView();
-    this.modal = new editCampaignView();
-    this.modal_add = new addCampaignView();
-    this.tour = new Tour();
-    this.tour.init();
-    //let user = S.user
-      let data = S.collection.get("tour_element").toArray()
-        .map(element => {
-           return {
-            
-              element: element.attributes.name,
-              title :  element.attributes.title,
-              content : element.attributes.content,
-              opt:{
-                options: element.attributes.options
-              }                
-           };
-        });
-      return this.tour.addSteps(data);
+      this.navigation = new NavigationView();
+      this.footer = new FooterView();
+      this.modal = new editCampaignView();
+      this.modal_add = new addCampaignView();
 
   },
 
@@ -91,6 +75,7 @@ let CampaignView = Backbone.View.extend({
   },
 
   render: function(){
+
     this.modal_add.render();
     let data = {
       campaigns: S.collection.get("campaigns").toJSON()

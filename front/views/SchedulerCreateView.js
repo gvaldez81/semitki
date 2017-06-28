@@ -31,11 +31,6 @@ let SchedulerCreateView = Backbone.View.extend({
       return this.tour.addSteps(data);
     }
     
-
-   let sysuser = S.collection.get("user").findWhere({
-                bucket_id: user.bucket_id
-              });
-
     // TODO And it still fails, argh!!
 //    S.persistSignedUser(); // Ulgy hack, find a better way to persist the user!
     this.navigation = new NavigationView();
@@ -45,9 +40,6 @@ let SchedulerCreateView = Backbone.View.extend({
     this.footer.render();
     this.modal.render();
     this.render();
-
-    return this.tour.addSteps(data);//{ items: data };
-
   },
 
   render: function() {
