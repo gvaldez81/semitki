@@ -5,6 +5,7 @@ data
 **/bower_components
 **/node_modules
 storage
-varaiables.env
+img
+variables.env
 config
 *.retry
