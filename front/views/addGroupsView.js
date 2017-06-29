@@ -13,6 +13,29 @@ let addGroupsView = Backbone.View.extend({
 
   initialize: function(data) {
 
+    let tourFiltered = S.collection.get("tour_element").filter(
+      function(obj){ return obj.attributes.view == "addGroupsView"})
+    if (tourFiltered.length>0){
+      this.tour = new Tour({storage:false});
+      this.tour.init();
+      //sorteamos el arreglo por el Title. Importante a la hora de registrar elementos
+      tourFiltered.sort(function(a,b) {
+          return (a.title > b.title) 
+                  ? 1 : ((b.title > a.title) 
+          ? -1 : 0);} );
+      
+      let data = tourFiltered.map(element => {
+            let salida  = {
+              element: element.attributes.name,
+              title :  element.attributes.title,
+              content : element.attributes.content,  
+            };
+            //TODO Change for JS
+            return $.extend(salida, element.attributes.options)
+        });
+      return this.tour.addSteps(data);
+    }      
+
     this.data = data || undefined;
 
   },
@@ -72,7 +95,10 @@ let addGroupsView = Backbone.View.extend({
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled(this.data));
     $("#dialog-crud").html(this.$el);
-    
+
+    if(this.tour != undefined){
+        this.tour.start(true);
+    }
   },
 
 });

@@ -171,7 +171,7 @@ class TourElementSerializer(serializers.ModelSerializer):
       return element.tourview.name
     class Meta:
         model = TourElement
-        fields = ('id', 'isactive','name','options','title', 'view')
+        fields = ('id', 'isactive','name','options','title', 'view','content')
 
 class TourRelatedSerializer(serializers.ModelSerializer):
 

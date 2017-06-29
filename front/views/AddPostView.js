@@ -16,6 +16,7 @@ let AddPostView = Backbone.View.extend({
   },
 
   initialize: function(data) {
+
     this.data = data || {};
     this.data.campaigns = S.collection.get("campaigns").toJSON().map((i) => {
       return S.collection2select({id: i.id, text: i.name});
@@ -205,7 +206,6 @@ let AddPostView = Backbone.View.extend({
           return S.collection2select({id: i.id, text: i.name});
         })}).prop("disabled", false);
     });
-
 
     let selectplace = S.polyglot.t("addpost.select_group");
 

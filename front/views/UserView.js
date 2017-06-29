@@ -6,6 +6,31 @@ let UserView = Backbone.View.extend({
 
   initialize: function () {
 
+   let tourFiltered = S.collection.get("tour_element").filter(
+      function(obj){ return obj.attributes.view == "UserView"})
+
+    if (tourFiltered.length>0){
+
+      this.tour = new Tour({storage:false});
+      this.tour.init();
+      //sorteamos el arreglo por el Title. Importante a la hora de registrar elementos
+      tourFiltered.sort(function(a,b) {
+          return (a.title > b.title) 
+                  ? 1 : ((b.title > a.title) 
+          ? -1 : 0);} );
+      
+      let data = tourFiltered.map(element => {
+            let salida  = {
+              element: element.attributes.name,
+              title :  element.attributes.title,
+              content : element.attributes.content,  
+            };
+            //TODO Change for JS
+            return $.extend(salida, element.attributes.options)
+        });
+      return this.tour.addSteps(data);
+    }
+     
     this.navigation = new NavigationView();
     this.footer = new FooterView();
     this.modal_add = new addUserView();
@@ -79,7 +104,12 @@ let UserView = Backbone.View.extend({
     this.$el.html(compiled(data));
     $("#container").html(this.$el);
     $("#main").html(this.$el);
+
     S.showButtons();
+
+    if (this.tour != undefined){
+          this.tour.start(true);
+    }
 
     return this;
   }

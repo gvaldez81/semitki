@@ -9,6 +9,29 @@ let GroupMenuView = Backbone.View.extend({
   initialize: function() {
     let acts = S.collection.get("accounts").toJSON();
 
+    let tourFiltered = S.collection.get("tour_element").filter(
+      function(obj){ return obj.attributes.view == "GroupMenuView"})
+    if (tourFiltered.length>0){
+      this.tour = new Tour({storage:false});
+      this.tour.init();
+      //sorteamos el arreglo por el Title. Importante a la hora de registrar elementos
+      tourFiltered.sort(function(a,b) {
+          return (a.title > b.title) 
+                  ? 1 : ((b.title > a.title) 
+          ? -1 : 0);} );
+      
+      let data = tourFiltered.map(element => {
+            let salida  = {
+              element: element.attributes.name,
+              title :  element.attributes.title,
+              content : element.attributes.content,  
+            };
+            //TODO Change for JS
+            return $.extend(salida, element.attributes.options)
+        });
+      return this.tour.addSteps(data);
+    }
+
     this.accounts = acts.map((a) => {
       let groups = '';
       S.collection.get("groups").map(function (group){
@@ -33,7 +56,6 @@ let GroupMenuView = Backbone.View.extend({
 
     return this;
   },
-
 
   render: function() {
     let template = $("#account-menu-template").html();
@@ -64,6 +86,9 @@ let GroupMenuView = Backbone.View.extend({
       templateSelection: templateSelect
     });
 
+      if(this.tour != undefined){
+        this.tour.start(true);
+      }
 
     return this;
   }
