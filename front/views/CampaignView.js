@@ -2,8 +2,6 @@
 
 let CampaignView = Backbone.View.extend({
 
-  tagName: "div",
-
   className: "row",
 
   initialize: function() {
