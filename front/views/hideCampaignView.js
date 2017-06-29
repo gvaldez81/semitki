@@ -6,7 +6,37 @@ let hideCampaignView = Backbone.View.extend({
   className: "modal-dialog",
 
 initialize: function(data) {
-    this.data = data || undefined;
+    if (data == undefined){
+      this.data = undefined;  
+    }else{
+      this.data = data;
+      //TOUR
+      let tourFiltered = S.collection.get("tour_element").filter(
+      function(obj){ return obj.attributes.view == "hideCampaignView"})
+
+      if (tourFiltered.length>0){
+
+         this.tour = new Tour({storage:false});
+         this.tour.init();
+        //sorteamos el arreglo por el Title. Importante a la hora de registrar elementos
+        tourFiltered.sort(function(a,b) {
+            return (a.title > b.title) 
+                    ? 1 : ((b.title > a.title) 
+            ? -1 : 0);} );
+        
+        let data = tourFiltered.map(element => {
+              let salida  = {
+                element: element.attributes.name,
+                title :  element.attributes.title,
+                content : element.attributes.content,  
+              };
+              //TODO Change for JS
+              return $.extend(salida, element.attributes.options)
+          });
+        return this.tour.addSteps(data);
+      }
+    }
+
   },
 
   events: {
@@ -65,6 +95,10 @@ initialize: function(data) {
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled(this.data));
     $("#dialog-crud").html(this.$el);
+
+    if(this.tour != undefined){
+        this.tour.start(true);
+    }
     
   },
 

@@ -8,11 +8,14 @@ let CampaignView = Backbone.View.extend({
 
   initialize: function() {
 
+    this.navigation = new NavigationView();
+    this.footer = new FooterView();
+    this.modal_edit = new editCampaignView();
+    this.modal_add = new addCampaignView();
+
     let tourFiltered = S.collection.get("tour_element").filter(
       function(obj){ return obj.attributes.view == "CampaignView"})
-
     if (tourFiltered.length>0){
-
       this.tour = new Tour({storage:false});
       this.tour.init();
       //sorteamos el arreglo por el Title. Importante a la hora de registrar elementos
@@ -61,7 +64,7 @@ let CampaignView = Backbone.View.extend({
     "click #delete": "delete",
     "click .item_button_edit": "editItem",
     "click .item_button_remove": "hideItem",
-    "click .add_campaign": "addItem"
+    "click .btn-add": "addItem"
   },
 
   addItem: () => {
@@ -79,10 +82,14 @@ let CampaignView = Backbone.View.extend({
 
   hideItem: function(ev) {
     let id = $(ev.currentTarget).parents('.item')[0].id;
+<<<<<<< HEAD
     let dialog = new hideCampaignView({
       item: new Array(S.collection.get("campaigns").get(id).toJSON())
     });
     dialog.render();
+=======
+    let dialog = new hideCampaignView({item: new Array(S.collection.get("campaigns").get(id).toJSON())});
+>>>>>>> tour
   },
 
   delete: () => {
@@ -92,6 +99,7 @@ let CampaignView = Backbone.View.extend({
   },
 
   render: function(){
+    this.modal_edit.render();
     this.modal_add.render();
     let data = {
       campaigns: S.collection.get("campaigns").toJSON()
@@ -105,7 +113,11 @@ let CampaignView = Backbone.View.extend({
     S.showButtons();
 
     if (this.tour != undefined){
+<<<<<<< HEAD
       this.tour.start(true);
+=======
+         this.tour.start(true);  
+>>>>>>> tour
     }
 
     return this;

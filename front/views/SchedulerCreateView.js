@@ -34,11 +34,6 @@ let SchedulerCreateView = Backbone.View.extend({
 
       this.tour.addSteps(data);
     }
-
-    let sysuser = S.collection.get("user").findWhere({
-      bucket_id: S.user.bucket_id
-    });
-
     // TODO And it still fails, argh!!
     this.navigation = new NavigationView();
     this.footer = new FooterView();
