@@ -82,14 +82,10 @@ let CampaignView = Backbone.View.extend({
 
   hideItem: function(ev) {
     let id = $(ev.currentTarget).parents('.item')[0].id;
-<<<<<<< HEAD
     let dialog = new hideCampaignView({
       item: new Array(S.collection.get("campaigns").get(id).toJSON())
     });
     dialog.render();
-=======
-    let dialog = new hideCampaignView({item: new Array(S.collection.get("campaigns").get(id).toJSON())});
->>>>>>> tour
   },
 
   delete: () => {
