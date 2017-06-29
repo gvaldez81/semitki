@@ -109,11 +109,7 @@ let CampaignView = Backbone.View.extend({
     S.showButtons();
 
     if (this.tour != undefined){
-<<<<<<< HEAD
       this.tour.start(true);
-=======
-         this.tour.start(true);  
->>>>>>> tour
     }
 
     return this;
