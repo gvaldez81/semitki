@@ -10,17 +10,7 @@ let LoginView = Backbone.View.extend({
   initialize: function() {
     this.footer = new FooterView();
     S.toggleNavigation();
-    tour.init();
 
-//    S.collections.getTourSteps(
-//      )
-
-//    Iterar :
-//    tour.addSteps(
-//      Step:)
-    //
-    //Traer elementos del modelos tourlements
-    //addSteps
   },
 
   events: {
@@ -208,11 +198,6 @@ let LoginView = Backbone.View.extend({
 
     this.$el.html(compiled);
     $("#main").html(this.$el);
-
-
-    //Traer usuario y tourView,
-    //verTour =  (tourView existe, tourView.view, True)
-    //tour.start(verTour);
 
     return this;
   },
