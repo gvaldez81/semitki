@@ -5,7 +5,6 @@ let AddPostView = Backbone.View.extend({
   tagName: "div",
 
   className: "panel panel-default",
-  //className: "container addpost-form",
 
   events: {
     "click #closeadd": "closeadd",
@@ -13,7 +12,6 @@ let AddPostView = Backbone.View.extend({
     "click #publish-btn": "schedule",
     "click #publish-enable": "publish",
     "change #imageFile": "imageUpload",
-    "click .nolink": "nolink"
   },
 
   initialize: function(data) {
