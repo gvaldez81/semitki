@@ -238,6 +238,8 @@ let AddPostView = Backbone.View.extend({
     }
 
     // Initialize fileinput
+    let customHeaders = S.addAuthorizationHeader().headers
+    customHeaders['Content-Disposition'] = 'attachment; filenamemyfile.jpg';
     $("#uploadfileField").fileinput({
       uploadUrl: 'http://localhost:3032/upload',
       uploadAsync: true,
@@ -245,7 +247,8 @@ let AddPostView = Backbone.View.extend({
       maxFilePreviewSize: 1024,
       elErrorContainer: "#messages",
       allowedFileTypes: ['image', 'video'],
-      allowedFileExtensions: ['jpg', 'jpeg', 'gif', 'png', 'webm', 'avi', 'mp4']
+      allowedFileExtensions: ['jpg', 'jpeg', 'gif', 'png', 'webm', 'avi', 'mp4'],
+      ajaxSettings: customHeaders
     });
 
     return this;

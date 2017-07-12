@@ -197,13 +197,6 @@ let S = {
 
 
   initPolyglot: function() {
-    // Start Internationalization support
-/*    let phrases = $.get("i18n/"+semitki.lang+".json", {*/
-      //dataType: "json"
-    //});
-    //phrases.done((xhr) => {
-      //semitki.polyglot.replace(xhr);
-    /*});*/
     this.polyglot.replace(poles);
   },
 

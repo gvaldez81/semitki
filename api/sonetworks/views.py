@@ -10,8 +10,9 @@ from rest_framework import viewsets
 from rest_framework import permissions
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.parsers import FormParser
-from rest_framework.parsers import MultiPartParser
+from rest_framework.parsers import FileUploadParser
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.views import APIView
 from .serializers import *
 from .models import *
 
@@ -52,12 +53,11 @@ class FacebookLogin(SocialLoginView):
 
 class TwitterLogin(LoginView):
     adapter_class = TwitterOAuthAdapter
-    #client_class = OAuth2Client
-    #callback_url = os.environ["OAUTH2_REDIRECT_URI"] + "?chan=facebook"
     serializer_class = TwitterLoginSerializer
 
     def process_login(self):
         get_adapter(self.request).login(self.request, self.user)
+
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -66,14 +66,14 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
     lookup_field = 'username'
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticated,)
 
 
 class PostViewSet(viewsets.ModelViewSet):
     """
     Scheduled posts
     """
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
@@ -84,17 +84,7 @@ class PhaseViewSet(viewsets.ModelViewSet):
     """
     queryset = Phase.objects.all()
     serializer_class = PhaseSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    # def update(self, request, *args, **kwargs):
-    # #def update(self, request, pk=None):
-    #     pk=kwargs['pk']
-    #     print('Update phase id ='+pk)
-    #     #print('ob j =',getattr(self.get_object(),'description'))
-    #     instance = self.get_object()
-    #     serializer = self.get_serializer(instance, data=request.data, partial=False)
-    #     serializer.is_valid(raise_exception=True)
-    #     serializer.save()
-    #     return Response(status=status.HTTP_200_OK, statusText='success')
+    permission_classes = (permissions.IsAuthenticated,)
 
 
 class CampaignViewSet(viewsets.ModelViewSet):
@@ -103,7 +93,7 @@ class CampaignViewSet(viewsets.ModelViewSet):
     """
     queryset = Campaign.objects.all()
     serializer_class = CampaignSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticated,)
 
 
 class SocialAccountViewSet(viewsets.ModelViewSet):
@@ -114,13 +104,15 @@ class SocialAccountViewSet(viewsets.ModelViewSet):
     serializer_class = SocialAccountSerializer
     permission_classes = (permissions.AllowAny,)
 
+
 class SocialGroupViewSet(viewsets.ModelViewSet):
     """
     Managed social accounts
     """
     queryset = SocialGroup.objects.all()
     serializer_class = SocialGroupSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticated,)
+
 
 class SocialAccountGroupViewSet(viewsets.ModelViewSet):
     """
@@ -128,21 +120,20 @@ class SocialAccountGroupViewSet(viewsets.ModelViewSet):
     """
     queryset = SocialAccountGroup.objects.all()
     serializer_class = SocialAccountGroupSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticated,)
 
     @detail_route()
     def search(self, request, *args, **kwargs):
-        ag = self.filter(name="algo")
+        ag = self.filter(name="algo") # TODO WTF?
 
 
 class BucketViewSet(viewsets.ModelViewSet):
     """
     Marketing channels registry
     """
-
     queryset = Bucket.objects.all()
     serializer_class = BucketSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticated,)
 
 
 class StaticPageViewSet(viewsets.ModelViewSet):
@@ -151,20 +142,24 @@ class StaticPageViewSet(viewsets.ModelViewSet):
     """
     queryset = StaticPage.objects.all()
     serializer_class = StaticPageSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticated,)
 
 
-class ImageStoreViewSet(viewsets.ModelViewSet):
+class FileUpload(APIView):
     """
-    Image store vireset
+    File uploads view
     """
-    queryset = ImageStore.objects.all()
-    serializer_class = ImageStoreSerializer
-    parser_classes = (FormParser, MultiPartParser)
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    parser_classes = (FileUploadParser,)
 
-    def perform_create(self, serializer):
-        serializer.save(image = self.request.data.get('image'))
+    def post(self, request, format=None):
+        up_file = request.FILES['file']
+        destination = open('/semitki/storage/uploads' + up_file.name, 'wb+')
+        for chunk in up_file.chunks():
+            destination.write(chunk)
+            detination.close()
+
+        return Response(up_file.name, status.HTTP_201_CREATED)
+
 
 class PagesTokenViewSet(viewsets.ModelViewSet):
     """
@@ -172,7 +167,7 @@ class PagesTokenViewSet(viewsets.ModelViewSet):
     """
     queryset = PagesToken.objects.all()
     serializer_class = PagesTokenSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticated,)
 
 
 def twitter_auth(request):
@@ -192,8 +187,8 @@ def callback(request):
     when registering Follower accounts.
     """
     # Set to 0 for production, 1 is for development only
+    # TODO WTF?
     os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
-
 
     # Only process if a chan is present
     if 'chan' in request.GET:
@@ -237,16 +232,6 @@ def callback(request):
             except MultipleObjectsReturned:
                 # TODO do the logging thing
                 parameter="?action=error"
-#             social_account = SocialAccount(
-                    # username = user["name"],
-                    # email = user["email"],
-                    # bucket_id = user["id"],
-                    # image_link = user["image"],
-                    # access_token = token, #json.JSONEncoder().encode(token),
-                    # token_expiration = datetime.fromtimestamp(token["expires_in"])
-                                # if "expires_in" in token  else None,
-                    # bucket = bucket.tagname)
-            # social_account.save()
     elif 'login' in request.GET:
 
         response = HttpResponse('<script type="text/javascript">window.close(); </script>')
@@ -309,10 +294,7 @@ def fb_exchange_token(request):
     return HttpResponse(r.text)
 
 
-
 def tw_request_token(request):
-
-
     ts = str(int(time.time()))
 
     oauth = OAuth1(settings.SOCIAL_AUTH_TWITTER_KEY,
@@ -330,23 +312,21 @@ def tw_request_token(request):
     request.session['tw_request_token_secret'] = credentials.get('oauth_token_secret')[0]
     authorize_url = settings.TWITTER_AUTHENTICATE_URL + credentials.get('oauth_token')[0]
     return HttpResponseRedirect(authorize_url)
-    
+
 
 class TourViewSet(viewsets.ModelViewSet):
-
     queryset = TourView.objects.all()
     serializer_class = TourViewSerializer
     permission_classes = (permissions.IsAuthenticated,)
 
 
 class TourElementSet(viewsets.ModelViewSet):
-
     queryset = TourElement.objects.all()
     serializer_class = TourElementSerializer
     permission_classes = (permissions.IsAuthenticated,)
 
-class TourRelatedSet(viewsets.ModelViewSet):
 
+class TourRelatedSet(viewsets.ModelViewSet):
     queryset = TourRelated.objects.all()
     serializer_class = TourRelatedSerializer
     permission_classes = (permissions.IsAuthenticated,)

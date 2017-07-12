@@ -96,7 +96,7 @@ module.exports = (grunt) => {
           { // Images PNG only
             expand: true,
             cwd: 'static/img',
-            src: '*.png',
+            src: '*.*',
             dest: 'dist/img',
           },
           { // Polyglot translations
@@ -153,8 +153,15 @@ module.exports = (grunt) => {
             src: 'bower_components/bootstrap-material-design/dist/js/*.js',
             dest: 'dist/js/'
           },
+          { // Bootstrap Fileinput IMG
+            expand: true,
+            src: 'bower_components/bootstrap-fileinput/css/img/**',
+            dest: 'dist/img/'
+          },
+
           { // Bootstrap Fileinput CSS
-            src: 'bower_components/bootstrap-fileinput/css/*.*',
+            expand: true,
+            src: 'bower_components/bootstrap-fileinput/css/**',
             dest: 'dist/css/'
           },
           { // Bootstrap Fileinput JS

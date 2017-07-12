@@ -34,7 +34,6 @@ router.register(r'group', SocialGroupViewSet)
 router.register(r'account_group', SocialAccountGroupViewSet)
 router.register(r'bucket', BucketViewSet)
 router.register(r'static_page', StaticPageViewSet)
-router.register(r'image_upload', ImageStoreViewSet)
 router.register(r'page', PagesTokenViewSet)
 router.register(r'tour_view', TourViewSet)
 router.register(r'tour_element', TourElementSet)
@@ -45,17 +44,20 @@ router.register(r'tour_relates', TourRelatedSet)
 urlpatterns = [
     #url(r'^$', schema_view),
     url(r'^', include(router.urls)),
+    url(r'^admin/', admin.site.urls),
+    # Social accounts auth
     url(r'^auth/', include('rest_auth.urls')),
     url(r'^auth/', include('allauth.urls'), name='socialaccount_signup'),
     # System users login
     url(r'^auth/facebook/$', FacebookLogin.as_view(), name="fb_login"),
     url(r'^auth/twitter/$', TwitterLogin.as_view(), name='tw_login'),
-    url(r'^admin/', admin.site.urls),
-    url(r'^api-token-auth/', obtain_jwt_token),
-    url(r'^api-token-refresh/', refresh_jwt_token),
-    url(r'^callback/$', callback, name='callback'),
-    url(r'^twitter_auth/$', twitter_auth, name='twitter_auth'),
-    url(r'^post/(?P<pk>[^/.]+)/publish/$', publish_now, name='publish_now'),
     url(r'^auth/fb_exchange/$', fb_exchange_token, name='fb_exchange_token'),
     url(r'^auth/tw_request_token/$', tw_request_token, name='tw_request_token'),
+    url(r'^twitter_auth/$', twitter_auth, name='twitter_auth'),
+    # Social networks callback URL
+    url(r'^callback/$', callback, name='callback'),
+    url(r'^api-token-auth/', obtain_jwt_token),
+    url(r'^api-token-refresh/', refresh_jwt_token),
+    url(r'^post/(?P<pk>[^/.]+)/publish/$', publish_now, name='publish_now'),
+    url(r'^upload', FileUpload.as_view()),
 ]
