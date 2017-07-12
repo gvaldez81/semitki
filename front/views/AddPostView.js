@@ -237,6 +237,17 @@ let AddPostView = Backbone.View.extend({
         this.tour.start(true);
     }
 
+    // Initialize fileinput
+    $("#uploadfileField").fileinput({
+      uploadUrl: 'http://localhost:3032/upload',
+      uploadAsync: true,
+      maxFileCount: 3,
+      maxFilePreviewSize: 1024,
+      elErrorContainer: "#messages",
+      allowedFileTypes: ['image', 'video'],
+      allowedFileExtensions: ['jpg', 'jpeg', 'gif', 'png', 'webm', 'avi', 'mp4']
+    });
+
     return this;
   }
 });
