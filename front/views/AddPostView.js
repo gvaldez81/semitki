@@ -12,7 +12,8 @@ let AddPostView = Backbone.View.extend({
     "click #schedule-enable": "schedule",
     "click #publish-btn": "schedule",
     "click #publish-enable": "publish",
-    "change #imageFile": "imageUpload"
+    "change #imageFile": "imageUpload",
+    "click .nolink": "nolink"
   },
 
   initialize: function(data) {
@@ -32,21 +33,26 @@ let AddPostView = Backbone.View.extend({
       this.tour.init();
       //sorteamos el arreglo por el Title. Importante a la hora de registrar elementos
       tourFiltered.sort(function(a,b) {
-          return (a.title > b.title) 
-                  ? 1 : ((b.title > a.title) 
+          return (a.title > b.title)
+                  ? 1 : ((b.title > a.title)
           ? -1 : 0);} );
-      
+
       let data = tourFiltered.map(element => {
             let salida  = {
               element: element.attributes.name,
               title :  element.attributes.title,
-              content : element.attributes.content,  
+              content : element.attributes.content,
             };
             //TODO Change for JS
             return $.extend(salida, element.attributes.options)
         });
       return this.tour.addSteps(data);
     }
+  },
+
+  nolink: (e) => {
+    e.preventDefault();
+    console.log(e);
   },
 
   closeadd: function() {
@@ -230,7 +236,7 @@ let AddPostView = Backbone.View.extend({
     }
 
     if (this.tour != undefined){
-        this.tour.start(true);  
+        this.tour.start(true);
     }
 
     return this;
