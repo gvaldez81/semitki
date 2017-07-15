@@ -1,4 +1,4 @@
- Byte-compiled / optimized / DLL files
+Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
@@ -138,7 +138,7 @@ bower_components
 seecrets.txt
 front/config.js
 variables.env
-storage/img/**
+storage/**
 #config
 *.log
 *.pid

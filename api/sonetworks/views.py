@@ -11,7 +11,9 @@ from rest_framework import permissions
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.parsers import FileUploadParser
+from rest_framework.parsers import MultiPartParser
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
 from .serializers import *
 from .models import *
@@ -66,14 +68,12 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
     lookup_field = 'username'
-    permission_classes = (permissions.IsAuthenticated,)
 
 
 class PostViewSet(viewsets.ModelViewSet):
     """
     Scheduled posts
     """
-    permission_classes = (permissions.IsAuthenticated,)
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
@@ -84,7 +84,6 @@ class PhaseViewSet(viewsets.ModelViewSet):
     """
     queryset = Phase.objects.all()
     serializer_class = PhaseSerializer
-    permission_classes = (permissions.IsAuthenticated,)
 
 
 class CampaignViewSet(viewsets.ModelViewSet):
@@ -93,7 +92,6 @@ class CampaignViewSet(viewsets.ModelViewSet):
     """
     queryset = Campaign.objects.all()
     serializer_class = CampaignSerializer
-    permission_classes = (permissions.IsAuthenticated,)
 
 
 class SocialAccountViewSet(viewsets.ModelViewSet):
@@ -102,7 +100,6 @@ class SocialAccountViewSet(viewsets.ModelViewSet):
     """
     queryset = SocialAccount.objects.all()
     serializer_class = SocialAccountSerializer
-    permission_classes = (permissions.AllowAny,)
 
 
 class SocialGroupViewSet(viewsets.ModelViewSet):
@@ -111,7 +108,6 @@ class SocialGroupViewSet(viewsets.ModelViewSet):
     """
     queryset = SocialGroup.objects.all()
     serializer_class = SocialGroupSerializer
-    permission_classes = (permissions.IsAuthenticated,)
 
 
 class SocialAccountGroupViewSet(viewsets.ModelViewSet):
@@ -120,7 +116,6 @@ class SocialAccountGroupViewSet(viewsets.ModelViewSet):
     """
     queryset = SocialAccountGroup.objects.all()
     serializer_class = SocialAccountGroupSerializer
-    permission_classes = (permissions.IsAuthenticated,)
 
     @detail_route()
     def search(self, request, *args, **kwargs):
@@ -133,7 +128,6 @@ class BucketViewSet(viewsets.ModelViewSet):
     """
     queryset = Bucket.objects.all()
     serializer_class = BucketSerializer
-    permission_classes = (permissions.IsAuthenticated,)
 
 
 class StaticPageViewSet(viewsets.ModelViewSet):
@@ -142,21 +136,23 @@ class StaticPageViewSet(viewsets.ModelViewSet):
     """
     queryset = StaticPage.objects.all()
     serializer_class = StaticPageSerializer
-    permission_classes = (permissions.IsAuthenticated,)
 
 
 class FileUpload(APIView):
     """
     File uploads view
     """
-    parser_classes = (FileUploadParser,)
+    parser_classes = (FileUploadParser, MultiPartParser)
 
     def post(self, request, format=None):
         up_file = request.FILES['file']
-        destination = open('/semitki/storage/uploads' + up_file.name, 'wb+')
+        timestamp = datetime.now().strftime("%Y%m%d%H%M%S%f")
+        destination = open('/semitki/storage/uploads/' + timestamp + '_' +
+                up_file.name, 'wb+')
         for chunk in up_file.chunks():
             destination.write(chunk)
-            detination.close()
+
+        destination.close()
 
         return Response(up_file.name, status.HTTP_201_CREATED)
 
@@ -167,7 +163,6 @@ class PagesTokenViewSet(viewsets.ModelViewSet):
     """
     queryset = PagesToken.objects.all()
     serializer_class = PagesTokenSerializer
-    permission_classes = (permissions.IsAuthenticated,)
 
 
 def twitter_auth(request):
@@ -217,7 +212,7 @@ def callback(request):
                             'username': user["name"],
                             'email': user["email"],
                             'image_link': user["image"],
-                            'access_token': token, #json.JSONEncoder().encode(token),
+                            'access_token': token,
                             'token_expiration':
                             datetime.fromtimestamp(token["expires_in"]) if "expires_in" in token  else None,
                             }
@@ -255,7 +250,6 @@ def callback(request):
             r = requests.post(url=settings.TWITTER_ACCESS_TOKEN_URL, auth=oauth)
 
             credentials = parse_qs(r.content)
-            #response.set_cookie('tw_response', r.text, domain=settings.SESSION_COOKIE_DOMAIN)
             response.set_cookie('tw_access_token', credentials.get('oauth_token')[0], domain=settings.SESSION_COOKIE_DOMAIN)
             response.set_cookie('tw_access_token_secret', credentials.get('oauth_token_secret')[0], domain=settings.SESSION_COOKIE_DOMAIN)
             response.set_cookie('tw_bucket_id', credentials.get('user_id')[0], domain=settings.SESSION_COOKIE_DOMAIN)
@@ -317,16 +311,13 @@ def tw_request_token(request):
 class TourViewSet(viewsets.ModelViewSet):
     queryset = TourView.objects.all()
     serializer_class = TourViewSerializer
-    permission_classes = (permissions.IsAuthenticated,)
 
 
 class TourElementSet(viewsets.ModelViewSet):
     queryset = TourElement.objects.all()
     serializer_class = TourElementSerializer
-    permission_classes = (permissions.IsAuthenticated,)
 
 
 class TourRelatedSet(viewsets.ModelViewSet):
     queryset = TourRelated.objects.all()
     serializer_class = TourRelatedSerializer
-    permission_classes = (permissions.IsAuthenticated,)

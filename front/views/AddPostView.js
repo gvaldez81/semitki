@@ -11,8 +11,8 @@ let AddPostView = Backbone.View.extend({
     "click #schedule-enable": "schedule",
     "click #publish-btn": "schedule",
     "click #publish-enable": "publish",
-    "change #imageFile": "imageUpload",
   },
+
 
   initialize: function(data) {
 
@@ -25,7 +25,7 @@ let AddPostView = Backbone.View.extend({
     let tourFiltered = S.collection.get("tour_element").filter(
       function(obj){ return obj.attributes.view == "AddPostView"})
 
-    if (tourFiltered.length>0){
+    if (tourFiltered.length > 0){
 
       this.tour = new Tour({storage:false});
       this.tour.init();
@@ -48,37 +48,11 @@ let AddPostView = Backbone.View.extend({
     }
   },
 
-  nolink: (e) => {
-    e.preventDefault();
-    console.log(e);
-  },
 
   closeadd: function() {
     S.toggleNavigation(true);
     this.scheduler = new SchedulerCreateView();
     this.remove();
-  },
-
-
-  imageUpload: function(event) {
-    let fileInput = $("#imageFile");
-    let file = fileInput[0].files[0];
-    let form = new FormData($("#addpost-form")[0]);
-    form.append('image', file);
-    $.ajax(S.api("image_upload"),
-      {
-        type: "POST",
-        contentType: "multipart/form-data",
-        data: form,
-        processData: false,
-        headers: S.addAuthorizationHeader().headers,
-        error: (jqXHR, textStatus, error) => {
-          console.log(jqXHR.responseText);
-        },
-        success: (data, textStatus, jqHXR) => {
-          console.log(jqHXR);
-        }
-      });
   },
 
 
@@ -188,13 +162,12 @@ let AddPostView = Backbone.View.extend({
 
     this.$el.html(compiled(this.data));
 
+    // Initialize any DOM element after the next line only
     $("#main").html(this.$el);
 
-    // DAtetime picker
+    // Datetime picker
     $("#schedule-post").datetimepicker({
-      disabledDates: [
-        new Date()
-      ]
+      disabledDates: [new Date()]
     });
 
     // Campaigns and phases select
@@ -238,17 +211,18 @@ let AddPostView = Backbone.View.extend({
     }
 
     // Initialize fileinput
-    let customHeaders = S.addAuthorizationHeader().headers
-    customHeaders['Content-Disposition'] = 'attachment; filenamemyfile.jpg';
-    $("#uploadfileField").fileinput({
-      uploadUrl: 'http://localhost:3032/upload',
-      uploadAsync: true,
-      maxFileCount: 3,
-      maxFilePreviewSize: 1024,
+    let customHeaders = S.addAuthorizationHeader().headers;
+    // TODO check filename handling
+    customHeaders['Content-Disposition'] = 'attachment;filename=upload.jpg';
+    $("#uploadfile").fileinput({
+      uploadUrl: '//' + SEMITKI_CONFIG.api_url + ':' + SEMITKI_CONFIG.api_port +
+        '/upload/',
       elErrorContainer: "#messages",
       allowedFileTypes: ['image', 'video'],
       allowedFileExtensions: ['jpg', 'jpeg', 'gif', 'png', 'webm', 'avi', 'mp4'],
-      ajaxSettings: customHeaders
+      ajaxSettings: {
+        headers: customHeaders
+      }
     });
 
     return this;

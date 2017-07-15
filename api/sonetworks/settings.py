@@ -12,11 +12,12 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 
 import os
 import datetime
+from corsheaders.defaults import default_methods
+from corsheaders.defaults import default_headers
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
@@ -29,9 +30,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -41,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'corsheaders',
-    # django-rest-framework
     'rest_framework',
     'rest_framework_swagger',
     'rest_framework.authtoken',
@@ -52,7 +50,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.twitter',
-    # our app
     'sonetworks',
     'django_extensions',
     'django_cron',
@@ -184,6 +181,10 @@ CORS_ORIGIN_WHITELIST = (
         '174.138.68.40',
         'mexicoeligebien.mx',
         'mexicoeligebien.mx:9080'
+        )
+
+CORS_ALLOW_HEADERS = default_headers + (
+        'Content-Disposition',
         )
 
 SITE_ID = 1
