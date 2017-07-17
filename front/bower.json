@@ -33,6 +33,7 @@
     "bootstrap-select": "^1.12.2",
     "bootstrap-tour": "^0.11.0",
     "jquery-oauthpopup": "^0.0.2",
-    "bootstrap-material-design": "https://github.com/FezVrasta/bootstrap-material-design.git#6625d42cc2"
+    "bootstrap-material-design": "https://github.com/FezVrasta/bootstrap-material-design.git#6625d42cc2",
+    "bootstrap-fileinput": "^4.4.2"
   }
 }
