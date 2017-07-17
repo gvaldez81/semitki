@@ -211,9 +211,10 @@ let AddPostView = Backbone.View.extend({
     }
 
     // Initialize fileinput
+    let user_id = S.user.attributes.pk;
     let customHeaders = S.addAuthorizationHeader().headers;
     // TODO check filename handling
-    customHeaders['Content-Disposition'] = 'attachment;filename=upload.jpg';
+    customHeaders['Content-Disposition'] = 'attachment;filename=.jpg';
     $("#uploadfile").fileinput({
       uploadUrl: '//' + SEMITKI_CONFIG.api_url + ':' + SEMITKI_CONFIG.api_port +
         '/upload/',

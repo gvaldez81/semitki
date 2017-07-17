@@ -93,7 +93,7 @@ module.exports = (grunt) => {
             src: ['*.html', '!index.html'],
             dest: 'dist/'
           },
-          { // Images PNG only
+          { // Images
             expand: true,
             cwd: 'static/img',
             src: '*.*',
@@ -146,11 +146,11 @@ module.exports = (grunt) => {
             dest: 'dist/js/', filter: 'isFile'
           },
           { // Bootstrap Material Design CSS
-            src: 'bower_components/bootstrap-material-design/dist/css/*.*',
+            src: 'bootstrap-material-design/dist/css/*.*',
             dest: 'dist/css/'
           },
           { // Bootstrap Material Design JS
-            src: 'bower_components/bootstrap-material-design/dist/js/*.js',
+            src: 'bootstrap-material-design/dist/js/*.js',
             dest: 'dist/js/'
           },
           { // Bootstrap Fileinput IMG
