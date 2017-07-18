@@ -20,7 +20,7 @@ class PhaseAdmin(admin.ModelAdmin):
 		return obj.campaign.name
 	get_campaign.short_description = 'Campaign'
 	get_campaign.admin_order_field = 'campaign__name'
-    
+
 
 class PostAdmin(admin.ModelAdmin):
 	list_display = ['owner', 'date', 'get_phase']
@@ -61,6 +61,10 @@ class TourElementAdmin(admin.ModelAdmin):
     def get_tourview(self, obj):
         return obj.tourview.name
 
+
+class FileUploadAdmin(admin.ModelAdmin):
+    list_display = ['id', 'file_url', 'owner']
+
 admin.site.register(Bucket, BucketAdmin)
 admin.site.register(Post, PostAdmin)
 admin.site.register(Phase, PhaseAdmin)
@@ -73,3 +77,4 @@ admin.site.register(StaticPage)
 admin.site.register(TourView, TourViewGroupAdmin)
 admin.site.register(TourElement,TourElementAdmin)
 admin.site.register(TourRelated)
+admin.site.register(FileUpload, FileUploadAdmin)

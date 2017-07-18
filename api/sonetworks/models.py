@@ -212,3 +212,19 @@ class TourRelated(models.Model):
     tourview = models.ForeignKey(TourView)
     owner = models.ForeignKey('auth.user', related_name='user')
     show = models.BooleanField(default = True)
+
+
+class FileUpload(models.Model):
+    """
+    Store file uploadas and relate it to its owner
+    """
+    FILE_TYPES = (
+            ('image', 'image'),
+            ('video', 'video'))
+
+    id = models.CharField(max_length=256, primary_key=True, editable = False)
+    file_type = models.CharField(max_length=5,
+            choices=FILE_TYPES)
+    file_extension = models.CharField(max_length=4)
+    file_url = models.CharField(max_length=256)
+    owner = models.ForeignKey('auth.user', related_name='file_owner')

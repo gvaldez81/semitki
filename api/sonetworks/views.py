@@ -1,5 +1,7 @@
 import os, time
 import json
+import string
+import uuid
 from datetime import datetime, tzinfo
 
 from django.core.exceptions import MultipleObjectsReturned
@@ -138,23 +140,46 @@ class StaticPageViewSet(viewsets.ModelViewSet):
     serializer_class = StaticPageSerializer
 
 
-class FileUpload(APIView):
+class FileUploadView(APIView):
     """
-    File uploads view
+    File uploads
     """
-    parser_classes = (FileUploadParser, MultiPartParser)
+    parser_classes = (FileUploadParser, )
 
     def post(self, request, format=None):
-        up_file = request.FILES['file']
+        up_file = request.data['file']
+        file_uuid = uuid.uuid1().time_low
         timestamp = datetime.now().strftime("%Y%m%d%H%M%S%f")
-        destination = open('/semitki/storage/uploads/' + timestamp + '_' +
-                up_file.name, 'wb+')
-        for chunk in up_file.chunks():
-            destination.write(chunk)
+        filename = timestamp + '_' + str(file_uuid) + '_' + up_file.name + '.png'
+        owner = User.objects.get(pk=int(up_file.name))
+        try:
+            destination = open('/semitki/storage/uploads/' +  filename, 'wb+')
+            for chunk in up_file.chunks():
+                destination.write(chunk)
 
-        destination.close()
+            destination.close()
 
-        return Response(up_file.name, status.HTTP_201_CREATED)
+            new_file = FileUpload()
+            new_file.id = filename
+            new_file.file_type = 'image'
+            new_file.file_extension = 'png'
+            new_file.file_url = '/semitki/storage/uploads/'
+            new_file.owner = owner
+            new_file.save()
+
+            return Response(up_file.name, status.HTTP_201_CREATED)
+        except Exception:
+            return Response(Exception, status.HTTP_400_BAD_REQUEST)
+
+
+
+
+class FileUploadViewSet(viewsets.ModelViewSet):
+    """
+    Provides a serialzed representation of uploaded files
+    """
+    queryset = FileUpload.objects.all()
+    serializer_class = FileUploadSerializer
 
 
 class PagesTokenViewSet(viewsets.ModelViewSet):

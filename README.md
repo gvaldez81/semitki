@@ -13,14 +13,14 @@ missing username in Facebook social authentication, the module is
 patched to get around this validation. But better to check and fix it
 ASAP.
 
-Patches are locates in `semitki/patches` directory and applied at
+Patches are located in `semitki/patches` directory and applied at
 container build.
 
 
 ## Requirements
 
-Front end relies heavily in JavaScript 1.6 (ECMAScript 6), web browser
-requiremenst follow, any version below stated here or not listed, please
+Front-end heavily relies on JavaScript 1.6 (ECMAScript 6), web browser
+requiremenst follow, any version number below or not listed, please
 check the compatibility table link.
 
 * Firefox => 52
@@ -56,16 +56,15 @@ Besides the code you'll need various tools.
 
   * [docker](https://www.docker.com/products/docker)
   * [docker-compose](https://docs.docker.com/compose/)
-  * [virtualenv](https://virtualenv.pypa.io/en/stable/)
   * [NodeJS](https://nodejs.org/en/)
   * [Bower](https://bower.io/)
   * [Grunt](http://gruntjs.com/)
 
 
-## Build container image
+## Build API container image
 
 
-    cd semitki
+    cd semitki/api
     docker build -t semitki_app .
 
 
@@ -103,8 +102,16 @@ We use (among others, check requirements.txt):
     cd semitki/front
     npm install
     bower install
+    cd bootstrap-material-design
+    npm install
+    bower install
+    grunt
+    cd ..
     grunt
 
+
+Bootstrap material design shoud be built first in order to get the right
+visual styles.
 
 Running grunt will create a `semitki/frontend/dist` directory which
 should be accesable by an HTTP server. When running with docker-compose

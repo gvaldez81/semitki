@@ -76,7 +76,7 @@ class PhaseSerializer(serializers.ModelSerializer):
 
 
 class CampaignSerializer(serializers.HyperlinkedModelSerializer):
-    #phases = PhaseSerializer(many=True, read_only=True)    
+    #phases = PhaseSerializer(many=True, read_only=True)
     phases = PhaseSerializer(many=True, read_only=True)
 
     class Meta:
@@ -94,7 +94,7 @@ class SocialAccountSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         list_serializer_class = FilteredIsActiveListSerializer
         model = SocialAccount
-        fields = ('url', 'id', 'username', 'email', 'access_token', 'token_expiration', 
+        fields = ('url', 'id', 'username', 'email', 'access_token', 'token_expiration',
             'isactive', 'valid_to', 'bucket', 'bucket_id', 'image', 'image_path')
 
 class SocialAccountGroupSerializer(serializers.HyperlinkedModelSerializer):
@@ -154,9 +154,9 @@ class PagesTokenSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = PagesToken
-        fields = ('page_id', 'name', 'account_id', 'image_link', 
+        fields = ('page_id', 'name', 'account_id', 'image_link',
             'image', 'image_path', 'bucket', 'bucket_id')
-        
+
 
 class TourViewSerializer(serializers.ModelSerializer):
 
@@ -177,4 +177,11 @@ class TourRelatedSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = TourRelated
+        fields = ('__all__')
+
+
+class FileUploadSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = FileUpload
         fields = ('__all__')

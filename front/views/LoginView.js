@@ -17,26 +17,6 @@ let LoginView = Backbone.View.extend({
     "click #login-button": "tryLogin",
     "click #fb-login": "tryFbLogin",
     "click #twitter-login": "tryTwLogin",
-    "click #recover-pass": "recoverPassword",
-  },
-
-  recoverPassword: () => {
-    // TODO IT does not work, needs some work in backend
-    let url = S.api("auth/password/reset");
-    let csrftoken = Cookies.get("csrftoken");
-    $.ajax(url,
-    {
-       beforeSend: (xhr, settings) => {
-        if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
-          xhr.setRequestHeader("X-CSRFToken", csrftoken);
-        }
-      },
-      data: {
-        email: $("#email").val()
-      },
-      method: "POST",
-      dataType: "JSON"
-    });
   },
 
 
@@ -150,9 +130,6 @@ let LoginView = Backbone.View.extend({
           }
         }
     });
-
-
-
   },
 
 

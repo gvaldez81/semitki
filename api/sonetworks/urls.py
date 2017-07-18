@@ -38,6 +38,7 @@ router.register(r'page', PagesTokenViewSet)
 router.register(r'tour_view', TourViewSet)
 router.register(r'tour_element', TourElementSet)
 router.register(r'tour_relates', TourRelatedSet)
+router.register(r'file', FileUploadViewSet)
 
 #schema_view = get_swagger_view(title='Semitki API')
 
@@ -59,5 +60,5 @@ urlpatterns = [
     url(r'^api-token-auth/', obtain_jwt_token),
     url(r'^api-token-refresh/', refresh_jwt_token),
     url(r'^post/(?P<pk>[^/.]+)/publish/$', publish_now, name='publish_now'),
-    url(r'^upload', FileUpload.as_view()),
+    url(r'^upload', FileUploadView.as_view()),
 ]

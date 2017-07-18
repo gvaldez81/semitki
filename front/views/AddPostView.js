@@ -20,6 +20,7 @@ let AddPostView = Backbone.View.extend({
     this.data.campaigns = S.collection.get("campaigns").toJSON().map((i) => {
       return S.collection2select({id: i.id, text: i.name});
     });
+
     S.toggleNavigation();
 
     let tourFiltered = S.collection.get("tour_element").filter(
@@ -214,7 +215,7 @@ let AddPostView = Backbone.View.extend({
     let user_id = S.user.attributes.pk;
     let customHeaders = S.addAuthorizationHeader().headers;
     // TODO check filename handling
-    customHeaders['Content-Disposition'] = 'attachment;filename=.jpg';
+    customHeaders['Content-Disposition'] = 'attachment;filename='+S.user.attributes.pk;
     $("#uploadfile").fileinput({
       uploadUrl: '//' + SEMITKI_CONFIG.api_url + ':' + SEMITKI_CONFIG.api_port +
         '/upload/',
@@ -224,6 +225,15 @@ let AddPostView = Backbone.View.extend({
       ajaxSettings: {
         headers: customHeaders
       }
+    });
+
+    $('#uploadfile').on('filepreupload', function(event, data, previewId, index) {
+      let extra = data.extra;
+      data.extra.file_name = S.user.attributes.pk;
+      data.extra.file_type = 'image';
+      data.extra.file_extension = 'png';
+      console.log(data.extra);
+      return data.extra;
     });
 
     return this;
