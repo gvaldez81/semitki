@@ -112,7 +112,7 @@ def stuff_it(pk, staff = False, page = False):
 
         copy = post.content["txt"]
 
-        #SI LA PUBLICACION NO ES UNA LIGA URL DE SOCIAL NETWORK 
+        #SI LA PUBLICACION NO ES UNA LIGA URL DE SOCIAL NETWORK
         if (not copy.startswith(chan.url)):
             response =  chan.post(token = token, post = post, account_id = account_id,
                 staff = staff if staff else page )
@@ -137,7 +137,7 @@ def stuff_it(pk, staff = False, page = False):
                 permalink_url = permalink_url + user_tw + '/status/'
 
             permalink_url = permalink_url + post_id
-        else:    
+        else:
             status_ok = status.HTTP_200_OK
             permalink_url = copy
             post_id = 0

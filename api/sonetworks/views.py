@@ -19,6 +19,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
 from .serializers import *
 from .models import *
+from .utils import check_link
 
 from allauth.account.adapter import get_adapter
 from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
@@ -170,8 +171,6 @@ class FileUploadView(APIView):
             return Response(up_file.name, status.HTTP_201_CREATED)
         except Exception:
             return Response(Exception, status.HTTP_400_BAD_REQUEST)
-
-
 
 
 class FileUploadViewSet(viewsets.ModelViewSet):
@@ -346,3 +345,8 @@ class TourElementSet(viewsets.ModelViewSet):
 class TourRelatedSet(viewsets.ModelViewSet):
     queryset = TourRelated.objects.all()
     serializer_class = TourRelatedSerializer
+
+
+class KnownSharingServiceViewSet(viewsets.ModelViewSet):
+    queryset = KnownSharingService.objects.all()
+    serializer_class = KnownSharingServiceSerializer

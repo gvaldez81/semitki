@@ -228,3 +228,20 @@ class FileUpload(models.Model):
     file_extension = models.CharField(max_length=4)
     file_url = models.CharField(max_length=256)
     owner = models.ForeignKey('auth.user', related_name='file_owner')
+
+
+class KnownSharingService(models.Model):
+    """
+    Catalog of known sharing services
+    """
+    FILE_TYPES = (
+            ('any', 'any'),
+            ('image', 'image'),
+            ('video', 'video'))
+
+    id = models.UUIDField(primary_key = True, default = uuid.uuid4,
+            editable = False)
+    domain_name = models.CharField(max_length=255)
+    api_url = models.CharField(max_length=255)
+    hosting_type = models.CharField(max_length=5,
+            choices=FILE_TYPES)

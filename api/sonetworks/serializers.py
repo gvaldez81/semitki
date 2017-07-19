@@ -185,3 +185,10 @@ class FileUploadSerializer(serializers.ModelSerializer):
     class Meta:
         model = FileUpload
         fields = ('__all__')
+
+
+class KnownSharingServiceSerializer(serializers.ModelSerializer):
+
+        class Meta:
+            model = KnownSharingService
+            fields = ('__all__')

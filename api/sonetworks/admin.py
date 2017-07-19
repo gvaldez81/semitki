@@ -65,6 +65,11 @@ class TourElementAdmin(admin.ModelAdmin):
 class FileUploadAdmin(admin.ModelAdmin):
     list_display = ['id', 'file_url', 'owner']
 
+
+class KnownSharingServiceAdmin(admin.ModelAdmin):
+    list_display = ['domain_name', 'hosting_type']
+
+
 admin.site.register(Bucket, BucketAdmin)
 admin.site.register(Post, PostAdmin)
 admin.site.register(Phase, PhaseAdmin)
@@ -78,3 +83,4 @@ admin.site.register(TourView, TourViewGroupAdmin)
 admin.site.register(TourElement,TourElementAdmin)
 admin.site.register(TourRelated)
 admin.site.register(FileUpload, FileUploadAdmin)
+admin.site.register(KnownSharingService, KnownSharingServiceAdmin)
