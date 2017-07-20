@@ -116,6 +116,9 @@ def stuff_it(pk, staff = False, page = False):
         if (not copy.startswith(chan.url)):
             response =  chan.post(token = token, post = post, account_id = account_id,
                 staff = staff if staff else page )
+            if type(response) is not requests.models.Response:
+                return False
+
             if chanstr == 'facebook':
                 out = json.loads(response.text)
                 post_id = out['id']

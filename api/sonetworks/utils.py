@@ -1,6 +1,7 @@
 from .models import KnownSharingService
 from .serializers import UserSerializer
 import requests
+from urlparse import urlparse
 
 
 MIME_TYPE = [
@@ -24,5 +25,5 @@ def check_link(url):
     if r.status_code is not 200 or r.headers['Content-Type'] not in MIME_TYPE:
         return False
     else:
-        sharing_services = KnownSharingService.objects.get(domain_name = url)
+        return True
 

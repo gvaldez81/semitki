@@ -132,6 +132,16 @@ Every time you install a new component through bower, make sure to add
     git commit -m"My new bower component" front/bower.json
 
 
+## About buckets
+
+In semitki buckets are any channel to spread the marketing campaign
+through.
+
+[requests-oauth](https://github.com/requests/requests-oauthlib) is the
+library which abstracts most of the operations behind.
+
+In order to add copy one of the existing `buckets` with a new name and
+edit it to suit the new marketing channel.
 
 
 ## Django App

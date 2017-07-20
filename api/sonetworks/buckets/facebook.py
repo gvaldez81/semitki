@@ -2,6 +2,7 @@ import os
 import sys
 import logging
 import json
+from sonetworks import utils
 
 from django.conf import settings
 from django.db import migrations, models
@@ -140,6 +141,10 @@ class Facebook:
         if ("link" in post.content
             and (post.content["link"] is not None
                 and post.content["link"] != "")):
+
+            # Validate link
+            if utils.check_link(post.content['link']) is not True:
+                return '{"text": "invalid link"}'
 
             imagen = post.content["link"]
             #[POSTEANDO IMAGEN CON CUENTAS USUARIO]
