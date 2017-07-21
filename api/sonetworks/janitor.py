@@ -146,6 +146,7 @@ def stuff_it(pk, staff = False, page = False):
             post_id = 0
 
         if  status_ok == requests.codes.ok:
+            # TODO return json
             response = HttpResponse('Succesfully posted',
                     status=status.HTTP_200_OK)
 
@@ -171,6 +172,10 @@ def stuff_it(pk, staff = False, page = False):
                         account = SocialAccount.objects.get(pk = ag.social_account_id)
                         fav = chan.fav(account.access_token,
                             permalink_url, account.bucket_id, post_id )
+        else:
+            post_err = PostError(cause='some error here',
+                    post_id = post)
+            post_err.save()
 
         return response
 
