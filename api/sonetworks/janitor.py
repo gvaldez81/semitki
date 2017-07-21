@@ -15,6 +15,7 @@ from buckets.facebook import *
 from buckets.twitter import *
 from .models import PagesToken
 from .models import Post
+from .models import PostError
 from .models import SocialAccount
 from .models import SocialAccountGroup
 
@@ -116,8 +117,17 @@ def stuff_it(pk, staff = False, page = False):
         if (not copy.startswith(chan.url)):
             response =  chan.post(token = token, post = post, account_id = account_id,
                 staff = staff if staff else page )
+
+            # Handle any invalid response, such as invalid links
             if type(response) is not requests.models.Response:
-                return False
+                post_err = PostError(cause=response['error'],
+                        post = post)
+                post_err.save()
+                # TODO make a better response
+                response = HttpResponse(response['error'],
+                    status=status.HTTP_406_NOT_ACCEPTABLE)
+
+                return response
 
             if chanstr == 'facebook':
                 out = json.loads(response.text)
@@ -172,10 +182,6 @@ def stuff_it(pk, staff = False, page = False):
                         account = SocialAccount.objects.get(pk = ag.social_account_id)
                         fav = chan.fav(account.access_token,
                             permalink_url, account.bucket_id, post_id )
-        else:
-            post_err = PostError(cause='some error here',
-                    post_id = post)
-            post_err.save()
 
         return response
 

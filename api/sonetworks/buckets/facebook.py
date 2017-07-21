@@ -145,7 +145,7 @@ class Facebook:
             # Validate link
             if utils.check_link(post.content['link'],
                     post.content['linkType']) is not True:
-                return '{"text": "invalid link"}'
+                return {'error': "Invalid link"}
 
             imagen = post.content["link"]
             #[POSTEANDO IMAGEN CON CUENTAS USUARIO]
