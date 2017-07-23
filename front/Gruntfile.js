@@ -85,9 +85,13 @@ module.exports = (grunt) => {
           },
           { // Javascript
             expand: true,
-            src: '*.js',
+            src: ['*.js', '!sw.js'],
             dest: 'dist/js/',
             filter: 'isFile'
+          },
+          { // Service worker
+            src: 'sw.js',
+            dest: 'dist/'
           },
           { // HTML
             src: ['*.html', '!index.html'],
@@ -259,17 +263,34 @@ module.exports = (grunt) => {
         ]
       },
     },
+
+
+    'sw-precache': {
+      options: {
+        cacheId: 'semitki',
+        verbose: true,
+      },
+      'default': {
+        staticFileGlobs: [
+          'css/**/*.css',
+          'js/**/*.js',
+        ],
+      },
+    }
   });
+
 
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-bower');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-less')
+  grunt.loadNpmTasks('grunt-sw-precache');
+
 
   grunt.registerTask('default', ['clean', 'less:development', 'concat',
-    'copy']);
+    'copy', 'sw-precache']);
   grunt.registerTask('production', ['clean', 'less:production', 'concat',
-    'copy']);
+    'copy', 'sw-precache']);
 
 };
