@@ -282,6 +282,7 @@ module.exports = (grunt) => {
       'default': {
         staticFileGlobs: [
           'index.html',
+          'tmpls/*.html',
           'css/**/*.css',
           'js/**/*.js',
           'i18n/*.js',
