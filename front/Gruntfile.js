@@ -260,6 +260,12 @@ module.exports = (grunt) => {
             cwd: 'bower_components/select2-bootstrap-theme/dist',
             src: '*', dest: 'dist/css', filter: 'isFile'
           },
+          { // sw-toolbox
+            expand: true,
+            cwd: 'bower_components/sw-toolbox',
+            src: '*.js', dest: 'dist/js', filter: 'isFile'
+          },
+
         ]
       },
     },
@@ -268,12 +274,17 @@ module.exports = (grunt) => {
     'sw-precache': {
       options: {
         cacheId: 'semitki',
-        verbose: true,
+        importScripts: [
+          'js/sw-toolbox.js'
+        ],
+        verbose: false,
       },
       'default': {
         staticFileGlobs: [
+          'index.html',
           'css/**/*.css',
           'js/**/*.js',
+          'i18n/*.js',
         ],
       },
     }
