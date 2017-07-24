@@ -14,6 +14,7 @@ let SchedulerCreateView = Backbone.View.extend({
     this.staff = new StaffMenuView();
     this.navigation.render();
     this.footer.render();
+    this.render();
 
     return this;
   },
