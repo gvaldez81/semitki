@@ -294,6 +294,22 @@ module.exports = (grunt) => {
           'i18n/*.js',
         ],
       },
+    },
+
+    'watch': {
+      scripts: {
+        files: [
+          'index.html',
+          '*.js',
+          'views/*.*',
+          'collections/*.js',
+          'i18n/*.js',
+          'models/*.js',
+          'static/**/*.*',
+          'templs/*.html'
+        ],
+        tasks: ['default']
+      }
     }
   });
 
@@ -304,6 +320,7 @@ module.exports = (grunt) => {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-less')
   grunt.loadNpmTasks('grunt-sw-precache');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
 
   grunt.registerTask('default', ['clean', 'less:development', 'concat',

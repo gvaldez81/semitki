@@ -16,6 +16,7 @@
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-less": "^1.4.1",
     "grunt-contrib-uglify": "^3.0.0",
+    "grunt-contrib-watch": "^1.0.0",
     "grunt-sw-precache": "^1.0.3",
     "jshint": "^2.9.4",
     "less-plugin-clean-css": "^1.5.1",
