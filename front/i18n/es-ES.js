@@ -51,6 +51,9 @@ let poles = {
   "login.sing_face_twit": "Inicia sesión",
   "login.usernameplaceholder": "Usuario",
   "login.passplaceholder": "Contraseña",
+  "login.fail": "Credenciales incorrectas",
+  "login.fbfail": "Fallo la identificación con Facebook",
+  "login.twfail": "Falló la identificación con Twitter",
 
   "msg.nodata": "Sin datos",
 
@@ -71,6 +74,8 @@ let poles = {
   "sidemenu.logout": "Salir",
 
   "scheduler.title": "Calendario",
+
+  "twitter.infodenied": "Acceso negado a información de Twitter",
 
   "user.title": "Usuarios",
   "user.add": "Agregar usuario",

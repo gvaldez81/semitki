@@ -44,7 +44,6 @@ let LoginView = Backbone.View.extend({
             }).done(resolve).fail(reject);
           });
           fb_token.then((result) => { // The promise of the FB token succeded
-            S.logger("bg-success", "Access granted, creating user. Please wait... ", true);
             S.jwtoken(result.token);
             S.fetchCollections();
             window.setTimeout(() => {
@@ -59,14 +58,12 @@ let LoginView = Backbone.View.extend({
                   sessionStorage.setItem("user", JSON.stringify(user));
                   S.router.navigate('#scheduler', {trigger: true});
                 } else {
-                  S.logger("bg-danger",
-                    "Couldn't associate Facebook user with system user",
-                    true);
+                  S.logger("bg-danger", "login.fbfail");
                 }
               }},
               3000);
           }, (err) => { // The promise of FB token failed
-            S.logger("bg-danger", "Failed login with Facebook account", true);
+            S.logger("bg-danger", "login.fbfail");
           });
 
       });
@@ -97,8 +94,7 @@ let LoginView = Backbone.View.extend({
               method: "POST",
               }).done(resolve).fail(reject);
             });
-            tw_token.then((result) => { // The promise of the FB token succeded
-              S.logger("bg-success", "Access granted, creating user. Please wait... ", true);
+            tw_token.then((result) => { // The promise of the TW token succeded
               S.jwtoken(result.token);
               S.fetchCollections();
               window.setTimeout(() => {
@@ -115,18 +111,16 @@ let LoginView = Backbone.View.extend({
                     sessionStorage.setItem("user", JSON.stringify(sysuser.toJSON()));
                     S.router.navigate('#scheduler', {trigger: true});
                   } else {
-                    S.logger("bg-danger",
-                      "Couldn't associate Twitter user with system user",
-                      true);
+                    S.logger("bg-danger", "login.twfail");
                   }
                 }},
                 3000);
             }, (err) => { // The promise of FB token failed
-              S.logger("bg-danger", "Failed login with Twitter account", true);
+              S.logger("bg-danger", "login.twfail");
             });
           }else{
             document.cookie = 'tw_denied=;'+expires
-            S.logger("bg-danger", "Access to Twitter account info denied", true);
+            S.logger("bg-danger", "twitter.infodenied");
           }
         }
     });
@@ -159,10 +153,7 @@ let LoginView = Backbone.View.extend({
           S.fetchCollections();
        },
        error: (jqXHR, textStatus, errorTrhown) => {
-         console.log(jqXHR);
-         console.log(textStatus);
-         console.log(errorTrhown);
-         S.logger("bg-danger", "Failed login, check your credentials", true);
+         S.logger("bg-danger", "login.fail");
        }
       });
   },

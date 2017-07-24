@@ -138,7 +138,7 @@ let S = {
       return "bg-info bg-success bg-danger";
     });
 
-    divmsg.addClass(level).html("<h4>"+text+"</h4>")
+    divmsg.addClass(level).html("<h4>"+ S.polyglot.t(text) + "</h4>")
       .fadeIn(400, () => { $("#messages").fadeOut(4000); });
   },
 
@@ -281,6 +281,33 @@ let S = {
   },
 
 
+  tour: (viewName) => {
+    let tourFiltered = S.collection.get("tour_element").filter(
+      function(obj){ return obj.attributes.view == viewName});
+
+    if (tourFiltered.length > 0){
+      let tour = new Tour({storage:false});
+      tour.init();
+      //sorteamos el arreglo por el Title. Importante a la hora de registrar elementos
+      tourFiltered.sort(function(a,b) {
+          return (a.title > b.title)
+                  ? 1 : ((b.title > a.title)
+          ? -1 : 0);} );
+
+      let data = tourFiltered.map(element => {
+            let salida  = {
+              element: element.attributes.name,
+              title :  element.attributes.title,
+              content : element.attributes.content,
+            };
+            //TODO Change for JS
+            return $.extend(salida, element.attributes.options)
+        });
+      tour.addSteps(data);
+      return tour;
+    }
+
+  }
 };
 
 // Launch the JavaScript client side app
