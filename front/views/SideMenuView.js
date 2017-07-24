@@ -15,9 +15,9 @@ let SideMenuView = Backbone.View.extend({
   },
 
   initialize: function() {
-     this.data = {
-       user: S.user.toJSON(),
-     };
+    this.data = {
+      user: S.user.toJSON(),
+    };
 
     return this;
   },

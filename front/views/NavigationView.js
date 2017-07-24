@@ -6,7 +6,6 @@ let NavigationView = Backbone.View.extend({
 
   className: "container",
 
-
   events: {
     "click #addpost-btn": "addNewPost"
   },

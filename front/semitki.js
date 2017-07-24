@@ -44,6 +44,51 @@ let S = {
   },
 
 
+  calendarFeed: () => {
+    /* Build the calendar feed */
+    let postArray = S.collection.get("posts").toArray();
+
+    let feed = postArray.map((post) => {
+
+      let FIXED_USER_LONG = 10
+
+      let bucket = post.attributes.content.tags[0].account.charAt(0)
+        .toUpperCase() + post.attributes.content.tags[0].account.slice(1);
+
+      let username = (post.attributes.content.username == undefined ? "N/A"
+        : post.attributes.content.username );
+      let user_length = username.length;
+      username = username.substring(0,FIXED_USER_LONG);
+      username = username.padEnd((user_length > FIXED_USER_LONG
+        ? FIXED_USER_LONG + 3 : user_length ), '.');
+
+      let FIXED_TEXT_LONG = 60;
+      let text = post.attributes.content.txt;
+      let text_length = text.length;
+      text = text.substring(0,FIXED_TEXT_LONG);
+      text =  text.padEnd((text_length > FIXED_TEXT_LONG ? FIXED_TEXT_LONG + 3
+        : text_length), '.');
+      text = text + (text_length > FIXED_TEXT_LONG ? " and "
+        + (text_length - FIXED_TEXT_LONG) + " characters more" : "");
+
+      let item = {
+        "id": post.attributes.url,
+        "url": (post.attributes.content.permalink == undefined ? '' : post.attributes.content.permalink),
+        "title":  bucket
+                  + " | " + username
+                  + " | " + text,
+        "class": "event-info",
+        "start": Date.parse(post.attributes.date),
+        "end": Date.parse(post.attributes.date),
+      };
+
+      return item;
+    });
+
+     return feed;
+  },
+
+
   jwtoken: function(token) {
     // Set or get the JWT
     if (token === undefined) {
