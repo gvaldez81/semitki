@@ -115,7 +115,6 @@ module.exports = (grunt) => {
             src: 'bower_components/handlebars/*.js',
             dest: 'dist/js/'
           },
-
           { // Backbone
             src: 'bower_components/backbone/*.js',
             dest: 'dist/js/'
@@ -148,6 +147,10 @@ module.exports = (grunt) => {
           { // Bootstrap JS
             src: 'bower_components/bootstrap/dist/js/*.js',
             dest: 'dist/js/', filter: 'isFile'
+          },
+          { // Fontawesome
+            src: 'bower_components/components-font-awesome/css/*.css',
+            dest: 'dist/css/'
           },
           { // Bootstrap Material Design CSS
             src: 'bootstrap-material-design/dist/css/*.*',
@@ -283,6 +286,9 @@ module.exports = (grunt) => {
         staticFileGlobs: [
           'index.html',
           'tmpls/*.html',
+          'fonts/*.woff',
+          'fonts/*.woff2',
+          'fonts/*.ttf',
           'css/**/*.css',
           'js/**/*.js',
           'i18n/*.js',

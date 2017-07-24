@@ -7,9 +7,7 @@ let FooterView = Backbone.View.extend({
   className: "container",
 
   render: function() {
-    let data = {
-      pages: S.static_pages.toJSON()
-    };
+    let data = {};
     let template = $("#footer-template").html();
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled(data));

@@ -31,12 +31,6 @@ let S = {
       this.user.set(JSON.parse(sessionStorage.user));
     }
     this.users = new Users();                         // User collection
-    this.static_pages = new StaticPages();
-    this.static_pages.fetch(() => {                   // Get custom static content
-      return {
-        headers: {'X-CSRFToken': Cookies.get("CSRFToken")}
-      }
-    });
     this.hideSideMenu = true;                           // Keep the side menu hidden fro start
 
     this.lang = "es-ES"                                  // UX language

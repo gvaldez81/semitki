@@ -26,27 +26,6 @@ let SemitkiRouter = Backbone.Router.extend({
   },
 
 
-  execute: function (callback, args, name) {
-    // This method is called whenever a route matches and its corresponding
-    // callback is about to be executed. If there is a valid session return
-    // false to cancel the current transition.
-    if (sessionStorage.getItem("token") && sessionStorage.getItem("user")) {
-      S.refreshToken(() => {
-        //      args.push(parseQueryString(args.pop())); TODO check what to do with it
-        if (callback) callback.apply(this, args);
-        //return false;
-      });
-    } else {
-      if(callback === this.landing) {
-        S.router.navigate("landing", {trigger: true});
-        this.landing();
-      } else {
-        S.router.navigate("", {trigger: true});
-      }
-    }
-  },
-
-
   index: () => {
     let view = new LoginView();
     view.render();
