@@ -35,7 +35,7 @@ let FollowerMenuView = Backbone.View.extend({
   },
 
   render: function() {
-    let template = $("#follower-menu-template").html();
+    let template = $("#account-select-template").html();
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled());
     $("#account-menu").html(this.$el);

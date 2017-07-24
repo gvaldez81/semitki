@@ -1,6 +1,6 @@
 'use strict'
 
-let StaffAccountsView = Backbone.View.extend({
+let StaffMenuView = Backbone.View.extend({
 
   tagName: "div",
 
@@ -41,7 +41,7 @@ let StaffAccountsView = Backbone.View.extend({
 
 
   render: function() {
-    let template = $("#account-menu-template").html();
+    let template = $("#account-select-template").html();
     let compiled = Handlebars.compile(template);
     this.$el.html(compiled());
     $("#staff-menu").html(this.$el);

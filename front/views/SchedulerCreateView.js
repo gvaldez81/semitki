@@ -10,9 +10,10 @@ let SchedulerCreateView = Backbone.View.extend({
     this.tour = S.tour('SchedulerCreateView');
     this.navigation = new NavigationView();
     this.footer = new FooterView();
+    this.followers = new FollowerMenuView();
+    this.staff = new StaffMenuView();
     this.navigation.render();
     this.footer.render();
-    this.render();
 
     return this;
   },
@@ -53,22 +54,23 @@ let SchedulerCreateView = Backbone.View.extend({
     });
 
     // Calendar navigation
+    let calButton = ['prev', 'next', 'day', 'week', 'month', 'year'];
     // TODO make this with Array.each() method
-    $("#btn-prev").on("click", () => {
-      calendar.navigate("prev");
+    calButton.map((target) => {
+      if(target === 'prev' || target === 'next') {
+        $('#btn-' + target).on('click', () => {
+          calendar.navigate(target);
+        });
+      } else {
+        $('#btn-' + target).on('click', () => {
+          calendar.view(target);
+        });
+      }
     });
-    $("#btn-day").on("click", () => {
-      calendar.view("day");
-    });
-    $("#btn-week").on("click", () => {
-      calendar.view("week");
-    });
-    $("#btn-month").on("click", () => {
-      calendar.view("month");
-    });
-    $("#btn-next").on("click", () => {
-      calendar.navigate("next");
-    });
+
+    // Menus
+    this.followers.render();
+    this.staff.render();
 
     if (this.tour != undefined){
       this.tour.start(true);
