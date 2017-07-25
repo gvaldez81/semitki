@@ -4,13 +4,15 @@ let SideMenuView = Backbone.View.extend({
 
   tagName: "div",
 
-
   className: "panel-group",
-
 
   events: {
     "click #logout": "logout",
     "change .account-select": "addNewPost"
+  },
+
+  initialize: function() {
+    this.data = {};
   },
 
   addNewPost: (e) => {
@@ -18,9 +20,8 @@ let SideMenuView = Backbone.View.extend({
     let value = e.currentTarget.value;
     let source_id = e.currentTarget.value;
     let postView = undefined;
-    sourceType = value.substring(0,1)=='u' ? "staff-menu" : sourceType ;
-    sourceType = value.substring(0,1)=='p' ? "fb-pages-menu" : sourceType ;
-
+    sourceType = value.substring(0, 1)=='u' ? "staff-menu" : sourceType;
+    sourceType = value.substring(0, 1)=='p' ? "fb-pages-menu" : sourceType;
 
     if(sourceType === "account-menu") {
       let data = S.collection.get("accounts")
@@ -60,11 +61,12 @@ let SideMenuView = Backbone.View.extend({
 
 
   render: function() {
+    this.data.user = S.user.toJSON();
     let compiled = S.handlebarsCompile("#side-menu-template");
     this.$el.attr("role", "tablist");
     this.$el.attr("aria-multiselectable", "true");
     this.$el.attr("id", "accordion");
-    this.$el.html(compiled);
+    this.$el.html(compiled(this.data));
     $(".menu-slide").html(this.$el);
 
     return this;

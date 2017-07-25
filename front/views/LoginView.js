@@ -120,7 +120,7 @@ let LoginView = Backbone.View.extend({
   tryLogin: () => {
     this.username = $("input[name='username']").val();
     this.password = $("input[name='password']").val();
-    let url = S.api("auth/login");
+    let url = apiBuilder("auth/login");
     let csrftoken = Cookies.get("csrftoken");
     $.ajax(url,
        {
