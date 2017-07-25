@@ -42,8 +42,6 @@ function csrfSafeMethod(method) {
 };
 
 function apiBuilder(resource) {
-  // TODO marked for deprecation over S.api
-  console.warn("apiBuilder is marked for deprecation, use S.api instead!");
   // Builds the api url of a given resource
   if(SEMITKI_CONFIG.api_port == undefined) {
     return "//" + SEMITKI_CONFIG.api_url + "/" + resource + "/";

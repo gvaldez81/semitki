@@ -5,7 +5,7 @@ let SemitkiRouter = Backbone.Router.extend({
 
   routes: {
     "": "index",
-    "scheduler": "schedulerCreate",
+    "scheduler": "scheduler",
     "groups": "groups",
     "groupedaccounts": "groupedAccounts",
     "landing": "landing",
@@ -32,9 +32,9 @@ let SemitkiRouter = Backbone.Router.extend({
   },
 
 
-  schedulerCreate: () => {
+  scheduler: () => {
     S.refreshToken(() => {
-      let view = new SchedulerCreateView();
+      let view = new SchedulerView();
       view.render();
     });
   },

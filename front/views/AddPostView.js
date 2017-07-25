@@ -52,7 +52,7 @@ let AddPostView = Backbone.View.extend({
 
   closeadd: function() {
     S.toggleNavigation(true);
-    this.scheduler = new SchedulerCreateView();
+    this.scheduler = new SchedulerView();
     this.remove();
   },
 

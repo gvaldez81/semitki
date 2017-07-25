@@ -3,13 +3,7 @@
 let NavigationView = Backbone.View.extend({
 
   tagName: "div",
-
   className: "container",
-
-  events: {
-    "click #addpost-btn": "addNewPost"
-  },
-
 
   addNewPost: () => {
     let data = S.user.toJSON()
@@ -18,7 +12,6 @@ let NavigationView = Backbone.View.extend({
     let postView = new AddPostView(data);
     postView.render();
   },
-
 
   render: function() {
     let template = $("#navigation-template").html();

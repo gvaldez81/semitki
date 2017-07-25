@@ -1,34 +1,36 @@
 'use strict'
 
-let SchedulerCreateView = Backbone.View.extend({
+let SchedulerView = Backbone.View.extend({
 
   tagName: "div",
 
   className: "container",
 
   initialize: function() {
-    this.tour = S.tour('SchedulerCreateView');
     this.navigation = new NavigationView();
     this.footer = new FooterView();
     this.followers = new FollowerMenuView();
     this.staff = new StaffMenuView();
-    this.navigation.render();
-    this.footer.render();
-    this.render();
-
+//    S.fetchCollections({
+//      callback: () => {
+//        this.tour = S.tour('SchedulerView');
+//        this.navigation.render();
+//        this.footer.render();
+//      }
+//    });
     return this;
   },
 
 
   render: function() {
-    S.fetchCollections();
+    console.log('rendering scheduler' );
     let template = $("#scheduler-template").html();
     let compiled = Handlebars.compile(template);
 
-    S.toggleNavigation(true);
+//    S.toggleNavigation(true);
 
     let posts = new Post();
-    posts.fetch(S.addAuthorizationHeader());
+//    posts.fetch(S.addAuthorizationHeader());
     let data = {
       campaigns: S.collection.get("campaigns").toJSON(),
       phases: S.collection.get("phases").toJSON(),

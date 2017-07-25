@@ -57,7 +57,9 @@ let LoginView = Backbone.View.extend({
                   sessionStorage.setItem("user", JSON.stringify(user));
                   S.fetchCollections({
                     callback: function() {
-                      S.router.navigate('#scheduler', {trigger: true});
+              //        S.router.navigate('#scheduler', {trigger: true});
+              let scheduler = new SchedulerView();
+              scheduler.render();
                     }
                   });
                 } else {
@@ -113,7 +115,9 @@ let LoginView = Backbone.View.extend({
                     sessionStorage.setItem("user", JSON.stringify(sysuser.toJSON()));
                     S.fetchCollections({
                       callback: function() {
-                        S.router.navigate('#scheduler', {trigger: true});
+              //          S.router.navigate('#scheduler', {trigger: true});
+              let scheduler = new SchedulerView();
+              scheduler.render();
                       }
                     });
                   } else {
@@ -121,7 +125,7 @@ let LoginView = Backbone.View.extend({
                   }
                 }},
                 0);
-            }, (err) => { // The promise of FB token failed
+            }, (err) => { // The promise of TW token failed
               S.logger("bg-danger", "login.twfail");
             });
           }else{
@@ -155,16 +159,17 @@ let LoginView = Backbone.View.extend({
           S.jwtoken(data.token);
           S.user.set(data.user);
           sessionStorage.setItem("user", JSON.stringify(data.user));
-          S.fetchCollections({
-            callback: function() {
-              S.router.navigate("#scheduler", {trigger: true});
-            }
-          });
-                 },
+/*          S.fetchCollections({*/
+            //callback: function() {
+              //let scheduler = new SchedulerView();
+              //scheduler.render();
+            //}
+          /*});*/
+       },
        error: (jqXHR, textStatus, errorTrhown) => {
          S.logger("bg-danger", "login.fail");
        }
-      });
+    });
   },
 
   render: function() {

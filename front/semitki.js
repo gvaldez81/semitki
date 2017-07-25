@@ -14,15 +14,15 @@ let S = {
     // Heil ES6 Map!
     this.collection = new Map ();                     // System catalogs colection
     // Collections == Catalogs
+    this.collection.set("accounts", new Accounts());
+    this.collection.set("user", new Users());
+    this.collection.set("pages", new Pages());
+    this.collection.set("groups", new Groups());
+    this.collection.set("account_groups", new AccountGroups());
     this.collection.set("campaigns", new Campaigns());
     this.collection.set("phases", new Phases());
     this.collection.set("buckets", new Buckets());
-    this.collection.set("accounts", new Accounts());
-    this.collection.set("groups", new Groups());
-    this.collection.set("account_groups", new AccountGroups());
-    this.collection.set("pages", new Pages());
     this.collection.set("posts", new Posts());
-    this.collection.set("user", new Users());
     this.collection.set("tour_view",new TourViews());
     this.collection.set("tour_element",new TourElements());
     this.collection.set("tour_relates",new TourRelates());
@@ -44,8 +44,24 @@ let S = {
   },
 
 
+  addAuthorizationHeader: () => {
+    return {
+      headers: {'Authorization': S.jwtheader.concat(S.jwtoken())}
+    }
+  },
+
+
+  api: (resource) => {
+    // Builds the api url of a given resource
+    if(SEMITKI_CONFIG.api_port == undefined) {
+      return "//" + SEMITKI_CONFIG.api_url + "/" + resource + "/";
+    } else {
+      return "//" + SEMITKI_CONFIG.api_url + ":" + SEMITKI_CONFIG.api_port + "/" + resource + "/";
+    }
+  },
+
+
   calendarFeed: () => {
-    /* Build the calendar feed */
     let postArray = S.collection.get("posts").toArray();
 
     let feed = postArray.map((post) => {
@@ -85,7 +101,7 @@ let S = {
       return item;
     });
 
-     return feed;
+    return feed;
   },
 
 
@@ -105,23 +121,6 @@ let S = {
       return sessionStorage.getItem("token");
     } else {
       sessionStorage.setItem("token", token);
-    }
-  },
-
-
-  addAuthorizationHeader: () => {
-    return {
-      headers: {'Authorization': S.jwtheader.concat(S.jwtoken())}
-    }
-  },
-
-
-  api: (resource) => {
-    // Builds the api url of a given resource
-    if(SEMITKI_CONFIG.api_port == undefined) {
-      return "//" + SEMITKI_CONFIG.api_url + "/" + resource + "/";
-    } else {
-      return "//" + SEMITKI_CONFIG.api_url + ":" + SEMITKI_CONFIG.api_port + "/" + resource + "/";
     }
   },
 
@@ -191,10 +190,10 @@ let S = {
   // TODO something like fetchCollections(success, error)
   // for callbacks to be passed to Backbone.collection.fetch
   fetchCollections: (options = {}) => {
-    if(options.collection != undefined) {
+    if(typeof options.collection === 'string' &&
+      typeof options.callback === 'function') {
       S.collection.get(options.collection).fetch({
-        headers: S.addAuthorizationHeader().headers,
-        success: options.callback()
+        success: options.callback
       });
     } else {
       for (let [key, value] of S.collection) {
@@ -202,11 +201,10 @@ let S = {
           headers: S.addAuthorizationHeader().headers
         });
       }
-      if(options.callback != undefined) {
-        options.callback();
+      if(typeof options.callback === 'function') {
+        options.callback.call(this);
       }
     }
-    return true;
   },
 
 
@@ -379,8 +377,8 @@ $(() => {
     } else {
       // if there is a session try to refresh the token and navigate to Scheduler
       S.refreshToken(() => {
-        S.router.schedulerCreate();
-        S.router.navigate("#scheduler", {trigger: true});
+        let scheduler = new SchedulerView();
+        scheduler.render();
       });
     }
 
