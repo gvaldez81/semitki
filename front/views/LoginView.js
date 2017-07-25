@@ -6,19 +6,11 @@ let LoginView = Backbone.View.extend({
 
   className: "form-signin",
 
-
-  initialize: function() {
-    this.footer = new FooterView();
-    S.toggleNavigation();
-  },
-
-
   events: {
     "click #login-button": "tryLogin",
     "click #fb-login": "tryFbLogin",
     "click #twitter-login": "tryTwLogin",
   },
-
 
   tryFbLogin: function() {
     FB.login((response) => {
@@ -55,13 +47,7 @@ let LoginView = Backbone.View.extend({
                   S.user.set(user);
                   sysuser.set(S.user.toJSON());
                   sessionStorage.setItem("user", JSON.stringify(user));
-                  S.fetchCollections({
-                    callback: function() {
-              //        S.router.navigate('#scheduler', {trigger: true});
-              let scheduler = new SchedulerView();
-              scheduler.render();
-                    }
-                  });
+                  S.view.get('scheduler').render();
                 } else {
                   S.logger("bg-danger", "login.fbfail");
                 }
@@ -113,13 +99,7 @@ let LoginView = Backbone.View.extend({
                     document.cookie = 'tw_bucket_id=;'+expires
                     S.user.set(sysuser.toJSON());
                     sessionStorage.setItem("user", JSON.stringify(sysuser.toJSON()));
-                    S.fetchCollections({
-                      callback: function() {
-              //          S.router.navigate('#scheduler', {trigger: true});
-              let scheduler = new SchedulerView();
-              scheduler.render();
-                      }
-                    });
+                    S.view.get('scheduler').render();
                   } else {
                     S.logger("bg-danger", "login.twfail");
                   }
@@ -159,12 +139,7 @@ let LoginView = Backbone.View.extend({
           S.jwtoken(data.token);
           S.user.set(data.user);
           sessionStorage.setItem("user", JSON.stringify(data.user));
-/*          S.fetchCollections({*/
-            //callback: function() {
-              //let scheduler = new SchedulerView();
-              //scheduler.render();
-            //}
-          /*});*/
+          S.view.get('scheduler').render();
        },
        error: (jqXHR, textStatus, errorTrhown) => {
          S.logger("bg-danger", "login.fail");
@@ -173,14 +148,9 @@ let LoginView = Backbone.View.extend({
   },
 
   render: function() {
-    let template = $("#login-template").html();
-    let compiled = Handlebars.compile(template);
-
-    this.footer.render();
-
-    this.$el.html(compiled);
+    this.$el.html(S.handlebarsCompile("#login-template"));
     $("#main").html(this.$el);
-
+    S.view.get('footer').render();
     return this;
   },
 

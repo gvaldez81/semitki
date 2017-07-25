@@ -26,6 +26,13 @@ let S = {
     this.collection.set("tour_view",new TourViews());
     this.collection.set("tour_element",new TourElements());
     this.collection.set("tour_relates",new TourRelates());
+    // Views registry
+    this.view = new Map();
+    this.view.set('footer', new FooterView());
+    this.view.set('login', new LoginView());
+    this.view.set('scheduler', new SchedulerView());
+    this.view.set('navigation', new NavigationView());
+    this.view.set('menu', new SideMenuView());
     this.user = new UserModel();                      // Signed in user
     if(sessionStorage.getItem("user")) {
       this.user.set(JSON.parse(sessionStorage.user));
@@ -105,13 +112,12 @@ let S = {
   },
 
 
-  jwtoken: function(token) {
-    // Set or get the JWT
-    if (token === undefined) {
-      return sessionStorage.getItem("token");
-    } else {
-      sessionStorage.setItem("token", token);
-    }
+  collection2select: (jsonMap) => {
+    // Get a { id, text } closure and return another closure for select2
+    return {
+      "id": jsonMap.id,
+      "text": jsonMap.text
+    };
   },
 
 
@@ -125,43 +131,15 @@ let S = {
   },
 
 
-  collection2select: (jsonMap) => {
-    // Get a { id, text } closure and return another closure for select2
-    return {
-      "id": jsonMap.id,
-      "text": jsonMap.text
-    };
-  },
-
-
-  unrelatedAccounts: function(related) {
-    // related = { items: [{social_Account}] }
-    let related_set = new Set(related.items.map(account => {
-      return account.social_account_url.id;
-    }));
-    // Get all accounts in a Set
-    let accounts = new Set(S.collection.get("accounts").toJSON().map(account => {
-      return account.id;
-    }));
-    // Delete from accounts the related ones
-    let unrelated = new Set([...related_set].filter(x => {
-      if(accounts.has(x))
-        accounts.delete(x);
-    }));
-    // Iterate account ids and return JSON for view
-    let data = [...accounts].map(account => {
-      let a = S.collection.get("accounts").get({id: account}).toJSON();
-      return {
-        id: a.id,
-        social_account_url: { bucket: a.bucket, username: a.username }
-      };
-    });
-    return { items: data };
-  },
-
-
   fixUrl: (modelUrl) => {
     return modelUrl+(modelUrl.charAt(modelUrl.length - 1) == "/" ? "" : "/");
+  },
+
+
+  handlebarsCompile: (templateId) => {
+    let template = $(templateId).html();
+    let compiled = Handlebars.compile(template);
+    return compiled;
   },
 
 
@@ -204,6 +182,16 @@ let S = {
       if(typeof options.callback === 'function') {
         options.callback.call(this);
       }
+    }
+  },
+
+
+  jwtoken: function(token) {
+    // Set or get the JWT
+    if (token === undefined) {
+      return sessionStorage.getItem("token");
+    } else {
+      sessionStorage.setItem("token", token);
     }
   },
 
@@ -266,9 +254,9 @@ let S = {
       S.jwtoken(result.token);
       secureFunction.call();
     }, (err) => {
-      S.logger("bg-danger", "Invalid token", false);
+      S.logger("bg-danger", S.polyglot.t("auth.invalidtoken"));
       S.sessionDestroy();
-      S.router.index();
+      S.view.get('login').render();
     });
   },
 
@@ -306,9 +294,7 @@ let S = {
 
 
   toggleMenu: () => {
-    // Enable side menu
-    let menu = new SideMenuView();
-    menu.render();
+    S.view.get('menu').render();
     $(".menu-slide").show().hover(() => {
       $(".menu-slide").addClass("menu-slide-show");
       $("#main").addClass("corp-show");
@@ -323,6 +309,7 @@ let S = {
   toggleNavigation: (enable=false) => {
     // Hide or show navigation elements (top and side menu)
     if(enable) {
+      S.view.get('navigation').render();
       $("#app-nav").show();
       S.toggleMenu();
     } else {
@@ -333,32 +320,56 @@ let S = {
 
 
   tour: (viewName) => {
-    let tourFiltered = S.collection.get("tour_element").filter(
-      function(obj){ return obj.attributes.view == viewName});
+    let tourFiltered = S.collection.get("tour_element").filter(function(obj) {
+      return obj.attributes.view == viewName;
+    });
 
-    if (tourFiltered.length > 0){
+    if (tourFiltered.length > 0) {
       let tour = new Tour({storage:false});
       tour.init();
       //sorteamos el arreglo por el Title. Importante a la hora de registrar elementos
       tourFiltered.sort(function(a,b) {
-          return (a.title > b.title)
-                  ? 1 : ((b.title > a.title)
-          ? -1 : 0);} );
+        return (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0);
+      });
 
       let data = tourFiltered.map(element => {
-            let salida  = {
-              element: element.attributes.name,
-              title :  element.attributes.title,
-              content : element.attributes.content,
-            };
-            //TODO Change for JS
-            return $.extend(salida, element.attributes.options)
-        });
+        let salida  = {
+          element: element.attributes.name,
+          title :  element.attributes.title,
+          content : element.attributes.content,
+        };
+        return $.extend(salida, element.attributes.options)
+      });
+
       tour.addSteps(data);
+
       return tour;
     }
+  },
 
-  }
+  unrelatedAccounts: function(related) {
+    let related_set = new Set(related.items.map(account => {
+      return account.social_account_url.id;
+    }));
+    // Get all accounts in a Set
+    let accounts = new Set(S.collection.get("accounts").toJSON().map(account => {
+      return account.id;
+    }));
+    // Delete from accounts the related ones
+    let unrelated = new Set([...related_set].filter(x => {
+      if(accounts.has(x))
+        accounts.delete(x);
+    }));
+    // Iterate account ids and return JSON for view
+    let data = [...accounts].map(account => {
+      let a = S.collection.get("accounts").get({id: account}).toJSON();
+      return {
+        id: a.id,
+        social_account_url: { bucket: a.bucket, username: a.username }
+      };
+    });
+    return { items: data };
+  },
 };
 
 // Launch the JavaScript client side app
@@ -372,13 +383,11 @@ $(() => {
     S.initialize();
     if(!sessionStorage.getItem("token") || !sessionStorage.getItem("user")) {
       // If we can't find a previous session stored render a new LoginView
-      let app = new LoginView();
-      app.render();
+      S.view.get('login').render();
     } else {
       // if there is a session try to refresh the token and navigate to Scheduler
       S.refreshToken(() => {
-        let scheduler = new SchedulerView();
-        scheduler.render();
+        S.view.get('scheduler').render();
       });
     }
 

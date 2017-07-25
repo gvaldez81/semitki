@@ -13,14 +13,6 @@ let SideMenuView = Backbone.View.extend({
     "change .account-select": "addNewPost"
   },
 
-  initialize: function() {
-    this.data = {
-      user: S.user.toJSON(),
-    };
-
-    return this;
-  },
-
   addNewPost: (e) => {
     let sourceType = e.currentTarget.parentNode.parentNode.id;
     let value = e.currentTarget.value;
@@ -68,12 +60,11 @@ let SideMenuView = Backbone.View.extend({
 
 
   render: function() {
-    let template = $("#side-menu-template").html();
-    let compiled = Handlebars.compile(template);
+    let compiled = S.handlebarsCompile("#side-menu-template");
     this.$el.attr("role", "tablist");
     this.$el.attr("aria-multiselectable", "true");
     this.$el.attr("id", "accordion");
-    this.$el.html(compiled(this.data));
+    this.$el.html(compiled);
     $(".menu-slide").html(this.$el);
 
     return this;

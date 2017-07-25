@@ -15,6 +15,8 @@ let poles = {
 
   "adduser.title": "Agregar usuario",
 
+  "auth.invalidtoken": "Token inválido",
+
   "button.add": "Agregar",
   "button.edit": "Editar",
   "button.save": "Guardar",
@@ -41,6 +43,12 @@ let poles = {
   "generics.toggle_navigation": "Activar navegación",
   "generics.select_file": "Selecciona archivo",
   "generics.select_account": "Selecciona cuenta",
+  "generics.previous": "Anterior",
+  "generics.next": "Próximo",
+  "generics.day": "Día",
+  "generics.week": "Semana",
+  "generics.month": "Mes",
+  "generics.year": "Año",
 
   "group.title": "Grupos",
   "group.add": "Agregar grupo",

@@ -6,41 +6,12 @@ let SchedulerView = Backbone.View.extend({
 
   className: "container",
 
-  initialize: function() {
-    this.navigation = new NavigationView();
-    this.footer = new FooterView();
-    this.followers = new FollowerMenuView();
-    this.staff = new StaffMenuView();
-//    S.fetchCollections({
-//      callback: () => {
-//        this.tour = S.tour('SchedulerView');
-//        this.navigation.render();
-//        this.footer.render();
-//      }
-//    });
-    return this;
-  },
-
-
   render: function() {
-    console.log('rendering scheduler' );
-    let template = $("#scheduler-template").html();
-    let compiled = Handlebars.compile(template);
-
-//    S.toggleNavigation(true);
-
-    let posts = new Post();
-//    posts.fetch(S.addAuthorizationHeader());
-    let data = {
-      campaigns: S.collection.get("campaigns").toJSON(),
-      phases: S.collection.get("phases").toJSON(),
-      buckets: S.collection.get("buckets").toJSON(),
-      account_groups: S.collection.get("account_groups").toJSON()
-    };
-
+    S.toggleNavigation(true);
+    let compiled = S.handlebarsCompile("#scheduler-template");
     let calendarFeed = S.calendarFeed();
 
-    this.$el.html(compiled(data));
+    this.$el.html(compiled);
     $("#main").html(this.$el);
 
     // Initialize datimepicker here after rendering, otherwise it won't work
@@ -70,10 +41,6 @@ let SchedulerView = Backbone.View.extend({
         });
       }
     });
-
-    // Menus
-    this.followers.render();
-    this.staff.render();
 
     if (this.tour != undefined){
       this.tour.start(true);
