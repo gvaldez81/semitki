@@ -1,5 +1,6 @@
 let poles = {
 
+  "addpost.posttab": "Contenido de la publicación",
   "addpost.photolinks": "Enlace fotográfico",
   "addpost.postplaceholder": "¿Que quieres compartir?",
   "addpost.urlplaceholder": "URL ej. http://ejemplo.com/imagen.png",
@@ -38,6 +39,8 @@ let poles = {
   "generics.link": "Enlace",
   "generics.spread": "P R O P A G A R",
   "generics.toggle_navigation": "Activar navegación",
+  "generics.select_file": "Selecciona archivo",
+  "generics.select_account": "Selecciona cuenta",
 
   "group.title": "Grupos",
   "group.add": "Agregar grupo",

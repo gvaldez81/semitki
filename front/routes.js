@@ -9,7 +9,6 @@ let SemitkiRouter = Backbone.Router.extend({
     "groups": "groups",
     "groupedaccounts": "groupedAccounts",
     "landing": "landing",
-    "accounts": "accounts",
     "user": "user",
     "campaign": "campaign",
     "permissions": "permissions",
@@ -21,6 +20,7 @@ let SemitkiRouter = Backbone.Router.extend({
 
   initialize: function (options) {
     if (!sessionStorage.getItem("token") || !sessionStorage.getItem("user")) {
+      // Check for previous session and destroy it if found
       S.sessionDestroy();
     }
   },
@@ -59,14 +59,6 @@ let SemitkiRouter = Backbone.Router.extend({
   landing: () => {
     let view = new LandingPageView();
     view.render();
-  },
-
-
-  accounts: () => {
-    S.refreshToken(() => {
-      let view = new AccountsView();
-      view.render();
-    });
   },
 
 

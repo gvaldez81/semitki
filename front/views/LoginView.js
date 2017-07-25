@@ -10,8 +10,8 @@ let LoginView = Backbone.View.extend({
   initialize: function() {
     this.footer = new FooterView();
     S.toggleNavigation();
-
   },
+
 
   events: {
     "click #login-button": "tryLogin",
@@ -45,7 +45,6 @@ let LoginView = Backbone.View.extend({
           });
           fb_token.then((result) => { // The promise of the FB token succeded
             S.jwtoken(result.token);
-            S.fetchCollections();
             window.setTimeout(() => {
               if (S.jwtoken() != undefined && S.user != undefined) {
                 let csrftoken = Cookies.get("csrftoken");
@@ -56,12 +55,16 @@ let LoginView = Backbone.View.extend({
                   S.user.set(user);
                   sysuser.set(S.user.toJSON());
                   sessionStorage.setItem("user", JSON.stringify(user));
-                  S.router.navigate('#scheduler', {trigger: true});
+                  S.fetchCollections({
+                    callback: function() {
+                      S.router.navigate('#scheduler', {trigger: true});
+                    }
+                  });
                 } else {
                   S.logger("bg-danger", "login.fbfail");
                 }
               }},
-              3000);
+              0);
           }, (err) => { // The promise of FB token failed
             S.logger("bg-danger", "login.fbfail");
           });
@@ -96,7 +99,6 @@ let LoginView = Backbone.View.extend({
             });
             tw_token.then((result) => { // The promise of the TW token succeded
               S.jwtoken(result.token);
-              S.fetchCollections();
               window.setTimeout(() => {
                 if (S.jwtoken() != undefined && S.user != undefined) {
                   let csrftoken = Cookies.get("csrftoken");
@@ -109,12 +111,16 @@ let LoginView = Backbone.View.extend({
                     document.cookie = 'tw_bucket_id=;'+expires
                     S.user.set(sysuser.toJSON());
                     sessionStorage.setItem("user", JSON.stringify(sysuser.toJSON()));
-                    S.router.navigate('#scheduler', {trigger: true});
+                    S.fetchCollections({
+                      callback: function() {
+                        S.router.navigate('#scheduler', {trigger: true});
+                      }
+                    });
                   } else {
                     S.logger("bg-danger", "login.twfail");
                   }
                 }},
-                3000);
+                0);
             }, (err) => { // The promise of FB token failed
               S.logger("bg-danger", "login.twfail");
             });
@@ -149,9 +155,12 @@ let LoginView = Backbone.View.extend({
           S.jwtoken(data.token);
           S.user.set(data.user);
           sessionStorage.setItem("user", JSON.stringify(data.user));
-          S.router.navigate("#scheduler", {trigger: true});
-          S.fetchCollections();
-       },
+          S.fetchCollections({
+            callback: function() {
+              S.router.navigate("#scheduler", {trigger: true});
+            }
+          });
+                 },
        error: (jqXHR, textStatus, errorTrhown) => {
          S.logger("bg-danger", "login.fail");
        }

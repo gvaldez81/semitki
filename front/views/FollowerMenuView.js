@@ -57,7 +57,7 @@ let FollowerMenuView = Backbone.View.extend({
     };
 
     $("#account-menu .account-select").select2({
-      placeholder: "Select account",
+      placeholder: S.polyglot.t('generics.select_account'),
       data: this.accounts,
       templateResult: templateSelect,
       templateSelection: templateSelect

@@ -190,9 +190,21 @@ let S = {
 
   // TODO something like fetchCollections(success, error)
   // for callbacks to be passed to Backbone.collection.fetch
-  fetchCollections: () => {
-    for (let [key, value] of S.collection) {
-      value.fetch(S.addAuthorizationHeader());
+  fetchCollections: (options = {}) => {
+    if(options.collection != undefined) {
+      S.collection.get(options.collection).fetch({
+        headers: S.addAuthorizationHeader().headers,
+        success: options.callback()
+      });
+    } else {
+      for (let [key, value] of S.collection) {
+        value.fetch({
+          headers: S.addAuthorizationHeader().headers
+        });
+      }
+      if(options.callback != undefined) {
+        options.callback();
+      }
     }
     return true;
   },
@@ -285,14 +297,10 @@ let S = {
   showButtons: () => {
     // TODO show which buttons? Is it generic enough to be in S?
     $(".list-group-item").hover(function() {
-      //$($(this)[0].childNodes[3]).addClass('showme')
-      //$($(this)[0]).css("background-color","transparent")
       $(this).find('div.item_buttons.hideme.crud_buttons').addClass('showme')
       $(this).css("background-color","transparent")
     },
     function() {
-      //$($(this)[0].childNodes[3]).removeClass('showme')
-      //$($(this)[0]).css("background-color","#eee")
       $(this).find('div.item_buttons.hideme.crud_buttons').removeClass('showme')
       $(this).css("background-color","#eee")
     });
@@ -375,17 +383,18 @@ $(() => {
         S.router.navigate("#scheduler", {trigger: true});
       });
     }
+
 /*    if ('serviceWorker' in navigator) {*/
       //window.addEventListener('load', function() {
         //navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
           //// Registration was successful
-          ////console.log('ServiceWorker registration successful with scope: ', registration.scope);
+          //console.log('ServiceWorker registration successful with scope: ', registration.scope);
         //}, function(err) {
           //// registration failed :(
-          ////console.log('ServiceWorker registration failed: ', err);
+          //console.log('ServiceWorker registration failed: ', err);
         //});
       //});
-    /*}*/
+    //}
 
   }
 });

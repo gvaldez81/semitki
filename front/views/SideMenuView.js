@@ -10,7 +10,6 @@ let SideMenuView = Backbone.View.extend({
 
   events: {
     "click #logout": "logout",
-    "click #settings-btn": "goSettings",
     "change .account-select": "addNewPost"
   },
 
@@ -57,11 +56,6 @@ let SideMenuView = Backbone.View.extend({
   },
 
 
-  goSettings: () => {
-    console.log("Do something");
-  },
-
-
   logout: function() {
     S.sessionDestroy();
     S.router.navigate("", { trigger: true });
@@ -81,8 +75,6 @@ let SideMenuView = Backbone.View.extend({
     this.$el.attr("id", "accordion");
     this.$el.html(compiled(this.data));
     $(".menu-slide").html(this.$el);
-
-    $('[data-submenu]').submenupicker();
 
     return this;
   }

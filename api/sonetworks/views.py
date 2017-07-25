@@ -14,6 +14,8 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.parsers import FileUploadParser
 from rest_framework.parsers import MultiPartParser
+from rest_framework.parsers import FormParser
+
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
@@ -145,10 +147,10 @@ class FileUploadView(APIView):
     """
     File uploads
     """
-    parser_classes = (FileUploadParser, )
+    parser_classes = (MultiPartParser, FormParser,)
 
     def post(self, request, format=None):
-        up_file = request.data['file']
+        up_file = request.data.get('datafile')
         file_uuid = uuid.uuid1().time_low
         timestamp = datetime.now().strftime("%Y%m%d%H%M%S%f")
         filename = timestamp + '_' + str(file_uuid) + '_' + up_file.name + '.png'
