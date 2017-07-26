@@ -8,13 +8,13 @@ let FollowerMenuView = Backbone.View.extend({
 
   initialize: function() {
     this.tour = S.tour('FollowerMenuView');
-    this.on('ready', this.accounts);
-    S.collection.get('accounts').on('update', this.accounts);
+    this.on('ready', this.re_render);
+    S.collection.get('accounts').on('update', this.re_render);
 
     return this;
   },
 
-  accounts: function() {
+  re_render: function() {
     let acts = S.collection.get("accounts").toJSON();
     let accounts = acts.map((a) => {
       let groups = '';

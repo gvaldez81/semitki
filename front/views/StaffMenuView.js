@@ -7,9 +7,19 @@ let StaffMenuView = Backbone.View.extend({
   className: "panel-body",
 
   initialize: function() {
+
+    this.on('ready', this.re_render);
+    S.collection.get('user').on('update', this.re_render);
+    S.collection.get('pages').on('update', this.re_render);
+
+    return this;
+  },
+
+
+  re_render: function() {
     let acts = S.collection.get("user").where({is_superuser: false});
 
-    this.accounts = acts.map((a) => {
+    let accounts = acts.map((a) => {
       let account = {
         id: 'u_'+a.attributes.id,
         text: a.attributes.username,
@@ -23,7 +33,7 @@ let StaffMenuView = Backbone.View.extend({
 
     let pages = S.collection.get("pages").toJSON();
 
-    this.fbPages = pages.map((p) => {
+    let fbPages = pages.map((p) => {
       let page = {
         id: 'p_'+p.page_id,
         text: p.name,
@@ -34,18 +44,6 @@ let StaffMenuView = Backbone.View.extend({
 
       return page;
     });
-
-
-    return this;
-  },
-
-
-  render: function() {
-    let template = $("#account-select-template").html();
-    let compiled = Handlebars.compile(template);
-    this.$el.html(compiled());
-    $("#staff-menu").html(this.$el);
-
     let templateSelect = function(account) {
       if(!account.id) { return account.text; }
       let $t = $(
@@ -64,11 +62,21 @@ let StaffMenuView = Backbone.View.extend({
 
     $("#staff-menu .account-select").select2({
       placeholder: "Select account",
-      data: this.accounts.concat(this.fbPages),
+      data: accounts.concat(fbPages),
       templateResult: templateSelect,
       templateSelection: templateSelect
     });
 
+  },
+
+
+  render: function() {
+    let template = $("#account-select-template").html();
+    let compiled = Handlebars.compile(template);
+    this.$el.html(compiled());
+    $("#staff-menu").html(this.$el);
+
+    this.trigger('ready');
     return this;
   }
 
