@@ -33,6 +33,8 @@ let S = {
     this.view.set('scheduler', new SchedulerView());
     this.view.set('navigation', new NavigationView());
     this.view.set('menu', new SideMenuView());
+    this.view.set('follower_menu', new FollowerMenuView());
+    this.view.set('staff_menu', new StaffMenuView());
     this.user = new UserModel();                      // Signed in user
     if(sessionStorage.getItem("user")) {
       this.user.set(JSON.parse(sessionStorage.user));

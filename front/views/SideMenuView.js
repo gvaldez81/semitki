@@ -8,11 +8,16 @@ let SideMenuView = Backbone.View.extend({
 
   events: {
     "click #logout": "logout",
-    "change .account-select": "addNewPost"
+    "change .account-select": "addNewPost",
+  },
+
+  render_content: () => {
+    S.view.get('follower_menu').render()
   },
 
   initialize: function() {
     this.data = {};
+    this.on('ready', this.render_content);
   },
 
   addNewPost: (e) => {
@@ -50,15 +55,12 @@ let SideMenuView = Backbone.View.extend({
 
 
   logout: function() {
+    S.toggleNavigation(false);
     S.sessionDestroy();
-    S.router.navigate("", { trigger: true });
     $("#main").removeClass("corp-show"); // Ugly hack :P
-    S.router.index();
     this.remove();
-
-    return this;
+    location.assign('/');
   },
-
 
   render: function() {
     this.data.user = S.user.toJSON();
@@ -68,6 +70,7 @@ let SideMenuView = Backbone.View.extend({
     this.$el.attr("id", "accordion");
     this.$el.html(compiled(this.data));
     $(".menu-slide").html(this.$el);
+    this.trigger('ready');
 
     return this;
   }

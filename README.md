@@ -108,6 +108,7 @@ We use (among others, check requirements.txt):
     grunt
     cd ..
     grunt
+    grunt watch
 
 
 Bootstrap material design shoud be built first in order to get the right
@@ -120,6 +121,9 @@ container.
 
 Some grunt tasks have both `development` and `production` targets, the
 default is to execute development targets.
+
+`grunt watch` will trigger the default task everytime a file under
+`front` directory changes.
 
 
 #### Adding new bower components

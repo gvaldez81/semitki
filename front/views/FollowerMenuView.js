@@ -8,8 +8,15 @@ let FollowerMenuView = Backbone.View.extend({
 
   initialize: function() {
     this.tour = S.tour('FollowerMenuView');
+    this.on('ready', this.accounts);
+    S.collection.get('accounts').on('update', this.accounts);
+
+    return this;
+  },
+
+  accounts: function() {
     let acts = S.collection.get("accounts").toJSON();
-    this.accounts = acts.map((a) => {
+    let accounts = acts.map((a) => {
       let groups = '';
       S.collection.get("groups").map(function (group) {
         if (group.get('related').length > 0){
@@ -31,15 +38,6 @@ let FollowerMenuView = Backbone.View.extend({
       return account;
     });
 
-    return this;
-  },
-
-  render: function() {
-    let template = $("#account-select-template").html();
-    let compiled = Handlebars.compile(template);
-    this.$el.html(compiled());
-    $("#account-menu").html(this.$el);
-
     let templateSelect = function(account) {
       if(!account.id) { return account.text; }
       let $t = $(
@@ -58,14 +56,21 @@ let FollowerMenuView = Backbone.View.extend({
 
     $("#account-menu .account-select").select2({
       placeholder: S.polyglot.t('generics.select_account'),
-      data: this.accounts,
+      data: accounts,
       templateResult: templateSelect,
       templateSelection: templateSelect
     });
+     return this;
+  },
 
+  render: function() {
+    let compiled = S.handlebarsCompile("#account-select-template");
+    this.$el.html(compiled());
+    $("#account-menu").html(this.$el);
       if(this.tour != undefined){
         this.tour.start(true);
       }
+    this.trigger('ready');
 
     return this;
   }
