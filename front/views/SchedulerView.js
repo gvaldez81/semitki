@@ -6,14 +6,13 @@ let SchedulerView = Backbone.View.extend({
 
   className: "container",
 
-  render: function() {
-    S.toggleNavigation(true);
-    let compiled = S.handlebarsCompile("#scheduler-template");
+  initialize: function() {
+    this.on('ready', S.fetchCollections);
+    S.collection.get('posts').on('update', this.post_render);
+  },
+
+  post_render: function() {
     let calendarFeed = S.calendarFeed();
-
-    this.$el.html(compiled);
-    $("#main").html(this.$el);
-
     // Initialize datimepicker here after rendering, otherwise it won't work
     $('#scheduledForPicker').datetimepicker();
     // Initialize calendar view
@@ -41,10 +40,18 @@ let SchedulerView = Backbone.View.extend({
         });
       }
     });
+  },
 
+  render: function() {
+    S.toggleNavigation(true);
+    let compiled = S.handlebarsCompile("#scheduler-template");
+    this.$el.html(compiled);
+    $("#main").html(this.$el);
     if (this.tour != undefined){
       this.tour.start(true);
     }
+
+    this.trigger('ready');
 
     return this;
   }

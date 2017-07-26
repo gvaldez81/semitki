@@ -8,15 +8,15 @@ let StaffMenuView = Backbone.View.extend({
 
   initialize: function() {
 
-    this.on('ready', this.re_render);
-    S.collection.get('user').on('update', this.re_render);
-    S.collection.get('pages').on('update', this.re_render);
+    this.on('ready', this.post_render);
+    S.collection.get('user').on('update', this.post_render);
+    S.collection.get('pages').on('update', this.post_render);
 
     return this;
   },
 
 
-  re_render: function() {
+  post_render: function() {
     let acts = S.collection.get("user").where({is_superuser: false});
 
     let accounts = acts.map((a) => {

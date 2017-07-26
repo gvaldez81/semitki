@@ -51,8 +51,12 @@ let AddPostView = Backbone.View.extend({
 
 
   closeadd: function() {
-    S.toggleNavigation(true);
-    this.scheduler = new SchedulerView();
+    S.fetchCollections({
+      callback: () => {
+        S.toggleNavigation(true);
+        S.view.get('scheduler').render();
+      }
+    });
     this.remove();
   },
 
@@ -132,7 +136,6 @@ let AddPostView = Backbone.View.extend({
         })
         .done((data) => {
           this.closeadd();
-          console.log(data)
           S.logger("bg-success", S.polyglot.t("addpost.publish_success"));
         })
         .fail((xhr, status, error) => {

@@ -12,6 +12,8 @@ let poles = {
   "addpost.select_phase": "Selecciona fase",
   "addpost.select_group": "Selecciona los grupos",
   "addpost.notforfacebook": "No disponible para Facebook",
+  "addpost.publish_success": "Publicación exitosa",
+  "addpost.publish_error": "Ocurrió un error intentando enviar la publicción",
 
   "adduser.title": "Agregar usuario",
 
