@@ -5,45 +5,12 @@ let UserView = Backbone.View.extend({
   className:"row",
 
   initialize: function () {
-
-   let tourFiltered = S.collection.get("tour_element").filter(
-      function(obj){ return obj.attributes.view == "UserView"})
-
-    if (tourFiltered.length>0){
-
-      this.tour = new Tour({storage:false});
-      this.tour.init();
-      //sorteamos el arreglo por el Title. Importante a la hora de registrar elementos
-      tourFiltered.sort(function(a,b) {
-          return (a.title > b.title) 
-                  ? 1 : ((b.title > a.title) 
-          ? -1 : 0);} );
-      
-      let data = tourFiltered.map(element => {
-            let salida  = {
-              element: element.attributes.name,
-              title :  element.attributes.title,
-              content : element.attributes.content,  
-            };
-            //TODO Change for JS
-            return $.extend(salida, element.attributes.options)
-        });
-      return this.tour.addSteps(data);
-    }
-     
-    this.navigation = new NavigationView();
-    this.footer = new FooterView();
-    this.modal_add = new addUserView();
-    this.modal_edit = new editUserView();
-    S.users.fetch(S.addAuthorizationHeader());
-
+    this.template = S.handlebarsCompile("#user-template");
+    this.tour = S.tour('UserView');
   },
 
 
-
   events: {
-
-    "click #delete": "delete",
     "click .item_button_edit": "editItem",
     "click .item_button_remove": "hideItem",
     "click .btn-add": "addItem"
@@ -88,21 +55,12 @@ let UserView = Backbone.View.extend({
 
 
   render: function() {
-    //S.users = new Users();
-    // TODO probably better fetching on user demand rather than on the render
-    //console.log(S.users.toJSON());
-    this.modal_add.render();
-    this.modal_edit.render();
     let data = {
       users: S.collection.get("user").toJSON() //.where({is_superuser: false})
 
     };
-    console.log(data);
-    let template = $("#user-template").html();
-    let compiled = Handlebars.compile(template);
 
-    this.$el.html(compiled(data));
-    $("#container").html(this.$el);
+    this.$el.html(this.template(data));
     $("#main").html(this.$el);
 
     S.showButtons();
