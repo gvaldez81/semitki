@@ -18,7 +18,7 @@ let SideMenuView = Backbone.View.extend({
   },
 
   post_render: () => {
-    S.view.get('follower_menu').setElement(this.$('.panel-body')).render();
+    S.view.get('follower_menu').setElement(this.$('#account-menu')).render();
     S.view.get('staff_menu').render();
   },
 
@@ -69,7 +69,7 @@ let SideMenuView = Backbone.View.extend({
     this.$el.attr("role", "tablist");
     this.$el.attr("aria-multiselectable", "true");
     this.$el.attr("id", "accordion");
-    this.$el.html(template(this.data));
+    this.$el.html(this.template(this.data));
     $(".menu-slide").html(this.$el);
     this.trigger('ready');
 
