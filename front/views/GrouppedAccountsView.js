@@ -5,34 +5,7 @@ let GrouppedAccountsView = Backbone.View.extend({
   className: "row",
 
   initialize: function () {
-
-  let tourFiltered = S.collection.get("tour_element").filter(
-      function(obj){ return obj.attributes.view == "GrouppedAccountsView"})
-
-    if (tourFiltered.length>0){
-
-      this.tour = new Tour({storage:false});
-      this.tour.init();
-      //sorteamos el arreglo por el Title. Importante a la hora de registrar elementos
-      tourFiltered.sort(function(a,b) {
-          return (a.title > b.title) 
-                  ? 1 : ((b.title > a.title) 
-          ? -1 : 0);} );
-      
-      let data = tourFiltered.map(element => {
-            let salida  = {
-              element: element.attributes.name,
-              title :  element.attributes.title,
-              content : element.attributes.content,  
-            };
-            //TODO Change for JS
-            return $.extend(salida, element.attributes.options)
-        });
-      return this.tour.addSteps(data);
-    }
-
-    this.navigation = new NavigationView();
-    this.footer = new FooterView();
+    this.template = S.handlebarsCompile("#grouppedaccounts");
     this.related = new ConnectedSortable({
       templateId: "#connected-sortable-template",
       targetId: "#related",
@@ -45,8 +18,8 @@ let GrouppedAccountsView = Backbone.View.extend({
       relatedTable: "#table-related",
       tableId: "table-for-related"
     });
-    this.navigation.render();
-    this.footer.render();
+
+    this.tour = S.tour('GrouppedAccountsView');
     return this;
   },
 
@@ -104,9 +77,7 @@ let GrouppedAccountsView = Backbone.View.extend({
       groups: S.collection.get("groups").toJSON(),
     };
 
-    let template = $("#grouppedaccounts").html();
-    let compiled = Handlebars.compile(template);
-    this.$el.html(compiled(data));
+    this.$el.html(this.template(data));
     $("#main").html(this.$el);
     this.related.render();
     this.available.render();

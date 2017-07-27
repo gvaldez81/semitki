@@ -6,6 +6,7 @@ let GroupsView = Backbone.View.extend({
 
   initialize: function () {
     this.template = S.handlebarsCompile('#resource-template');
+    this.tour = S.tour('GroupsView');
   },
 
   events: {
@@ -15,10 +16,8 @@ let GroupsView = Backbone.View.extend({
   },
 
   addItem: () => {
-
     let dialog = new addGroupsView();
     dialog.render();
-
   },
 
   hideItem: function(ev) {
@@ -41,7 +40,6 @@ let GroupsView = Backbone.View.extend({
     }
 
     this.$el.html(this.template(data));
-    $("#container").html(this.$el);
     $("#main").html(this.$el);
 
     S.showButtons();
