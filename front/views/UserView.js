@@ -5,7 +5,7 @@ let UserView = Backbone.View.extend({
   className:"row",
 
   initialize: function () {
-    this.template = S.handlebarsCompile("#user-template");
+    this.template = S.handlebarsCompile("#resource-template");
     this.tour = S.tour('UserView');
   },
 
@@ -16,39 +16,19 @@ let UserView = Backbone.View.extend({
     "click .btn-add": "addItem"
   },
 
-
-  save: () => {
-    let data = {
-      username: $("#username").val(),
-      email: $("#email").val(),
-      first_name: $("#fname").val(),
-      last_name: $("#lname").val()
-    };
-
-    let user = new UserModel();
-    user.save(data, S.addAuthorizationHeader());
-
-  },
-
-  delete: () => {
-    let user = S.users.get($("#userFinder").val());
-    S.users.sync("delete", user, S.addAuthorizationHeader());
-  },
-
-
   addItem: () =>{
     let dialog = new addUserView();
     dialog.render();
   },
 
   editItem: function(ev) {
-    let id = $(ev.currentTarget).parents('.item')[0].id;
+    let id = ev.target.parentElement.className;
     let dialog = new editUserView({item: new Array(S.collection.get("user").get(id).toJSON())});
     dialog.render();
   },
 
   hideItem: function(ev) {
-    let id = $(ev.currentTarget).parents('.item')[0].id;
+    let id = ev.target.parentElement.className;
     let dialog = new hideUserView({item: new Array(S.collection.get("user").get(id).toJSON())});
     dialog.render();
   },
@@ -56,8 +36,8 @@ let UserView = Backbone.View.extend({
 
   render: function() {
     let data = {
-      users: S.collection.get("user").toJSON() //.where({is_superuser: false})
-
+      title: S.polyglot.t('user.title'),
+      items: S.collection.get("user").toJSON() //.where({is_superuser: false})
     };
 
     this.$el.html(this.template(data));
