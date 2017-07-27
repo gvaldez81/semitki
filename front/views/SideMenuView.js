@@ -18,7 +18,7 @@ let SideMenuView = Backbone.View.extend({
   },
 
   post_render: () => {
-    S.view.get('follower_menu').setElement(this.$('#account-menu')).render();
+    S.view.get('follower_menu').render();
     S.view.get('staff_menu').render();
   },
 
