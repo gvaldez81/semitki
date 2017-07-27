@@ -6,6 +6,10 @@ let LoginView = Backbone.View.extend({
 
   className: "form-signin",
 
+  initialize: function() {
+    this.template = S.handlebarsCompile("#login-template");
+  },
+
   events: {
     "click #login-button": "tryLogin",
     "click #fb-login": "tryFbLogin",
@@ -148,7 +152,7 @@ let LoginView = Backbone.View.extend({
   },
 
   render: function() {
-    this.$el.html(S.handlebarsCompile("#login-template"));
+    this.$el.html(this.template);
     $("#main").html(this.$el);
     S.view.get('footer').render();
     return this;

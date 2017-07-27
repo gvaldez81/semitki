@@ -6,19 +6,20 @@ let SideMenuView = Backbone.View.extend({
 
   className: "panel-group",
 
-  events: {
+  initialize: function() {
+    this.template = S.handlebarsCompile("#side-menu-template");
+    this.data = {};
+    this.on('ready', this.post_render);
+  },
+
+ events: {
     "click #logout": "logout",
     "change .account-select": "addNewPost",
   },
 
-  render_content: () => {
-    S.view.get('follower_menu').render();
+  post_render: () => {
+    S.view.get('follower_menu').setElement(this.$('.panel-body')).render();
     S.view.get('staff_menu').render();
-  },
-
-  initialize: function() {
-    this.data = {};
-    this.on('ready', this.render_content);
   },
 
   addNewPost: (e) => {
@@ -65,11 +66,10 @@ let SideMenuView = Backbone.View.extend({
 
   render: function() {
     this.data.user = S.user.toJSON();
-    let compiled = S.handlebarsCompile("#side-menu-template");
     this.$el.attr("role", "tablist");
     this.$el.attr("aria-multiselectable", "true");
     this.$el.attr("id", "accordion");
-    this.$el.html(compiled(this.data));
+    this.$el.html(template(this.data));
     $(".menu-slide").html(this.$el);
     this.trigger('ready');
 

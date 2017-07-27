@@ -15,18 +15,18 @@ let AddPostView = Backbone.View.extend({
 
 
   initialize: function(data) {
-
     this.data = data || {};
     this.data.campaigns = S.collection.get("campaigns").toJSON().map((i) => {
       return S.collection2select({id: i.id, text: i.name});
     });
 
-    S.toggleNavigation();
+    S.toggleNavigation(false);
 
-    let tourFiltered = S.collection.get("tour_element").filter(
-      function(obj){ return obj.attributes.view == "AddPostView"})
+    let tourFiltered = S.collection.get("tour_element").filter(function(obj) {
+      return obj.attributes.view == "AddPostView"
+    });
 
-    if (tourFiltered.length > 0){
+    if (tourFiltered.length > 0) {
 
       this.tour = new Tour({storage:false});
       this.tour.init();
