@@ -35,6 +35,8 @@ let S = {
     this.view.set('menu', new SideMenuView());
     this.view.set('follower_menu', new FollowerMenuView());
     this.view.set('staff_menu', new StaffMenuView());
+    this.view.set('campaign', new CampaignView());
+//    this.view.set('phase', new Phases
     this.user = new UserModel();                      // Signed in user
     if(sessionStorage.getItem("user")) {
       this.user.set(JSON.parse(sessionStorage.user));
@@ -283,7 +285,6 @@ let S = {
 
 
   showButtons: () => {
-    // TODO show which buttons? Is it generic enough to be in S?
     $(".list-group-item").hover(function() {
       $(this).find('div.item_buttons.hideme.crud_buttons').addClass('showme')
       $(this).css("background-color","transparent")

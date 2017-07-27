@@ -12,9 +12,35 @@ let SideMenuView = Backbone.View.extend({
     this.on('ready', this.post_render);
   },
 
- events: {
+  events: {
     "click #logout": "logout",
     "change .account-select": "addNewPost",
+    "click a#campaigns": "chooser",
+    "click a#phases": "chooser",
+    "click a#groups": "chooser",
+    "click a#grouppedaccounts": "chooser",
+    "click a#user": "chooser"
+  },
+
+  chooser: (e) => {
+    console.log(e.target.id);
+    e.preventDefault();
+    switch(e.target.id) {
+        case 'campaigns':
+          S.view.get('campaign').render();
+          break;
+        case 'phases':
+          S.view.get('phase').render();
+          break;
+        case 'groups':
+          S.view.get('group').render();
+          break;
+        case 'grouppedaccounts':
+          S.view.get('grouped_account').render();
+        case 'user':
+          S.view.get('user').render();
+          break;
+    }
   },
 
   post_render: () => {

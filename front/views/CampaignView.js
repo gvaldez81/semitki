@@ -5,56 +5,12 @@ let CampaignView = Backbone.View.extend({
   className: "row",
 
   initialize: function() {
-
-    this.navigation = new NavigationView();
-    this.footer = new FooterView();
+    this.template = S.handlebarsCompile("#resource-template");
     this.modal_edit = new editCampaignView();
     this.modal_add = new addCampaignView();
-
-    let tourFiltered = S.collection.get("tour_element").filter(
-      function(obj){ return obj.attributes.view == "CampaignView"})
-    if (tourFiltered.length>0){
-      this.tour = new Tour({storage:false});
-      this.tour.init();
-      //sorteamos el arreglo por el Title. Importante a la hora de registrar elementos
-      tourFiltered.sort(function(a,b) {
-          return (a.title > b.title)
-                  ? 1 : ((b.title > a.title)
-          ? -1 : 0);} );
-
-      let data = tourFiltered.map(element => {
-            let salida  = {
-              element: element.attributes.name,
-              title :  element.attributes.title,
-              content : element.attributes.content,
-            };
-            //TODO Change for JS
-            return $.extend(salida, element.attributes.options)
-        });
-      return this.tour.addSteps(data);
-    }
-
-    this.navigation = new NavigationView();
-    this.footer = new FooterView();
-    this.modal = new editCampaignView();
-    this.modal_add = new addCampaignView();
-    this.tour = new Tour();
-    this.tour.init();
-    //let user = S.user
-      let data = S.collection.get("tour_element").toArray()
-        .map(element => {
-           return {
-              element: element.attributes.name,
-              title :  element.attributes.title,
-              content : element.attributes.content,
-              opt:{
-                options: element.attributes.options
-              }
-           };
-        });
-      return this.tour.addSteps(data);
+    this.on('ready', S.fetchCollections);
+    S.collection.get('campaigns').on('update', this.post_render);
   },
-
 
   events: {
     "click #save": "create",
@@ -63,6 +19,11 @@ let CampaignView = Backbone.View.extend({
     "click .item_button_edit": "editItem",
     "click .item_button_remove": "hideItem",
     "click .btn-add": "addItem"
+  },
+
+  post_render: function() {
+    this.modal_edit.render();
+    this.modal_add.render();
   },
 
   addItem: () => {
@@ -93,15 +54,12 @@ let CampaignView = Backbone.View.extend({
   },
 
   render: function(){
-    this.modal_edit.render();
-    this.modal_add.render();
     let data = {
-      campaigns: S.collection.get("campaigns").toJSON()
+      title: S.polyglot.t('campaign.title'),
+      items: S.collection.get("campaigns").toJSON()
     };
 
-    let template = $("#campaign-template").html();
-    let compiled = Handlebars.compile(template);
-    this.$el.html(compiled(data));
+    this.$el.html(this.template(data));
     $("#container").html(this.$el);
     $("#main").html(this.$el);
     S.showButtons();
@@ -110,6 +68,7 @@ let CampaignView = Backbone.View.extend({
       this.tour.start(true);
     }
 
+    this.trigger('ready');
     return this;
   }
 });
