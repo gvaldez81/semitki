@@ -36,7 +36,7 @@ let S = {
     this.view.set('follower_menu', new FollowerMenuView());
     this.view.set('staff_menu', new StaffMenuView());
     this.view.set('campaign', new CampaignView());
-//    this.view.set('phase', new Phases
+    this.view.set('phase', new PhaseView());
     this.user = new UserModel();                      // Signed in user
     if(sessionStorage.getItem("user")) {
       this.user.set(JSON.parse(sessionStorage.user));
