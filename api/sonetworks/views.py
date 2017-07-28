@@ -150,11 +150,13 @@ class FileUploadView(APIView):
     parser_classes = (MultiPartParser, FormParser,)
 
     def post(self, request, format=None):
-        up_file = request.data.get('datafile')
+        up_file = request.FILES['uploadfile']
+        post_owner = request.data['owner']
         file_uuid = uuid.uuid1().time_low
         timestamp = datetime.now().strftime("%Y%m%d%H%M%S%f")
-        filename = timestamp + '_' + str(file_uuid) + '_' + up_file.name + '.png'
-        owner = User.objects.get(pk=int(up_file.name))
+        filename = timestamp + '_' + str(file_uuid) + '_' + up_file.name
+        content_type = up_file.content_type.split("/")
+        owner = User.objects.get(pk=int(post_owner))
         try:
             destination = open('/semitki/storage/uploads/' +  filename, 'wb+')
             for chunk in up_file.chunks():
@@ -164,8 +166,8 @@ class FileUploadView(APIView):
 
             new_file = FileUpload()
             new_file.id = filename
-            new_file.file_type = 'image'
-            new_file.file_extension = 'png'
+            new_file.file_type = content_type[0]
+            new_file.file_extension = content_type[1]
             new_file.file_url = '/semitki/storage/uploads/'
             new_file.owner = owner
             new_file.save()

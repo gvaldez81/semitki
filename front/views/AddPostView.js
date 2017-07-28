@@ -15,38 +15,14 @@ let AddPostView = Backbone.View.extend({
 
 
   initialize: function(data) {
+    this.template = S.handlebarsCompile("#addpost-template");
     this.data = data || {};
     this.data.campaigns = S.collection.get("campaigns").toJSON().map((i) => {
       return S.collection2select({id: i.id, text: i.name});
     });
 
     S.toggleNavigation(false);
-
-    let tourFiltered = S.collection.get("tour_element").filter(function(obj) {
-      return obj.attributes.view == "AddPostView"
-    });
-
-    if (tourFiltered.length > 0) {
-
-      this.tour = new Tour({storage:false});
-      this.tour.init();
-      //sorteamos el arreglo por el Title. Importante a la hora de registrar elementos
-      tourFiltered.sort(function(a,b) {
-          return (a.title > b.title)
-                  ? 1 : ((b.title > a.title)
-          ? -1 : 0);} );
-
-      let data = tourFiltered.map(element => {
-            let salida  = {
-              element: element.attributes.name,
-              title :  element.attributes.title,
-              content : element.attributes.content,
-            };
-            //TODO Change for JS
-            return $.extend(salida, element.attributes.options)
-        });
-      return this.tour.addSteps(data);
-    }
+    this.tour = S.tour('AddPostView');
   },
 
 
@@ -54,6 +30,7 @@ let AddPostView = Backbone.View.extend({
     S.fetchCollections({
       callback: () => {
         S.toggleNavigation(true);
+        S.view.get('menu').render();
         S.view.get('scheduler').render();
       }
     });
@@ -161,10 +138,7 @@ let AddPostView = Backbone.View.extend({
       return retVal;
     });
 
-    let template = $("#addpost-template").html();
-    let compiled = Handlebars.compile(template);
-
-    this.$el.html(compiled(this.data));
+    this.$el.html(this.template(this.data));
 
     // Initialize any DOM element after the next line only
     $("#main").html(this.$el);
@@ -232,10 +206,7 @@ let AddPostView = Backbone.View.extend({
 
     $('#uploadfile').on('filepreupload', function(event, data, previewId, index) {
       let extra = data.extra;
-      data.extra.file_name = S.user.attributes.pk;
-      data.extra.file_type = 'image';
-      data.extra.file_extension = 'png';
-      console.log(data.extra);
+      data.extra.owner = S.user.attributes.pk;
       return data.extra;
     });
 
