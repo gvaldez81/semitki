@@ -6,11 +6,7 @@ let editCampaignView = Backbone.View.extend({
   className: "modal-dialog",
 
   initialize: function(data) {
-    if (data == undefined){
-      this.data = undefined;
-    }else{
-      this.data = data;
-    }
+      this.data = data || {};
   },
 
   events: {
@@ -18,10 +14,9 @@ let editCampaignView = Backbone.View.extend({
   },
 
   editcampaign: function (e) {
-    console.log(e);
     e.preventDefault();
     let id = $("#edit-id").val();
-    let dialog = new editCampaignView({title: new Array(S.collection.get("campaigns").get(id).toJSON())});
+//    let dialog = new editCampaignView({title: new Array(S.collection.get("campaigns").get(id).toJSON())});
     let model = S.collection.get("campaigns").get(id);
         model.set({name: $("#input_name_edit").val(),
         description: $("#input_description").val(),});
