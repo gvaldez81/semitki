@@ -69,13 +69,19 @@
   <body>
     <div class="modal fade" tabindex="-1" role="dialog" id="dialog-crud"></div>
     <nav class="navbar navbar-fixed-top nav semitkibar" id="app-nav"></nav>
-    <div class="menu-slide affix">
+    <!-- <div class="menu-slide affix">
       <div class="panel-group" id="accordion" role="tablist"
         aria-multiselectable="true"></div>
+        </div> -->
+
+    <div id="wrapper">
+      <div id="sidebar-wrapper"></div> <!-- Sidebar Wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid xyz" id="main"></div>
+        <div class=".gallery-slide affix"></div>
+        <footer id="app-footer"></footer>
+      </div>
     </div>
-    <div class="container" id="main"></div>
-    <div class=".gallery-slide affix"></div>
-    <footer id="app-footer"></footer>
   </body>
 
   <script async="true" data-main="js/semitki" src="js/bower_components/requirejs/require.js"></script>

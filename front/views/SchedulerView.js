@@ -51,6 +51,7 @@ let SchedulerView = Backbone.View.extend({
       this.tour.start(true);
     }
 
+    $('#sidebar-wrapper').show();
     this.trigger('ready');
 
     return this;

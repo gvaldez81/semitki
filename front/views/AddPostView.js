@@ -21,7 +21,7 @@ let AddPostView = Backbone.View.extend({
       return S.collection2select({id: i.id, text: i.name});
     });
 
-    S.toggleNavigation(false);
+//    S.toggleNavigation(false);
     this.tour = S.tour('AddPostView');
   },
 

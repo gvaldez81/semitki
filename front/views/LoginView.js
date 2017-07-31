@@ -8,6 +8,7 @@ let LoginView = Backbone.View.extend({
 
   initialize: function() {
     this.template = S.handlebarsCompile("#login-template");
+    $('#sidebar-wrapper').hide();
   },
 
   events: {

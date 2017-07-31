@@ -2,14 +2,16 @@
 
 let SideMenuView = Backbone.View.extend({
 
-  tagName: "div",
+  tagName: "ul",
 
-  className: "panel-group",
+  className: "sidebar-nav nav-pills nav-stacked",
 
   initialize: function() {
     this.template = S.handlebarsCompile("#side-menu-template");
     this.data = {};
     this.on('ready', this.post_render);
+    $("#menu-toggle").on('click', this.collapse);
+    $("#menu-toggle-2").on('click', this.collapse2);
   },
 
   events: {
@@ -20,6 +22,36 @@ let SideMenuView = Backbone.View.extend({
     "click a#groups": "chooser",
     "click a#grouppedaccounts": "chooser",
     "click a#user": "chooser"
+  },
+
+  collapse: (e) => {
+    e.preventDefault();
+    $("#wrapper").toggleClass("toggled");
+  },
+
+  collapse2: (e) => {
+    e.preventDefault();
+    $("#wrapper").toggleClass("toggled-2");
+    $('#menu ul').hide();
+  },
+
+  initMenu: () => {
+    $('#menu ul').hide();
+    $('#menu ul').children('.current').parent().show();
+    $('#menu ul:first').show();
+    $('#menu li a').click(
+      function() {
+        var checkElement = $(this).next();
+        if((checkElement.is('ul')) && (checkElement.is(':visible'))) {
+          return false;
+        }
+        if((checkElement.is('ul')) && (!checkElement.is(':visible'))) {
+          $('#menu ul:visible').slideUp('normal');
+          checkElement.slideDown('normal');
+          return false;
+        }
+      }
+    );
   },
 
   chooser: (e) => {
@@ -91,11 +123,13 @@ let SideMenuView = Backbone.View.extend({
 
   render: function() {
     this.data.user = S.user.toJSON();
-    this.$el.attr("role", "tablist");
-    this.$el.attr("aria-multiselectable", "true");
-    this.$el.attr("id", "accordion");
+/*    this.$el.attr("role", "tablist");*/
+    //this.$el.attr("aria-multiselectable", "true");
+    /*this.$el.attr("id", "accordion");*/
+    this.$el.attr("id", "menu");
     this.$el.html(this.template(this.data));
-    $(".menu-slide").html(this.$el);
+    $("#sidebar-wrapper").html(this.$el);
+
     this.trigger('ready');
 
     return this;
