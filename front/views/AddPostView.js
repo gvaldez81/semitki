@@ -201,14 +201,15 @@ let AddPostView = Backbone.View.extend({
       allowedFileExtensions: ['jpg', 'jpeg', 'gif', 'png', 'webm', 'avi', 'mp4'],
       ajaxSettings: {
         headers: customHeaders
-      }
+      },
+      uploadExtraData: { owner: S.user.attributes.pk }
     });
 
-    $('#uploadfile').on('filepreupload', function(event, data, previewId, index) {
-      let extra = data.extra;
-      data.extra.owner = S.user.attributes.pk;
-      return data.extra;
-    });
+/*    $('#uploadfile').on('filepreupload', function(event, data, previewId, index) {*/
+      //let extra = data.extra;
+      //data.extra.owner = S.user.attributes.pk;
+      //return data.extra;
+    //});
 
     return this;
   }

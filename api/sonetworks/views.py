@@ -150,8 +150,8 @@ class FileUploadView(APIView):
     parser_classes = (MultiPartParser, FormParser,)
 
     def post(self, request, format=None):
+        post_owner = request.POST['owner']
         up_file = request.FILES['uploadfile']
-        post_owner = request.data['owner']
         file_uuid = uuid.uuid1().time_low
         timestamp = datetime.now().strftime("%Y%m%d%H%M%S%f")
         filename = timestamp + '_' + str(file_uuid) + '_' + up_file.name
@@ -174,7 +174,7 @@ class FileUploadView(APIView):
 
             return Response(up_file.name, status.HTTP_201_CREATED)
         except Exception:
-            return Response(Exception, status.HTTP_400_BAD_REQUEST)
+            return Response(request, status.HTTP_400_BAD_REQUEST)
 
 
 class FileUploadViewSet(viewsets.ModelViewSet):
