@@ -30,6 +30,8 @@ let poles = {
   "campaign.add": "Agregar campaña",
   "campaign.edit": "Editar campaña",
 
+  "error.upload": "Error intentando subir archivo",
+
   "generics.name": "Nombre",
   "generics.lname": "Apellido",
   "generics.description": "Descripción",

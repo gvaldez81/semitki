@@ -23,8 +23,44 @@ let AddPostView = Backbone.View.extend({
 
 //    S.toggleNavigation(false);
     this.tour = S.tour('AddPostView');
+    this.on('ready', this.post_render);
   },
 
+
+  post_render: () => {
+    // Initialize fileinput
+    let user_id = S.user.attributes.pk;
+    let customHeaders = S.addAuthorizationHeader().headers;
+    // TODO check filename handling
+    customHeaders['Content-Disposition'] = 'attachment;filename='+S.user.attributes.pk;
+    $("#uploadfile").fileinput({
+      uploadUrl: '//' + SEMITKI_CONFIG.api_url + ':' + SEMITKI_CONFIG.api_port +
+        '/upload/',
+      elErrorContainer: "#messages",
+      autoReplace: true,
+      allowedFileTypes: ['image', 'video'],
+      allowedPreviewTypes: ['image', 'video'],
+      maxFileCount: 1,
+      ajaxSettings: {
+        headers: customHeaders
+      },
+      uploadExtraData: { owner: S.user.attributes.pk },
+    });
+
+    $('#uploadfile').on('fileuploaded', function(event, data, previewId, index) {
+      if(Array.isArray(data.response) && data.response.length == 1) {
+        console.log(data.files[0].type);
+        $('#urlTarget').val(window.location.origin + data.response[0].fileurl);
+        if(data.files[0].type.includes('image')) {
+          $('#imgUrl').attr('checked', true);
+        } else if(data.files[0].type.includes('video')) {
+          // TODO check if video should be sent as link
+          $('#lnkUrl').attr('checked', true);
+        }
+      }
+    });
+
+  },
 
   closeadd: function() {
     S.fetchCollections({
@@ -188,29 +224,7 @@ let AddPostView = Backbone.View.extend({
         this.tour.start(true);
     }
 
-    // Initialize fileinput
-    let user_id = S.user.attributes.pk;
-    let customHeaders = S.addAuthorizationHeader().headers;
-    // TODO check filename handling
-    customHeaders['Content-Disposition'] = 'attachment;filename='+S.user.attributes.pk;
-    $("#uploadfile").fileinput({
-      uploadUrl: '//' + SEMITKI_CONFIG.api_url + ':' + SEMITKI_CONFIG.api_port +
-        '/upload/',
-      elErrorContainer: "#messages",
-      allowedFileTypes: ['image', 'video'],
-      allowedFileExtensions: ['jpg', 'jpeg', 'gif', 'png', 'webm', 'avi', 'mp4'],
-      ajaxSettings: {
-        headers: customHeaders
-      },
-      uploadExtraData: { owner: S.user.attributes.pk }
-    });
-
-/*    $('#uploadfile').on('filepreupload', function(event, data, previewId, index) {*/
-      //let extra = data.extra;
-      //data.extra.owner = S.user.attributes.pk;
-      //return data.extra;
-    //});
-
+    this.trigger('ready');
     return this;
   }
 });

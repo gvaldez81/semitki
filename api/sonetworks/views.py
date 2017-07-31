@@ -31,7 +31,7 @@ from allauth.socialaccount.providers.twitter.views import TwitterOAuthAdapter
 from rest_auth.views import LoginView
 from rest_auth.social_serializers import TwitterLoginSerializer
 
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 
 import requests
 from requests_oauthlib import OAuth1
@@ -150,6 +150,7 @@ class FileUploadView(APIView):
     parser_classes = (MultiPartParser, FormParser,)
 
     def post(self, request, format=None):
+        storage = '/semitki/storage/uploads/'
         post_owner = request.POST['owner']
         up_file = request.FILES['uploadfile']
         file_uuid = uuid.uuid1().time_low
@@ -158,7 +159,7 @@ class FileUploadView(APIView):
         content_type = up_file.content_type.split("/")
         owner = User.objects.get(pk=int(post_owner))
         try:
-            destination = open('/semitki/storage/uploads/' +  filename, 'wb+')
+            destination = open(storage +  filename, 'wb+')
             for chunk in up_file.chunks():
                 destination.write(chunk)
 
@@ -168,13 +169,13 @@ class FileUploadView(APIView):
             new_file.id = filename
             new_file.file_type = content_type[0]
             new_file.file_extension = content_type[1]
-            new_file.file_url = '/semitki/storage/uploads/'
+            new_file.file_url = storage
             new_file.owner = owner
             new_file.save()
 
-            return Response(up_file.name, status.HTTP_201_CREATED)
+            return JsonResponse([{'fileurl': '/storage/uploads/' + filename}], safe=False)
         except Exception:
-            return Response(request, status.HTTP_400_BAD_REQUEST)
+            return JsonResponse({'error': 'error.upload'})
 
 
 class FileUploadViewSet(viewsets.ModelViewSet):
