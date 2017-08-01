@@ -1,5 +1,5 @@
 #!/bin/sh
-APP_BASE=/opt/semitki
+APP_BASE=/opt/semitkitest
 APP_API=$APP_BASE/api
 APP_FRONT=$APP_BASE/front
 cd $APP_BASE
