@@ -42,27 +42,16 @@ let LoginView = Backbone.View.extend({
           });
           fb_token.then((result) => { // The promise of the FB token succeded
             S.jwtoken(result.token);
-            window.setTimeout(() => {
-              if (S.jwtoken() != undefined && S.user != undefined) {
-                let csrftoken = Cookies.get("csrftoken");
-                let sysuser = S.collection.get("user").findWhere({
-                  bucket_id: user.bucket_id
-                });
-                if (sysuser !== undefined) {
-                  S.user.set(user);
-                  sysuser.set(S.user.toJSON());
-                  sessionStorage.setItem("user", JSON.stringify(user));
-                  S.view.get('scheduler').render();
-                } else {
-                  S.logger("bg-danger", "login.fbfail");
-                }
-              }},
-              0);
+            if (S.jwtoken() != undefined && S.user != undefined) {
+              let csrftoken = Cookies.get("csrftoken");
+              S.user.set(user);
+              sessionStorage.setItem("user", JSON.stringify(user));
+              S.view.get('scheduler').render();
+            }
           }, (err) => { // The promise of FB token failed
             S.logger("bg-danger", "login.fbfail");
           });
-
-      });
+        });
       }
     }, {scope: 'public_profile,email,publish_actions,user_photos,' +
       'manage_pages,publish_pages'});
@@ -70,7 +59,6 @@ let LoginView = Backbone.View.extend({
 
 
   tryTwLogin: () => {
-
     $.oauthpopup({
         path: S.api("auth/tw_request_token"),
         callback: function(param)
@@ -92,28 +80,17 @@ let LoginView = Backbone.View.extend({
             });
             tw_token.then((result) => { // The promise of the TW token succeded
               S.jwtoken(result.token);
-              window.setTimeout(() => {
-                if (S.jwtoken() != undefined && S.user != undefined) {
-                  let csrftoken = Cookies.get("csrftoken");
-                  let sysuser = S.collection.get("user").findWhere({
-                    bucket_id: Cookies('tw_bucket_id')
-                  });
-                  if (sysuser !== undefined) {
-                    document.cookie = 'tw_access_token=;'+expires
-                    document.cookie = 'tw_access_token_secret=;'+expires
-                    document.cookie = 'tw_bucket_id=;'+expires
-                    S.user.set(sysuser.toJSON());
-                    sessionStorage.setItem("user", JSON.stringify(sysuser.toJSON()));
-                    S.view.get('scheduler').render();
-                  } else {
-                    S.logger("bg-danger", "login.twfail");
-                  }
-                }},
-                0);
+              if (S.jwtoken() != undefined && S.user != undefined) {
+                let csrftoken = Cookies.get("csrftoken");
+                document.cookie = 'tw_access_token=;'+expires
+                document.cookie = 'tw_access_token_secret=;'+expires
+                document.cookie = 'tw_bucket_id=;'+expires
+                S.view.get('scheduler').render();
+              }
             }, (err) => { // The promise of TW token failed
               S.logger("bg-danger", "login.twfail");
             });
-          }else{
+          } else {
             document.cookie = 'tw_denied=;'+expires
             S.logger("bg-danger", "twitter.infodenied");
           }
