@@ -1,31 +1,14 @@
 /*** COLORS ***/
-// Color for post box border looks like copper
-@s_copper: #efa05a;
 // Color used in post box Schedule/Post now button
 @light-blue: #b3e5fc;    // Border of the button and background when selected
-@s_lighterBlue: #e1f5fe;  // Background when unselected
-@s_slateBlue: #2a6496;    // TODO ??
 @s_facebookBlue: #3b5998; // Name say it
 @s_grey: rgba(0,0,0, 0.26);
 @s_black: #333;
-@indigo: #3f51b5;
 @teal: #009688;
 
 /*** MIXINS ***/
 
-.slide-animation(@offset) {
-  -webkit-transform: translateX(@offset);
-  -ms-transform: translateX(@offset);
-  -o-transform: translateX(@offset);
-  transform: translateX(@offset);
-}
-
-.s_transition(@delay) {
-  -webkit-transition: @delay;
-  -o-transition: @delay;
-  transition: @delay;
-}
-
+/*** Base styles ***/
 html {
   position: relative;
   min-height: 100%;
@@ -81,41 +64,6 @@ footer {
 /** Main **/
 div#main{
    padding: 40px 15px;
-}
-
-
-
-/** Sliding Menu **/
-.menu-slide {
-  position: absolute;
-  float: left;
-  display: none;
-  .slide-animation(-200px);
-  .s_transition(400ms);
-  margin:0;
-  padding-top: 40px;
-  padding-right: 0px;
-  padding-bottom: 0px;
-  padding-left: 0px;
-  width: 230px;
-  height: 100%;
-  background-color: @teal;
-}
-
-.menu-slide-show {
-  .slide-animation(0px);
-}
-
-.corp {
-/*  position: absolute; */
-  .s_transition(700ms);
-  margin: 0;
-  padding: 0;
-  width: 50%;
-  height: 100%;
-}
-.corp-show {
-  .slide-animation(250px);
 }
 
 .panel.panel-default.panel-menu {
@@ -215,19 +163,6 @@ button#landing-login-tw {
 
 .showme {
     display: block;
-}
-
-a.action {
-  border-bottom: 1px dashed @s_slateBlue;
-  text-decoration: none;
-  &:hover {
-    border-bottom: 1px dashed @s_slateBlue;
-    text-decoration: none;
-  }
-}
-
-div.finder {
-  z-index: 300 !important;
 }
 
 .connectedSortable {
@@ -420,52 +355,48 @@ div.finder {
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
-  overflow: hidden;
-}
-
-#wrapper.toggled {
-  padding-left: 250px;
-  overflow: scroll;
-}
-
-#sidebar-wrapper {
-  z-index: 1000;
-  position: absolute;
-  left: 250px;
-  width: 0;
+  /* overflow: hidden; */
   height: 100%;
-  margin-left: -250px;
-  overflow-y: auto;
-  background: @teal;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-}
 
-#wrapper.toggled #sidebar-wrapper {
-  width: 250px;
-}
+  #sidebar-wrapper {
+    z-index: 1000;
+    position: absolute;
+    left: 250px;
+    width: 0;
+    margin-left: -250px;
+    overflow-y: auto;
+    background: @teal;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+  }
 
-#page-content-wrapper {
-  position: absolute;
-  padding: 15px;
-  width: 100%;
-  overflow-x: hidden;
+  #sidebar-wrapper.show-menu {
+    padding-left: 250px;
+    overflow: hidden;
+    width: 250px;
+    height: 100%;
+  }
+
+  #page-content-wrapper {
+    position: absolute;
+    padding: 15px;
+    width: 100%;
+    overflow-x: hidden;
+  }
+  #page-content-wrapper.show-menu {
+    position: relative;
+    height: 100%;
+    margin-right: 0;
+    padding-left: 250px;
+  }
 }
 
 .xyz{
-  min-width: 360px;
+  min-width: 320px;
 }
 
-#wrapper.toggled #page-content-wrapper {
-  position: relative;
-  margin-right: 0px;
-}
-
-.fixed-brand{
-  width: auto;
-}
 /* Sidebar Styles */
 
 .sidebar-nav {
@@ -501,77 +432,10 @@ div.finder {
   text-decoration: none;
 }
 
-.sidebar-nav > .sidebar-brand {
-  height: 65px;
-  font-size: 18px;
-  line-height: 60px;
-}
-
-.sidebar-nav > .sidebar-brand a {
-  color: #999999;
-}
-
-.sidebar-nav > .sidebar-brand a:hover {
-  color: #fff;
-  background: none;
-}
-
 .no-margin{
   margin:0;
 }
 
-@media(min-width:768px) {
-  #wrapper {
-    /* padding-left: 250px; */
-  }
-  .fixed-brand{
-    width: 250px;
-  }
-  #wrapper.toggled {
-    padding-left: 0;
-  }
-
-  #sidebar-wrapper {
-    width: 250px;
-  }
-
-  #wrapper.toggled #sidebar-wrapper {
-    width: 250px;
-  }
-  #wrapper.toggled-2 #sidebar-wrapper {
-    width: 50px;
-  }
-  #wrapper.toggled-2 #sidebar-wrapper:hover {
-    width: 250px;
-  }
-
-
-  #page-content-wrapper {
-    padding: 20px;
-    position: relative;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-  }
-
-  #wrapper.toggled #page-content-wrapper {
-    position: relative;
-    margin-right: 0;
-    padding-left: 250px;
-  }
-
-  #wrapper.toggled-2 #page-content-wrapper {
-    position: relative;
-    margin-right: 0;
-    margin-left: -200px;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-    width: auto;
-  }
-}
 
 /** Form Add Post **/
 .addpost-form {

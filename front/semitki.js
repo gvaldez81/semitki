@@ -300,16 +300,15 @@ let S = {
 
 
   toggleMenu: () => {
-/*    S.view.get('menu').render();*/
-    //$(".menu-slide").show().hover(() => {
-      //$(".menu-slide").addClass("menu-slide-show");
-      //$("#main").addClass("corp-show");
-    //},
-    //() => {
-      //$(".menu-slide").removeClass("menu-slide-show");
-      //$("#main").removeClass("corp-show");
-/*    });*/
-    console.log('toggleMenu deprecated');
+    let sidebar = $('#sidebar-wrapper');
+    let content = $('#page-content-wrapper');
+    if(sidebar.hasClass('show-menu') && content.hasClass('show-menu')) {
+      sidebar.removeClass('show-menu');
+      content.removeClass('show-menu');
+    } else {
+      sidebar.addClass('show-menu');
+      content.addClass('show-menu');
+    }
   },
 
 
