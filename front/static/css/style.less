@@ -35,21 +35,24 @@ body {
   margin-bottom: 60px;
 }
 
-/*body,h1,h2,h3,h4,h5,h6,p,label,span,div,td*/
-/*{*/
-    /*font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;*/
-/*}*/
-
-/** Bootstrap MAterial Design Override **/
+/** Bootstrap Material Design Override **/
 .form-group {
   label {
     color: rgba(0,0,0, 0.87);
   }
 }
 
+/** Footer **/
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+  color: @s_grey;
+}
+
 /** Navigation **/
 .semitkibar {
-  display: none;
   .nav {
     li {
       float: none;
@@ -60,13 +63,6 @@ body {
     }
   }
 }
-
-div.navbar-inner {
-  float: right;
-  vertical-align: top;
-  text-align: center;
-}
-
 
 /** Login **/
 .form-signin {
@@ -81,47 +77,12 @@ div.navbar-inner {
   }
 }
 
-/** Form Add Post **/
-.addpost-form {
-  position: relative;
-  max-width: 96%;
-  padding: 15px;
-  margin: 0 auto;
-  .form-signin-heading {
-    @margin_bottom_10;
-  }
-  .checkbox {
-    @margin_bottom_10;
-  }
-  .form-control {
-    &:focus {
-      z-index: 2;
-    }
-    position: relative;
-    height: auto;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -box-sizing: border-box;
-    padding: 10px;
-    font-size: 16px;
-  }
-}
-
 
 /** Main **/
 div#main{
    padding: 40px 15px;
 }
 
-
-/** Footer **/
-footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  height: 40px;
-  color: @s_grey;
-}
 
 
 /** Sliding Menu **/
@@ -561,7 +522,7 @@ div.finder {
 
 @media(min-width:768px) {
   #wrapper {
-    padding-left: 250px;
+    /* padding-left: 250px; */
   }
   .fixed-brand{
     width: 250px;
@@ -611,3 +572,31 @@ div.finder {
     width: auto;
   }
 }
+
+/** Form Add Post **/
+.addpost-form {
+  position: relative;
+  max-width: 96%;
+  padding: 15px;
+  margin: 0 auto;
+  .form-signin-heading {
+    @margin_bottom_10;
+  }
+  .checkbox {
+    @margin_bottom_10;
+  }
+  .form-control {
+    &:focus {
+      z-index: 2;
+    }
+    position: relative;
+    height: auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -box-sizing: border-box;
+    padding: 10px;
+    font-size: 16px;
+  }
+}
+
+

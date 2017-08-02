@@ -300,15 +300,16 @@ let S = {
 
 
   toggleMenu: () => {
-    S.view.get('menu').render();
-    $(".menu-slide").show().hover(() => {
-      $(".menu-slide").addClass("menu-slide-show");
-      $("#main").addClass("corp-show");
-    },
-    () => {
-      $(".menu-slide").removeClass("menu-slide-show");
-      $("#main").removeClass("corp-show");
-    });
+/*    S.view.get('menu').render();*/
+    //$(".menu-slide").show().hover(() => {
+      //$(".menu-slide").addClass("menu-slide-show");
+      //$("#main").addClass("corp-show");
+    //},
+    //() => {
+      //$(".menu-slide").removeClass("menu-slide-show");
+      //$("#main").removeClass("corp-show");
+/*    });*/
+    console.log('toggleMenu deprecated');
   },
 
 
@@ -317,7 +318,6 @@ let S = {
     if(enable) {
       S.view.get('navigation').render();
       $("#app-nav").show();
-      S.toggleMenu();
     } else {
       $("#app-nav").hide();
       $(".menu-slide").hide();
@@ -387,6 +387,7 @@ $(() => {
   } else {
     // initialize Semitki
     S.initialize();
+    S.view.get('navigation').render();
     if(!sessionStorage.getItem("token") || !sessionStorage.getItem("user")) {
       // If we can't find a previous session stored render a new LoginView
       S.view.get('login').render();
