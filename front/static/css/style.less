@@ -347,7 +347,7 @@ button#landing-login-tw {
 
 
 /* Collapsable menu */
- /* Toggle Styles */
+/* Toggle Styles */
 
 #wrapper {
   padding-left: 0;
@@ -355,8 +355,12 @@ button#landing-login-tw {
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
-  /* overflow: hidden; */
-  height: 100%;
+  overflow: hidden;
+
+  .show-menu {
+    padding-left: 250px;
+    overflow: scroll;
+  }
 
   #sidebar-wrapper {
     z-index: 1000;
@@ -372,17 +376,17 @@ button#landing-login-tw {
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
   }
-
-  #sidebar-wrapper.show-menu {
-    padding-left: 250px;
-    overflow: hidden;
-    width: 250px;
-  }
   #sidebar-wrapper.minimal-menu {
-    padding-left: 52px;
+//    padding-left: 52px;
     overflow: hidden;
     width: 52px;
   }
+  #sidebar-wrapper.show-menu {
+//    padding-left: 250px;
+    overflow: hidden;
+    width: 250px;
+  }
+
   #page-content-wrapper {
     position: absolute;
     padding: 15px;
@@ -401,48 +405,38 @@ button#landing-login-tw {
 }
 
 .xyz{
-  min-width: 320px;
+  min-width: 270px;
 }
 
 /* Sidebar Styles */
 
 .sidebar-nav {
   position: absolute;
+  left: 10px;
   top: 0;
   width: 250px;
   margin: 0;
   padding: 0;
   list-style: none;
-  margin-top: 2px;
-}
+  margin-top: 60px;
 
-.sidebar-nav li {
-  text-indent: 15px;
-  line-height: 40px;
-}
+  li {
+    text-indent: 15px;
+    line-height: 40px;
 
-.sidebar-nav li a {
-  display: block;
-  text-decoration: none;
-  color: #999999;
-}
+    a {
+      display: block;
+      text-decoration: none;
+      color: #D6EEEC;
+      text-decoration: none;
 
-.sidebar-nav li a:hover {
-  text-decoration: none;
-  color: #fff;
-  background: rgba(255,255,255,0.2);
-  border-left: red 2px solid;
+      &hover {
+        background: rgba(255,255,255,0.2);
+        border-left: red 2px solid;
+      }
+    }
+  }
 }
-
-.sidebar-nav li a:active,
-.sidebar-nav li a:focus {
-  text-decoration: none;
-}
-
-.no-margin{
-  margin:0;
-}
-
 
 /** Form Add Post **/
 .addpost-form {

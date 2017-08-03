@@ -1,92 +1,32 @@
 <script type="x-handlebars-template" id="side-menu-template">
 
-  <!-- Sidebar -->
-  <div class="panel panel-default panel-menu">
-    <div class="panel-heading" role="tab" id="headingAccounts">
-      <h4 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion"
-          href="#collapseAccounts" aria-expanded="true"
-          aria-controls="collapseAccounts">
-          {{pt "sidemenu.followers"}}
-        </a>
-      </h4>
-    </div>
-    <div id="collapseAccounts" class="panel-collapse collapse">
-      <div class="panel-body" id="account-menu"></div>
-    </div>
-  </div>
-
-  <div class="panel panel-default panel-menu">
-    <div class="panel-heading" role="tab" id="headingStaff">
-      <h4 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion"
-          href="#collapseStaff" aria-expanded="true"
-          aria-controls="collapseStaff">
-          {{pt "sidemenu.staff"}}
-        </a>
-      </h4>
-    </div>
-    <div id="collapseStaff" class="panel-collapse collapse in">
-      <div class="panel-body" id="staff-menu"></div>
-    </div>
-  </div>
-
-
-  <div class="panel panel-default panel-menu">
-    <div class="panel-heading" role="tab" id="headingSettings">
-      <h4 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion"
-          href="#collapseSettings" aria-expanded="true"
-          aria-controls="collapseSettings">
-          {{pt "sidemenu.settings"}}
-        </a>
-      </h4>
-    </div>
-    <div id="collapseSettings" class="panel-collapse collapse"
-      role="tabpanel" aria-labelledby="headingSettings">
-      <div class="panel-body">
-        <ul class="list-group">
-         <li class="list-group-item">
-           <a href="#" type="button"
-             role="button" id="campaigns">{{pt "campaign.title"}}</a>
-         </li>
-         <li class="list-group-item">
-           <a href="#" type="button"
-             role="button" id="phases">{{pt "phase.title"}}</a></li>
-         <li class="list-group-item">
-           <a href="#" type="button"
-             role="button" id="groups">{{pt "group.title"}}</a></li>
-         <li class="list-group-item">
-           <a href="#" type="button"
-             role="button" id="grouppedaccounts">{{pt "sidemenu.related"}}</a></li>
-         <li class="list-group-item" id="groups">
-           <a href="#" type="button"
-             role="button" id="user">{{pt "user.title"}}</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="panel panel-default panel-menu">
-    <div class="panel-heading" role="tab" id="headingProfile">
-      <h4 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion"
-          href="#collapseProfile" aria-expanded="true"
-          aria-controls="collapseProfile">{{user.username}}
-        </a>
-      </h4>
-    </div>
-    <div id="collapseProfile" class="panel-collapse collapse"
-      role="tabpanel" aria-labelledby="headingProfile">
-      <div class="panel-body">
-        <ul class="list-group">
-         <li class="list-group-item">
-           <a href="#" type="button" class="btn btn-link" id="logout"
-             role="button">{{pt "sidemenu.logout"}}</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <!-- /#sidebar-wrapper -->
+  <li>
+    <button type="button" class="menu-toggle"
+    data-toggle="collapse">
+      <span class="sr-only">{{pt "generics.toggle_navigation"}}</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+  </li>
+  <li>
+    <a href="#" type="button"
+    role="button" id="campaigns">{{pt "campaign.title"}}</a>
+  </li>
+  <li>
+    <a href="#" type="button"
+    role="button" id="phases">{{pt "phase.title"}}</a></li>
+  <li>
+    <a href="#" type="button"
+    role="button" id="groups">{{pt "group.title"}}</a></li>
+  <li>
+    <a href="#" type="button"
+    role="button" id="grouppedaccounts">{{pt "sidemenu.related"}}</a></li>
+  <li>
+    <a href="#" type="button"
+    role="button" id="user">{{pt "user.title"}}</a></li>
+  <li>
+    <a href="#" type="button" class="btn btn-link" id="logout"
+    role="button">{{pt "sidemenu.logout"}}</a></li>
 
 </script>

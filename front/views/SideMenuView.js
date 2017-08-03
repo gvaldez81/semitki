@@ -4,7 +4,7 @@ let SideMenuView = Backbone.View.extend({
 
   tagName: "ul",
 
-  className: "sidebar-nav nav-pills nav-stacked",
+  className: "sidebar-nav",
 
   initialize: function() {
     this.template = S.handlebarsCompile("#side-menu-template");
@@ -82,9 +82,7 @@ let SideMenuView = Backbone.View.extend({
 
 
   logout: function() {
-    S.toggleNavigation(false);
     S.sessionDestroy();
-    $("#main").removeClass("corp-show"); // Ugly hack :P
     this.remove();
     location.assign('/');
   },

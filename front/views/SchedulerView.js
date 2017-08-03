@@ -45,13 +45,14 @@ let SchedulerView = Backbone.View.extend({
 
   render: function() {
     S.initMenu();
+    S.view.get('menu').render();
     let compiled = S.handlebarsCompile("#scheduler-template");
     this.$el.html(compiled);
     $("#main").html(this.$el);
     if (this.tour != undefined){
       this.tour.start(true);
     }
-    $('#menu-toggle').on('click', function() {
+    $('.menu-toggle').on('click', function() {
       S.toggleMenu();
     });
 
