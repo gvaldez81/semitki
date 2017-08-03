@@ -8,6 +8,7 @@ let SchedulerView = Backbone.View.extend({
 
   initialize: function() {
     this.on('ready', S.fetchCollections);
+
     S.collection.get('posts').on('update', this.post_render);
   },
 
@@ -43,15 +44,17 @@ let SchedulerView = Backbone.View.extend({
   },
 
   render: function() {
-    S.toggleNavigation(true);
+    S.initMenu();
     let compiled = S.handlebarsCompile("#scheduler-template");
     this.$el.html(compiled);
     $("#main").html(this.$el);
     if (this.tour != undefined){
       this.tour.start(true);
     }
+    $('#menu-toggle').on('click', function() {
+      S.toggleMenu();
+    });
 
-    $('#sidebar-wrapper').show();
     this.trigger('ready');
 
     return this;

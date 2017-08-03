@@ -303,24 +303,17 @@ let S = {
     let sidebar = $('#sidebar-wrapper');
     let content = $('#page-content-wrapper');
     if(sidebar.hasClass('show-menu') && content.hasClass('show-menu')) {
-      sidebar.removeClass('show-menu');
-      content.removeClass('show-menu');
+      sidebar.removeClass('show-menu').addClass('minimal-menu');
+      content.removeClass('show-menu').addClass('minimal-menu');
     } else {
-      sidebar.addClass('show-menu');
-      content.addClass('show-menu');
+      sidebar.removeClass('minimal-menu').addClass('show-menu');
+      content.removeClass('minimal-menu').addClass('show-menu');
     }
   },
 
-
-  toggleNavigation: (enable=false) => {
-    // Hide or show navigation elements (top and side menu)
-    if(enable) {
-      S.view.get('navigation').render();
-      $("#app-nav").show();
-    } else {
-      $("#app-nav").hide();
-      $(".menu-slide").hide();
-    }
+  initMenu: () => {
+    $('#sidebar-wrapper').removeClass('show-menu').addClass('minimal-menu');
+    $('#page-content-wrapper').removeClass('show-menu').addClass('minimal-menu');
   },
 
 
