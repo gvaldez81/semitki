@@ -41,18 +41,18 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'corsheaders',
     'rest_framework',
-    'rest_framework_swagger',
     'rest_framework.authtoken',
+    'rest_framework_swagger',
     'rest_auth',
+    'rest_auth.registration',
     'allauth',
     'allauth.account',
-    'rest_auth.registration',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.twitter',
-    'sonetworks',
     'django_extensions',
     'django_cron',
+    'sonetworks',
 ]
 
 MIDDLEWARE = [
@@ -83,8 +83,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                #'social_django.context_processors.backends',
-                #'social_django.context_processors.login_redirect'
             ],
         },
     },
