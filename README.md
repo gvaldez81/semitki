@@ -195,5 +195,6 @@ _Requires graphviz installed_
     )
 
 
-    manage.py graph_models --pygraphviz -a -g -o my_project_visualized.png
+    python manage.py graph_models --pygraphviz -a -g -o \
+      ../config/semitki_model_graph.png
 

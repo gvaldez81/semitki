@@ -40,6 +40,7 @@ router.register(r'tour_element', TourElementSet)
 router.register(r'tour_relates', TourRelatedSet)
 router.register(r'file', FileUploadViewSet)
 router.register(r'sharing_service', KnownSharingServiceViewSet)
+## Routes for management
 
 #schema_view = get_swagger_view(title='Semitki API')
 

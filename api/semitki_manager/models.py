@@ -3,4 +3,12 @@ from __future__ import unicode_literals
 
 from django.db import models
 
-# Create your models here.
+
+class PaymentGateway(models.Model):
+    id = models.UUIDField(max_length=255, primary_key=True,
+            editable=False)
+    name = models.CharField(max_length=255)
+
+
+class BillingAccount(models.Model):
+

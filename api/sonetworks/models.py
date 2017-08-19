@@ -241,6 +241,7 @@ class FileUpload(models.Model):
 class KnownSharingService(models.Model):
     """
     Catalog of known sharing services
+    TODO maybe this class will go away
     """
     FILE_TYPES = (
             ('any', 'any'),
