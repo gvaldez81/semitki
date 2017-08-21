@@ -23,6 +23,8 @@ from django.conf.urls import url
 from rest_framework_swagger.views import get_swagger_view
 from .views import *
 
+from semitki_manager.views import *
+
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
 router.register(r'user', UserViewSet)
@@ -41,6 +43,7 @@ router.register(r'tour_relates', TourRelatedSet)
 router.register(r'file', FileUploadViewSet)
 router.register(r'sharing_service', KnownSharingServiceViewSet)
 ## Routes for management
+router.register(r'billing', BillingAccountView)
 
 #schema_view = get_swagger_view(title='Semitki API')
 

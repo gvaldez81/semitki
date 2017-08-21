@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'django_cron',
     'sonetworks',
+    'semitki_manager'
 ]
 
 MIDDLEWARE = [
