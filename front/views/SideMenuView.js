@@ -24,7 +24,7 @@ let SideMenuView = Backbone.View.extend({
 
   chooser: (e) => {
     e.preventDefault();
-    switch(e.target.id) {
+    switch(e.currentTarget.id) {
         case 'campaigns':
           S.view.get('campaign').render();
           break;
@@ -39,6 +39,8 @@ let SideMenuView = Backbone.View.extend({
         case 'user':
           S.view.get('user').render();
           break;
+      default:
+        break;
     }
   },
 
