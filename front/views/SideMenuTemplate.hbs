@@ -1,22 +1,39 @@
 <script type="x-handlebars-template" id="side-menu-template">
   <li>
+    <a href="#" type="button" role="button" id="menu-toggle"
+    data-toggle="collapse">
+    <i class="fa fa-bars" aria-hidden="true"></i>
+    </a>
+  <li>
     <a href="#" type="button"
-    role="button" id="campaigns">{{pt "campaign.title"}}</a>
+    role="button" id="campaigns">
+    <i class="fa fa-trophy" aria-hidden="true"></i>&nbsp;&nbsp;
+    {{pt "campaign.title"}}</a>
   </li>
   <li>
     <a href="#" type="button"
-    role="button" id="phases">{{pt "phase.title"}}</a></li>
+    role="button" id="phases">
+    <i class="fa fa-thermometer-full" aria-hiddend="true"></i>&nbsp;&nbsp;
+    {{pt "phase.title"}}</a></li>
   <li>
     <a href="#" type="button"
-    role="button" id="groups">{{pt "group.title"}}</a></li>
+    role="button" id="groups">
+    <i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;
+    {{pt "group.title"}}</a></li>
   <li>
     <a href="#" type="button"
-    role="button" id="grouppedaccounts">{{pt "sidemenu.related"}}</a></li>
+    role="button" id="grouppedaccounts">
+    <i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;&nbsp;
+    {{pt "sidemenu.related"}}</a></li>
   <li>
     <a href="#" type="button"
-    role="button" id="user">{{pt "user.title"}}</a></li>
+    role="button" id="user">
+    <i class="fa fa-user fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;
+    {{pt "user.title"}}</a></li>
   <li>
-    <a href="#" type="button" class="btn btn-link" id="logout"
-    role="button">{{pt "sidemenu.logout"}}</a></li>
+    <a href="#" type="button" id="logout"
+    role="button">
+    <i class="fa fa-power-off" aria-hidden="true"></i>&nbsp;&nbsp;
+    {{pt "sidemenu.logout"}}</a></li>
 
 </script>

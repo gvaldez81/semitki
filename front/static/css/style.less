@@ -36,10 +36,16 @@ footer {
 
 /** Navigation **/
 .semitkibar {
+  .navbar-header {
+    position: relative;
+    float: left;
+    width: 100px;
+
+  }
   #navbar {
     position: relative;
     float: right;
-    width: 85%;
+    width: 70%;
   }
   .nav {
     li {
@@ -368,8 +374,9 @@ button#landing-login-tw {
   }
 
   #sidebar-wrapper {
-    z-index: 1000;
+    z-index: 3000;
     position: absolute;
+    top: 55px;
     left: 200px;
     width: 0;
     height: 100%;
@@ -417,7 +424,7 @@ button#landing-login-tw {
 
 .sidebar-nav {
   position: absolute;
-  left: 10px;
+  left: 1px;
   top: 0;
   width: 250px;
   margin: 0;
@@ -468,11 +475,3 @@ button#landing-login-tw {
     font-size: 16px;
   }
 }
-
-    .toggle-always {
-      position: relative;
-      float: left;
-      display: block!important;
-      z-index: 3001;
-    }
-

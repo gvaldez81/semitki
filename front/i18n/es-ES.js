@@ -19,6 +19,8 @@ let poles = {
 
   "auth.invalidtoken": "Token inválido",
 
+  "billing.title": "Cuenta de cargo",
+
   "button.add": "Agregar",
   "button.edit": "Editar",
   "button.save": "Guardar",
