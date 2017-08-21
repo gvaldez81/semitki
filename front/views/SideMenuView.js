@@ -15,30 +15,39 @@ let SideMenuView = Backbone.View.extend({
   events: {
     "click #logout": "logout",
     "change .account-select": "addNewPost",
+    "click a#btn-calendar": "chooser",
     "click a#campaigns": "chooser",
     "click a#phases": "chooser",
     "click a#groups": "chooser",
     "click a#grouppedaccounts": "chooser",
-    "click a#user": "chooser"
+    "click a#user": "chooser",
+    "click a#btn-billing": "chooser"
   },
 
   chooser: (e) => {
     e.preventDefault();
     switch(e.currentTarget.id) {
-        case 'campaigns':
-          S.view.get('campaign').render();
+      case 'btn-calendar':
+          S.view.get('scheduler').render();
           break;
-        case 'phases':
-          S.view.get('phase').render();
-          break;
-        case 'groups':
-          S.view.get('group').render();
-          break;
-        case 'grouppedaccounts':
-          S.view.get('grouped_account').render();
-        case 'user':
-          S.view.get('user').render();
-          break;
+      case 'campaigns':
+        S.view.get('campaign').render();
+        break;
+      case 'phases':
+        S.view.get('phase').render();
+        break;
+      case 'groups':
+        S.view.get('group').render();
+        break;
+      case 'grouppedaccounts':
+        S.view.get('grouped_account').render();
+        break;
+      case 'user':
+        S.view.get('user').render();
+        break;
+      case 'btn-billing':
+        S.view.get('billing').render();
+        break;
       default:
         break;
     }

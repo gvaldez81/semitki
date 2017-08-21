@@ -40,6 +40,7 @@ let S = {
     this.view.set('group', new GroupsView());
     this.view.set('grouped_account', new GrouppedAccountsView());
     this.view.set('user', new UserView());
+    this.view.set('billing', new BillingView());
     this.user = new UserModel();                      // Signed in user
     if(sessionStorage.getItem("user")) {
       this.user.set(JSON.parse(sessionStorage.user));
