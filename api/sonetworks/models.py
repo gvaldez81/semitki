@@ -81,6 +81,7 @@ class PostError(models.Model):
     cause = models.CharField(max_length=255)
     post = models.ForeignKey(Post, related_name='post_error')
 
+
 class Bucket(models.Model):
     """
     Represents marketing targets
@@ -162,13 +163,22 @@ class StaticPage(models.Model):
 
 class ImageStore(models.Model):
     """
+    TODO Checj where its used
     Image store
     """
     id = models.UUIDField(primary_key = True, default = uuid.uuid4,
             editable = False)
     image = models.ImageField(upload_to='uploads/', blank=True)
 
+
 class PagesToken(models.Model):
+    """
+    Store Facebook pages token
+    https://developers.facebook.com/docs/pages/access-tokens
+
+    Pages are those which the :model:`auth.User` owner has admin or post
+    permissions in FB.
+    """
     id = models.UUIDField(primary_key = True, default = uuid.uuid4,
             editable = False)
     owner = models.ForeignKey('auth.user', related_name='tokens', default=1)
@@ -176,11 +186,11 @@ class PagesToken(models.Model):
     account = models.ForeignKey(LoginAccount,related_name='accounts')
     name = models.CharField(max_length=256, null=False)
     token = models.CharField(max_length=256, null=False)
-    image=models.ImageField(upload_to='img/', blank=True)
+    image = models.ImageField(upload_to='img/', blank=True)
     image_link = models.CharField(max_length=255, null=True, blank=True)
 
     def save(self, *args, **kwargs):
-        """Store image locally if we have a URL"""
+        """Store page profile image locally if we have a URL"""
         if self.image_link and not self.image:
             result = requests.get(self.image_link)
             profilePic = NamedTemporaryFile(delete=True)
@@ -189,6 +199,7 @@ class PagesToken(models.Model):
             urlclean = urlparse.urljoin(self.image_link, urlparse.urlparse(self.image_link).path)
             self.image.save(str(self.page_id)+'_'+os.path.basename(urlclean), profilePic )
             self.save()
+
         super(PagesToken, self).save()
 
 
@@ -224,7 +235,7 @@ class TourRelated(models.Model):
 
 class FileUpload(models.Model):
     """
-    Store file uploadas and relate it to its owner
+    Store file uploadas and relate it to its owner :model:`auth.User`
     """
     FILE_TYPES = (
             ('image', 'image'),
