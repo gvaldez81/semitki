@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 
 from django.db import models
-from sonetworks import models as sn
 from django.contrib.auth.models import User
 
 

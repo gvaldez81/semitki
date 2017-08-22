@@ -1,4 +1,4 @@
-FROM nginx
+FROM nginx:stable
 LABEL mantainer "developer@celisdelafuente.net"
 
 EXPOSE 80

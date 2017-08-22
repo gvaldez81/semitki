@@ -9,17 +9,19 @@ import requests
 import urlparse
 from django.core.files.temp import NamedTemporaryFile
 from allauth.socialaccount.models import SocialAccount as LoginAccount
-
+from semitki_manager.models import Organization
 
 class Campaign(models.Model):
     """
-    A project can hold many topics
+    Marketing campaign it has an owner organization
+    :model:`semitki_manager.Organization`
     """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=140)
     description = models.CharField(max_length=256)
     isactive = models.BooleanField(default = True)
     valid_to = models.DateField(null=True, blank=True)
+    organization_id = models.ForeignKey(Organization)
 
     def __unicode__(self):
         """Unicode class."""
@@ -126,13 +128,15 @@ class SocialAccount(models.Model):
 
 class SocialGroup(models.Model):
     """
-    Managed social accounts
+    Groups of managed social accounts it must be related to an
+    :model:`semitki_manager.Organization`
     """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=140)
     description = models.CharField(max_length=256)
     isactive = models.BooleanField(default = True)
     valid_to = models.DateField(null=True, blank=True)
+    organization_id = models.ForeignKey(Organization)
 
     def __unicode__(self):
         """Unicode class."""
@@ -141,24 +145,13 @@ class SocialGroup(models.Model):
 
 class SocialAccountGroup(models.Model):
     """
-    Grouped social accounts
+    Grouped :model:`SocialGroup` social accounts :model:`SocialAccount`
     """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     social_account = models.ForeignKey(SocialAccount, blank=True , related_name='accounts')
     social_group = models.ForeignKey(SocialGroup, blank=True, related_name='related')
     isactive = models.BooleanField(default = True)
     valid_to = models.DateField(null=True, blank=True)
-
-
-class StaticPage(models.Model):
-    """
-    Customizable static pages such as About Us, Contact, etc...
-    """
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4,
-    editable=False)
-    title = models.CharField(max_length=140)
-    content = models.TextField()
-    template = models.CharField(max_length=140)
 
 
 class ImageStore(models.Model):

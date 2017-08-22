@@ -1,4 +1,4 @@
-FROM centos
+FROM centos:7
 LABEL mantainer "developer@celisdelafuente.net"
 
 EXPOSE 8000 3031 9191

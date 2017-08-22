@@ -135,14 +135,6 @@ class BucketViewSet(viewsets.ModelViewSet):
     serializer_class = BucketSerializer
 
 
-class StaticPageViewSet(viewsets.ModelViewSet):
-    """
-    Customizable system static pages
-    """
-    queryset = StaticPage.objects.all()
-    serializer_class = StaticPageSerializer
-
-
 class FileUploadView(APIView):
     """
     File uploads
