@@ -9,3 +9,10 @@ class BillingAccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = BillingAccount
         fields = ('__all__')
+
+
+class OrganizationSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Organization
+        fields = ('__all__')

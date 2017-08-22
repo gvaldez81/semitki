@@ -14,10 +14,20 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
 from semitki_manager.serializers import BillingAccountSerializer
+from semitki_manager.serializers import OrganizationSerializer
 from semitki_manager.models import BillingAccount
+from semitki_manager.models import Organization
+
 
 # Create your views here.
 
 class BillingAccountView(viewsets.ModelViewSet):
     queryset = BillingAccount.objects.all()
     serializer_class = BillingAccountSerializer
+
+
+class OrganizationView(viewsets.ModelViewSet):
+    queryset = Organization.objects.all()
+    serializer_class = OrganizationSerializer
+
+

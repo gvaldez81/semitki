@@ -83,7 +83,7 @@ class CampaignSerializer(serializers.HyperlinkedModelSerializer):
         list_serializer_class = FilteredIsActiveListSerializer
         model = Campaign
         fields = ('url', 'id', 'name', 'description', 'isactive', 'valid_to',
-                'phases')
+                'phases', 'organization_id')
 
 class SocialAccountSerializer(serializers.HyperlinkedModelSerializer):
     image_path = serializers.SerializerMethodField()

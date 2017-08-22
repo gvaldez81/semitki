@@ -23,6 +23,7 @@ let S = {
     this.collection.set("phases", new Phases());
     this.collection.set("buckets", new Buckets());
     this.collection.set("posts", new Posts());
+    this.collection.get("ogranizations", new Organizations());
     this.collection.set("tour_view",new TourViews());
     this.collection.set("tour_element",new TourElements());
     this.collection.set("tour_relates",new TourRelates());

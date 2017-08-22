@@ -43,6 +43,7 @@ router.register(r'file', FileUploadViewSet)
 router.register(r'sharing_service', KnownSharingServiceViewSet)
 ## Routes for management
 router.register(r'billing', BillingAccountView)
+router.register(r'organization', OrganizationView)
 
 #schema_view = get_swagger_view(title='Semitki API')
 
