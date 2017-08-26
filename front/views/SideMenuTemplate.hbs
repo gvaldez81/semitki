@@ -1,53 +1,50 @@
 <script type="x-handlebars-template" id="side-menu-template">
   <li>
-    <a href="#" type="button" role="button" id="menu-toggle"
-    data-toggle="collapse">
-    <i class="fa fa-bars" aria-hidden="true"></i>
-    </a>
+    <button id="menu-toggle" type="button" class="btn menu-btn">
+      <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
 
   <li>
-    <a href="#" type="button" role="button" id="btn-calendar">
-      <i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;&nbsp;
-      {{pt "scheduler.title"}}
-    </a>
+    <button type="button" class="btn menu-btn" id="btn-calendar">
+      <i class="fa fa-calendar" aria-hidden="true"></i>{{pt "scheduler.title"}}
+    </button>
   </li>
   <li>
-    <a href="#" type="button"
-    role="button" id="campaigns">
-    <i class="fa fa-trophy" aria-hidden="true"></i>&nbsp;&nbsp;
-    {{pt "campaign.title"}}</a>
+    <button class="btn menu-btn" type="button" id="campaigns">
+      <i class="fa fa-trophy" aria-hidden="true"></i>{{pt "campaign.title"}}
+    </button>
   </li>
   <li>
-    <a href="#" type="button"
-    role="button" id="phases">
-    <i class="fa fa-thermometer-full" aria-hiddend="true"></i>&nbsp;&nbsp;
-    {{pt "phase.title"}}</a></li>
+    <button class="btn menu-btn" type="button" id="phases">
+      <i class="fa fa-thermometer-full" aria-hiddend="true"></i>{{pt "phase.title"}}
+    </button>
+  </li>
   <li>
-    <a href="#" type="button"
-    role="button" id="groups">
-    <i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;
-    {{pt "group.title"}}</a></li>
+    <button class="btn menu-btn" type="button" id="groups">
+      <i class="fa fa-users" aria-hidden="true"></i>{{pt "group.title"}}
+    </button>
+  </li>
   <li>
-    <a href="#" type="button"
-    role="button" id="grouppedaccounts">
-    <i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;&nbsp;
-    {{pt "sidemenu.related"}}</a></li>
+    <button class="btn menu-btn" type="button" id="grouppedaccounts">
+      <i class="fa fa-user-circle-o" aria-hidden="true"></i>{{pt "sidemenu.related"}}
+    </button>
+  </li>
   <li>
-    <a href="#" type="button"
-    role="button" id="user">
-    <i class="fa fa-user fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;
-    {{pt "user.title"}}</a></li>
+    <button class="btn menu-btn" type="button" id="user">
+      <i class="fa fa-user fa-fw" aria-hidden="true"></i>{{pt "user.title"}}
+    </button>
+  </li>
   <li>
-    <a href="#" type="button" role="button" id="btn-billing">
-      <i class="fa fa-money" aria-hidden="true"></i>&nbsp;&nbsp;
+    <button class="btn menu-btn" type="button" id="btn-billing">
+      <i class="fa fa-money" aria-hidden="true"></i>
       {{pt "billing.title"}}
-    </a>
+    </button>
   </li>
 
   <li>
-    <a href="#" type="button" id="logout"
-    role="button">
-    <i class="fa fa-power-off" aria-hidden="true"></i>&nbsp;&nbsp;
-    {{pt "sidemenu.logout"}}</a></li>
+    <button class="btn menu-btn" type="button" id="logout">
+      <i class="fa fa-power-off" aria-hidden="true"></i>
+    {{pt "sidemenu.logout"}}</button>
+  </li>
 
 </script>

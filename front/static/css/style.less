@@ -5,6 +5,7 @@
 @s_grey: rgba(0,0,0, 0.26);
 @s_black: #333;
 @teal: #009688;
+@icon_white: #D6EEEC;
 
 /*** MIXINS ***/
 
@@ -361,6 +362,7 @@ button#landing-login-tw {
 /* Toggle Styles */
 
 #wrapper {
+  height: 100%;
   padding-left: 0;
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
@@ -374,7 +376,6 @@ button#landing-login-tw {
   }
 
   #sidebar-wrapper {
-    z-index: 3000;
     position: absolute;
     top: 55px;
     left: 200px;
@@ -387,6 +388,15 @@ button#landing-login-tw {
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
+    ul li button.menu-btn {
+      color: @icon_white;
+      margin: 0px;
+      padding: 0px;
+      font-family: 'Lato', sans-serif;
+      i {
+        margin-right: 20px;
+      }
+    }
   }
   #sidebar-wrapper.minimal-menu {
 //    padding-left: 52px;

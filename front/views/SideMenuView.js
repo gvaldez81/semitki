@@ -15,17 +15,16 @@ let SideMenuView = Backbone.View.extend({
   events: {
     "click #logout": "logout",
     "change .account-select": "addNewPost",
-    "click a#btn-calendar": "chooser",
-    "click a#campaigns": "chooser",
-    "click a#phases": "chooser",
-    "click a#groups": "chooser",
-    "click a#grouppedaccounts": "chooser",
-    "click a#user": "chooser",
-    "click a#btn-billing": "chooser"
+    "click #btn-calendar": "chooser",
+    "click #campaigns": "chooser",
+    "click #phases": "chooser",
+    "click #groups": "chooser",
+    "click #grouppedaccounts": "chooser",
+    "click #user": "chooser",
+    "click #btn-billing": "chooser"
   },
 
   chooser: (e) => {
-    e.preventDefault();
     switch(e.currentTarget.id) {
       case 'btn-calendar':
           S.view.get('scheduler').render();
@@ -55,7 +54,6 @@ let SideMenuView = Backbone.View.extend({
 
   post_render: () => {
     $('#menu-toggle').on('click', e => {
-      e.preventDefault();
       S.toggleMenu();
     })
     S.view.get('follower_menu').render();
