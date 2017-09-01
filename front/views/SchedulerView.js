@@ -1,15 +1,17 @@
-'use strict'
+'use strict';
 
 let SchedulerView = Backbone.View.extend({
 
   tagName: "div",
 
-  className: "container",
+  className: "container xyz",
 
   initialize: function() {
     this.on('ready', S.fetchCollections);
-
-    S.collection.get('posts').on('update', this.post_render);
+    S.collection.get('posts').on('update', function() {
+      this.post_render();
+    S.view.get('menu').render();
+    });
   },
 
   post_render: function() {
@@ -44,11 +46,12 @@ let SchedulerView = Backbone.View.extend({
   },
 
   render: function() {
-    S.initMenu();
-    S.view.get('menu').render();
     let compiled = S.handlebarsCompile("#scheduler-template");
     this.$el.html(compiled);
+    debugger;
+
     $("#main").html(this.$el);
+
     if (this.tour != undefined){
       this.tour.start(true);
     }
@@ -57,7 +60,6 @@ let SchedulerView = Backbone.View.extend({
     });
 
     this.trigger('ready');
-
     return this;
   }
 });

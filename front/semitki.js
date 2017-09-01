@@ -42,6 +42,7 @@ let S = {
     this.view.set('grouped_account', new GrouppedAccountsView());
     this.view.set('user', new UserView());
     this.view.set('billing', new BillingView());
+    this.app = new AppBaseView();
     this.user = new UserModel();                      // Signed in user
     if(sessionStorage.getItem("user")) {
       this.user.set(JSON.parse(sessionStorage.user));
@@ -381,14 +382,15 @@ $(() => {
   } else {
     // initialize Semitki
     S.initialize();
-    S.view.get('navigation').render();
+    S.app.render();
+//    S.view.get('navigation').render();
     if(!sessionStorage.getItem("token") || !sessionStorage.getItem("user")) {
       // If we can't find a previous session stored render a new LoginView
       S.view.get('login').render();
     } else {
       // if there is a session try to refresh the token and navigate to Scheduler
       S.refreshToken(() => {
-        S.view.get('scheduler').render();
+        S.app.render();
       });
     }
 

@@ -6,8 +6,10 @@ let NavigationView = Backbone.View.extend({
   className: "container",
 
   render: function() {
+    debugger;
     this.$el.html(S.handlebarsCompile("#navigation-template"));
-    $("#app-nav").html(this.$el);
+    //    $("#app-nav").html(this.$el);
+
 
     return this;
   }

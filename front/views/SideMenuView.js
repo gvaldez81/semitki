@@ -56,8 +56,8 @@ let SideMenuView = Backbone.View.extend({
     $('#menu-toggle').on('click', e => {
       S.toggleMenu();
     })
-    S.view.get('follower_menu').render();
-    S.view.get('staff_menu').render();
+/*    S.view.get('follower_menu').render();
+    S.view.get('staff_menu').render(); */
   },
 
   addNewPost: (e) => {
