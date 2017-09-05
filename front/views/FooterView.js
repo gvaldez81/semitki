@@ -6,11 +6,12 @@ let FooterView = Backbone.View.extend({
 
   className: "container",
 
+  initialize: function() {
+    this.template = S.handlebarsCompile("#footer-template");
+  },
+
   render: function() {
-    let data = {};
-    let template = $("#footer-template").html();
-    let compiled = Handlebars.compile(template);
-    this.$el.html(compiled(data));
+    this.$el.html(this.template);
     $("#app-footer").html(this.$el);
 
     return this;

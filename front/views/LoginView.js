@@ -131,7 +131,7 @@ let LoginView = Backbone.View.extend({
   render: function() {
     this.$el.html(this.template);
     $("#main").html(this.$el);
-    S.view.get('footer').render();
+//    S.view.get('footer').render();
     return this;
   },
 

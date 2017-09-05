@@ -389,9 +389,7 @@ $(() => {
       S.view.get('login').render();
     } else {
       // if there is a session try to refresh the token and navigate to Scheduler
-      S.refreshToken(() => {
-        S.app.render();
-      });
+      S.refreshToken();
     }
 
 /*    if ('serviceWorker' in navigator) {*/
