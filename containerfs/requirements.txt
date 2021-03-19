@@ -18,7 +18,7 @@ djangorestframework==3.6.3
 djangorestframework-jwt==1.10.0
 idna==2.5
 itypes==1.1.0
-Jinja2==2.9.5
+Jinja2==2.11.3
 Markdown==2.6.8
 MarkupSafe==1.0
 newrelic==2.86.2.68
